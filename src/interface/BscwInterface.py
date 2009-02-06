@@ -4,9 +4,7 @@
 # @brief Implementation der BscwInterface Klasse
 # @version 0.1
 # @author Florian Kaiser
-# @date 05.02.09
-#
-# <Beschreibung>
+# @date 06.02.09 
 
 #################################################################################
 # Copyright (C) 2009 Benjamin Flader, Bejamin Leipold, Andé Naumann,            #
@@ -57,17 +55,17 @@ class BscwInterface(object):
     # - address : Adresse
     # - homepage : Webseite
     # - additional_info : Weitere Informationen
+    # - used_memory : Speicherverbrauch in Byte
+    # - last_login : Letzte Anmeldung als datetime.date
     def getAllUsers(self):
         pass
 
     ## Gibt zusätzlich Informationen zu einem User zurück, deren Sammlung
     # aufwendiger ist und deshalb aus Performance-Gründen nicht mit in 
     # getAllUsers() aufgenommen wurde.
-    # @param p_user Ein Dictonary mit mindestens einem Element names "id" 
-    # indem sich die ID des Users befindet 
+    # @param p_user Ein Dictonary mit einem Element "id" indem sich
+    # die ID des Users befindet.
     # @return Ein Dictonary mit folgendem Aufbau
-    # - last_login : Letzte Anmeldung als datetime.date
-    # - used_memory : Speicherverbrauch in Byte
     # - objects : Objekte (Anzahl)
     # - access_rights : Zugriffsrechte, Dictornary mit folgendem Aufbau:
     #  - creator : Liste mit Zugriffsrechten für Erzeuger
@@ -81,14 +79,14 @@ class BscwInterface(object):
         pass
     
     ## Löscht einen Benuzter endgültig und irreversibel vom BSCW-Server.
-    # @param p_user Ein Dictonary mit mindestens einem Element names "id"
-    # indem sich die ID des Users befindet.
+    # @param p_user Ein Dictonary mit einem Element "id" indem sich
+    # die ID des Users befindet.
     def deleteUser(self, p_user):
         pass
     
     ## Sperrt einen User, sodass er sich nicht mehr anmelden kann.
-    # @param p_user Ein Dictonary mit mindestens einem Element names "id"
-    # indem sich die ID des Users befindet.
+    # @param p_user Ein Dictonary mit einem Element "id" indem sich
+    # die ID des Users befindet.
     # @see unlockUser()
     def lockUser(self, p_user):
         pass
@@ -102,15 +100,15 @@ class BscwInterface(object):
         pass
     
     ## Löscht alle Objekte im Mülleimer eins oder aller User.
-    # @param p_user Ein Dictonary mit mindestens einem Element names "id"
-    # indem sich die ID des Users befindet. Oder None wenn alle Mülleinmer
+    # @param p_user Ein Dictonary mit einem Element "id" indem sich
+    # die ID des Users befindet. Oder None wenn alle Mülleinmer
     # geleert werden sollen.
     def destroyTrash(self, p_user = None):
         pass
     
     ## Löscht alle Objekte in der Ablage eins oder aller User.
-    # @param p_user Ein Dictonary mit mindestens einem Element names "id"
-    # indem sich die ID des Users befindet. Oder None wenn alle Mülleinmer
+    # @param p_user Ein Dictonary mit einem Element "id" indem sich
+    # die ID des Users befindet. Oder None wenn alle Mülleinmer
     # geleert werden sollen.
     def destroyClipboard(self, p_user = None):
         pass
