@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 
+## @package BscwInterface 
+# @brief Interface zum BSCW-Server
+# @version 0.1
+# @author Florian Kaiser
+# @date 06.02.09 
+
 #################################################################################
-# Datei: __init__.py                                                            #
-# Autor: Florian Kaiser                                                         #
-# Version 0.1                                                                   #
-# Letzteänderung: 05.02.09 Florian Kaiser                                       #
-#                                                                               #
-# Beschreibung: Initialisator des Interface Packages                            #
-#                                                                               #
 # Copyright (C) 2009 Benjamin Flader, Bejamin Leipold, Andé Naumann,            #
 # Corinna Vollert, Florian Kaiser                                               #
 #                                                                               #
