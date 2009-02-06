@@ -1,7 +1,7 @@
 ## <Kurzbeschreibung>
 # <Weitere Beschreibung>
 (# @param <Parametername> <Beschreibung>)
-(# @return <Rckgabewert>)
+(# @return <RÃ¼ckgabewert>)
 (# @see <Siehe auch>)
 
 () = optional

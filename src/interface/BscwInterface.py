@@ -38,6 +38,40 @@
 # erst bei Bedarf nachgeladen werden sollte.
 class BscwInterface(object):
     
+    ## Kein Proxy
+    NoProxy = 2
+    ## Standard Proxy des Betriebsystems
+    DefaultProxy = 0
+    ## Socks5 Proxy
+    Socks5Proxy =  1
+    ## Transparenter HTTP-Proxy
+    HttpProxy = 3
+    ## HTTP-Proxy für rein HTTP-Anfragen
+    HttpCachingProxy = 4
+    
+    ## Baut eine Verbindung zum BSCW Server auf und versucht sich anzumelden.
+    # Sollte der Versuch scheitern wird eine Exception geworfen.
+    # @param p_username Benutzername für die Anmeldung am BSCW-Server
+    # @param p_passwd Passwort für die Anmeldung am BSCW-Server
+    def login(self, p_username, p_passwd):
+        pass
+    
+    ## Logged den User aus und bricht die Verbindung zum BSCW-Server ab
+    def logout(self):
+        pass
+    
+    ## Definiert ein Netzwerk-Proxy für die Verbindung zum BSCW Server.
+    # Sollte bereits eine Verbindung bestehen, wird diese getrennt
+    # @param p_hostname DNS-Name oder IP-Adresse des Proxys
+    # @param p_port Port des Proxys
+    # @param p_type Proxy-Typ (Siehe Proxy-Klassenattribute)
+    # @param p_exceptions Liste von Domänen, für die der Proxy
+    # nicht verwendet werden soll
+    # @param p_username Benutzername für die Anmeldung am Proxy
+    # @param p_passwd Passwort für die Anmeldung am Proxy
+    def setProxy(self, p_type, p_hostname = None, p_port = None, p_username = None, p_exceptions = None, p_passwd = None):
+        pass
+    
     ## Gibt eine Liste aller am BSCW-Server angemeldeten User inkl.
     # verschiedener Attribute zurück. 
     # @return Liste von Dictionaries mit folgendem Aufbau
@@ -54,9 +88,13 @@ class BscwInterface(object):
     # - language : Sprache
     # - address : Adresse
     # - homepage : Webseite
+    # - messaging_services : Messaging Services, Dictronary mit
+    # dem Name des Service als Schlüssel und der ID (z.B ICQ-Nummer)
+    # als Wert
     # - additional_info : Weitere Informationen
+    # - photo : Link zum Benutzerbild oder None wenn keins existiert
     # - used_memory : Speicherverbrauch in Byte
-    # - last_login : Letzte Anmeldung als datetime.date
+    # - last_login : Letzte Anmeldung als datetime.datetime
     def getAllUsers(self):
         pass
 
@@ -99,16 +137,16 @@ class BscwInterface(object):
     def unlockUser(self, p_user):
         pass
     
-    ## Löscht alle Objekte im Mülleimer eins oder aller User.
+    ## Löscht alle Objekte im Mülleimer eines oder aller User.
     # @param p_user Ein Dictonary mit einem Element "id" indem sich
     # die ID des Users befindet. Oder None wenn alle Mülleinmer
     # geleert werden sollen.
     def destroyTrash(self, p_user = None):
         pass
     
-    ## Löscht alle Objekte in der Ablage eins oder aller User.
+    ## Löscht alle Objekte in der Ablage eines oder aller User.
     # @param p_user Ein Dictonary mit einem Element "id" indem sich
-    # die ID des Users befindet. Oder None wenn alle Mülleinmer
+    # die ID des Users befindet. Oder None wenn alle Ablagen
     # geleert werden sollen.
     def destroyClipboard(self, p_user = None):
         pass
