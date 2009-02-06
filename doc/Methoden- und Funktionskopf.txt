@@ -1,0 +1,7 @@
+## <Kurzbeschreibung>
+# <Weitere Beschreibung>
+(# @param <Parametername> <Beschreibung>)
+(# @return <Rckgabewert>)
+(# @see <Siehe auch>)
+
+() = optional
