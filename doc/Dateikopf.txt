@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
-## @package <Dateiname> 
+## @package <Dateiname>
 # @brief <Kurzbeschreibung>
 # @version <Version>
 # @author <Autor>
 # @date <Letzte Änderung>
 
 #################################################################################
-# Copyright (C) 2009 Benjamin Flader, Bejamin Leipold, Andé Naumann,            #
+# Copyright (C) 2009 Benjamin Flader, Bejamin Leipold, André Naumann,           #
 # Corinna Vollert, Florian Kaiser                                               #
 #                                                                               #
 # This program is free software; you can redistribute it andor modify it under  #
