@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
-## @package BscwInterface 
+## @package BscwInterface
 # @brief Implementation der BscwInterface Klasse
 # @version 0.1
 # @author Florian Kaiser
-# @date 06.02.09 
+# @date 06.02.09
 
 #################################################################################
-# Copyright (C) 2009 Benjamin Flader, Bejamin Leipold, Andé Naumann,            #
+# Copyright (C) 2009 Benjamin Flader, Bejamin Leipold, André Naumann,            #
 # Corinna Vollert, Florian Kaiser                                               #
 #                                                                               #
 # This program is free software; you can redistribute it andor modify it under  #
@@ -34,10 +34,10 @@
 # -# Weitere Attribute können mit getAdditionalUserInfo() gelesen werden
 #
 # Diese Trennung ist nötig, da das Sammeln der "Additional Information"
-# im Vergleich zu den "einfachen" Attributen relativ lange dauert und deshalb 
+# im Vergleich zu den "einfachen" Attributen relativ lange dauert und deshalb
 # erst bei Bedarf nachgeladen werden sollte.
 class BscwInterface(object):
-    
+
     ## Kein Proxy
     NoProxy = 2
     ## Standard Proxy des Betriebsystems
@@ -48,18 +48,18 @@ class BscwInterface(object):
     HttpProxy = 3
     ## HTTP-Proxy für rein HTTP-Anfragen
     HttpCachingProxy = 4
-    
+
     ## Baut eine Verbindung zum BSCW Server auf und versucht sich anzumelden.
     # Sollte der Versuch scheitern wird eine Exception geworfen.
     # @param p_username Benutzername für die Anmeldung am BSCW-Server
     # @param p_passwd Passwort für die Anmeldung am BSCW-Server
     def login(self, p_username, p_passwd):
         pass
-    
+
     ## Logged den User aus und bricht die Verbindung zum BSCW-Server ab
     def logout(self):
         pass
-    
+
     ## Definiert ein Netzwerk-Proxy für die Verbindung zum BSCW Server.
     # Sollte bereits eine Verbindung bestehen, wird diese getrennt
     # @param p_hostname DNS-Name oder IP-Adresse des Proxys
@@ -71,9 +71,9 @@ class BscwInterface(object):
     # @param p_passwd Passwort für die Anmeldung am Proxy
     def setProxy(self, p_type, p_hostname = None, p_port = None, p_username = None, p_exceptions = None, p_passwd = None):
         pass
-    
+
     ## Gibt eine Liste aller am BSCW-Server angemeldeten User inkl.
-    # verschiedener Attribute zurück. 
+    # verschiedener Attribute zurück.
     # @return Liste von Dictionaries mit folgendem Aufbau
     # - id : Benutzer-ID
     # - name : Benutzername
@@ -99,7 +99,7 @@ class BscwInterface(object):
         pass
 
     ## Gibt zusätzlich Informationen zu einem User zurück, deren Sammlung
-    # aufwendiger ist und deshalb aus Performance-Gründen nicht mit in 
+    # aufwendiger ist und deshalb aus Performance-Gründen nicht mit in
     # getAllUsers() aufgenommen wurde.
     # @param p_user Ein Dictonary mit einem Element "id" indem sich
     # die ID des Users befindet.
@@ -115,20 +115,20 @@ class BscwInterface(object):
     #  - communities : Liste der Namen der Gemeinschaften
     def getAdditionalUserInfo(self, p_user):
         pass
-    
+
     ## Löscht einen Benuzter endgültig und irreversibel vom BSCW-Server.
     # @param p_user Ein Dictonary mit einem Element "id" indem sich
     # die ID des Users befindet.
     def deleteUser(self, p_user):
         pass
-    
+
     ## Sperrt einen User, sodass er sich nicht mehr anmelden kann.
     # @param p_user Ein Dictonary mit einem Element "id" indem sich
     # die ID des Users befindet.
     # @see unlockUser()
     def lockUser(self, p_user):
         pass
-    
+
     ## Entsperrt einen User, damit er sich wieder am BSCW-Server anmelden
     # kann.
     # @param p_user Ein Dictonary mit mindestens einem Element names "id"
@@ -136,14 +136,14 @@ class BscwInterface(object):
     # @see lockUser()
     def unlockUser(self, p_user):
         pass
-    
+
     ## Löscht alle Objekte im Mülleimer eines oder aller User.
     # @param p_user Ein Dictonary mit einem Element "id" indem sich
     # die ID des Users befindet. Oder None wenn alle Mülleinmer
     # geleert werden sollen.
     def destroyTrash(self, p_user = None):
         pass
-    
+
     ## Löscht alle Objekte in der Ablage eines oder aller User.
     # @param p_user Ein Dictonary mit einem Element "id" indem sich
     # die ID des Users befindet. Oder None wenn alle Ablagen
