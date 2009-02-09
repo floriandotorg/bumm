@@ -28,7 +28,7 @@
 ## Interface zur BSCW-Server
 #
 # Diese Klasse stellt Methoden bereit alle User inkl. aller Attribute
-# auszulesen. Dabei teilet sich das Auslesen der Attribute in zwei Phasen:
+# auszulesen. Dabei teilt sich das Auslesen der Attribute in zwei Phasen:
 #
 # -# Allgemeine Attribute werden bereits mit getAllUsers() zurückgegeben
 # -# Weitere Attribute können mit getAdditionalUserInfo() gelesen werden
