@@ -50,7 +50,7 @@ class BscwInterface(object):
     HttpCachingProxy = 4
 
     ## Initialisiert die BscwInterface-Klasse
-    def __init__():
+    def __init__(self):
         pass
 
     ## Baut eine Verbindung zum BSCW Server auf und versucht sich anzumelden.
@@ -112,7 +112,8 @@ class BscwInterface(object):
     # getAllUsers() aufgenommen wurde.
     # @param p_user Ein Dictonary mit einem Element "user_id" indem sich
     # die ID des Users befindet.
-    # @return Ein Dictonary mit folgendem Aufbau
+    # @return Ein Dictonary mit folgendem Aufbau oder None falls der User
+    # nicht existiert
     # - objects : Objekte (Anzahl)
     # - access_rights : Zugriffsrechte, Dictornary mit folgendem Aufbau:
     #     - creator : Liste mit Zugriffsrechten für Erzeuger
