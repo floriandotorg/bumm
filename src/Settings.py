@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-## @package MainWindow
-# @brief Implementation der MainWindow Klasse
+## @package Settings
+# @brief Implementation der Settings Klasse
 # @version 0.1
 # @author Florian Kaiser
 # @date 12.02.09
@@ -25,62 +25,21 @@
 #                                                                               #
 #################################################################################
 
-from PyQt4 import QtGui, QtCore
-import interface
-#from interface.BscwInterface import BscwInterface
-from test import BscwInterface
-from UserList import UserList
-from UserDetails import UserDetails
-from LoginDialog import LoginDialog
-from Settings import Settings
+from PyQt4 import QtCore
 
-## Diese Klasse stellt das Hauptfenster der Anwendung da und managed alle
-# Funktionen des Programms.
-class MainWindow(QtGui.QMainWindow):
+## Verwaltet Programmeinstellungen und speichert diese in einer .ini Datei.
+# Diese Datei hat immer den Namen "config.ini" und liegt Verzeichnis für 
+# Einstellugnen des Betriebsystems (z.B. Dokumente und Einstellungen)
+# Bei der Datei handelt sich um ein Standard-Windows-Konfigurationsfile.
+# Sollte sich diese Datei am angegebenen Ort befinden, wird sie gelesen,
+# anderenfalls wird eine neue Datei mit Standardwerten gefüllt.
+class Settings(QtCore.QObject):
     
     ## Konstruktor
-    # @param p_parent Übergeordnetes QObject. 
+    # @param p_parent Übergeordnetes QObject
     def __init__(self, p_parent = None):
-        QtGui.QMainWindow.__init__(self, p_parent)
-        self._settings = Settings()
-        self._login()
+        QtCore.QObject.__init__(self, p_parent)
+        self.server_address = "http://10.200.132.22/bscw"
+        self.username = "bla"
+        self.proxy = "internetproxy:8080"
     
-    ## Zeigt den LoginDialog an und versucht sich per BscwInterface am
-    #  BSCW-Server anzumelden. 
-    def _login(self):
-        login_dialog = LoginDialog(self._settings, self)
-        
-        if login_dialog.exec_() != QtGui.QDialog.Accepted:
-            QtGui.qApp.quit()
-            exit()
-                   
-        self._bscw_interface = login_dialog.getInterface()
-            
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        

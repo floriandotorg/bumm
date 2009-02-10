@@ -38,17 +38,6 @@
 # erst bei Bedarf nachgeladen werden sollte.
 class BscwInterface(object):
 
-    ## Kein Proxy
-    NoProxy = 2
-    ## Standard Proxy des Betriebsystems
-    DefaultProxy = 0
-    ## Socks5 Proxy
-    Socks5Proxy =  1
-    ## Transparenter HTTP-Proxy
-    HttpProxy = 3
-    ## HTTP-Proxy für rein HTTP-Anfragen
-    HttpCachingProxy = 4
-
     ## Initialisiert die BscwInterface-Klasse
     def __init__(self):
         pass
@@ -69,14 +58,11 @@ class BscwInterface(object):
     # @param p_hostname DNS-Name oder IP-Adresse des Proxys (None = kein Proxy
     # benötigt)
     # @param p_port Port des Proxys
-    # @param p_type Proxy-Typ (Siehe Proxy-Klassenattribute)
-    # @param p_exceptions Liste von Domänen, für die der Proxy
-    # nicht verwendet werden soll
     # @param p_username Benutzername für die Anmeldung am Proxy (None = keine 
     # Anmeldung erforderlich)
     # @param p_passwd Passwort für die Anmeldung am Proxy
-    def setProxy(self, p_type, p_hostname = None, p_port = None, 
-                 p_username = None, p_exceptions = None, p_passwd = None):
+    def setProxy(self, p_hostname = "", p_port = "", p_username = "", 
+                 p_passwd = ""):
         pass
 
     ## Gibt eine Liste aller am BSCW-Server angemeldeten User inkl.
