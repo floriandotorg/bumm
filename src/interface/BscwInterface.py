@@ -7,7 +7,7 @@
 # @date 06.02.09
 
 #################################################################################
-# Copyright (C) 2009 Benjamin Flader, Bejamin Leipold, André Naumann,            #
+# Copyright (C) 2009 Benjamin Flader, Bejamin Leipold, André Naumann,           #
 # Corinna Vollert, Florian Kaiser                                               #
 #                                                                               #
 # This program is free software; you can redistribute it andor modify it under  #
