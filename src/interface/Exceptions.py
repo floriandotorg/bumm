@@ -24,3 +24,20 @@
 # /gpl-2.0.html>.                                                               #
 #                                                                               #
 #################################################################################
+
+## Benutzername oder Passwort sind inkorrekt.
+class AuthorizationFailed(Exception):
+    pass
+
+## Der BSCW-Server ist nicht erreichbar.
+class HostUnreachable(Exception):
+    pass
+
+## Der angegebene Proxy ist nicht verfügbar
+class ProxyUnreachable(Exception):
+    pass
+
+## Die bereits bestehende Verbindung wurde unterbrochen. Ein erneuter Login-
+# Vorgang ist erforderlich
+class ConnectionError(Exception):
+    pass
