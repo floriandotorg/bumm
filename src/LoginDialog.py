@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
-## @package MainWindow
-# @brief Implementation der MainWindow Klasse
+## @package LoginDialog
+# @brief Implementation der LoginDialog Klasse
 # @version 0.1
 # @author Florian Kaiser
 # @date 12.02.09
 
 #################################################################################
-# Copyright (C) 2009 Benjamin Flader, Benjamin Leipold, André Naumann,           #
+# Copyright (C) 2009 Benjamin Flader, Benjamin Leipold, André Naumann,          #
 # Corinna Vollert, Florian Kaiser                                               #
 #                                                                               #
 # This program is free software; you can redistribute it andor modify it under  #
@@ -26,33 +26,24 @@
 #################################################################################
 
 from PyQt4 import QtGui, QtCore
-from interface.BscwInterface import BscwInterface
-#from test import BscwInterface
-from UserList import UserList
-from UserDetails import UserDetails
-from LoginDialog import LoginDialog
+from ui_LoginDialog import Ui_LoginDialog
 
-## Diese Klasse stellt das Hauptfenster der Anwendung da und managed alle
-# Funktionen des Programms.
-class MainWindow(QtGui.QMainWindow):
+## Stellt ein Dialog da, indem Benutzername und Passwort eingegeben werden
+# müssen.
+class LoginDialog(QtGui.QDialog, Ui_LoginDialog):
     
     ## Konstruktor
-    # @param p_parent Übergeordnetes QObject. 
+    # @param p_parent Übergeordnetes QObject
     def __init__(self, p_parent = None):
-        QtGui.QMainWindow.__init__(self, p_parent)
-        self._login()
+         QtGui.QDialog.__init__(self, p_parent)
+         self.setupUi(self)
     
-    ## Zeigt den LoginDialog an und versucht sich per BscwInterface am
-    #  BSCW-Server anzumelden. 
-    def _login(self):
-        self._bscw_interface = BscwInterface()
-        
-        login_dialog = LoginDialog(self)
-        if not login_dialog.exec_() == QtGui.QDialog.Accepted:
-            QtGui.QApplication.quit()
-            return
-        
-        print (login_dialog.username, login_dialog.passwd)
-        
-        
-        
+    ## Getter für den Benutzernamen     
+    def getUsername(self):
+        return self._username.text()
+    username = property(getUsername)
+    
+    ## Getter für das Passwort
+    def getPasswd(self):
+        return self._passwd.text()
+    passwd = property(getPasswd)
