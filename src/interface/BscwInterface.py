@@ -75,7 +75,8 @@ class BscwInterface(object):
     ## Gibt eine Liste aller am BSCW-Server angemeldeten User inkl.
     # verschiedener Attribute zurück.
     # @return Liste von Dictionaries mit folgendem Aufbau
-    # - id : Benutzer-ID
+    # - _user_id : Benutzer-ID
+    # - _home_id : ID vom Arbeitsbereich des Benutzers
     # - name : Benutzername
     # - longname : Vor- und Nachname
     # - email : E-Mail Adresse
@@ -93,6 +94,7 @@ class BscwInterface(object):
     # als Wert
     # - additional_info : Weitere Informationen
     # - photo : Link zum Benutzerbild oder None wenn keins existiert
+    # - locked : User geserrt ja/nein (Boolean)
     # - used_memory : Speicherverbrauch in Byte
     # - last_login : Letzte Anmeldung als datetime.datetime
     def getAllUsers(self):
