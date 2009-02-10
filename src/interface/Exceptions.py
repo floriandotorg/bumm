@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
-## @package BscwInterface 
-# @brief Interface zum BSCW-Server
+## @package Exceptions
+# @brief Implementation mehrerer Exceptions für das BscwInterface
 # @version 0.1
 # @author Florian Kaiser
-# @date 06.02.09 
+# @date 10.02.09
 
 #################################################################################
-# Copyright (C) 2009 Benjamin Flader, Bejamin Leipold, AndÃ© Naumann,            #
+# Copyright (C) 2009 Benjamin Flader, Bejamin Leipold, André Naumann,            #
 # Corinna Vollert, Florian Kaiser                                               #
 #                                                                               #
 # This program is free software; you can redistribute it andor modify it under  #
@@ -24,6 +24,3 @@
 # /gpl-2.0.html>.                                                               #
 #                                                                               #
 #################################################################################
-
-import Exceptions
-import BscwInterface

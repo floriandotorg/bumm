@@ -61,13 +61,15 @@ class BscwInterface(object):
         pass
 
     ## Definiert ein Netzwerk-Proxy für die Verbindung zum BSCW Server.
-    # Sollte bereits eine Verbindung bestehen, wird diese getrennt
-    # @param p_hostname DNS-Name oder IP-Adresse des Proxys
+    # Sollte bereits eine Verbindung bestehen, wird diese getrennt.
+    # @param p_hostname DNS-Name oder IP-Adresse des Proxys (None = kein Proxy
+    # benötigt)
     # @param p_port Port des Proxys
     # @param p_type Proxy-Typ (Siehe Proxy-Klassenattribute)
     # @param p_exceptions Liste von Domänen, für die der Proxy
     # nicht verwendet werden soll
-    # @param p_username Benutzername für die Anmeldung am Proxy
+    # @param p_username Benutzername für die Anmeldung am Proxy (None = keine 
+    # Anmeldung erforderlich)
     # @param p_passwd Passwort für die Anmeldung am Proxy
     def setProxy(self, p_type, p_hostname = None, p_port = None, p_username = None, p_exceptions = None, p_passwd = None):
         pass
