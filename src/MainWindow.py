@@ -7,7 +7,7 @@
 # @date 12.02.09
 
 #################################################################################
-# Copyright (C) 2009 Benjamin Flader, Benjamin Leipold, André Naumann,           #
+# Copyright (C) 2009 Benjamin Flader, Benjamin Leipold, André Naumann,          #
 # Corinna Vollert, Florian Kaiser                                               #
 #                                                                               #
 # This program is free software; you can redistribute it andor modify it under  #
@@ -26,8 +26,9 @@
 #################################################################################
 
 from PyQt4 import QtGui, QtCore
-from interface.BscwInterface import BscwInterface
-#from test import BscwInterface
+import interface
+#from interface.BscwInterface import BscwInterface
+from test import BscwInterface
 from UserList import UserList
 from UserDetails import UserDetails
 from LoginDialog import LoginDialog
@@ -52,7 +53,41 @@ class MainWindow(QtGui.QMainWindow):
             QtGui.QApplication.quit()
             return
         
-        print (login_dialog.username, login_dialog.passwd)
+        try:
+            self._bscw_interface.login(login_dialog.username,
+                                        login_dialog.passwd)
+        except interface.Exceptions.AuthorizationFailed:
+            QtGui.QMessageBox.critical(self, self.trUtf8(
+                                            "Anmeldung fehlgeschlagen"), 
+                            self.trUtf8("""Die Anmeldung ist fehlgeschlagen!
+Möglicherweise wurde ein falsches Passwort oder ein falscher Benutzername
+verwendet oder sie verfügen nicht über die nötigen Rechte."""))
+            
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         

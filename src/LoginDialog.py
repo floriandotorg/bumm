@@ -40,10 +40,10 @@ class LoginDialog(QtGui.QDialog, Ui_LoginDialog):
     
     ## Getter für den Benutzernamen     
     def getUsername(self):
-        return self._username.text()
+        return str(self._username.text())
     username = property(getUsername)
     
     ## Getter für das Passwort
     def getPasswd(self):
-        return self._passwd.text()
+        return str(self._passwd.text())
     passwd = property(getPasswd)
