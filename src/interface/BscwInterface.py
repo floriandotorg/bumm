@@ -71,7 +71,8 @@ class BscwInterface(object):
     # @param p_username Benutzername für die Anmeldung am Proxy (None = keine 
     # Anmeldung erforderlich)
     # @param p_passwd Passwort für die Anmeldung am Proxy
-    def setProxy(self, p_type, p_hostname = None, p_port = None, p_username = None, p_exceptions = None, p_passwd = None):
+    def setProxy(self, p_type, p_hostname = None, p_port = None, 
+                 p_username = None, p_exceptions = None, p_passwd = None):
         pass
 
     ## Gibt eine Liste aller am BSCW-Server angemeldeten User inkl.
