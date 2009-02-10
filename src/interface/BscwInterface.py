@@ -7,7 +7,7 @@
 # @date 06.02.09
 
 #################################################################################
-# Copyright (C) 2009 Benjamin Flader, Bejamin Leipold, André Naumann,           #
+# Copyright (C) 2009 Benjamin Flader, Benjamin Leipold, André Naumann,          #
 # Corinna Vollert, Florian Kaiser                                               #
 #                                                                               #
 # This program is free software; you can redistribute it andor modify it under  #
@@ -25,7 +25,7 @@
 #                                                                               #
 #################################################################################
 
-## Interface zur BSCW-Server
+## Interface zum BSCW-Server
 #
 # Diese Klasse stellt Methoden bereit alle User inkl. aller Attribute
 # auszulesen. Dabei teilt sich das Auslesen der Attribute in zwei Phasen:
@@ -49,6 +49,10 @@ class BscwInterface(object):
     ## HTTP-Proxy für rein HTTP-Anfragen
     HttpCachingProxy = 4
 
+    ## Initialisiert die BscwInterface-Klasse
+    def __init__():
+        pass
+
     ## Baut eine Verbindung zum BSCW Server auf und versucht sich anzumelden.
     # Sollte der Versuch scheitern wird eine Exception geworfen.
     # @param p_username Benutzername für die Anmeldung am BSCW-Server
@@ -56,7 +60,7 @@ class BscwInterface(object):
     def login(self, p_username, p_passwd):
         pass
 
-    ## Logged den User aus und bricht die Verbindung zum BSCW-Server ab
+    ## Loggt den User aus und bricht die Verbindung zum BSCW-Server ab
     def logout(self):
         pass
 
