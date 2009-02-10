@@ -78,8 +78,8 @@ class BscwInterface(object):
     ## Gibt eine Liste aller am BSCW-Server angemeldeten User inkl.
     # verschiedener Attribute zurück.
     # @return Liste von Dictionaries mit folgendem Aufbau
-    # - _user_id : Benutzer-ID
-    # - _home_id : ID vom Arbeitsbereich des Benutzers
+    # - user_id : Benutzer-ID
+    # - _home_id : ID vom Arbeitsbereich des Benutzers (private)
     # - name : Benutzername
     # - longname : Vor- und Nachname
     # - email : E-Mail Adresse
