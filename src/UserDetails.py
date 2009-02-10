@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 
-## @package UserList
-# @brief Implementation der Liste aller Benutzer
+## @package UserDetails
+# @brief Implementation eines DockWidgets zum Anzeigen zusätzlicher User 
+# Informationen
 # @version 0.1
-# @author Benjamin Leipold
+# @author Corinna Vollert
 # @date 12.02.09
 
 #################################################################################
@@ -27,48 +28,61 @@
 
 from PyQt4 import QtGui, QtCore
 
-## UserList Steuerelement
-# Diese Klasse implementiert ein Steuerelement zum Anzeigen aller Benutzer
-# anhand einer Liste. Mehrfachauswahl ist nicht zugelassen.
+## UserDetails Steuerelement
+# Diese Klasse implementiert ein Steuerelement zum Anzeigen zusätzlicher
+# Benutzer Informationen.
 #
 # Die Klasse emitiert folgende Signals:
-# - SelectionChanged(p_user_id) wenn auf ein Eintrag geklickt wurde. "p_user_id"
-# gibt die ID des Users zurück, welcher selektiert wurde.
-class UserList(QtGui.QTreeView):
-
+# - RemoveUser(p_user_id) Wenn auf "Benutzer löschen" geklickt wurde. 
+# "p_user_id" gibt die ID des Users zurück, welcher gelöscht werden soll.
+# - LockUser(p_user_id) Wenn auf "Benutzer sperren" geklickt wurde. 
+# "p_user_id" gibt die ID des Users zurück, welcher gesperrt werden soll.
+# - UnlockUser(p_user_id) Wenn auf "Benutzer entsperren" geklickt wurde. 
+# "p_user_id" gibt die ID des Users zurück, welcher entsperrt werden soll.
+# - DestroyTrash(p_user_id)Leert den Mülleinmer des Benutzers. "p_user_id" ist
+# die ID des Benutzers bei dem dies geschied.
+# - DestroyClipboard(p_user_id) Räumt die Zwischenablage des Benutzers auf. 
+# "p_user_id" ist die ID des Benutzers bei dem dies geschied.
+class UserDetails(QtGui.QDockWidget):
+    
     ## Konstruktor
+    # @param p_parent Übergeordnetes QObject 
+    def __init__(self, p_parent = None):
+        QtGui.QDockWidget.__init__(self, p_parent)
+        pass
+    
+    ## Zeigt alle Userinformationen im Widget an
     # @param p_user_list Eine Liste von Dictonaries mit folgendem Aufbau:
     # - user_id : Benutzer-ID
     # - name : Benutzername
     # - longname : Vor- und Nachname
     # - email : E-Mail Adresse
+    # - secondary_email : Liste mit weiteren E-Mail Adressen
     # - organization : Organisation
     # - phone_home : Telefon Heim
     # - phone_mobile : Telefon Handy
     # - phone_office : Telefon Büro
     # - fax : Faxnummer
     # - language : Sprache
+    # - address : Adresse
     # - homepage : Webseite
+    # - messaging_services : Messaging Services, Dictronary mit
+    # dem Name des Service als Schlüssel und der ID (z.B ICQ-Nummer)
+    # als Wert
     # - additional_info : Weitere Informationen
+    # - photo : Link zum Benutzerbild oder None wenn keins existiert
     # - locked : User geserrt ja/nein (Boolean)
     # - used_memory : Speicherverbrauch in Byte
     # - last_login : Letzte Anmeldung als datetime.datetime
-    # @param p_header_data Liste von Strings mit den Namen der Spalten
-    # die angezeigt werden sollen. 
-    # @param p_parent Übergeordnetes QObject 
-    def __init__(self, p_user_list, p_header_data, p_parent = None):
-        QtGui.QTreeView.__init__(self, p_parent)
+    # - objects : Objekte (Anzahl)
+    # - access_rights : Zugriffsrechte, Dictornary mit folgendem Aufbau:
+    #     - creator : Liste mit Zugriffsrechten für Erzeuger
+    #     - user : Liste mit Zugriffsrechten für registriete Benutzer
+    #     - owner : Liste mit Zugriffsrechten für Eigentümer
+    #     - manager : Liste mit Zugriffsrechten für Manager
+    # - memberships : Mitgliedschaften, Dictonary mit zwei Elementen:
+    #     - workspaces : Liste der Namen der Arbeitsbereiche
+    #     - communities : Liste der Namen der Gemeinschaften
+    def showUser(self, p_user):
         pass
     
-    ## Übergibt eine neue Liste mit Spalten die angezeigt werden sollen.
-    # @param p_header_data Liste von Strings mit den Namen der Spalten
-    # die angezeigt werden sollen.
-    def changeHeaderData(self, p_header_data):
-         pass
-    
-    ## Entfernt einen Benutzer aus der Liste
-    # @param p_user Ein Dictonary mit einem Element "user_id" indem sich
-    # die ID des Users befindet. 
-    # @return Benutzer-ID des Eintrags der nun selektiert ist. None für keinen.
-    def removeEntry(self, p_user):
-        pass

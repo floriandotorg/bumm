@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
 ## @package Exceptions
-# @brief Implementation mehrerer Exceptions für das BscwInterface
+# @brief Implementation mehrerer Exceptions fÃ¼r das BscwInterface
 # @version 0.1
 # @author Florian Kaiser
 # @date 10.02.09
 
 #################################################################################
-# Copyright (C) 2009 Benjamin Flader, Bejamin Leipold, André Naumann,            #
+# Copyright (C) 2009 Benjamin Flader, Bejamin Leipold, Andrï¿½ Naumann,            #
 # Corinna Vollert, Florian Kaiser                                               #
 #                                                                               #
 # This program is free software; you can redistribute it andor modify it under  #

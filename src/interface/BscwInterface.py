@@ -115,13 +115,13 @@ class BscwInterface(object):
     # @return Ein Dictonary mit folgendem Aufbau
     # - objects : Objekte (Anzahl)
     # - access_rights : Zugriffsrechte, Dictornary mit folgendem Aufbau:
-    #  - creator : Liste mit Zugriffsrechten für Erzeuger
-    #  - user : Liste mit Zugriffsrechten für registriete Benutzer
-    #  - owner : Liste mit Zugriffsrechten für Eigentümer
-    #  - manager : Liste mit Zugriffsrechten für Manager
+    #     - creator : Liste mit Zugriffsrechten für Erzeuger
+    #     - user : Liste mit Zugriffsrechten für registriete Benutzer
+    #     - owner : Liste mit Zugriffsrechten für Eigentümer
+    #     - manager : Liste mit Zugriffsrechten für Manager
     # - memberships : Mitgliedschaften, Dictonary mit zwei Elementen:
-    #  - workspaces : Liste der Namen der Arbeitsbereiche
-    #  - communities : Liste der Namen der Gemeinschaften
+    #     - workspaces : Liste der Namen der Arbeitsbereiche
+    #     - communities : Liste der Namen der Gemeinschaften
     def getAdditionalUserInfo(self, p_user):
         pass
 
