@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-## @package Exceptions
-# @brief Deklaration mehrerer Exceptions für das BscwInterface
+## @package __main__
+# @brief Startet die Applikation
 # @version 0.1
 # @author Florian Kaiser
 # @date 10.02.09
@@ -25,19 +25,11 @@
 #                                                                               #
 #################################################################################
 
-## Benutzername oder Passwort sind inkorrekt oder Benutzer ist kein Admin.
-class AuthorizationFailed(Exception):
-    pass
+import sys
+from PyQt4 import QtGui
+from MainWindow import MainWindow
 
-## Der BSCW-Server ist nicht erreichbar.
-class HostUnreachable(Exception):
-    pass
-
-## Der angegebene Proxy ist nicht verfügbar
-class ProxyUnreachable(Exception):
-    pass
-
-## Die bereits bestehende Verbindung wurde unterbrochen. Ein erneuter Login-
-# Vorgang ist erforderlich
-class ConnectionError(Exception):
-    pass
+app = QtGui.QApplication(sys.argv)
+mainWindow = MainWindow()
+mainWindow.show()
+app.exec_()

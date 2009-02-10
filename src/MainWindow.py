@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
-## @package Exceptions
-# @brief Deklaration mehrerer Exceptions für das BscwInterface
+## @package MainWindow
+# @brief Implementation der MainWindow Klasse
 # @version 0.1
 # @author Florian Kaiser
-# @date 10.02.09
+# @date 12.02.09
 
 #################################################################################
-# Copyright (C) 2009 Benjamin Flader, Benjamin Leipold, André Naumann,          #
+# Copyright (C) 2009 Benjamin Flader, Benjamin Leipold, André Naumann,           #
 # Corinna Vollert, Florian Kaiser                                               #
 #                                                                               #
 # This program is free software; you can redistribute it andor modify it under  #
@@ -25,19 +25,16 @@
 #                                                                               #
 #################################################################################
 
-## Benutzername oder Passwort sind inkorrekt oder Benutzer ist kein Admin.
-class AuthorizationFailed(Exception):
-    pass
+from PyQt4 import QtGui, QtCore
+from interface import BscwInterface
+from UserList import UserList
+from UserDetails import UserDetails
 
-## Der BSCW-Server ist nicht erreichbar.
-class HostUnreachable(Exception):
-    pass
-
-## Der angegebene Proxy ist nicht verfügbar
-class ProxyUnreachable(Exception):
-    pass
-
-## Die bereits bestehende Verbindung wurde unterbrochen. Ein erneuter Login-
-# Vorgang ist erforderlich
-class ConnectionError(Exception):
-    pass
+## Diese Klasse stellt das Hauptfenster der Anwendung da und managed alle
+# Funktionen des Programms.
+class MainWindow(QtGui.QMainWindow):
+    
+    ## Konstruktor
+    # @param p_parent Übergeordnetes QObject 
+    def __init__(self, p_parent = None):
+        QtGui.QMainWindow.__init__(self, p_parent)
