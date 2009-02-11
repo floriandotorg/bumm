@@ -26,8 +26,8 @@
 #################################################################################
 
 import xmlrpclib                                         # XML-RPC
-import socket                                            # Socket
 import Exceptions                                        # Ausnahmen
+import socket                                            # Socket
 from _AuthorizedTransport import AuthorizedTransport     # Authorized-Transport
 
 ## Interface zum BSCW-Server
@@ -60,11 +60,11 @@ class BscwInterface(object):
 
             # Authorisierung überprüfen (User? Admin?)
             if not self._server.is_admin(p_username):
-                raise AuthorizationFailed
+                raise Exceptions.AuthorizationFailed
 
-        except (socket.error, xmlrpclib.Fault):
+        except (xmlrpclib.Fault, socket.error):
             # Verbindung überprüfen
-            raise HostUnreachable
+            raise Exceptions.HostUnreachable
 
     ## Loggt den User aus und bricht die Verbindung zum BSCW-Server ab
     def logout(self):
@@ -181,4 +181,7 @@ class BscwInterface(object):
 
 if __name__ == '__main__':
     test = BscwInterface()
-    test.login('10.200.132.23', 'Ben', 'mypass')
+    try:
+        test.login('10.200.132.23', 'Ben', 'mypass')
+    except Exceptions.AuthorizationFailed:
+        print 'failed'

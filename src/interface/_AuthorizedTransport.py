@@ -26,6 +26,7 @@
 #################################################################################
 
 import xmlrpclib # Bibliothek zum ferngesteuerten Aufruf von Methoden
+import base64, string
 
 ## AuthorizedTransport
 #
@@ -38,10 +39,12 @@ class AuthorizedTransport(xmlrpclib.Transport):
     ## initialisiert die AuthorizedTransport-Klasse
     # @param p_passwd Passwort für die Anmeldung am BSCW-Server
     def __init__(self, p_username = None, p_passwd = None):
+
         # Initialisierung, wird später durch XML-RPC geprüft
         self._use_datetime = False
+
+        # User + Passwort verschlüsseln und festlegen
         self.user_passwd = p_username + ':' + p_passwd
-        import base64, string
         self.auth = string.strip(base64.encodestring(self.user_passwd))
 
     ## sendet den Host-Namen
