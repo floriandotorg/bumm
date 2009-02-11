@@ -4,7 +4,7 @@
 # @brief erweitert xmlrpclib um die Möglichkeit einer HTTP-Authorization
 # @version 0.1
 # @author Benjamin Flader
-# @date 09.02.09
+# @date 10.02.09
 
 #################################################################################
 # Copyright (C) 2009 Benjamin Flader, Benjamin Leipold, André Naumann,          #
@@ -37,15 +37,17 @@ class AuthorizedTransport(xmlrpclib.Transport):
 
     ## initialisiert die AuthorizedTransport-Klasse
     # @param p_passwd Passwort für die Anmeldung am BSCW-Server
-    def __init__(self, p_passwd = ''):
-      self.user_passwd = user_passwd
-      import base64, string
-      self.auth = string.strip(base64.encodestring(self.user_passwd))
+    def __init__(self, p_username = None, p_passwd = None):
+        # Initialisierung, wird später durch XML-RPC geprüft
+        self._use_datetime = False
+        self.user_passwd = p_username + ':' + p_passwd
+        import base64, string
+        self.auth = string.strip(base64.encodestring(self.user_passwd))
 
     ## sendet den Host-Namen
     # @param connection Verbindungs-Alias
     # @param host Hostname
     def send_host(self, connection, host):
-      connection.putheader("Host", host)
-      if self.auth:
-          connection.putheader('Authorization', 'Basic %s' % self.auth)
+        connection.putheader("Host", host)
+        if self.auth:
+            connection.putheader('Authorization', 'Basic %s' % self.auth)
