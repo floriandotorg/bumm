@@ -37,7 +37,8 @@ class HostUnreachable(Exception):
 class ProxyUnreachable(Exception):
     pass
 
-## Die bereits bestehende Verbindung wurde unterbrochen. Ein erneuter Login-
-# Vorgang ist erforderlich
+## Die bereits bestehende Verbindung wurde unterbrochen oder hat nie
+# existiert. Ein erneuter Loginvorgang ist erforderlich und die aufgerufene
+# Methode auszuführen.
 class ConnectionError(Exception):
     pass

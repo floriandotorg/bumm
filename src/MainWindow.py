@@ -26,6 +26,7 @@
 #################################################################################
 
 from PyQt4 import QtGui, QtCore
+from ui_MainWindow import Ui_MainWindow
 import interface
 #from interface.BscwInterface import BscwInterface
 from test import BscwInterface
@@ -33,17 +34,37 @@ from UserList import UserList
 from UserDetails import UserDetails
 from LoginDialog import LoginDialog
 from Settings import Settings
+import time
+
+class LoadingDialog(QtGui.QDialog):
+    
+    def __init__(self, p_parent = None):
+        QtGui.QDialog.__init__(self, p_parent)
+        self._label = QtGui.QLabel(self)
+        self._label.setText("Bitte Warten ...")
+        self.setGeometry(self.x(), self.y(), 100, 200)
+        #self.setWindowFlags(QtCore.WindowFlags.)
 
 ## Diese Klasse stellt das Hauptfenster der Anwendung da und managed alle
 # Funktionen des Programms.
-class MainWindow(QtGui.QMainWindow):
+class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
     
     ## Konstruktor
     # @param p_parent Übergeordnetes QObject. 
     def __init__(self, p_parent = None):
         QtGui.QMainWindow.__init__(self, p_parent)
+        self.setupUi(self)
         self._settings = Settings()
-        self._login()
+        self._centralwidget = UserList([], [], self)
+        self.setCentralWidget(self._centralwidget)
+        self._dockwidget = UserDetails(self)
+        self.addDockWidget(QtCore.Qt.RightDockWidgetArea, self._dockwidget)
+        self._loading_dialog = LoadingDialog(self)
+        self._loading_dialog.show()
+        #self._login()
+        #self._user_list = self._bscw_interface.getAllUsers()
+        #print self._user_list
+        
     
     ## Zeigt den LoginDialog an und versucht sich per BscwInterface am
     #  BSCW-Server anzumelden. 
@@ -55,11 +76,6 @@ class MainWindow(QtGui.QMainWindow):
             exit()
                    
         self._bscw_interface = login_dialog.getInterface()
-            
-        
-        
-        
-        
         
         
         

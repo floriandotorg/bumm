@@ -1,0 +1,96 @@
+<ui version="4.0" >
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>BSCW Userverwaltung</string>
+  </property>
+  <widget class="QWidget" name="_centralwidget" />
+  <widget class="QMenuBar" name="_menubar" >
+   <property name="geometry" >
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="_menu_program" >
+    <property name="title" >
+     <string>Programm</string>
+    </property>
+    <addaction name="_action_quit" />
+   </widget>
+   <widget class="QMenu" name="_menu_view" >
+    <property name="title" >
+     <string>Ansicht</string>
+    </property>
+    <addaction name="_action_user_Details" />
+    <addaction name="separator" />
+    <addaction name="_action_set_cols" />
+   </widget>
+   <widget class="QMenu" name="_menu_help" >
+    <property name="title" >
+     <string>Hilfe</string>
+    </property>
+    <addaction name="_action_info" />
+   </widget>
+   <addaction name="_menu_program" />
+   <addaction name="_menu_view" />
+   <addaction name="_menu_help" />
+  </widget>
+  <widget class="QStatusBar" name="_statusbar" />
+  <action name="_action_quit" >
+   <property name="text" >
+    <string>Beenden</string>
+   </property>
+  </action>
+  <action name="_action_info" >
+   <property name="text" >
+    <string>Info</string>
+   </property>
+  </action>
+  <action name="_action_user_Details" >
+   <property name="checkable" >
+    <bool>true</bool>
+   </property>
+   <property name="checked" >
+    <bool>true</bool>
+   </property>
+   <property name="text" >
+    <string>User Details</string>
+   </property>
+  </action>
+  <action name="_action_set_cols" >
+   <property name="text" >
+    <string>Spalten auswählen</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>_action_quit</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

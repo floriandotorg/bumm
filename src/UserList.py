@@ -60,6 +60,11 @@ class UserList(QtGui.QTreeView):
         QtGui.QTreeView.__init__(self, p_parent)
         pass
     
+    ## Löscht den Inhalt der Liste und zeigt den Inhalt von p_user_list an.
+    # @param p_user_list Liste mit Userdaten. (Siehe __init__())
+    def setList(self, p_user_list):
+        pass
+    
     ## Übergibt eine neue Liste mit Spalten die angezeigt werden sollen.
     # @param p_header_data Liste von Strings mit den Namen der Spalten
     # die angezeigt werden sollen.

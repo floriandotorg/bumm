@@ -33,7 +33,7 @@ from test import BscwInterface
 
 ## Stellt ein Dialog da, indem Benutzername und Passwort eingegeben werden
 # müssen. Optional kann ein Proxy eingegeben werden.
-# Danach wird versucht zum BSCW-Server zu connecten.
+# Sind alle Daten eingegeben, kann ein Verbindungsversuch gestartet werden.
 class LoginDialog(QtGui.QDialog, Ui_LoginDialog):
     
     ## Konstruktor
