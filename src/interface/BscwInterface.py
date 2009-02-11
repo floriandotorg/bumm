@@ -4,7 +4,7 @@
 # @brief Implementation der BscwInterface Klasse
 # @version 0.1
 # @author Florian Kaiser
-# @date 06.02.09
+# @date 10.02.09
 
 #################################################################################
 # Copyright (C) 2009 Benjamin Flader, Benjamin Leipold, André Naumann,          #
@@ -25,6 +25,11 @@
 #                                                                               #
 #################################################################################
 
+import xmlrpclib                                         # XML-RPC
+import socket                                            # Socket
+import Exceptions                                        # Ausnahmen
+from _AuthorizedTransport import AuthorizedTransport     # Authorized-Transport
+
 ## Interface zum BSCW-Server
 #
 # Diese Klasse stellt Methoden bereit alle User inkl. aller Attribute
@@ -44,10 +49,22 @@ class BscwInterface(object):
 
     ## Baut eine Verbindung zum BSCW Server auf und versucht sich anzumelden.
     # Sollte der Versuch scheitern wird eine Exception geworfen.
+    # @param p_hostname DNS-Name oder IP-Adresse des BSCW-Servers
     # @param p_username Benutzername für die Anmeldung am BSCW-Server
     # @param p_passwd Passwort für die Anmeldung am BSCW-Server
-    def login(self, p_username, p_passwd):
-        pass
+    def login(self, p_hostname, p_username, p_passwd):
+
+        try:
+            # Verbindung herstellen
+            self._connect(p_hostname, p_username, p_passwd)
+
+            # Authorisierung überprüfen (User? Admin?)
+            if not self._server.is_admin(p_username):
+                raise AuthorizationFailed
+
+        except (socket.error, xmlrpclib.Fault):
+            # Verbindung überprüfen
+            raise HostUnreachable
 
     ## Loggt den User aus und bricht die Verbindung zum BSCW-Server ab
     def logout(self):
@@ -58,10 +75,11 @@ class BscwInterface(object):
     # @param p_hostname DNS-Name oder IP-Adresse des Proxys (None = kein Proxy
     # benötigt)
     # @param p_port Port des Proxys
-    # @param p_username Benutzername für die Anmeldung am Proxy (None = keine 
+    # @param p_username Benutzername für die Anmeldung am Proxy (None = keine
     # Anmeldung erforderlich)
     # @param p_passwd Passwort für die Anmeldung am Proxy
-    def setProxy(self, p_hostname = "", p_port = "", p_username = "", 
+
+    def setProxy(self, p_hostname = "", p_port = "", p_username = "",
                  p_passwd = ""):
         pass
 
@@ -146,3 +164,21 @@ class BscwInterface(object):
     # geleert werden sollen.
     def destroyClipboard(self, p_user = None):
         pass
+
+    ## Stellt eine Verbindung zum BSCW-Server her
+    # @param p_hostname DNS-Name oder IP-Adresse des BSCW-Servers
+    # @param p_username Benutzername für die Anmeldung am BSCW-Server
+    # @param p_passwd Passwort für die Anmeldung am BSCW-Server
+    def _connect(self, p_hostname, p_username, p_passwd):
+
+        # AuthorizedTransport (zum Patchen von XMLRPC, siehe
+        # _AuthorizedTransport.py)
+        authorized_transport = AuthorizedTransport(p_username, p_passwd)
+
+        # Verbindung mit dem Server herstellen
+        self.hostname = 'http://' + p_hostname + '/bscw/bscw.cgi/?op=xmlrpc'
+        self._server = xmlrpclib.Server(self.hostname, authorized_transport)
+
+if __name__ == '__main__':
+    test = BscwInterface()
+    test.login('10.200.132.23', 'Ben', 'mypass')
