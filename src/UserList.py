@@ -37,37 +37,58 @@ from PyQt4 import QtGui, QtCore
 class UserList(QtGui.QTreeView):
 
     ## Konstruktor
+    # @param p_header_data Siehe changeHeaderData()
+    # @param p_parent Übergeordnetes QObject 
+    def __init__(self, p_header_data, p_parent = None):
+        QtGui.QTreeView.__init__(self, p_parent)
+        pass
+    
+    ## Löscht den Inhalt der Liste und zeigt den Inhalt von p_user_list an.
     # @param p_user_list Eine Liste von Dictonaries mit folgendem Aufbau:
     # - user_id : Benutzer-ID
     # - name : Benutzername
     # - longname : Vor- und Nachname
     # - email : E-Mail Adresse
+    # - secondary_email : Liste mit weiteren E-Mail Adressen
     # - organization : Organisation
     # - phone_home : Telefon Heim
     # - phone_mobile : Telefon Handy
     # - phone_office : Telefon Büro
     # - fax : Faxnummer
     # - language : Sprache
-    # - homepage : Webseite
+    # - address : Adresse
+    # - url_homepage : Webseite privat
+    # - url : website Büro
+    # - messaging_services : Messaging Services, Dictronary mit
+    # dem Name des Service als Schlüssel und der ID (z.B ICQ-Nummer)
+    # als Wert
     # - additional_info : Weitere Informationen
+    # - photo : Link zum Benutzerbild oder None wenn keins existiert
     # - locked : User geserrt ja/nein (Boolean)
-    # - used_memory : Speicherverbrauch in Byte
+    # - used_memory : Speicherverbrauch in MB
     # - last_login : Letzte Anmeldung als datetime.datetime
-    # @param p_header_data Liste von Strings mit den Namen der Spalten
-    # die angezeigt werden sollen. 
-    # @param p_parent Übergeordnetes QObject 
-    def __init__(self, p_user_list, p_header_data, p_parent = None):
-        QtGui.QTreeView.__init__(self, p_parent)
+    # - create_time : Zeit der Erstellung des Users als datetime.datetime
+    # - files : Dateien (Anzahl)
+    # - admin : User ist BSCW-Admin ja/nein (Boolean)
+    # - workspaces : Liste aller Arbeitsbereiche, in den der User Mitglied ist
+    # - accress_right : Zugriffsrechte, Dictornary mit folgendem Aufbau:
+    #     - owner : Zugriffsrechte für Eigentümer: Liste mit zwei Elementen
+    #        - Liste mit Usernamen, die dieser Rolle entsprechen
+    #        - Liste mit Zugriffsrechten
+    #     - manager : Zugriffsrechte für Manager: Liste mit zwei Elementen
+    #        - Liste mit Usernamen, die dieser Rolle entsprechen
+    #        - Liste mit Zugriffsrechten
+    #     - other : Zugriffsrechte für alle Anderen: Liste mit zwei Elementen
+    #        - Liste mit Usernamen, die dieser Rolle entsprechen
+    #        - Liste mit Zugriffsrechten
+    def loadList(self, p_user_list):
         pass
     
-    ## Löscht den Inhalt der Liste und zeigt den Inhalt von p_user_list an.
-    # @param p_user_list Liste mit Userdaten. (Siehe __init__())
-    def setList(self, p_user_list):
-        pass
-    
-    ## Übergibt eine neue Liste mit Spalten die angezeigt werden sollen.
-    # @param p_header_data Liste von Strings mit den Namen der Spalten
-    # die angezeigt werden sollen.
+    ## Übergibt eine Liste mit Spalten die angezeigt werden sollen.
+    # @param p_header_data Ein Dictonary mit den Spaltenüberschriften. Als
+    # Schlüssel dienen die Schlüssel aus user_list. Einträge die nicht vorhanden
+    # sind, sollen nicht angezeigt werden.
+    # @see loadList()
     def changeHeaderData(self, p_header_data):
          pass
     

@@ -65,24 +65,30 @@ class UserDetails(QtGui.QDockWidget):
     # - fax : Faxnummer
     # - language : Sprache
     # - address : Adresse
-    # - homepage : Webseite
+    # - url_homepage : Webseite privat
+    # - url : website Büro
     # - messaging_services : Messaging Services, Dictronary mit
     # dem Name des Service als Schlüssel und der ID (z.B ICQ-Nummer)
     # als Wert
     # - additional_info : Weitere Informationen
     # - photo : Link zum Benutzerbild oder None wenn keins existiert
     # - locked : User geserrt ja/nein (Boolean)
-    # - used_memory : Speicherverbrauch in Byte
+    # - used_memory : Speicherverbrauch in MB
     # - last_login : Letzte Anmeldung als datetime.datetime
-    # - objects : Objekte (Anzahl)
-    # - access_rights : Zugriffsrechte, Dictornary mit folgendem Aufbau:
-    #     - creator : Liste mit Zugriffsrechten für Erzeuger
-    #     - user : Liste mit Zugriffsrechten für registriete Benutzer
-    #     - owner : Liste mit Zugriffsrechten für Eigentümer
-    #     - manager : Liste mit Zugriffsrechten für Manager
-    # - memberships : Mitgliedschaften, Dictonary mit zwei Elementen:
-    #     - workspaces : Liste der Namen der Arbeitsbereiche
-    #     - communities : Liste der Namen der Gemeinschaften
+    # - create_time : Zeit der Erstellung des Users als datetime.datetime
+    # - files : Dateien (Anzahl)
+    # - admin : User ist BSCW-Admin ja/nein (Boolean)
+    # - workspaces : Liste aller Arbeitsbereiche, in den der User Mitglied ist
+    # - accress_right : Zugriffsrechte, Dictornary mit folgendem Aufbau:
+    #     - owner : Zugriffsrechte für Eigentümer: Liste mit zwei Elementen
+    #        - Liste mit Usernamen, die dieser Rolle entsprechen
+    #        - Liste mit Zugriffsrechten
+    #     - manager : Zugriffsrechte für Manager: Liste mit zwei Elementen
+    #        - Liste mit Usernamen, die dieser Rolle entsprechen
+    #        - Liste mit Zugriffsrechten
+    #     - other : Zugriffsrechte für alle Anderen: Liste mit zwei Elementen
+    #        - Liste mit Usernamen, die dieser Rolle entsprechen
+    #        - Liste mit Zugriffsrechten
     def showUser(self, p_user):
         pass
     

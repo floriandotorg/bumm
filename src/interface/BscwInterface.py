@@ -88,7 +88,6 @@ class BscwInterface(object):
     # verschiedener Attribute zurück.
     # @return Liste von Dictionaries mit folgendem Aufbau
     # - user_id : Benutzer-ID
-    # - _home_id : ID vom Arbeitsbereich des Benutzers (private)
     # - name : Benutzername
     # - longname : Vor- und Nachname
     # - email : E-Mail Adresse
@@ -108,15 +107,25 @@ class BscwInterface(object):
     # - additional_info : Weitere Informationen
     # - photo : Link zum Benutzerbild oder None wenn keins existiert
     # - locked : User geserrt ja/nein (Boolean)
-    # - used_memory : Speicherverbrauch in Byte
+    # - used_memory : Speicherverbrauch in MB
     # - last_login : Letzte Anmeldung als datetime.datetime
     # - create_time : Zeit der Erstellung des Users als datetime.datetime
     # - files : Dateien (Anzahl)
-    # - admin : User
+    # - admin : User ist BSCW-Admin ja/nein (Boolean)
+    # - workspaces : Liste aller Arbeitsbereiche, in den der User Mitglied ist
+    # - accress_right : Zugriffsrechte, Dictornary mit folgendem Aufbau:
+    #     - owner : Zugriffsrechte für Eigentümer: Liste mit zwei Elementen
+    #        - Liste mit Usernamen, die dieser Rolle entsprechen
+    #        - Liste mit Zugriffsrechten
+    #     - manager : Zugriffsrechte für Manager: Liste mit zwei Elementen
+    #        - Liste mit Usernamen, die dieser Rolle entsprechen
+    #        - Liste mit Zugriffsrechten
+    #     - other : Zugriffsrechte für alle Anderen: Liste mit zwei Elementen
+    #        - Liste mit Usernamen, die dieser Rolle entsprechen
+    #        - Liste mit Zugriffsrechten
     def getAllUsers(self):
         pass
 
-    '''weg!!!'''
 
     ## Gibt zusätzlich Informationen zu einem User zurück, deren Sammlung
     # aufwendiger ist und deshalb aus Performance-Gründen nicht mit in
