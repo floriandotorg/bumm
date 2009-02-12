@@ -86,9 +86,8 @@ class UserList(QtGui.QTreeView):
         pass
     
     ## Übergibt eine Liste mit Spalten die angezeigt werden sollen.
-    # @param p_header_data Ein Dictonary mit den Spaltenüberschriften. Als
-    # Schlüssel dienen die Schlüssel aus user_list. Einträge die nicht vorhanden
-    # sind, sollen nicht angezeigt werden.
+    # @param p_header_data Eine Liste von Tupels mit jeweils zwei Elementen,
+    # in denen der Schlüssel und die Überschrift stehen.
     # @see loadList()
     def changeHeaderData(self, p_header_data):
          pass
