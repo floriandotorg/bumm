@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-## @package AuthorizedTransport
-# @brief erweitert xmlrpclib um die Möglichkeit einer HTTP-Authorization
+## @package _ProxiedTransport
+# @brief erweitert xmlrpclib um die Möglichkeit einer Proxy-Authorization
 # @version 0.1
 # @author Benjamin Flader
 # @date 10.02.09
@@ -27,14 +27,17 @@
 
 import xmlrpclib # Bibliothek zum ferngesteuerten Aufruf von Methoden
 import base64, string
+import urllib
+from urllib import unquote, splittype, splithost
 
-## AuthorizedTransport
+## ProxiedTransport
 #
 # Diese Klasse erweitert die XML-RPC-Implementation von Python um die
-# Möglichkeit einer HTTP-Authorization (Benutzername und Passwort)
+# Möglichkeit einer Proxy-Authorization (Benutzername und Passwort)
+#
 # Bemerkung: überlädt xmlrpclib.Transport
 
-class AuthorizedTransport(xmlrpclib.Transport):
+class ProxiedTransport(xmlrpclib.Transport):
 
     ## initialisiert die AuthorizedTransport-Klasse
     # @param p_passwd Passwort für die Anmeldung am BSCW-Server
@@ -44,13 +47,21 @@ class AuthorizedTransport(xmlrpclib.Transport):
         self._use_datetime = False
 
         # User + Passwort verschlüsseln und festlegen
-        self.user_passwd = p_username + ':' + p_passwd
-        self.auth = string.strip(base64.encodestring(self.user_passwd))
+        #self.user_passwd = p_username + ':' + p_passwd
+        #self.auth = string.strip(base64.encodestring(self.user_passwd))
 
-    ## sendet den Host-Namen
-    # @param connection Verbindungs-Alias
-    # @param host Hostname
-    def send_host(self, connection, host):
-        connection.putheader("Host", host)
-        if self.auth:
-            connection.putheader('Authorization', 'Basic %s' % self.auth)
+        self.proxyurl = 'http://141.200.122.34:8080'
+
+    def request(self, host, handler, request_body, verbose=0):
+
+        urlopener = urllib.FancyURLopener({'http' : 'http://141.200.122.34'})
+
+        urlopener.addheaders = [('User-agent', self.user_agent)]
+
+        host = unquote(host)
+
+        f = urlopener.open("http://%s%s"%(host,handler), request_body)
+
+        self.verbose = verbose
+
+        return self.parse_response(f)
