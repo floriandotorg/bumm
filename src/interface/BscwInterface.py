@@ -146,39 +146,34 @@ class BscwInterface(object):
     def getAdditionalUserInfo(self, p_user):
         pass
 
-    ## Löscht einen Benuzter endgültig und irreversibel vom BSCW-Server.
-    # @param p_user Ein Dictonary mit einem Element "user_id" indem sich
-    # die ID des Users befindet.
+    ## Löscht ein oder mehrere Benuzter endgültig und irreversibel vom
+    # BSCW-Server.
+    # @param p_user Eine Liste mit den Namen der zu löschenden Benutzer
     def deleteUser(self, p_user):
         pass
 
     ## Sperrt einen User, sodass er sich nicht mehr anmelden kann.
-    # @param p_user Ein Dictonary mit einem Element "user_id" indem sich
-    # die ID des Users befindet.
+    # @param p_user Der Name des Benutzers
     # @see unlockUser()
     def lockUser(self, p_user):
         pass
 
     ## Entsperrt einen User, damit er sich wieder am BSCW-Server anmelden
     # kann.
-    # @param p_user Ein Dictonary mit mindestens einem Element names "id"
-    # indem sich die ID des Users befindet.
-    # @see lockUser()
+    # @param p_user Der Name des Benutzers
     def unlockUser(self, p_user):
         pass
 
     ## Löscht alle Objekte im Mülleimer eines oder aller User.
-    # @param p_user Ein Dictonary mit einem Element "user_id" indem sich
-    # die ID des Users befindet. Oder None wenn alle Mülleinmer
-    # geleert werden sollen.
-    def destroyTrash(self, p_user = None):
+    # @param p_user Eine Liste mit den Namen der zu löschenden Benutzer oder
+    # eine leere Liste für alle Benutzer
+    def destroyTrash(self, p_user = []):
         pass
 
     ## Löscht alle Objekte in der Ablage eines oder aller User.
-    # @param p_user Ein Dictonary mit einem Element "user_id" indem sich
-    # die ID des Users befindet. Oder None wenn alle Ablagen
-    # geleert werden sollen.
-    def destroyClipboard(self, p_user = None):
+    # @param p_user Eine Liste mit den Namen der zu löschenden Benutzer oder
+    # eine leere Liste für alle Benutzer
+    def destroyClipboard(self, p_user = []):
         pass
 
     ## Stellt eine Verbindung zum BSCW-Server her
