@@ -55,7 +55,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         QtGui.QMainWindow.__init__(self, p_parent)
         self.setupUi(self)
         self._settings = Settings()
-        self._centralwidget = UserList([], [], self)
+        self._centralwidget = UserList([], self)
         self.setCentralWidget(self._centralwidget)
         self._dockwidget = UserDetails(self)
         self.addDockWidget(QtCore.Qt.RightDockWidgetArea, self._dockwidget)

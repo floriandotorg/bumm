@@ -42,8 +42,21 @@
     </property>
     <addaction name="_action_info" />
    </widget>
+   <widget class="QMenu" name="_menu_action" >
+    <property name="title" >
+     <string>Aktion</string>
+    </property>
+    <addaction name="_action_destroy_clipboard" />
+    <addaction name="_action_destroy_trash" />
+    <addaction name="separator" />
+    <addaction name="_action_delete_users" />
+    <addaction name="separator" />
+    <addaction name="_action_destroy_all_clipboards" />
+    <addaction name="_action_destroy_all_trash" />
+   </widget>
    <addaction name="_menu_program" />
    <addaction name="_menu_view" />
+   <addaction name="_menu_action" />
    <addaction name="_menu_help" />
   </widget>
   <widget class="QStatusBar" name="_statusbar" />
@@ -71,6 +84,31 @@
   <action name="_action_set_cols" >
    <property name="text" >
     <string>Spalten auswählen</string>
+   </property>
+  </action>
+  <action name="_action_delete_users" >
+   <property name="text" >
+    <string>Benutzer löschen</string>
+   </property>
+  </action>
+  <action name="_action_destroy_clipboard" >
+   <property name="text" >
+    <string>Ablage aufräumen</string>
+   </property>
+  </action>
+  <action name="_action_destroy_trash" >
+   <property name="text" >
+    <string>Mülleimer leeren</string>
+   </property>
+  </action>
+  <action name="_action_destroy_all_clipboards" >
+   <property name="text" >
+    <string>Alle Ablagen aufräumen</string>
+   </property>
+  </action>
+  <action name="_action_destroy_all_trash" >
+   <property name="text" >
+    <string>Alle Mülleimer leeren</string>
    </property>
   </action>
  </widget>

@@ -29,11 +29,12 @@ from PyQt4 import QtGui, QtCore
 
 ## UserList Steuerelement
 # Diese Klasse implementiert ein Steuerelement zum Anzeigen aller Benutzer
-# anhand einer Liste. Mehrfachauswahl ist nicht zugelassen.
+# anhand einer Liste. Mehrfachauswahl ist zugelassen.
 #
 # Die Klasse emitiert folgende Signals:
-# - SelectionChanged(p_user_id) wenn auf ein Eintrag geklickt wurde. "p_user_id"
-# gibt die ID des Users zurück, welcher selektiert wurde.
+# - SelectionChanged(p_user_ids) Wenn die Auswahl geändert wurde. "p_user_ids"
+# gibt eine Liste mit den User-IDs der selektierten User zurück oder None, wenn
+# kein User ausgewählt wurde
 class UserList(QtGui.QTreeView):
 
     ## Konstruktor

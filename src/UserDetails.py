@@ -52,7 +52,8 @@ class UserDetails(QtGui.QDockWidget):
         pass
     
     ## Zeigt alle Userinformationen im Widget an
-    # @param p_user_list Eine Liste von Dictonaries mit folgendem Aufbau:
+    # @param p_user_list Eine Liste von Dictonaries mit folgendem Aufbau oder 
+    # None für keinen:
     # - user_id : Benutzer-ID
     # - name : Benutzername
     # - longname : Vor- und Nachname

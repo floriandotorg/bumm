@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'MainWindow.ui'
 #
-# Created: Wed Feb 11 08:29:12 2009
+# Created: Thu Feb 12 11:43:24 2009
 #      by: PyQt4 UI code generator 4.4.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -25,6 +25,8 @@ class Ui_MainWindow(object):
         self._menu_view.setObjectName("_menu_view")
         self._menu_help = QtGui.QMenu(self._menubar)
         self._menu_help.setObjectName("_menu_help")
+        self._menu_action = QtGui.QMenu(self._menubar)
+        self._menu_action.setObjectName("_menu_action")
         MainWindow.setMenuBar(self._menubar)
         self._statusbar = QtGui.QStatusBar(MainWindow)
         self._statusbar.setObjectName("_statusbar")
@@ -39,13 +41,31 @@ class Ui_MainWindow(object):
         self._action_user_Details.setObjectName("_action_user_Details")
         self._action_set_cols = QtGui.QAction(MainWindow)
         self._action_set_cols.setObjectName("_action_set_cols")
+        self._action_delete_users = QtGui.QAction(MainWindow)
+        self._action_delete_users.setObjectName("_action_delete_users")
+        self._action_destroy_clipboard = QtGui.QAction(MainWindow)
+        self._action_destroy_clipboard.setObjectName("_action_destroy_clipboard")
+        self._action_destroy_trash = QtGui.QAction(MainWindow)
+        self._action_destroy_trash.setObjectName("_action_destroy_trash")
+        self._action_destroy_all_clipboards = QtGui.QAction(MainWindow)
+        self._action_destroy_all_clipboards.setObjectName("_action_destroy_all_clipboards")
+        self._action_destroy_all_trash = QtGui.QAction(MainWindow)
+        self._action_destroy_all_trash.setObjectName("_action_destroy_all_trash")
         self._menu_program.addAction(self._action_quit)
         self._menu_view.addAction(self._action_user_Details)
         self._menu_view.addSeparator()
         self._menu_view.addAction(self._action_set_cols)
         self._menu_help.addAction(self._action_info)
+        self._menu_action.addAction(self._action_destroy_clipboard)
+        self._menu_action.addAction(self._action_destroy_trash)
+        self._menu_action.addSeparator()
+        self._menu_action.addAction(self._action_delete_users)
+        self._menu_action.addSeparator()
+        self._menu_action.addAction(self._action_destroy_all_clipboards)
+        self._menu_action.addAction(self._action_destroy_all_trash)
         self._menubar.addAction(self._menu_program.menuAction())
         self._menubar.addAction(self._menu_view.menuAction())
+        self._menubar.addAction(self._menu_action.menuAction())
         self._menubar.addAction(self._menu_help.menuAction())
 
         self.retranslateUi(MainWindow)
@@ -57,8 +77,14 @@ class Ui_MainWindow(object):
         self._menu_program.setTitle(QtGui.QApplication.translate("MainWindow", "Programm", None, QtGui.QApplication.UnicodeUTF8))
         self._menu_view.setTitle(QtGui.QApplication.translate("MainWindow", "Ansicht", None, QtGui.QApplication.UnicodeUTF8))
         self._menu_help.setTitle(QtGui.QApplication.translate("MainWindow", "Hilfe", None, QtGui.QApplication.UnicodeUTF8))
+        self._menu_action.setTitle(QtGui.QApplication.translate("MainWindow", "Aktion", None, QtGui.QApplication.UnicodeUTF8))
         self._action_quit.setText(QtGui.QApplication.translate("MainWindow", "Beenden", None, QtGui.QApplication.UnicodeUTF8))
         self._action_info.setText(QtGui.QApplication.translate("MainWindow", "Info", None, QtGui.QApplication.UnicodeUTF8))
         self._action_user_Details.setText(QtGui.QApplication.translate("MainWindow", "User Details", None, QtGui.QApplication.UnicodeUTF8))
         self._action_set_cols.setText(QtGui.QApplication.translate("MainWindow", "Spalten auswählen", None, QtGui.QApplication.UnicodeUTF8))
+        self._action_delete_users.setText(QtGui.QApplication.translate("MainWindow", "Benutzer löschen", None, QtGui.QApplication.UnicodeUTF8))
+        self._action_destroy_clipboard.setText(QtGui.QApplication.translate("MainWindow", "Ablage aufräumen", None, QtGui.QApplication.UnicodeUTF8))
+        self._action_destroy_trash.setText(QtGui.QApplication.translate("MainWindow", "Mülleimer leeren", None, QtGui.QApplication.UnicodeUTF8))
+        self._action_destroy_all_clipboards.setText(QtGui.QApplication.translate("MainWindow", "Alle Ablagen aufräumen", None, QtGui.QApplication.UnicodeUTF8))
+        self._action_destroy_all_trash.setText(QtGui.QApplication.translate("MainWindow", "Alle Mülleimer leeren", None, QtGui.QApplication.UnicodeUTF8))
 
