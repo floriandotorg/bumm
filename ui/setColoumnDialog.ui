@@ -1,0 +1,392 @@
+<ui version="4.0" >
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>336</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Dialog</string>
+  </property>
+  <widget class="QDialogButtonBox" name="buttonBox" >
+   <property name="geometry" >
+    <rect>
+     <x>30</x>
+     <y>290</y>
+     <width>341</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="orientation" >
+    <enum>Qt::Horizontal</enum>
+   </property>
+   <property name="standardButtons" >
+    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="_chkbox_user_id" >
+   <property name="geometry" >
+    <rect>
+     <x>20</x>
+     <y>20</y>
+     <width>72</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>UserID</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="_chkbox_name" >
+   <property name="geometry" >
+    <rect>
+     <x>20</x>
+     <y>40</y>
+     <width>91</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Benutzername</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="_chkbox_longname" >
+   <property name="geometry" >
+    <rect>
+     <x>20</x>
+     <y>60</y>
+     <width>121</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Vor- und Nachname</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="_chkbox_email" >
+   <property name="geometry" >
+    <rect>
+     <x>20</x>
+     <y>80</y>
+     <width>91</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Email-Adresse</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="_chkbox_secondary_mail" >
+   <property name="geometry" >
+    <rect>
+     <x>20</x>
+     <y>100</y>
+     <width>141</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Weitere Email-Adressen</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="_chkbox_organization" >
+   <property name="geometry" >
+    <rect>
+     <x>20</x>
+     <y>120</y>
+     <width>91</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Organisation</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="_chkbox_phone_home" >
+   <property name="geometry" >
+    <rect>
+     <x>20</x>
+     <y>140</y>
+     <width>91</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Telefon privat</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="_chkbox_phone_mobile" >
+   <property name="geometry" >
+    <rect>
+     <x>20</x>
+     <y>160</y>
+     <width>91</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Telefon mobil</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="_chkbox_phone_office" >
+   <property name="geometry" >
+    <rect>
+     <x>20</x>
+     <y>180</y>
+     <width>121</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Telefon geschäftlich</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="_chkbox_fax" >
+   <property name="geometry" >
+    <rect>
+     <x>20</x>
+     <y>200</y>
+     <width>41</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Fax</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="_chkbox_language" >
+   <property name="geometry" >
+    <rect>
+     <x>20</x>
+     <y>220</y>
+     <width>72</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Sprache</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="_chkbox_adresse" >
+   <property name="geometry" >
+    <rect>
+     <x>20</x>
+     <y>240</y>
+     <width>72</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Adresse</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="_chkbox_url_homepage" >
+   <property name="geometry" >
+    <rect>
+     <x>220</x>
+     <y>60</y>
+     <width>91</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Website privat</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="_chkbox_url" >
+   <property name="geometry" >
+    <rect>
+     <x>220</x>
+     <y>40</y>
+     <width>121</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Website geschäftlich</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="_chkbox_messaging_services" >
+   <property name="geometry" >
+    <rect>
+     <x>220</x>
+     <y>20</y>
+     <width>121</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Messaging Services</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="_chkbox_additional_info" >
+   <property name="geometry" >
+    <rect>
+     <x>20</x>
+     <y>260</y>
+     <width>151</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Zusätzliche Informationen</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="_chkbox_photo" >
+   <property name="geometry" >
+    <rect>
+     <x>220</x>
+     <y>80</y>
+     <width>72</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Foto</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="_chkbox_locked" >
+   <property name="geometry" >
+    <rect>
+     <x>220</x>
+     <y>100</y>
+     <width>72</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Sperrung</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="_chkbox_used_memory" >
+   <property name="geometry" >
+    <rect>
+     <x>220</x>
+     <y>120</y>
+     <width>111</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Speicherverbrauch</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="_chkbox_last_login" >
+   <property name="geometry" >
+    <rect>
+     <x>220</x>
+     <y>140</y>
+     <width>91</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Letzter Login</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="_chkbox_create_time" >
+   <property name="geometry" >
+    <rect>
+     <x>220</x>
+     <y>160</y>
+     <width>81</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Mitglied seit</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="_chkbox_files" >
+   <property name="geometry" >
+    <rect>
+     <x>220</x>
+     <y>180</y>
+     <width>111</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Anzahl der Dateien</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="_chkbox_admin" >
+   <property name="geometry" >
+    <rect>
+     <x>220</x>
+     <y>200</y>
+     <width>131</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Administratorenrechte</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="_chkbox_workspaces" >
+   <property name="geometry" >
+    <rect>
+     <x>220</x>
+     <y>220</y>
+     <width>101</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Arbeitsbereiche</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="_chkbox_access_right" >
+   <property name="geometry" >
+    <rect>
+     <x>220</x>
+     <y>240</y>
+     <width>161</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string>Zugriffsrechte des Benutzers</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>Dialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>Dialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
