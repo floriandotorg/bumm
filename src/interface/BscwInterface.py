@@ -78,7 +78,6 @@ class BscwInterface(object):
     # @param p_username Benutzername für die Anmeldung am Proxy (None = keine
     # Anmeldung erforderlich)
     # @param p_passwd Passwort für die Anmeldung am Proxy
-
     def setProxy(self, p_hostname = "", p_port = "", p_username = "",
                  p_passwd = ""):
         pass
@@ -99,7 +98,8 @@ class BscwInterface(object):
     # - fax : Faxnummer
     # - language : Sprache
     # - address : Adresse
-    # - homepage : Webseite
+    # - url_homepage : Webseite privat
+    # - url : website Büro
     # - messaging_services : Messaging Services, Dictronary mit
     # dem Name des Service als Schlüssel und der ID (z.B ICQ-Nummer)
     # als Wert
@@ -108,8 +108,13 @@ class BscwInterface(object):
     # - locked : User geserrt ja/nein (Boolean)
     # - used_memory : Speicherverbrauch in Byte
     # - last_login : Letzte Anmeldung als datetime.datetime
+    # - create_time : Zeit der Erstellung des Users als datetime.datetime
+    # - files : Dateien (Anzahl)
+    # - admin : User
     def getAllUsers(self):
         pass
+
+    '''weg!!!'''
 
     ## Gibt zusätzlich Informationen zu einem User zurück, deren Sammlung
     # aufwendiger ist und deshalb aus Performance-Gründen nicht mit in
@@ -118,7 +123,7 @@ class BscwInterface(object):
     # die ID des Users befindet.
     # @return Ein Dictonary mit folgendem Aufbau oder None falls der User
     # nicht existiert
-    # - objects : Objekte (Anzahl)
+
     # - access_rights : Zugriffsrechte, Dictornary mit folgendem Aufbau:
     #     - creator : Liste mit Zugriffsrechten für Erzeuger
     #     - user : Liste mit Zugriffsrechten für registriete Benutzer
