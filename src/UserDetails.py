@@ -33,16 +33,16 @@ from PyQt4 import QtGui, QtCore
 # Benutzer Informationen.
 #
 # Die Klasse emitiert folgende Signals:
-# - RemoveUser(p_user_id) Wenn auf "Benutzer löschen" geklickt wurde. 
-# "p_user_id" gibt die ID des Users zurück, welcher gelöscht werden soll.
-# - LockUser(p_user_id) Wenn auf "Benutzer sperren" geklickt wurde. 
-# "p_user_id" gibt die ID des Users zurück, welcher gesperrt werden soll.
-# - UnlockUser(p_user_id) Wenn auf "Benutzer entsperren" geklickt wurde. 
-# "p_user_id" gibt die ID des Users zurück, welcher entsperrt werden soll.
-# - DestroyTrash(p_user_id)Leert den Mülleinmer des Benutzers. "p_user_id" ist
-# die ID des Benutzers bei dem dies geschied.
-# - DestroyClipboard(p_user_id) Räumt die Zwischenablage des Benutzers auf. 
-# "p_user_id" ist die ID des Benutzers bei dem dies geschied.
+# - RemoveUser(p_user_name) Wenn auf "Benutzer löschen" geklickt wurde. 
+# "p_user_name" gibt den Name des Users an, welcher gelöscht werden soll.
+# - LockUser(p_user_name) Wenn auf "Benutzer sperren" geklickt wurde. 
+# "p_user_name" gibt den Name des Users an, welcher gesperrt werden soll.
+# - UnlockUser(p_user_name) Wenn auf "Benutzer entsperren" geklickt wurde. 
+# "p_user_name" gibt den Name des Users an, welcher entsperrt werden soll.
+# - DestroyTrash(p_user_name) Leert den Mülleinmer des Benutzers. "p_user_name"
+# ist der Name des Benutzers bei dem dies geschied.
+# - DestroyClipboard(p_user_name) Räumt die Zwischenablage des Benutzers auf. 
+# "p_user_name" ist der Name des Benutzers bei dem dies geschied.
 class UserDetails(QtGui.QDockWidget):
     
     ## Konstruktor
