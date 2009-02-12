@@ -26,6 +26,7 @@
 #################################################################################
 
 from PyQt4 import QtGui, QtCore
+import UserListModel
 
 ## UserList Steuerelement
 # Diese Klasse implementiert ein Steuerelement zum Anzeigen aller Benutzer
@@ -42,7 +43,11 @@ class UserList(QtGui.QTreeView):
     # @param p_parent Übergeordnetes QObject 
     def __init__(self, p_header_data, p_parent = None):
         QtGui.QTreeView.__init__(self, p_parent)
-        pass
+        
+        self.model = UserListModel.UserListModel(p_header_data)
+        self.setModel(self.model)
+        self.setVerticalScrollMode(QtGui.QTreeView.ScrollPerPixel)
+        self.setHorizontalScrollMode(QtGui.QTreeView.ScrollPerPixel)
     
     ## Löscht den Inhalt der Liste und zeigt den Inhalt von p_user_list an.
     # @param p_user_list Eine Liste von Dictonaries mit folgendem Aufbau:
@@ -83,7 +88,8 @@ class UserList(QtGui.QTreeView):
     #        - Liste mit Usernamen, die dieser Rolle entsprechen
     #        - Liste mit Zugriffsrechten
     def loadList(self, p_user_list):
-        pass
+        self.model.loadList(p_user_list)
+        
     
     ## Übergibt eine Liste mit Spalten die angezeigt werden sollen.
     # @param p_header_data Eine Liste von Tupels mit jeweils zwei Elementen,
