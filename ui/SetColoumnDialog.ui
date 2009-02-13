@@ -1,6 +1,6 @@
 <ui version="4.0" >
- <class>Dialog</class>
- <widget class="QDialog" name="Dialog" >
+ <class>SetColoumnDialog</class>
+ <widget class="QDialog" name="SetColoumnDialog" >
   <property name="geometry" >
    <rect>
     <x>0</x>
@@ -171,7 +171,7 @@
     <string>Sprache</string>
    </property>
   </widget>
-  <widget class="QCheckBox" name="_chkbox_adresse" >
+  <widget class="QCheckBox" name="_chkbox_address" >
    <property name="geometry" >
     <rect>
      <x>20</x>
@@ -181,7 +181,7 @@
     </rect>
    </property>
    <property name="text" >
-    <string>Adresse</string>
+    <string>Addresse</string>
    </property>
   </widget>
   <widget class="QCheckBox" name="_chkbox_url_homepage" >
@@ -359,7 +359,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>Dialog</receiver>
+   <receiver>SetColoumnDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel" >
@@ -375,7 +375,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>Dialog</receiver>
+   <receiver>SetColoumnDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel" >
