@@ -25,7 +25,7 @@
 #                                                                               #
 #################################################################################
 
-from PyQt4 import QtGui, QtCore
+from PyQt4 import QtGui, QtCore, Qt
 from ui_MainWindow import Ui_MainWindow
 import interface
 #from interface.BscwInterface import BscwInterface
@@ -34,18 +34,10 @@ from UserList import UserList
 from UserDetails import UserDetails
 from LoginDialog import LoginDialog
 from Settings import Settings
+from InfoDialog import InfoDialog
 import time
 import urllib
 import tempfile
-
-class LoadingDialog(QtGui.QDialog):
-
-    def __init__(self, p_parent = None):
-        QtGui.QDialog.__init__(self, p_parent)
-        self._label = QtGui.QLabel(self)
-        self._label.setText("Bitte Warten ...")
-        self.setGeometry(self.x(), self.y(), 100, 200)
-        #self.setWindowFlags(QtCore.WindowFlags.)
 
 ## Diese Klasse stellt das Hauptfenster der Anwendung da und managed alle
 # Funktionen des Programms.
@@ -61,12 +53,33 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self.setCentralWidget(self._centralwidget)
         self._dockwidget = UserDetails(self)
         self.addDockWidget(QtCore.Qt.RightDockWidgetArea, self._dockwidget)
-        self._loading_dialog = LoadingDialog(self)
-        self._loading_dialog.show()
+        self.connect(self._action_info, QtCore.SIGNAL("triggered()"), 
+                        self._showInfoSlot)
         #self._login()
+    
+    ## Läd die Liste vom BSCW Server und zeigt das Fenster an    
+    def show(self):
+        QtGui.QMainWindow.show(self)
+        self._statusbar.showMessage(self.trUtf8("Benutzerliste wird geladen ..."))
+        self._setEnabled(False)
+        QtGui.qApp.processEvents()
         #self._user_list = self._bscw_interface.getAllUsers()
-        #print self._user_list
+        #self._centralwidget.loadList(self._user_list)
+        self._setEnabled(True)
+        self._statusbar.clearMessage()
 
+    ## Zeigt ein Info-Dialog an
+    def _showInfoSlot(self):
+        info_dialog = InfoDialog(self)
+        info_dialog.exec_()
+    
+    ## Sperrt bzw. Entsperrt alle Steuerelemente auf dem Fenster.
+    # @param p_enable Steuerelemente sperren ja/nein (Boolean)
+    def _setEnabled(self, p_enable):
+        self._toolbar.setEnabled(p_enable)
+        self._centralwidget.setEnabled(p_enable)
+        self._menubar.setEnabled(p_enable)
+        self._dockwidget.setEnabled(p_enable)
 
     ## Zeigt den LoginDialog an und versucht sich per BscwInterface am
     #  BSCW-Server anzumelden.
@@ -94,22 +107,9 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         tmp_file.close()
         return tmp_file.name
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+if __name__ == "__main__":
+    import sys
+    app = QtGui.QApplication(sys.argv)
+    mainWindow = MainWindow()
+    mainWindow.show()
+    app.exec_()

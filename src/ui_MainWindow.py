@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'MainWindow.ui'
 #
-# Created: Fri Feb 13 11:38:22 2009
+# Created: Fri Feb 13 13:19:37 2009
 #      by: PyQt4 UI code generator 4.4.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -31,9 +31,9 @@ class Ui_MainWindow(object):
         self._statusbar = QtGui.QStatusBar(MainWindow)
         self._statusbar.setObjectName("_statusbar")
         MainWindow.setStatusBar(self._statusbar)
-        self.toolBar = QtGui.QToolBar(MainWindow)
-        self.toolBar.setObjectName("toolBar")
-        MainWindow.addToolBar(QtCore.Qt.TopToolBarArea, self.toolBar)
+        self._toolbar = QtGui.QToolBar(MainWindow)
+        self._toolbar.setObjectName("_toolbar")
+        MainWindow.addToolBar(QtCore.Qt.TopToolBarArea, self._toolbar)
         self._action_quit = QtGui.QAction(MainWindow)
         self._action_quit.setObjectName("_action_quit")
         self._action_info = QtGui.QAction(MainWindow)
@@ -85,13 +85,13 @@ class Ui_MainWindow(object):
         self._menubar.addAction(self._menu_view.menuAction())
         self._menubar.addAction(self._menu_action.menuAction())
         self._menubar.addAction(self._menu_help.menuAction())
-        self.toolBar.addAction(self._action_lock)
-        self.toolBar.addAction(self._action_unlock)
-        self.toolBar.addSeparator()
-        self.toolBar.addAction(self._action_destroy_clipboard)
-        self.toolBar.addAction(self._action_destroy_trash)
-        self.toolBar.addSeparator()
-        self.toolBar.addAction(self._action_delete)
+        self._toolbar.addAction(self._action_lock)
+        self._toolbar.addAction(self._action_unlock)
+        self._toolbar.addSeparator()
+        self._toolbar.addAction(self._action_destroy_clipboard)
+        self._toolbar.addAction(self._action_destroy_trash)
+        self._toolbar.addSeparator()
+        self._toolbar.addAction(self._action_delete)
 
         self.retranslateUi(MainWindow)
         QtCore.QObject.connect(self._action_quit, QtCore.SIGNAL("triggered()"), MainWindow.close)
@@ -103,9 +103,9 @@ class Ui_MainWindow(object):
         self._menu_view.setTitle(QtGui.QApplication.translate("MainWindow", "Ansicht", None, QtGui.QApplication.UnicodeUTF8))
         self._menu_help.setTitle(QtGui.QApplication.translate("MainWindow", "Hilfe", None, QtGui.QApplication.UnicodeUTF8))
         self._menu_action.setTitle(QtGui.QApplication.translate("MainWindow", "Aktion", None, QtGui.QApplication.UnicodeUTF8))
-        self.toolBar.setWindowTitle(QtGui.QApplication.translate("MainWindow", "toolBar", None, QtGui.QApplication.UnicodeUTF8))
+        self._toolbar.setWindowTitle(QtGui.QApplication.translate("MainWindow", "toolBar", None, QtGui.QApplication.UnicodeUTF8))
         self._action_quit.setText(QtGui.QApplication.translate("MainWindow", "Beenden", None, QtGui.QApplication.UnicodeUTF8))
-        self._action_info.setText(QtGui.QApplication.translate("MainWindow", "Info", None, QtGui.QApplication.UnicodeUTF8))
+        self._action_info.setText(QtGui.QApplication.translate("MainWindow", "Über", None, QtGui.QApplication.UnicodeUTF8))
         self._action_user_Details.setText(QtGui.QApplication.translate("MainWindow", "User Details", None, QtGui.QApplication.UnicodeUTF8))
         self._action_set_cols.setText(QtGui.QApplication.translate("MainWindow", "Spalten auswählen", None, QtGui.QApplication.UnicodeUTF8))
         self._action_delete.setText(QtGui.QApplication.translate("MainWindow", "Benutzer löschen", None, QtGui.QApplication.UnicodeUTF8))

@@ -64,23 +64,15 @@ class LoginDialog(QtGui.QDialog, Ui_LoginDialog):
     def getInterface(self):
         return self._bscw_interface
     
-    ## Sperrt alle Steuerelemente auf dem Fenster.
-    def _disableDialog(self):
-        self._server_address.setEnabled(False)
-        self._username.setEnabled(False)
-        self._passwd.setEnabled(False)
-        self._proxy_button.setEnabled(False)
-        self._login_button.setEnabled(False)
-        self._quit_button.setEnabled(False)
-    
-    ## Entsperrt alle Steuerelemente auf dem Fenster.
-    def _enableDialog(self):
-        self._server_address.setEnabled(True)
-        self._username.setEnabled(True)
-        self._passwd.setEnabled(True)
-        self._proxy_button.setEnabled(True)
-        self._login_button.setEnabled(True)
-        self._quit_button.setEnabled(True)
+    ## Sperrt bzw. Entsperrt alle Steuerelemente auf dem Fenster.
+    # @param p_enable Steuerelemente sperren ja/nein (Boolean)
+    def _setEnabled(self, p_enable):
+        self._server_address.setEnabled(p_enable)
+        self._username.setEnabled(p_enable)
+        self._passwd.setEnabled(p_enable)
+        self._proxy_button.setEnabled(p_enable)
+        self._login_button.setEnabled(p_enable)
+        self._quit_button.setEnabled(p_enable)
     
     ## Schreibt einen Text auf das Status-Label und ändert die Textfarbe
     # des Labels.
@@ -96,7 +88,7 @@ class LoginDialog(QtGui.QDialog, Ui_LoginDialog):
     ## Versucht sich am BSCW-Server anzumelden und gibt ggf. eine Fehlermeldung
     # aus.
     def _loginSlot(self):
-        self._disableDialog()
+        self._setEnabled(False)()
         self._changeStatus("Verbinde...", QtGui.QColor("black"))
         self.repaint()
         
@@ -118,7 +110,7 @@ class LoginDialog(QtGui.QDialog, Ui_LoginDialog):
             self._changeStatus(self.trUtf8("Unbekannter Fehler aufgetreten!"),
                                 QtGui.QColor("Red"))
         finally:
-            self._enableDialog()
+            self._setEnabled(True)()
     
     ## Öffnet ein Eingabefenster für die Proxy-Konfigurationen und übergibt ggf.
     # die Daten an die BscwInterface Klasse.        

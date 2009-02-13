@@ -60,7 +60,7 @@
    <addaction name="_menu_help" />
   </widget>
   <widget class="QStatusBar" name="_statusbar" />
-  <widget class="QToolBar" name="toolBar" >
+  <widget class="QToolBar" name="_toolbar" >
    <property name="windowTitle" >
     <string>toolBar</string>
    </property>
@@ -85,7 +85,7 @@
   </action>
   <action name="_action_info" >
    <property name="text" >
-    <string>Info</string>
+    <string>Über</string>
    </property>
   </action>
   <action name="_action_user_Details" >
