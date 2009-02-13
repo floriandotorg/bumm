@@ -12,4 +12,4 @@ def do_it(request, user_names):
 		return None
 	
 	for user_name in user_names:
-		bs_passwd.updatelock(get_user(user_name), bs_passwd.LOCK, bs_passwd.LCK_ADMIN)
+		bs_passwd.updatelock(get_user(user_name), bs_passwd.UNLOCK, bs_passwd.LCK_ADMIN)

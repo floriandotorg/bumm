@@ -124,59 +124,39 @@ class BscwInterface(object):
     #        - Liste mit Usernamen, die dieser Rolle entsprechen
     #        - Liste mit Zugriffsrechten
     def getAllUsers(self):
-        pass
-
-
-    ## Gibt zusätzlich Informationen zu einem User zurück, deren Sammlung
-    # aufwendiger ist und deshalb aus Performance-Gründen nicht mit in
-    # getAllUsers() aufgenommen wurde.
-    # @param p_user Ein Dictonary mit einem Element "user_id" indem sich
-    # die ID des Users befindet.
-    # @return Ein Dictonary mit folgendem Aufbau oder None falls der User
-    # nicht existiert
-
-    # - access_rights : Zugriffsrechte, Dictornary mit folgendem Aufbau:
-    #     - creator : Liste mit Zugriffsrechten für Erzeuger
-    #     - user : Liste mit Zugriffsrechten für registriete Benutzer
-    #     - owner : Liste mit Zugriffsrechten für Eigentümer
-    #     - manager : Liste mit Zugriffsrechten für Manager
-    # - memberships : Mitgliedschaften, Dictonary mit zwei Elementen:
-    #     - workspaces : Liste der Namen der Arbeitsbereiche
-    #     - communities : Liste der Namen der Gemeinschaften
-    def getAdditionalUserInfo(self, p_user):
-        pass
+        return self._server.get_all_users()
 
     ## Löscht ein oder mehrere Benuzter endgültig und irreversibel vom
     # BSCW-Server.
     # @param p_user Eine Liste mit den Namen der zu löschenden Benutzer
-    def deleteUser(self, p_user):
-        pass
+    def deleteUsers(self, p_users):
+        self._server.delete_users(p_users)
 
     ## Sperrt einen User, sodass er sich nicht mehr anmelden kann.
-    # @param p_user Der Name des Benutzers
+    # @param p_user Eine Liste mit den Namen der zu sperrenden Benutzer
     # @see unlockUser()
-    def lockUser(self, p_user):
-        pass
+    def lockUsers(self, p_users):
+        self._server.lock_users(p_users)
 
     ## Entsperrt einen User, damit er sich wieder am BSCW-Server anmelden
     # kann.
-    # @param p_user Der Name des Benutzers
-    def unlockUser(self, p_user):
-        pass
+    # @param p_user Eine Liste mit den Namen der zu entsprrenden Benutzer
+    def unlockUsers(self, p_users):
+        self._server.unlock_users(p_users)
 
     ## Löscht alle Objekte im Mülleimer eines oder aller User.
     # @param p_outdated Mindestalter der zu löschenden Dateien
     # @param p_users Eine Liste mit den Namen der zu löschenden Benutzer oder
     # eine leere Liste für alle Benutzer
     def destroyTrash(self, p_outdated, p_users = []):
-        pass
+        self._server.destroy_trash(p_outdated, p_users)
 
     ## Löscht alle Objekte in der Ablage eines oder aller User.
     # @param p_outdated Mindestalter der zu löschenden Dateien
     # @param p_users Eine Liste mit den Namen der zu löschenden Benutzer oder
     # eine leere Liste für alle Benutzer
     def destroyClipboard(self, p_outdated, p_users = []):
-        pass
+        self._server.destroy_clipboard(p_outdated, p_users)
 
     ## Stellt eine Verbindung zum BSCW-Server her
     # @param p_hostname DNS-Name oder IP-Adresse des BSCW-Servers
