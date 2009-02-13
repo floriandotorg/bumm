@@ -35,9 +35,11 @@ from UserDetails import UserDetails
 from LoginDialog import LoginDialog
 from Settings import Settings
 import time
+import urllib
+import tempfile
 
 class LoadingDialog(QtGui.QDialog):
-    
+
     def __init__(self, p_parent = None):
         QtGui.QDialog.__init__(self, p_parent)
         self._label = QtGui.QLabel(self)
@@ -48,9 +50,9 @@ class LoadingDialog(QtGui.QDialog):
 ## Diese Klasse stellt das Hauptfenster der Anwendung da und managed alle
 # Funktionen des Programms.
 class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
-    
+
     ## Konstruktor
-    # @param p_parent Übergeordnetes QObject. 
+    # @param p_parent Übergeordnetes QObject.
     def __init__(self, p_parent = None):
         QtGui.QMainWindow.__init__(self, p_parent)
         self.setupUi(self)
@@ -64,39 +66,50 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         #self._login()
         #self._user_list = self._bscw_interface.getAllUsers()
         #print self._user_list
-        
-    
+
+
     ## Zeigt den LoginDialog an und versucht sich per BscwInterface am
-    #  BSCW-Server anzumelden. 
+    #  BSCW-Server anzumelden.
     def _login(self):
         login_dialog = LoginDialog(self._settings, self)
-        
+
         if login_dialog.exec_() != QtGui.QDialog.Accepted:
             QtGui.qApp.quit()
             exit()
-                   
+
         self._bscw_interface = login_dialog.getInterface()
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
+    ##Lädt eine URL in eine temporäre Date und gibt den Pfad der temporären Datei zurück
+    # @param p_url Pfad der Url
+    # @param p_proxy Adresse des Http-Proxys ist None wenn kein Proxy existiert. Bsp.:"http://proxy_address:port"
+    def _getFileByUrl(self, p_url, p_proxy=None):
+        tmp_data = ""
+        if p_proxy != None:
+            tmp_proxies = {'http': p_proxy}
+            tmp_data = urllib.urlopen(p_url,proxies=tmp_proxies).read()
+        else:
+            tmp_data = urllib.urlopen(p_url).read()
+        tmp_file = tempfile.NamedTemporaryFile(delete=False)
+        tmp_file.write(tmp_data)
+        tmp_file.close()
+        return tmp_file.name
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
