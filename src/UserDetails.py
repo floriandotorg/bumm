@@ -80,7 +80,7 @@ class UserDetails(QtGui.QDockWidget):
     # - files : Dateien (Anzahl)
     # - admin : User ist BSCW-Admin ja/nein (Boolean)
     # - workspaces : Liste aller Arbeitsbereiche, in den der User Mitglied ist
-    # - accress_right : Zugriffsrechte, Dictornary mit folgendem Aufbau:
+    # - access_right : Zugriffsrechte, Dictornary mit folgendem Aufbau:
     #     - owner : Zugriffsrechte für Eigentümer: Liste mit zwei Elementen
     #        - Liste mit Usernamen, die dieser Rolle entsprechen
     #        - Liste mit Zugriffsrechten
