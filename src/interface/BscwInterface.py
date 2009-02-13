@@ -28,7 +28,7 @@
 import xmlrpclib                                         # XML-RPC
 import Exceptions                                        # Ausnahmen
 import socket                                            # Socket
-#from _AuthorizedTransport import AuthorizedTransport     # Authorized-Transport
+from _ProxiedTransport import ProxiedTransport           # Authorized-Transport
 
 ## Interface zum BSCW-Server
 #
@@ -54,7 +54,7 @@ class BscwInterface(object):
     # @param p_passwd Passwort für die Anmeldung am BSCW-Server
     def login(self, p_hostname, p_username, p_passwd):
 
-        #try:
+        try:
             # Verbindung herstellen
             self._connect(p_hostname, p_username, p_passwd)
 
@@ -62,9 +62,9 @@ class BscwInterface(object):
             if not self._server.is_admin(p_username):
                 raise Exceptions.AuthorizationFailed
 
-        #except (xmlrpclib.Fault, socket.error):
+        except (xmlrpclib.Fault, socket.error):
             # Verbindung überprüfen
-            #raise Exceptions.HostUnreachable
+            raise Exceptions.HostUnreachable
 
     ## Loggt den User aus und bricht die Verbindung zum BSCW-Server ab
     def logout(self):
@@ -184,22 +184,11 @@ class BscwInterface(object):
 
         # AuthorizedTransport (zum Patchen von XMLRPC, siehe
         # _AuthorizedTransport.py)
-        #authorized_transport = AuthorizedTransport(p_username, p_passwd)
+        proxied_transport = ProxiedTransport(p_username, p_passwd)
 
         # Verbindung mit dem Server herstellen
         self.hostname = 'http://' + p_username + ':' + p_passwd \
         + '@' + p_hostname + '/bscw/bscw.cgi/?op=xmlrpc'
 
-        self._server = xmlrpclib.Server(self.hostname)
-
-        print self._server.get_attributes()
-
-if __name__ == '__main__':
-    test = BscwInterface()
-    try:
-        test.login('10.200.132.22', 'Ben', 'mypass')
-        #test.login('www.szut.uni-bremen.de', 'fa7flader', 'mypass')
-    except Exceptions.AuthorizationFailed:
-        print 'failed'
-
-    #test.logout()
+        self._server = xmlrpclib.ServerProxy(self.hostname)
+        #self._server = xmlrpclib.ServerProxy(self.hostname, proxied_transport)
