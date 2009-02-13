@@ -86,9 +86,9 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         tmp_data = ""
         if p_proxy != None:
             tmp_proxies = {'http': p_proxy}
-            tmp_data = urllib.urlopen(p_url,proxies=tmp_proxies).read()
+            tmp_data = urllib.urlopen("http://" + p_url,proxies=tmp_proxies).read()
         else:
-            tmp_data = urllib.urlopen(p_url).read()
+            tmp_data = urllib.urlopen("http://" + p_url).read()
         tmp_file = tempfile.NamedTemporaryFile(delete=False)
         tmp_file.write(tmp_data)
         tmp_file.close()
