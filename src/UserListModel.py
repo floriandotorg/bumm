@@ -121,5 +121,16 @@ class UserListModel(QtCore.QAbstractTableModel):
     #        - Liste mit Zugriffsrechten
     def loadList(self, p_user_list):
         self.user_list = p_user_list
+        self.emit(QtCore.SIGNAL("layoutChanged()"))
+        
+    ## Sortiert die angezeigten Benutzer
+    # @param p_column Die Nummer der Spalte nach der sortiert werden soll.
+    # @param p_order Die Richtung in die sortiert werden soll.
+    def sort(self, p_column, p_order):
+        if p_order == QtCore.Qt.AscendingOrder:
+            self.user_list.sort(key=operator.itemgetter(self.header_list[p_column][0]))
+        elif p_order == QtCore.Qt.DescendingOrder:
+            self.user_list.sort(key=operator.itemgetter(self.header_list[p_column][0]), reverse=True)
+        self.emit(QtCore.SIGNAL("layoutChanged()"))
 
 

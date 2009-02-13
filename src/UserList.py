@@ -98,7 +98,6 @@ class UserList(QtGui.QTreeView):
     #        - Liste mit Zugriffsrechten
     def loadList(self, p_user_list):
         self.model.loadList(p_user_list)
-        self.update()
     
     ## Übergibt eine Liste mit Spalten die angezeigt werden sollen.
     # @param p_header_data Eine Liste von Tupels mit jeweils zwei Elementen,
