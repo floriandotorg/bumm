@@ -10,7 +10,7 @@
    </rect>
   </property>
   <property name="windowTitle" >
-   <string>BSCW Userverwaltung</string>
+   <string>BUMM 1.0 - BSCW Userverwaltung</string>
   </property>
   <widget class="QWidget" name="_centralwidget" />
   <widget class="QMenuBar" name="_menubar" >
@@ -46,13 +46,13 @@
     <property name="title" >
      <string>Aktion</string>
     </property>
+    <addaction name="_action_lock" />
+    <addaction name="_action_unlock" />
+    <addaction name="separator" />
     <addaction name="_action_destroy_clipboard" />
     <addaction name="_action_destroy_trash" />
     <addaction name="separator" />
-    <addaction name="_action_delete_users" />
-    <addaction name="separator" />
-    <addaction name="_action_destroy_all_clipboards" />
-    <addaction name="_action_destroy_all_trash" />
+    <addaction name="_action_delete" />
    </widget>
    <addaction name="_menu_program" />
    <addaction name="_menu_view" />
@@ -60,6 +60,24 @@
    <addaction name="_menu_help" />
   </widget>
   <widget class="QStatusBar" name="_statusbar" />
+  <widget class="QToolBar" name="toolBar" >
+   <property name="windowTitle" >
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea" >
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak" >
+    <bool>false</bool>
+   </attribute>
+   <addaction name="_action_lock" />
+   <addaction name="_action_unlock" />
+   <addaction name="separator" />
+   <addaction name="_action_destroy_clipboard" />
+   <addaction name="_action_destroy_trash" />
+   <addaction name="separator" />
+   <addaction name="_action_delete" />
+  </widget>
   <action name="_action_quit" >
    <property name="text" >
     <string>Beenden</string>
@@ -86,33 +104,55 @@
     <string>Spalten auswählen</string>
    </property>
   </action>
-  <action name="_action_delete_users" >
+  <action name="_action_delete" >
+   <property name="icon" >
+    <iconset resource="../qrc/images.qrc" >
+     <normaloff>:/icons/icons/delete.png</normaloff>:/icons/icons/delete.png</iconset>
+   </property>
    <property name="text" >
     <string>Benutzer löschen</string>
    </property>
   </action>
   <action name="_action_destroy_clipboard" >
+   <property name="icon" >
+    <iconset resource="../qrc/images.qrc" >
+     <normaloff>:/icons/icons/destroy_clipboard.png</normaloff>:/icons/icons/destroy_clipboard.png</iconset>
+   </property>
    <property name="text" >
-    <string>Ablage aufräumen</string>
+    <string>Ablage(n) aufräumen</string>
    </property>
   </action>
   <action name="_action_destroy_trash" >
+   <property name="icon" >
+    <iconset resource="../qrc/images.qrc" >
+     <normaloff>:/icons/icons/destroy_trash.png</normaloff>:/icons/icons/destroy_trash.png</iconset>
+   </property>
    <property name="text" >
     <string>Mülleimer leeren</string>
    </property>
   </action>
-  <action name="_action_destroy_all_clipboards" >
+  <action name="_action_lock" >
+   <property name="icon" >
+    <iconset resource="../qrc/images.qrc" >
+     <normaloff>:/icons/icons/lock.png</normaloff>:/icons/icons/lock.png</iconset>
+   </property>
    <property name="text" >
-    <string>Alle Ablagen aufräumen</string>
+    <string>Benutzer sperren</string>
    </property>
   </action>
-  <action name="_action_destroy_all_trash" >
+  <action name="_action_unlock" >
+   <property name="icon" >
+    <iconset resource="../qrc/images.qrc" >
+     <normaloff>:/icons/icons/unlock.png</normaloff>:/icons/icons/unlock.png</iconset>
+   </property>
    <property name="text" >
-    <string>Alle Mülleimer leeren</string>
+    <string>Benutzer entsperren</string>
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="../qrc/images.qrc" />
+ </resources>
  <connections>
   <connection>
    <sender>_action_quit</sender>

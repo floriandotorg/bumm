@@ -1,0 +1,9 @@
+<RCC>
+  <qresource prefix="icons" >
+    <file>icons/destroy_trash.png</file>
+    <file>icons/lock.png</file>
+    <file>icons/destroy_clipboard.png</file>
+    <file>icons/unlock.png</file>
+    <file>icons/delete.png</file>
+  </qresource>
+</RCC>
