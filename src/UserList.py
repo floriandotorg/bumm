@@ -104,7 +104,7 @@ class UserList(QtGui.QTreeView):
     # in denen der Schlüssel und die Überschrift stehen.
     # @see loadList()
     def changeHeaderData(self, p_header_data):
-         pass
+         self.model.changeHeaderDate(p_header_data)
     
     ## Entfernt einen Benutzer aus der Liste
     # @param p_user Ein Dictonary mit einem Element "user_id" indem sich

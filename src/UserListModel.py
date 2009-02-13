@@ -133,4 +133,14 @@ class UserListModel(QtCore.QAbstractTableModel):
             self.user_list.sort(key=operator.itemgetter(self.header_list[p_column][0]), reverse=True)
         self.emit(QtCore.SIGNAL("layoutChanged()"))
 
-
+    ## Übergibt eine Liste mit Spalten die angezeigt werden sollen.
+    # @param p_header_data Eine Liste von Tupels mit jeweils zwei Elementen,
+    # in denen der Schlüssel und die Überschrift stehen.
+    # @see loadList()
+    def changeHeaderData(self, p_header_data):
+        self.header_list = p_header_data
+        self.emit(QtCore.SIGNAL("layoutChanged()"))
+        
+    ## Gibt eine Liste der Ausgewählten Einträge zurück.    
+    def selectedIndexes(self):
+        pass
