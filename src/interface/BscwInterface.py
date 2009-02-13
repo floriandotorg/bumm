@@ -165,15 +165,17 @@ class BscwInterface(object):
         pass
 
     ## Löscht alle Objekte im Mülleimer eines oder aller User.
-    # @param p_user Eine Liste mit den Namen der zu löschenden Benutzer oder
+    # @param p_outdated Mindestalter der zu löschenden Dateien
+    # @param p_users Eine Liste mit den Namen der zu löschenden Benutzer oder
     # eine leere Liste für alle Benutzer
-    def destroyTrash(self, p_user = []):
+    def destroyTrash(self, p_outdated, p_users = []):
         pass
 
     ## Löscht alle Objekte in der Ablage eines oder aller User.
-    # @param p_user Eine Liste mit den Namen der zu löschenden Benutzer oder
+    # @param p_outdated Mindestalter der zu löschenden Dateien
+    # @param p_users Eine Liste mit den Namen der zu löschenden Benutzer oder
     # eine leere Liste für alle Benutzer
-    def destroyClipboard(self, p_user = []):
+    def destroyClipboard(self, p_outdated, p_users = []):
         pass
 
     ## Stellt eine Verbindung zum BSCW-Server her

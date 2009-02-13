@@ -33,9 +33,7 @@ import UserListModel
 # anhand einer Liste. Mehrfachauswahl ist zugelassen.
 #
 # Die Klasse emitiert folgende Signals:
-# - SelectionChanged(p_user_ids) Wenn die Auswahl geändert wurde. "p_user_ids"
-# gibt eine Liste mit den User-IDs der selektierten User zurück oder None, wenn
-# kein User ausgewählt wurde
+# - SelectionChanged() Wenn die Auswahl geändert wurde.
 class UserList(QtGui.QTreeView):
 
     ## Konstruktor
@@ -48,6 +46,12 @@ class UserList(QtGui.QTreeView):
         self.setModel(self.model)
         self.setVerticalScrollMode(QtGui.QTreeView.ScrollPerPixel)
         self.setHorizontalScrollMode(QtGui.QTreeView.ScrollPerPixel)
+    
+    ## Gibt eine Liste der selektierten User zurück
+    # @return Liste von Dictonaries mit Userdaten (siehe loadList())
+    # @see loadList()
+    def getSelection(self):
+        pass
     
     ## Definiert einen Suchtext, nachdem gefilert wird
     # @param p_text Suchtext 
