@@ -49,6 +49,11 @@ class UserList(QtGui.QTreeView):
         self.setVerticalScrollMode(QtGui.QTreeView.ScrollPerPixel)
         self.setHorizontalScrollMode(QtGui.QTreeView.ScrollPerPixel)
     
+    ## Definiert einen Suchtext, nachdem gefilert wird
+    # @param p_text Suchtext 
+    def setFilter(self, p_text):
+        pass
+    
     ## Löscht den Inhalt der Liste und zeigt den Inhalt von p_user_list an.
     # @param p_user_list Eine Liste von Dictonaries mit folgendem Aufbau:
     # - user_id : Benutzer-ID
