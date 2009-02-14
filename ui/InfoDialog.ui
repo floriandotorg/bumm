@@ -6,7 +6,7 @@
     <x>0</x>
     <y>0</y>
     <width>386</width>
-    <height>284</height>
+    <height>307</height>
    </rect>
   </property>
   <property name="sizePolicy" >
@@ -18,13 +18,17 @@
   <property name="windowTitle" >
    <string>Über BUMM</string>
   </property>
+  <property name="windowIcon" >
+   <iconset resource="../qrc/images.qrc" >
+    <normaloff>:/logo/logo/logo.svg</normaloff>:/logo/logo/logo.svg</iconset>
+  </property>
   <widget class="QLabel" name="_lbl_info" >
    <property name="geometry" >
     <rect>
      <x>20</x>
      <y>150</y>
      <width>351</width>
-     <height>71</height>
+     <height>121</height>
     </rect>
    </property>
    <property name="layoutDirection" >
@@ -35,24 +39,26 @@
 &lt;html>&lt;head>&lt;meta name="qrichtext" content="1" />&lt;style type="text/css">
 p, li { white-space: pre-wrap; }
 &lt;/style>&lt;/head>&lt;body style=" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;">
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">&lt;span style=" font-weight:600;">Version&lt;/span>: 	1.0&lt;/p>
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">&lt;span style=" font-weight:600;">BUMM&lt;/span> - &lt;span style=" font-weight:600;">B&lt;/span>SCW &lt;span style=" font-weight:600;">U&lt;/span>ser &lt;span style=" font-weight:600;">M&lt;/span>anag&lt;span style=" font-weight:600;">m&lt;/span>ent&lt;/p>
+&lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">&lt;/p>
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt; font-weight:600;">Version&lt;span style=" font-weight:400;">: 	1.0&lt;/span>&lt;/p>
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">&lt;span style=" font-weight:600;">Autoren&lt;/span>:	Benjamin Flader, Benjamin Leipold, &lt;/p>
 &lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">                 	André Naumann, Corinna Vollert, Florian Kaiser&lt;/p>
 &lt;p style="-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">&lt;/p>
-&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">Dieses Programm verwendet das Qt Framework.&lt;/p>&lt;/body>&lt;/html></string>
+&lt;p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;">Dieses Programm ist freie Software und steht unter der GPLv2. Es verwendet das Qt Framework.&lt;/p>&lt;/body>&lt;/html></string>
    </property>
    <property name="alignment" >
     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
    </property>
    <property name="wordWrap" >
-    <bool>false</bool>
+    <bool>true</bool>
    </property>
   </widget>
   <widget class="QPushButton" name="_button_ok" >
    <property name="geometry" >
     <rect>
      <x>300</x>
-     <y>250</y>
+     <y>270</y>
      <width>75</width>
      <height>23</height>
     </rect>
@@ -65,17 +71,38 @@ p, li { white-space: pre-wrap; }
    <property name="geometry" >
     <rect>
      <x>220</x>
-     <y>250</y>
+     <y>270</y>
      <width>75</width>
      <height>23</height>
     </rect>
    </property>
    <property name="text" >
-    <string>About Qt</string>
+    <string>Über Qt</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label" >
+   <property name="geometry" >
+    <rect>
+     <x>70</x>
+     <y>10</y>
+     <width>241</width>
+     <height>131</height>
+    </rect>
+   </property>
+   <property name="text" >
+    <string/>
+   </property>
+   <property name="pixmap" >
+    <pixmap resource="../qrc/images.qrc" >:/logo/logo/logo.svg</pixmap>
+   </property>
+   <property name="scaledContents" >
+    <bool>true</bool>
    </property>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="../qrc/images.qrc" />
+ </resources>
  <connections>
   <connection>
    <sender>_button_ok</sender>

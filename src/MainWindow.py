@@ -35,6 +35,7 @@ from UserDetails import UserDetails
 from LoginDialog import LoginDialog
 from Settings import Settings
 from InfoDialog import InfoDialog
+from SetColumnDialog import SetColumnDialog
 import time
 import urllib
 import tempfile
@@ -49,13 +50,14 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         QtGui.QMainWindow.__init__(self, p_parent)
         self.setupUi(self)
         self._settings = Settings()
-        self._centralwidget = UserList([], self)
+        self._set_column_dialog = SetColumnDialog([], self)
+        self._centralwidget = UserList(self._set_column_dialog.tupleByKey(["name", "email", "user_id"]), self)
         self.setCentralWidget(self._centralwidget)
         self._dockwidget = UserDetails(self)
         self.addDockWidget(QtCore.Qt.RightDockWidgetArea, self._dockwidget)
         self.connect(self._action_info, QtCore.SIGNAL("triggered()"), 
                         self._showInfoSlot)
-        #self._login()
+        self._login()
     
     ## Läd die Liste vom BSCW Server und zeigt das Fenster an    
     def show(self):
@@ -63,8 +65,8 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self._statusbar.showMessage(self.trUtf8("Benutzerliste wird geladen ..."))
         self._setEnabled(False)
         QtGui.qApp.processEvents()
-        #self._user_list = self._bscw_interface.getAllUsers()
-        #self._centralwidget.loadList(self._user_list)
+        self._user_list = self._bscw_interface.getAllUsers()
+        self._centralwidget.loadList(self._user_list)
         self._setEnabled(True)
         self._statusbar.clearMessage()
 

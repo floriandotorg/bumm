@@ -39,7 +39,7 @@ class Settings(QtCore.QObject):
     # @param p_parent Übergeordnetes QObject
     def __init__(self, p_parent = None):
         QtCore.QObject.__init__(self, p_parent)
-        self.server_address = "http://10.200.132.22/bscw"
-        self.username = "bla"
-        self.proxy = "internetproxy:8080"
+        self.server_address = "http://localhost:8080/bscw/bscw.cgi/?op=xmlrpc"
+        self.username = "ChuckNoris"
+        self.proxy = ""
     

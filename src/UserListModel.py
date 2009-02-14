@@ -59,7 +59,7 @@ class UserListModel(QtCore.QAbstractTableModel):
     # stehen soll
     # @param p_role Funktion des Aufrufes
     def data(self, p_index, p_role=QtCore.Qt.DisplayRole):
-        if index.isValid() != True:
+        if p_index.isValid() != True:
             return QtCore.QVariant()
         elif p_role!=QtCore.Qt.DisplayRole:
             return QtCore.QVariant()

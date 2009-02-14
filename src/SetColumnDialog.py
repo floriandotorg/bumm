@@ -1,9 +1,10 @@
 from PyQt4 import QtCore, QtGui, Qt
-from ui_SetColoumnDialog import Ui_SetColoumnDialog
+from ui_SetColumnDialog import Ui_SetColumnDialog
 
-class SetColoumnDialog(QtGui.QDialog, Ui_SetColoumnDialog):
-    def __init__(self, p_list):
-        QtGui.QDialog.__init__(self)
+class SetColumnDialog(QtGui.QDialog, Ui_SetColumnDialog):
+    
+    def __init__(self, p_list, p_parent = None):
+        QtGui.QDialog.__init__(self, p_parent)
         self.setupUi(self)
 
         for i in p_list:
@@ -110,62 +111,63 @@ class SetColoumnDialog(QtGui.QDialog, Ui_SetColoumnDialog):
             result.append(("workspaces",_chkbox_workspaces.text()))
         if self._chkbox_access_right.checkState() == QtCore.Qt.Checked:
             result.append(("access_right",_chkbox_access_right.text()))
-
-    def TupleByKey(p_list):
+        return result
+    
+    def tupleByKey(self, p_list):
         result = []
+        
         for i in p_list:
             if i == 'user_id':
-                result.append((i,_chkbox_user_id.text()))
+                result.append((i, self._chkbox_user_id.text()))
             elif i == 'name':
-                result.append((i,_chkbox_name.text()))
+                result.append((i, self._chkbox_name.text()))
             elif i == 'longname':
-                result.append((i,_chkbox_longname.text()))
+                result.append((i, self._chkbox_longname.text()))
             elif i == 'email':
-                result.append((i,_chkbox_email.text()))
+                result.append((i, self._chkbox_email.text()))
             elif i == 'secondary_email':
-                result.append((i,_chkbox_secondary_email.text()))
+                result.append((i, self._chkbox_secondary_email.text()))
             elif i == 'organization':
-                result.append((i,_chkbox_organization.text()))
+                result.append((i, self._chkbox_organization.text()))
             elif i == 'phone_home':
-                result.append((i,_chkbox_phone_home.text()))
+                result.append((i, self._chkbox_phone_home.text()))
             elif i == 'phone_mobile':
-                result.append((i,_chkbox_phone_mobile.text()))
+                result.append((i, self._chkbox_phone_mobile.text()))
             elif i == 'phone_office':
-                result.append((i,_chkbox_phone_office.text()))
+                result.append((i, self._chkbox_phone_office.text()))
             elif i == 'fax':
-                result.append((i,_chkbox_fax.text()))
+                result.append((i, self._chkbox_fax.text()))
             elif i == 'language':
-                result.append((i,_chkbox_language.text()))
+                result.append((i, self._chkbox_language.text()))
             elif i == 'address':
-                result.append((i,_chkbox_address.text()))
+                result.append((i, self._chkbox_address.text()))
             elif i == 'url_homepage':
-                result.append((i,_chkbox_url_homepage.text()))
+                result.append((i, self._chkbox_url_homepage.text()))
             elif i == 'url':
-                result.append((i,_chkbox_url.text()))
+                result.append((i, self._chkbox_url.text()))
             elif i == 'messaging_services':
-                result.append((i,_chkbox_messaging_services.text()))
+                result.append((i, self._chkbox_messaging_services.text()))
             elif i == 'additional_info':
-                result.append((i,_chkbox_additional_info.text()))
+                result.append((i, self._chkbox_additional_info.text()))
             elif i == 'photo':
-                result.append((i,_chkbox_photo.text()))
+                result.append((i, self._chkbox_photo.text()))
             elif i == 'locked':
-                result.append((i,_chkbox_locked.text()))
+                result.append((i, self._chkbox_locked.text()))
             elif i == 'used_memory':
-                result.append((i,_chkbox_messaging_services.text()))
+                result.append((i, self._chkbox_messaging_services.text()))
             elif i == 'last_login':
-                result.append((i,_chkbox_last_login.text()))
+                result.append((i, self._chkbox_last_login.text()))
             elif i == 'reate_time':
-                result.append((i,_chkbox_create_time.text()))
+                result.append((i, self._chkbox_create_time.text()))
             elif i == 'files':
-                result.append((i,_chkbox_files.text()))
+                result.append((i, self._chkbox_files.text()))
             elif i == 'admin':
-                result.append((i,_chkbox_admin.text()))
+                result.append((i, self._chkbox_admin.text()))
             elif i == 'workspaces':
-                result.append((i,_chkbox_workspaces.text()))
+                result.append((i, self._chkbox_workspaces.text()))
             elif i == 'access_right':
-                result.append((i,_chkbox_access_right.text()))
-            return result
-    TupleByKey = staticmethod(TupleByKey)
-
+                result.append((i, self._chkbox_access_right.text()))
+                
+        return result
 
 

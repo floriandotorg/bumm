@@ -44,8 +44,9 @@ class UserList(QtGui.QTreeView):
         
         self.model = UserListModel.UserListModel(p_header_data)
         self.setModel(self.model)
-        self.setVerticalScrollMode(QtGui.QTreeView.ScrollPerPixel)
-        self.setHorizontalScrollMode(QtGui.QTreeView.ScrollPerPixel)
+        self.setRootIsDecorated(False)
+        #self.setVerticalScrollMode(QtGui.QTreeView.ScrollPerPixel)
+        #self.setHorizontalScrollMode(QtGui.QTreeView.ScrollPerPixel)
     
     ## Gibt eine Liste der selektierten User zurück
     # @return Liste von Dictonaries mit Userdaten (siehe loadList())

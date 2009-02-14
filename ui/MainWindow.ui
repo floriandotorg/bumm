@@ -12,6 +12,10 @@
   <property name="windowTitle" >
    <string>BUMM 1.0 - BSCW Userverwaltung</string>
   </property>
+  <property name="windowIcon" >
+   <iconset resource="../qrc/images.qrc" >
+    <normaloff>:/logo/logo/logo.svg</normaloff>:/logo/logo/logo.svg</iconset>
+  </property>
   <widget class="QWidget" name="_centralwidget" />
   <widget class="QMenuBar" name="_menubar" >
    <property name="geometry" >

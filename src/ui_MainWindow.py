@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'MainWindow.ui'
 #
-# Created: Fri Feb 13 13:19:37 2009
+# Created: Sat Feb 14 19:55:33 2009
 #      by: PyQt4 UI code generator 4.4.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -13,6 +13,9 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 600)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/logo/logo/logo.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        MainWindow.setWindowIcon(icon)
         self._centralwidget = QtGui.QWidget(MainWindow)
         self._centralwidget.setObjectName("_centralwidget")
         MainWindow.setCentralWidget(self._centralwidget)
@@ -45,29 +48,29 @@ class Ui_MainWindow(object):
         self._action_set_cols = QtGui.QAction(MainWindow)
         self._action_set_cols.setObjectName("_action_set_cols")
         self._action_delete = QtGui.QAction(MainWindow)
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(":/icons/icons/delete.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self._action_delete.setIcon(icon)
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap(":/icons/icons/delete.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self._action_delete.setIcon(icon1)
         self._action_delete.setObjectName("_action_delete")
         self._action_destroy_clipboard = QtGui.QAction(MainWindow)
-        icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap(":/icons/icons/destroy_clipboard.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self._action_destroy_clipboard.setIcon(icon1)
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap(":/icons/icons/destroy_clipboard.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self._action_destroy_clipboard.setIcon(icon2)
         self._action_destroy_clipboard.setObjectName("_action_destroy_clipboard")
         self._action_destroy_trash = QtGui.QAction(MainWindow)
-        icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap(":/icons/icons/destroy_trash.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self._action_destroy_trash.setIcon(icon2)
+        icon3 = QtGui.QIcon()
+        icon3.addPixmap(QtGui.QPixmap(":/icons/icons/destroy_trash.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self._action_destroy_trash.setIcon(icon3)
         self._action_destroy_trash.setObjectName("_action_destroy_trash")
         self._action_lock = QtGui.QAction(MainWindow)
-        icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap(":/icons/icons/lock.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self._action_lock.setIcon(icon3)
+        icon4 = QtGui.QIcon()
+        icon4.addPixmap(QtGui.QPixmap(":/icons/icons/lock.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self._action_lock.setIcon(icon4)
         self._action_lock.setObjectName("_action_lock")
         self._action_unlock = QtGui.QAction(MainWindow)
-        icon4 = QtGui.QIcon()
-        icon4.addPixmap(QtGui.QPixmap(":/icons/icons/unlock.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self._action_unlock.setIcon(icon4)
+        icon5 = QtGui.QIcon()
+        icon5.addPixmap(QtGui.QPixmap(":/icons/icons/unlock.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self._action_unlock.setIcon(icon5)
         self._action_unlock.setObjectName("_action_unlock")
         self._menu_program.addAction(self._action_quit)
         self._menu_view.addAction(self._action_user_Details)

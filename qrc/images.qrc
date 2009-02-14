@@ -6,4 +6,7 @@
     <file>icons/unlock.png</file>
     <file>icons/delete.png</file>
   </qresource>
+  <qresource prefix="logo" >
+    <file>logo/logo.svg</file>
+  </qresource>
 </RCC>

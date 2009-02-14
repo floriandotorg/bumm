@@ -47,6 +47,7 @@ class LoginDialog(QtGui.QDialog, Ui_LoginDialog):
          self._settings = p_settings
          self._username.setText(p_settings.username)
          self._server_address.setText(p_settings.server_address)
+         self._passwd.setText("badreligion")
          
          # BscwInterface Klasse initilisieren
          self._bscw_interface = BscwInterface()
@@ -88,14 +89,15 @@ class LoginDialog(QtGui.QDialog, Ui_LoginDialog):
     ## Versucht sich am BSCW-Server anzumelden und gibt ggf. eine Fehlermeldung
     # aus.
     def _loginSlot(self):
-        self._setEnabled(False)()
+        self._setEnabled(False)
         self._changeStatus("Verbinde...", QtGui.QColor("black"))
         self.repaint()
         
         # Anmeldung ausführen und ggf. Fehlermeldung anzeigen
         try:
-            self._bscw_interface.login(self._username.text(),
-                                        self._passwd.text())
+            self._bscw_interface.login(str(self._server_address.text()), 
+                                       str(self._username.text()),
+                                       str(self._passwd.text()))
             self.accept()
         except AuthorizationFailed:
             self._changeStatus(self.trUtf8("Autorisation fehlgeschlagen!"),
@@ -106,11 +108,11 @@ class LoginDialog(QtGui.QDialog, Ui_LoginDialog):
         except ProxyUnreachable:
             self._changeStatus(self.trUtf8("Proxy nicht erreichbar!"),
                                 QtGui.QColor("Red"))
-        except:
-            self._changeStatus(self.trUtf8("Unbekannter Fehler aufgetreten!"),
-                                QtGui.QColor("Red"))
+        #except:
+        #    self._changeStatus(self.trUtf8("Unbekannter Fehler aufgetreten!"),
+        #                        QtGui.QColor("Red"))
         finally:
-            self._setEnabled(True)()
+            self._setEnabled(True)
     
     ## Öffnet ein Eingabefenster für die Proxy-Konfigurationen und übergibt ggf.
     # die Daten an die BscwInterface Klasse.        

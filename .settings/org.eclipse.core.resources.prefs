@@ -1,4 +1,4 @@
-#Fri Feb 13 13:16:55 CET 2009
+#Sat Feb 14 20:43:55 CET 2009
 eclipse.preferences.version=1
 encoding//doc/Dateikopf.txt=UTF-8
 encoding//doc/Klassenkopf.txt=UTF-8
@@ -9,11 +9,13 @@ encoding//src/MainWindow.py=UTF-8
 encoding//src/Settings.py=UTF-8
 encoding//src/UserDetails.py=UTF-8
 encoding//src/UserList.py=UTF-8
+encoding//src/UserListModel.py=UTF-8
 encoding//src/__main__.py=UTF-8
 encoding//src/interface/BscwInterface.py=UTF-8
 encoding//src/interface/Exceptions.py=UTF-8
 encoding//src/interface/_ProxiedTransport.py=UTF-8
 encoding//src/interface/__init__.py=UTF-8
+encoding//src/qrc_images.py=UTF-8
 encoding//src/test.py=UTF-8
 encoding//src/ui_InfoDialog.py=UTF-8
 encoding//src/ui_LoginDialog.py=UTF-8
