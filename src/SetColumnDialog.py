@@ -1,173 +1,134 @@
+# -*- coding: utf-8 -*-
+
+## @package SetColumnDialog
+# @brief Implementation der SetColumnDialog Klasse
+# @version 0.1
+# @author Florian Kaiser
+# @date 15.02.09
+
+#################################################################################
+# Copyright (C) 2009 Benjamin Flader, Benjamin Leipold, André Naumann,          #
+# Corinna Vollert, Florian Kaiser                                               #
+#                                                                               #
+# This program is free software; you can redistribute it andor modify it under  #
+# the terms of the GNU General Public License as published by the Free Software #
+# Foundation; only version 2 of the License                                     #
+#                                                                               #
+# This program is distributed in the hope that it will be useful, but WITHOUT   #
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS #
+# FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more        #
+# details.                                                                      #
+#                                                                               #
+# You should have received a copy of the GNU General Public License along with  #
+# this program; if not, see <http://www.gnu.org/licenses/old-license            #
+# /gpl-2.0.html>.                                                               #
+#                                                                               #
+#################################################################################
+
 from PyQt4 import QtCore, QtGui, Qt
 from ui_SetColumnDialog import Ui_SetColumnDialog
 
+## Ein Dialog indem die angezeigten Spalten ausgewählt werden können.
 class SetColumnDialog(QtGui.QDialog, Ui_SetColumnDialog):
     
+    ## Liste von Tuples, in der die Spaltennamen und Überschriften gespeichert
+    # werden.
+    # Wird am Anfang auf None gesetzt, weil die Spaltenüberschriften erst 
+    # übersetzt werden können, wenn bereits eine QApplication existiert.
+    s_column_list = None
+    
+    ## Konstruktor
+    # @param p_list Liste der bereits angewählten Spalten
+    # @param p_parent Übergeordnetes QObject.
     def __init__(self, p_list, p_parent = None):
         QtGui.QDialog.__init__(self, p_parent)
         self.setupUi(self)
-
-        for i in p_list:
-            if   i[0] == 'user_id':
-                self._chkbox_user_id.setCheckState(QtCore.Qt.Checked)
-            elif i[0] == 'name':
-                self._chkbox_name.setCheckState(QtCore.Qt.Checked)
-            elif i[0] == 'longname':
-                self._chkbox_email.setCheckState(QtCore.Qt.Checked)
-            elif i[0] == 'email':
-                self._chkbox_name.setCheckState(QtCore.Qt.Checked)
-            elif i[0] == 'secondary_email':
-                self._chkbox_secondary_mail.setCheckState(QtCore.Qt.Checked)
-            elif i[0] == 'organization':
-                self._chkbox_organization.setCheckState(QtCore.Qt.Checked)
-            elif i[0] == 'phone_home':
-                self._chkbox_phone_home.setCheckState(QtCore.Qt.Checked)
-            elif i[0] == 'phone_mobile':
-                self._chkbox_phone_mobile.setCheckState(QtCore.Qt.Checked)
-            elif i[0] == 'phone_office':
-                self._chkbox_phone_office.setCheckState(QtCore.Qt.Checked)
-            elif i[0] == 'fax':
-                self._chkbox_fax.setCheckState(QtCore.Qt.Checked)
-            elif i[0] == 'language':
-                self._chkbox_language.setCheckState(QtCore.Qt.Checked)
-            elif i[0] == 'address':
-                self._chkbox_address.setCheckState(QtCore.Qt.Checked)
-            elif i[0] == 'url_homepage':
-                self._chkbox_url_homepage.setCheckState(QtCore.Qt.Checked)
-            elif i[0] == 'url':
-                self._chkbox_url.setCheckState(QtCore.Qt.Checked)
-            elif i[0] == 'messaging_services':
-                self._chkbox_messaging_services.setCheckState(QtCore.Qt.Checked)
-            elif i[0] == 'additional_info':
-                self._chkbox_additional_info.setCheckState(QtCore.Qt.Checked)
-            elif i[0] == 'photo':
-                self._chkbox_photo.setCheckState(QtCore.Qt.Checked)
-            elif i[0] == 'locked':
-                self._chkbox_locked.setCheckState(QtCore.Qt.Checked)
-            elif i[0] == 'used_memory':
-                self._chkbox_used_memory.setCheckState(QtCore.Qt.Checked)
-            elif i[0] == 'last_login':
-                self._chkbox_last_login.setCheckState(QtCore.Qt.Checked)
-            elif i[0] == 'create_time':
-                self._chkbox_create_time.setCheckState(QtCore.Qt.Checked)
-            elif i[0] == 'files':
-                self._chkbox_files.setCheckState(QtCore.Qt.Checked)
-            elif i[0] == 'admin':
-                self._chkbox_admin.setCheckState(QtCore.Qt.Checked)
-            elif i[0] == 'workspaces':
-                self._chkbox_workspaces.setCheckState(QtCore.Qt.Checked)
-            elif i[0] == 'access_right':
-                self._chkbox_access_right.setCheckState(QtCore.Qt.Checked)
-
+        
+        # s_column_list noch nicht initialisiert?
+        if not SetColumnDialog.s_column_list:
+            self._initColumnList()
+        
+        # Liste der Items der Liste, wird später benötigt um die selektierten
+        # Spalten zurück zu geben
+        self._items = {}
+        # Das ItemModel für die Liste
+        self._model = QtGui.QStandardItemModel(self)
+        
+        # Diese Schleife geht alle Spalten durch und fügt sie din die Liste ein
+        # sollte ein Eintrag ebenfalls in p_list existierten, wird die Checkbox
+        # angewählt.
+        for i in SetColumnDialog.s_column_list:
+            # Neues Item erstellen
+            item = QtGui.QStandardItem(QtCore.QString(i[1]))
+            item.setCheckable(True)
+            
+            # Spalte angewählt?
+            if i in p_list:
+                item.setCheckState(QtCore.Qt.Checked)
+                
+            # Item in die Listen aufnehmen
+            self._items[i[1]] = item
+            self._model.appendRow(item)
+        self._column_list.setModel(self._model)
+        
+    ## Gibt eine Liste der angewählten Spalten zurück
+    # @return Liste von Tuples mit Spaltename und Überschrift
     def getHeaderData(self):
         result = []
-        if self._chkbox_user_id.checkState() == QtCore.Qt.Checked:
-            result.append(("user_id",_chkbox_user_id.text()))
-        if self._chkbox_name.checkState() == QtCore.Qt.Checked:
-            result.append(("name",_chkbox_name.text()))
-        if self._chkbox_longname.checkState() == QtCore.Qt.Checked:
-            result.append(("longname",_chkbox_longname.text()))
-        if self._chkbox_email.checkState() == QtCore.Qt.Checked:
-            result.append(("email",_chkbox_email.text()))
-        if self._chkbox_secondary_email.checkState() == QtCore.Qt.Checked:
-            result.append(("secondary_email",_chkbox_secondary_email.text()))
-        if self._chkbox_organization.checkState() == QtCore.Qt.Checked:
-            result.append(("organization",_chkbox_organization.text()))
-        if self._chkbox_phone_home.checkState() == QtCore.Qt.Checked:
-            result.append(("phone_home",_chkbox_phone_home.text()))
-        if self._chkbox_phone_mobile.checkState() == QtCore.Qt.Checked:
-            result.append(("phone_mobile",_chkbox_phone_mobile.text()))
-        if self._chkbox_phone_office.checkState() == QtCore.Qt.Checked:
-            result.append(("phone_office",_chkbox_phone_office.text()))
-        if self._chkbox_fax.checkState() == QtCore.Qt.Checked:
-            result.append(("fax",_chkbox_fax.text()))
-        if self._chkbox_language.checkState() == QtCore.Qt.Checked:
-            result.append(("language",_chkbox_language.text()))
-        if self._chkbox_address.checkState() == QtCore.Qt.Checked:
-            result.append(("address",_chkbox_address.text()))
-        if self._chkbox_url_homepage.checkState() == QtCore.Qt.Checked:
-            result.append(("url_homepage",_chkbox_url_homepage.text()))
-        if self._chkbox_url.checkState() == QtCore.Qt.Checked:
-            result.append(("url",_chkbox_url.text()))
-        if self._chkbox_messaging_service.checkState() == QtCore.Qt.Checked:
-            result.append(("messaging_service",_chkbox_messaging_service.text()))
-        if self._chkbox_additional_info.checkState() == QtCore.Qt.Checked:
-            result.append(("additional_info",_chkbox_additional_info.text()))
-        if self._chkbox_photo.checkState() == QtCore.Qt.Checked:
-            result.append(("photo",_chkbox_photo.text()))
-        if self._chkbox_locked.checkState() == QtCore.Qt.Checked:
-            result.append(("locked",_chkbox_locked.text()))
-        if self._chkbox_used_memory.checkState() == QtCore.Qt.Checked:
-            result.append(("used_memory",_chkbox_used_memory.text()))
-        if self._chkbox_last_login.checkState() == QtCore.Qt.Checked:
-            result.append(("last_login",_chkbox_last_login.text()))
-        if self._chkbox_create_time.checkState() == QtCore.Qt.Checked:
-            result.append(("create_time",_chkbox_create_time.text()))
-        if self._chkbox_files.checkState() == QtCore.Qt.Checked:
-            result.append(("files",_chkbox_files.text()))
-        if self._chkbox_admin.checkState() == QtCore.Qt.Checked:
-            result.append(("admin",_chkbox_admin.text()))
-        if self._chkbox_workspaces.checkState() == QtCore.Qt.Checked:
-            result.append(("workspaces",_chkbox_workspaces.text()))
-        if self._chkbox_access_right.checkState() == QtCore.Qt.Checked:
-            result.append(("access_right",_chkbox_access_right.text()))
+        
+        for i in SetColumnDialog.s_column_list:
+            if self._items[i[1]].checkState() == QtCore.Qt.Checked:
+                result.append(i)
+                
         return result
     
+    ## In den Einstellungen werden die angewählten Spalten nur als Spaltenamen
+    # geseichert. Diese Methode wandelt die Liste in eine Liste aus Tuples um
+    # damit zu arbeiten.
+    # @param p_list Liste von Strings mit den Spaltennamen
+    # @return Liste von Tuples mit Spaltename und Überschrift
     def tupleByKey(self, p_list):
         result = []
         
-        for i in p_list:
-            if i == 'user_id':
-                result.append((i, self._chkbox_user_id.text()))
-            elif i == 'name':
-                result.append((i, self._chkbox_name.text()))
-            elif i == 'longname':
-                result.append((i, self._chkbox_longname.text()))
-            elif i == 'email':
-                result.append((i, self._chkbox_email.text()))
-            elif i == 'secondary_email':
-                result.append((i, self._chkbox_secondary_email.text()))
-            elif i == 'organization':
-                result.append((i, self._chkbox_organization.text()))
-            elif i == 'phone_home':
-                result.append((i, self._chkbox_phone_home.text()))
-            elif i == 'phone_mobile':
-                result.append((i, self._chkbox_phone_mobile.text()))
-            elif i == 'phone_office':
-                result.append((i, self._chkbox_phone_office.text()))
-            elif i == 'fax':
-                result.append((i, self._chkbox_fax.text()))
-            elif i == 'language':
-                result.append((i, self._chkbox_language.text()))
-            elif i == 'address':
-                result.append((i, self._chkbox_address.text()))
-            elif i == 'url_homepage':
-                result.append((i, self._chkbox_url_homepage.text()))
-            elif i == 'url':
-                result.append((i, self._chkbox_url.text()))
-            elif i == 'messaging_services':
-                result.append((i, self._chkbox_messaging_services.text()))
-            elif i == 'additional_info':
-                result.append((i, self._chkbox_additional_info.text()))
-            elif i == 'photo':
-                result.append((i, self._chkbox_photo.text()))
-            elif i == 'locked':
-                result.append((i, self._chkbox_locked.text()))
-            elif i == 'used_memory':
-                result.append((i, self._chkbox_messaging_services.text()))
-            elif i == 'last_login':
-                result.append((i, self._chkbox_last_login.text()))
-            elif i == 'reate_time':
-                result.append((i, self._chkbox_create_time.text()))
-            elif i == 'files':
-                result.append((i, self._chkbox_files.text()))
-            elif i == 'admin':
-                result.append((i, self._chkbox_admin.text()))
-            elif i == 'workspaces':
-                result.append((i, self._chkbox_workspaces.text()))
-            elif i == 'access_right':
-                result.append((i, self._chkbox_access_right.text()))
+        for i in SetColumnDialog.s_column_list:
+            if i[0] in p_list:
+                result.append(i)
                 
         return result
+    
+    ## Füllt s_column_list mit einer Liste aus Tuples, in der Spaltename und 
+    # Überschrift steht.
+    def _initColumnList(self):
+        SetColumnDialog.s_column_list = \
+                    [("user_id", QtGui.qApp.trUtf8("Benutzer-ID")),
+                     ("name", QtGui.qApp.trUtf8("Benutzername")),
+                     ("longname", QtGui.qApp.trUtf8("Vor- und Nachname")),
+                     ("email", QtGui.qApp.trUtf8("E-Mail Adresse")),
+                     ("language", QtGui.qApp.trUtf8("Sprache")),
+                     ("organization", QtGui.qApp.trUtf8("Organisation")),
+                     ("secondary_email", 
+                                QtGui.qApp.trUtf8("Weitere E-Mail Adressen")),
+                     ("phone_home", QtGui.qApp.trUtf8("Telefon Heim")),
+                     ("phone_mobile", QtGui.qApp.trUtf8("Telefon Handy")),
+                     ("phone_office", QtGui.qApp.trUtf8("Telefon Büro")),
+                     ("fax", QtGui.qApp.trUtf8("Faxnummer")),
+                     ("address", QtGui.qApp.trUtf8("Adresse")),
+                     ("url_homepage", QtGui.qApp.trUtf8("Webseite privat")),
+                     ("url", QtGui.qApp.trUtf8("Telefon Büro")),
+                     ("messaging_services", 
+                                QtGui.qApp.trUtf8("Messaging Services")),
+                     ("additional_info", 
+                                QtGui.qApp.trUtf8("Weitere Informationen")),
+                     ("photo", QtGui.qApp.trUtf8("Benutzerbild (URL)")),
+                     ("locked", QtGui.qApp.trUtf8("User geserrt ja/nein")),
+                     ("used_memory", 
+                                QtGui.qApp.trUtf8("Speicherverbrauch (MB)")),
+                     ("last_login", QtGui.qApp.trUtf8("Letzte Anmeldung")),
+                     ("create_time", QtGui.qApp.trUtf8("Datum der Erstellung")),
+                     ("files", QtGui.qApp.trUtf8("Dateien (Anzahl)")),
+                     ("admin", QtGui.qApp.trUtf8("Admin ja/nein")),
+                     ("workspaces", QtGui.qApp.trUtf8("Arbeitsbereiche")),
+                     ("access_right", QtGui.qApp.trUtf8("Zugriffsrechte"))]
+    
 
 

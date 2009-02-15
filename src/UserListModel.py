@@ -26,6 +26,7 @@
 #################################################################################
 
 from PyQt4 import QtCore
+import operator
 
 ## UserList Steuerelement
 # Diese Klasse implementiert ein Steuerelement zum Anzeigen aller Benutzer
@@ -67,8 +68,8 @@ class UserListModel(QtCore.QAbstractTableModel):
             return QtCore.QVariant()
         else:
             return QtCore.QVariant(
-                self.user_list[p_index.row()][self.header_list[p_index.column()][0]]
-                                    )
+                self.user_list[p_index.row()]
+                    [self.header_list[p_index.column()][0]])
 
     ## Gibt den Text, der in der gewünschten Spalte stehen soll zurück
     # @param p_section Für horizontale Header entspricht section der Nummer der
@@ -76,7 +77,8 @@ class UserListModel(QtCore.QAbstractTableModel):
     # @param p_orientation Gibt an, ob der Header horizontal oder vertikal 
     # ausgerichtet ist.
     # @param p_role Funktion des Aufrufes
-    def headerData(self, p_section, p_orientation, p_role=QtCore.Qt.DisplayRole):
+    def headerData(self, p_section, p_orientation,
+                                p_role = QtCore.Qt.DisplayRole):
         if p_role!=QtCore.Qt.DisplayRole:
             return QtCore.QVariant()
         return QtCore.QVariant(QtCore.QString(self.header_list[p_section][1]))
@@ -128,9 +130,9 @@ class UserListModel(QtCore.QAbstractTableModel):
     # @param p_order Die Richtung in die sortiert werden soll.
     def sort(self, p_column, p_order):
         if p_order == QtCore.Qt.AscendingOrder:
-            self.user_list.sort(key=operator.itemgetter(self.header_list[p_column][0]))
+            self.user_list.sort(key = operator.itemgetter(self.header_list[p_column][0]))
         elif p_order == QtCore.Qt.DescendingOrder:
-            self.user_list.sort(key=operator.itemgetter(self.header_list[p_column][0]), reverse=True)
+            self.user_list.sort(key = operator.itemgetter(self.header_list[p_column][0]), reverse = True)
         self.emit(QtCore.SIGNAL("layoutChanged()"))
 
     ## Übergibt eine Liste mit Spalten die angezeigt werden sollen.

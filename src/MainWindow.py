@@ -50,13 +50,15 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         QtGui.QMainWindow.__init__(self, p_parent)
         self.setupUi(self)
         self._settings = Settings()
-        self._set_column_dialog = SetColumnDialog([], self)
-        self._centralwidget = UserList(self._set_column_dialog.tupleByKey(["name", "email", "user_id"]), self)
+        self._headers = SetColumnDialog([], self).tupleByKey(self._settings.columns)
+        self._centralwidget = UserList(self._headers, self)
         self.setCentralWidget(self._centralwidget)
         self._dockwidget = UserDetails(self)
         self.addDockWidget(QtCore.Qt.RightDockWidgetArea, self._dockwidget)
         self.connect(self._action_info, QtCore.SIGNAL("triggered()"), 
                         self._showInfoSlot)
+        self.connect(self._action_set_cols, QtCore.SIGNAL("triggered()"),
+                        self._showSetColumnDialogSlot)
         self._login()
     
     ## Läd die Liste vom BSCW Server und zeigt das Fenster an    
@@ -75,6 +77,16 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         info_dialog = InfoDialog(self)
         info_dialog.exec_()
     
+    ## Zeigt den Spalten-Auswählen-Dialog an und speichert, wenn auf
+    # 'OK' geklickt wurde die Auswahl in _headers. Außerdem wird
+    # die User-Liste aktualisiert
+    def _showSetColumnDialogSlot(self):
+        set_column_dialog = SetColumnDialog(self._headers, self)
+        set_column_dialog.exec_()
+        if set_column_dialog.result() == QtGui.QDialog.Accepted:
+            self._headers = set_column_dialog.getHeaderData()
+            self._centralwidget.changeHeaderData(self._headers)
+        
     ## Sperrt bzw. Entsperrt alle Steuerelemente auf dem Fenster.
     # @param p_enable Steuerelemente sperren ja/nein (Boolean)
     def _setEnabled(self, p_enable):

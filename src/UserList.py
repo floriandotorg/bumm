@@ -41,10 +41,12 @@ class UserList(QtGui.QTreeView):
     # @param p_parent Übergeordnetes QObject 
     def __init__(self, p_header_data, p_parent = None):
         QtGui.QTreeView.__init__(self, p_parent)
-        
         self.model = UserListModel.UserListModel(p_header_data)
         self.setModel(self.model)
         self.setRootIsDecorated(False)
+        self.setSortingEnabled(True)
+        self.setAlternatingRowColors(True)
+        self.setSelectionMode(QtGui.QTreeView.ExtendedSelection)
         #self.setVerticalScrollMode(QtGui.QTreeView.ScrollPerPixel)
         #self.setHorizontalScrollMode(QtGui.QTreeView.ScrollPerPixel)
     
@@ -105,7 +107,7 @@ class UserList(QtGui.QTreeView):
     # in denen der Schlüssel und die Überschrift stehen.
     # @see loadList()
     def changeHeaderData(self, p_header_data):
-         self.model.changeHeaderDate(p_header_data)
+         self.model.changeHeaderData(p_header_data)
     
     ## Entfernt einen Benutzer aus der Liste
     # @param p_user Ein Dictonary mit einem Element "user_id" indem sich

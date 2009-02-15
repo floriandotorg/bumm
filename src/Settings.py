@@ -42,4 +42,5 @@ class Settings(QtCore.QObject):
         self.server_address = "http://localhost:8080/bscw/bscw.cgi/?op=xmlrpc"
         self.username = "ChuckNoris"
         self.proxy = ""
+        self.columns = ["user_id", "name", "longname"]
     

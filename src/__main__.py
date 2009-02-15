@@ -26,10 +26,10 @@
 #################################################################################
 
 import sys
-from PyQt4 import QtGui
+from PyQt4.QtGui import QApplication
 from MainWindow import MainWindow
 
-app = QtGui.QApplication(sys.argv)
+app = QApplication(sys.argv)
 mainWindow = MainWindow()
 mainWindow.show()
 app.exec_()
