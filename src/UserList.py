@@ -41,12 +41,14 @@ class UserList(QtGui.QTreeView):
     # @param p_parent Übergeordnetes QObject 
     def __init__(self, p_header_data, p_parent = None):
         QtGui.QTreeView.__init__(self, p_parent)
-        self.model = UserListModel.UserListModel(p_header_data)
-        self.setModel(self.model)
+        self._model = UserListModel.UserListModel(p_header_data)
+        self.setModel(self._model)
         self.setRootIsDecorated(False)
         self.setSortingEnabled(True)
         self.setAlternatingRowColors(True)
         self.setSelectionMode(QtGui.QTreeView.ExtendedSelection)
+        self.connect(self, QtCore.SIGNAL("clicked(QModelIndex)"), 
+                                    self._emitSelectionChanged)
         #self.setVerticalScrollMode(QtGui.QTreeView.ScrollPerPixel)
         #self.setHorizontalScrollMode(QtGui.QTreeView.ScrollPerPixel)
     
@@ -54,7 +56,11 @@ class UserList(QtGui.QTreeView):
     # @return Liste von Dictonaries mit Userdaten (siehe loadList())
     # @see loadList()
     def getSelection(self):
-        pass
+        result = []
+        for i in self.selectionModel().selectedIndexes():
+            if i.isValid() and i.column() == 0:
+                result.append(self._model.user_list[i.row()])
+        return result
     
     ## Definiert einen Suchtext, nachdem gefilert wird
     # @param p_text Suchtext 
@@ -100,14 +106,14 @@ class UserList(QtGui.QTreeView):
     #        - Liste mit Usernamen, die dieser Rolle entsprechen
     #        - Liste mit Zugriffsrechten
     def loadList(self, p_user_list):
-        self.model.loadList(p_user_list)
+        self._model.loadList(p_user_list)
     
     ## Übergibt eine Liste mit Spalten die angezeigt werden sollen.
     # @param p_header_data Eine Liste von Tupels mit jeweils zwei Elementen,
     # in denen der Schlüssel und die Überschrift stehen.
     # @see loadList()
     def changeHeaderData(self, p_header_data):
-         self.model.changeHeaderData(p_header_data)
+         self._model.changeHeaderData(p_header_data)
     
     ## Entfernt einen Benutzer aus der Liste
     # @param p_user Ein Dictonary mit einem Element "user_id" indem sich
@@ -115,3 +121,7 @@ class UserList(QtGui.QTreeView):
     # @return Benutzer-ID des Eintrags der nun selektiert ist. None für keinen.
     def removeEntry(self, p_user):
         pass
+    
+    ## Emitiert das SelectionChanged() Signal
+    def _emitSelectionChanged(self):
+        self.emit(QtCore.SIGNAL("SelectionChanged()"))

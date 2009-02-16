@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'InfoDialog.ui'
 #
-# Created: Sat Feb 14 19:58:43 2009
+# Created: Mon Feb 16 20:13:01 2009
 #      by: PyQt4 UI code generator 4.4.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -12,29 +12,31 @@ from PyQt4 import QtCore, QtGui
 class Ui_InfoDialog(object):
     def setupUi(self, InfoDialog):
         InfoDialog.setObjectName("InfoDialog")
-        InfoDialog.resize(386, 307)
+        InfoDialog.resize(386, 294)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(InfoDialog.sizePolicy().hasHeightForWidth())
         InfoDialog.setSizePolicy(sizePolicy)
+        InfoDialog.setMinimumSize(QtCore.QSize(386, 294))
+        InfoDialog.setMaximumSize(QtCore.QSize(386, 294))
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(":/logo/logo/logo.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         InfoDialog.setWindowIcon(icon)
         self._lbl_info = QtGui.QLabel(InfoDialog)
-        self._lbl_info.setGeometry(QtCore.QRect(20, 150, 351, 121))
+        self._lbl_info.setGeometry(QtCore.QRect(20, 140, 351, 121))
         self._lbl_info.setLayoutDirection(QtCore.Qt.LeftToRight)
         self._lbl_info.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
         self._lbl_info.setWordWrap(True)
         self._lbl_info.setObjectName("_lbl_info")
         self._button_ok = QtGui.QPushButton(InfoDialog)
-        self._button_ok.setGeometry(QtCore.QRect(300, 270, 75, 23))
+        self._button_ok.setGeometry(QtCore.QRect(300, 260, 75, 23))
         self._button_ok.setObjectName("_button_ok")
         self._button_qt_info = QtGui.QPushButton(InfoDialog)
-        self._button_qt_info.setGeometry(QtCore.QRect(220, 270, 75, 23))
+        self._button_qt_info.setGeometry(QtCore.QRect(220, 260, 75, 23))
         self._button_qt_info.setObjectName("_button_qt_info")
         self.label = QtGui.QLabel(InfoDialog)
-        self.label.setGeometry(QtCore.QRect(70, 10, 241, 131))
+        self.label.setGeometry(QtCore.QRect(70, 0, 241, 131))
         self.label.setPixmap(QtGui.QPixmap(":/logo/logo/logo.svg"))
         self.label.setScaledContents(True)
         self.label.setObjectName("label")
@@ -59,4 +61,5 @@ class Ui_InfoDialog(object):
         self._button_ok.setText(QtGui.QApplication.translate("InfoDialog", "OK", None, QtGui.QApplication.UnicodeUTF8))
         self._button_qt_info.setText(QtGui.QApplication.translate("InfoDialog", "Über Qt", None, QtGui.QApplication.UnicodeUTF8))
 
+import images_rc
 import images_rc

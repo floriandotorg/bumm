@@ -36,7 +36,7 @@
     <property name="title" >
      <string>Ansicht</string>
     </property>
-    <addaction name="_action_user_Details" />
+    <addaction name="_action_user_details" />
     <addaction name="separator" />
     <addaction name="_action_set_cols" />
    </widget>
@@ -92,7 +92,7 @@
     <string>Über</string>
    </property>
   </action>
-  <action name="_action_user_Details" >
+  <action name="_action_user_details" >
    <property name="checkable" >
     <bool>true</bool>
    </property>

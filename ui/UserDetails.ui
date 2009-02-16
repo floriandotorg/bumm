@@ -1,0 +1,60 @@
+<ui version="4.0" >
+ <class>UserDetails</class>
+ <widget class="QDockWidget" name="UserDetails" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>447</width>
+    <height>390</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Details</string>
+  </property>
+  <widget class="QWidget" name="_content" >
+   <layout class="QGridLayout" name="gridLayout" >
+    <item row="0" column="0" >
+     <widget class="QTabWidget" name="_tab_widget" >
+      <property name="currentIndex" >
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="_tab_details" >
+       <attribute name="title" >
+        <string>Details</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_2" >
+        <item row="0" column="0" >
+         <widget class="QTextEdit" name="_text_details" >
+          <property name="readOnly" >
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="_tab_pic" >
+       <attribute name="title" >
+        <string>Bild</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_3" >
+        <item row="0" column="0" >
+         <widget class="QLabel" name="_lbl_pic" >
+          <property name="text" >
+           <string/>
+          </property>
+          <property name="scaledContents" >
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -27,6 +27,7 @@
 #################################################################################
 
 from PyQt4 import QtGui, QtCore
+from ui_UserDetails import Ui_UserDetails
 
 ## UserDetails Steuerelement
 # Diese Klasse implementiert ein Steuerelement zum Anzeigen zusätzlicher
@@ -43,13 +44,13 @@ from PyQt4 import QtGui, QtCore
 # ist der Name des Benutzers bei dem dies geschied.
 # - DestroyClipboard(p_user_name) Räumt die Zwischenablage des Benutzers auf. 
 # "p_user_name" ist der Name des Benutzers bei dem dies geschied.
-class UserDetails(QtGui.QDockWidget):
+class UserDetails(QtGui.QDockWidget, Ui_UserDetails):
     
     ## Konstruktor
     # @param p_parent Übergeordnetes QObject 
     def __init__(self, p_parent = None):
         QtGui.QDockWidget.__init__(self, p_parent)
-        pass
+        self.setupUi(self)
     
     ## Zeigt alle Userinformationen im Widget an
     # @param p_user_list Eine Liste von Dictonaries mit folgendem Aufbau oder 
@@ -73,6 +74,8 @@ class UserDetails(QtGui.QDockWidget):
     # als Wert
     # - additional_info : Weitere Informationen
     # - photo : Link zum Benutzerbild oder None wenn keins existiert
+    # - local_photo : Pfad zum lokal zwischengespeicherten Benutzerbild oder 
+    # None wenn keins existiert
     # - locked : User geserrt ja/nein (Boolean)
     # - used_memory : Speicherverbrauch in MB
     # - last_login : Letzte Anmeldung als datetime.datetime
@@ -91,5 +94,16 @@ class UserDetails(QtGui.QDockWidget):
     #        - Liste mit Usernamen, die dieser Rolle entsprechen
     #        - Liste mit Zugriffsrechten
     def showUser(self, p_user):
-        pass
-    
+        if p_user:
+            text = u""
+            for key in p_user:
+                text += unicode(key) + u": " + unicode(p_user[key]) + u"\n"
+            self._text_details.setText(text)
+            
+            try:
+                self._lbl_pic.setPixmap(QtGui.QPixmap(p_user[local_photo]))
+            except:
+                self._lbl_pic.clear()
+        else:
+            self._text_details.setText(u"Bitte wählen Sie einen User aus!")
+        
