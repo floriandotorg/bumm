@@ -100,10 +100,11 @@ class UserDetails(QtGui.QDockWidget, Ui_UserDetails):
                 text += unicode(key) + u": " + unicode(p_user[key]) + u"\n"
             self._text_details.setText(text)
             
-            try:
-                self._lbl_pic.setPixmap(QtGui.QPixmap(p_user[local_photo]))
-            except:
-                self._lbl_pic.clear()
+            #try:
+            #print p_user["local_photo"]
+            self._lbl_pic.setPixmap(QtGui.QPixmap(p_user["local_photo"]))
+            #except:
+            #    self._lbl_pic.clear()
         else:
             self._text_details.setText(u"Bitte wählen Sie einen User aus!")
         

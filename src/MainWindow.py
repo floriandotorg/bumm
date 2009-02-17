@@ -80,19 +80,16 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self.connect(self._action_user_details, 
                         QtCore.SIGNAL("triggered(bool)"),
                         self._showUserDetails)
-        self._login()
+        #self._login()
     
     ## Läd die Liste vom BSCW Server und zeigt das Fenster an    
     def show(self):
         QtGui.QMainWindow.show(self)
-        self._statusbar.showMessage(
-                                self.trUtf8("Benutzerliste wird geladen ..."))
-        self._setEnabled(False)
-        QtGui.qApp.processEvents()
+        self._lockWidget(True, self.trUtf8("Benutzerliste wird geladen ..."))
+        self._bscw_interface = BscwInterface()
         self._user_list = self._bscw_interface.getAllUsers()
         self._user_list_widget.loadList(self._user_list)
-        self._setEnabled(True)
-        self._statusbar.clearMessage()
+        self._lockWidget(False)
 
     ## Zeigt ein Info-Dialog an
     def _showInfoSlot(self):
@@ -108,24 +105,34 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         if set_column_dialog.result() == QtGui.QDialog.Accepted:
             self._headers = set_column_dialog.getHeaderData()
             self._user_list_widget.changeHeaderData(self._headers)
-        
-    ## Sperrt bzw. Entsperrt alle Steuerelemente auf dem Fenster.
-    # @param p_enable Steuerelemente sperren ja/nein (Boolean)
-    def _setEnabled(self, p_enable):
-        self._toolbar.setEnabled(p_enable)
-        self._user_list_widget.setEnabled(p_enable)
-        self._menubar.setEnabled(p_enable)
-        self._user_details.setEnabled(p_enable)
+    
+    ## Sperrt/Entsperrt das Widget und zeigt eine Meldung in der Statusleiste an   
+    # @param p_lock Widget sperren ja/nein (Boolean)
+    # @param p_message Nachricht für die Statusbar  
+    def _lockWidget(self, p_lock, p_message = None):
+        p_lock = not p_lock
+        self._toolbar.setEnabled(p_lock)
+        self._user_list_widget.setEnabled(p_lock)
+        self._menubar.setEnabled(p_lock)
+        self._user_details.setEnabled(p_lock)
+        if p_message:
+            self._statusbar.showMessage(p_message)
+        else:
+            self._statusbar.clearMessage()
+        QtGui.qApp.processEvents()
     
     ## Zeigt den aktuell angewählten User im DockWidget an und läd bei Bedarf
     #  das Benutzerbild herunter.    
     def _updateUserDetailsSlot(self):
         selection = self._user_list_widget.getSelection()
         if len(selection) == 1:
-            #if not "local_photo" in selection[0] 
-            #        and selection[0]["photo"]:
-            #    selection[0]["local_photo"] = \
-            #         self._getFileByUrl(selection[0]["photo"])
+            if not "local_photo" in selection[0] \
+                    and selection[0]["photo"]:
+                self._lockWidget(True, 
+                            self.trUtf8(u"Benutzerbild wird geladen ..."))
+                selection[0]["local_photo"] = \
+                            self._getFileByUrl(selection[0]["photo"])
+                self._lockWidget(False)
             self._user_details.showUser(selection[0])
         else:
             self._user_details.showUser(None)
@@ -148,24 +155,23 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             exit()
 
         self._bscw_interface = login_dialog.getInterface()
-
+    
     ## Lädt eine URL in eine temporäre Date und gibt den Pfad der 
     # temporären Datei zurück
-    # @param p_url Pfad der Url
-    # @param p_proxy Adresse des Http-Proxys ist None wenn kein 
-    # Proxy existiert. Bsp.:"http://proxy_address:port"
-    def _getFileByUrl(self, p_url, p_proxy=None):
-        tmp_data = ""
-        if p_proxy != None:
-            tmp_proxies = {'http': p_proxy}
-            tmp_data = \
-                urllib.urlopen("http://" + p_url,proxies=tmp_proxies).read()
-        else:
-            tmp_data = urllib.urlopen("http://" + p_url).read()
-        tmp_file = tempfile.NamedTemporaryFile(delete=False)
-        tmp_file.write(tmp_data)
-        tmp_file.close()
-        return tmp_file.name
+    # @param p_url URL der Datei
+    # @return Pfad zur Datei als String oder None, wenn  ein Fehler aufgetreten
+    # ist
+    def _getFileByUrl(self, p_url):
+        try:
+            url_opener = urllib.URLopener()
+            file = url_opener.retrieve(p_url)[0]
+            file = open(file)
+            tmp_file = tempfile.NamedTemporaryFile(delete = False)
+            tmp_file.write(file.read())
+            file.close()
+            return tmp_file.name
+        except:
+            return None
 
 if __name__ == "__main__":
     import sys

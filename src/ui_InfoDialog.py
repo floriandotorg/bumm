@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'InfoDialog.ui'
 #
-# Created: Mon Feb 16 20:13:01 2009
+# Created: Tue Feb 17 10:10:52 2009
 #      by: PyQt4 UI code generator 4.4.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -36,7 +36,7 @@ class Ui_InfoDialog(object):
         self._button_qt_info.setGeometry(QtCore.QRect(220, 260, 75, 23))
         self._button_qt_info.setObjectName("_button_qt_info")
         self.label = QtGui.QLabel(InfoDialog)
-        self.label.setGeometry(QtCore.QRect(70, 0, 241, 131))
+        self.label.setGeometry(QtCore.QRect(80, 0, 221, 131))
         self.label.setPixmap(QtGui.QPixmap(":/logo/logo/logo.svg"))
         self.label.setScaledContents(True)
         self.label.setObjectName("label")
@@ -61,5 +61,6 @@ class Ui_InfoDialog(object):
         self._button_ok.setText(QtGui.QApplication.translate("InfoDialog", "OK", None, QtGui.QApplication.UnicodeUTF8))
         self._button_qt_info.setText(QtGui.QApplication.translate("InfoDialog", "Über Qt", None, QtGui.QApplication.UnicodeUTF8))
 
+import images_rc
 import images_rc
 import images_rc

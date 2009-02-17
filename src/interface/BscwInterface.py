@@ -70,7 +70,7 @@ class BscwInterface(object):
     def logout(self):
 
         # Server-Objekt löschen
-        del _server
+        del self._server
 
     ## Definiert ein Netzwerk-Proxy für die Verbindung zum BSCW Server.
     # Sollte bereits eine Verbindung bestehen, wird diese getrennt.
