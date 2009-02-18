@@ -25,16 +25,20 @@
 #                                                                               #
 #################################################################################
 
-## Benutzername oder Passwort sind inkorrekt oder Benutzer ist kein Admin.
-class AuthorizationFailed(Exception):
+## Benutzername oder Passwort ist inkorrekt.
+class LoginIncorrect(Exception):
+    pass
+
+## Benutzer ist kein Admin.
+class NoAdminRights(Exception):
+    pass
+
+## Benutzer ist gesperrt.
+class UserLocked(Exception):
     pass
 
 ## Der BSCW-Server ist nicht erreichbar.
 class HostUnreachable(Exception):
-    pass
-
-## Der angegebene Proxy ist nicht verfügbar
-class ProxyUnreachable(Exception):
     pass
 
 ## Die bereits bestehende Verbindung wurde unterbrochen oder hat nie

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'MainWindow.ui'
 #
-# Created: Tue Feb 17 08:33:34 2009
+# Created: Wed Feb 18 10:54:33 2009
 #      by: PyQt4 UI code generator 4.4.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -48,6 +48,7 @@ class Ui_MainWindow(object):
         self._action_set_cols = QtGui.QAction(MainWindow)
         self._action_set_cols.setObjectName("_action_set_cols")
         self._action_delete = QtGui.QAction(MainWindow)
+        self._action_delete.setEnabled(False)
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap(":/icons/icons/delete.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self._action_delete.setIcon(icon1)
@@ -63,11 +64,13 @@ class Ui_MainWindow(object):
         self._action_destroy_trash.setIcon(icon3)
         self._action_destroy_trash.setObjectName("_action_destroy_trash")
         self._action_lock = QtGui.QAction(MainWindow)
+        self._action_lock.setEnabled(False)
         icon4 = QtGui.QIcon()
         icon4.addPixmap(QtGui.QPixmap(":/icons/icons/lock.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self._action_lock.setIcon(icon4)
         self._action_lock.setObjectName("_action_lock")
         self._action_unlock = QtGui.QAction(MainWindow)
+        self._action_unlock.setEnabled(False)
         icon5 = QtGui.QIcon()
         icon5.addPixmap(QtGui.QPixmap(":/icons/icons/unlock.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self._action_unlock.setIcon(icon5)
@@ -102,19 +105,28 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "BUMM 1.0 - BSCW Userverwaltung", None, QtGui.QApplication.UnicodeUTF8))
-        self._menu_program.setTitle(QtGui.QApplication.translate("MainWindow", "Programm", None, QtGui.QApplication.UnicodeUTF8))
-        self._menu_view.setTitle(QtGui.QApplication.translate("MainWindow", "Ansicht", None, QtGui.QApplication.UnicodeUTF8))
-        self._menu_help.setTitle(QtGui.QApplication.translate("MainWindow", "Hilfe", None, QtGui.QApplication.UnicodeUTF8))
-        self._menu_action.setTitle(QtGui.QApplication.translate("MainWindow", "Aktion", None, QtGui.QApplication.UnicodeUTF8))
+        self._menu_program.setTitle(QtGui.QApplication.translate("MainWindow", "&Programm", None, QtGui.QApplication.UnicodeUTF8))
+        self._menu_view.setTitle(QtGui.QApplication.translate("MainWindow", "&Ansicht", None, QtGui.QApplication.UnicodeUTF8))
+        self._menu_help.setTitle(QtGui.QApplication.translate("MainWindow", "&Hilfe", None, QtGui.QApplication.UnicodeUTF8))
+        self._menu_action.setTitle(QtGui.QApplication.translate("MainWindow", "A&ktion", None, QtGui.QApplication.UnicodeUTF8))
         self._toolbar.setWindowTitle(QtGui.QApplication.translate("MainWindow", "toolBar", None, QtGui.QApplication.UnicodeUTF8))
-        self._action_quit.setText(QtGui.QApplication.translate("MainWindow", "Beenden", None, QtGui.QApplication.UnicodeUTF8))
-        self._action_info.setText(QtGui.QApplication.translate("MainWindow", "Über", None, QtGui.QApplication.UnicodeUTF8))
-        self._action_user_details.setText(QtGui.QApplication.translate("MainWindow", "User Details", None, QtGui.QApplication.UnicodeUTF8))
-        self._action_set_cols.setText(QtGui.QApplication.translate("MainWindow", "Spalten auswählen", None, QtGui.QApplication.UnicodeUTF8))
-        self._action_delete.setText(QtGui.QApplication.translate("MainWindow", "Benutzer löschen", None, QtGui.QApplication.UnicodeUTF8))
-        self._action_destroy_clipboard.setText(QtGui.QApplication.translate("MainWindow", "Ablage(n) aufräumen", None, QtGui.QApplication.UnicodeUTF8))
-        self._action_destroy_trash.setText(QtGui.QApplication.translate("MainWindow", "Mülleimer leeren", None, QtGui.QApplication.UnicodeUTF8))
-        self._action_lock.setText(QtGui.QApplication.translate("MainWindow", "Benutzer sperren", None, QtGui.QApplication.UnicodeUTF8))
-        self._action_unlock.setText(QtGui.QApplication.translate("MainWindow", "Benutzer entsperren", None, QtGui.QApplication.UnicodeUTF8))
+        self._action_quit.setText(QtGui.QApplication.translate("MainWindow", "&Beenden", None, QtGui.QApplication.UnicodeUTF8))
+        self._action_quit.setStatusTip(QtGui.QApplication.translate("MainWindow", "Beendet das Programm", None, QtGui.QApplication.UnicodeUTF8))
+        self._action_info.setText(QtGui.QApplication.translate("MainWindow", "Ü&ber", None, QtGui.QApplication.UnicodeUTF8))
+        self._action_info.setStatusTip(QtGui.QApplication.translate("MainWindow", "Zeigt Zusatzinformationen zum Programm an", None, QtGui.QApplication.UnicodeUTF8))
+        self._action_user_details.setText(QtGui.QApplication.translate("MainWindow", "User &Details", None, QtGui.QApplication.UnicodeUTF8))
+        self._action_user_details.setStatusTip(QtGui.QApplication.translate("MainWindow", "Blendet das Detail-Fenster ein bzw. aus", None, QtGui.QApplication.UnicodeUTF8))
+        self._action_set_cols.setText(QtGui.QApplication.translate("MainWindow", "&Spalten auswählen", None, QtGui.QApplication.UnicodeUTF8))
+        self._action_set_cols.setStatusTip(QtGui.QApplication.translate("MainWindow", "Öffnet ein Dialog, indem die Spalten der Tabelle ausgewählt werden können", None, QtGui.QApplication.UnicodeUTF8))
+        self._action_delete.setText(QtGui.QApplication.translate("MainWindow", "Benutzer &löschen", None, QtGui.QApplication.UnicodeUTF8))
+        self._action_delete.setStatusTip(QtGui.QApplication.translate("MainWindow", "Löscht die ausgewählten Benutzer", None, QtGui.QApplication.UnicodeUTF8))
+        self._action_destroy_clipboard.setText(QtGui.QApplication.translate("MainWindow", "&Ablage(n) aufräumen", None, QtGui.QApplication.UnicodeUTF8))
+        self._action_destroy_clipboard.setStatusTip(QtGui.QApplication.translate("MainWindow", "Löscht die Ablage aller, bzw. aller ausgewählten Benutzer", None, QtGui.QApplication.UnicodeUTF8))
+        self._action_destroy_trash.setText(QtGui.QApplication.translate("MainWindow", "&Mülleimer leeren", None, QtGui.QApplication.UnicodeUTF8))
+        self._action_destroy_trash.setStatusTip(QtGui.QApplication.translate("MainWindow", "Leet den Mülleimer aller bzw. aller ausgewählten Benutzer", None, QtGui.QApplication.UnicodeUTF8))
+        self._action_lock.setText(QtGui.QApplication.translate("MainWindow", "Benutzer &sperren", None, QtGui.QApplication.UnicodeUTF8))
+        self._action_lock.setStatusTip(QtGui.QApplication.translate("MainWindow", "Sperrt die ausgewählten Benutzer", None, QtGui.QApplication.UnicodeUTF8))
+        self._action_unlock.setText(QtGui.QApplication.translate("MainWindow", "Benutzer &entsperren", None, QtGui.QApplication.UnicodeUTF8))
+        self._action_unlock.setStatusTip(QtGui.QApplication.translate("MainWindow", "Hebt die Sperrung der ausgewählten Benutzer auf", None, QtGui.QApplication.UnicodeUTF8))
 
 import images_rc

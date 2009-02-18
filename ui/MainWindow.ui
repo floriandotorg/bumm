@@ -28,13 +28,13 @@
    </property>
    <widget class="QMenu" name="_menu_program" >
     <property name="title" >
-     <string>Programm</string>
+     <string>&amp;Programm</string>
     </property>
     <addaction name="_action_quit" />
    </widget>
    <widget class="QMenu" name="_menu_view" >
     <property name="title" >
-     <string>Ansicht</string>
+     <string>&amp;Ansicht</string>
     </property>
     <addaction name="_action_user_details" />
     <addaction name="separator" />
@@ -42,13 +42,13 @@
    </widget>
    <widget class="QMenu" name="_menu_help" >
     <property name="title" >
-     <string>Hilfe</string>
+     <string>&amp;Hilfe</string>
     </property>
     <addaction name="_action_info" />
    </widget>
    <widget class="QMenu" name="_menu_action" >
     <property name="title" >
-     <string>Aktion</string>
+     <string>A&amp;ktion</string>
     </property>
     <addaction name="_action_lock" />
     <addaction name="_action_unlock" />
@@ -84,12 +84,18 @@
   </widget>
   <action name="_action_quit" >
    <property name="text" >
-    <string>Beenden</string>
+    <string>&amp;Beenden</string>
+   </property>
+   <property name="statusTip" >
+    <string>Beendet das Programm</string>
    </property>
   </action>
   <action name="_action_info" >
    <property name="text" >
-    <string>Über</string>
+    <string>Ü&amp;ber</string>
+   </property>
+   <property name="statusTip" >
+    <string>Zeigt Zusatzinformationen zum Programm an</string>
    </property>
   </action>
   <action name="_action_user_details" >
@@ -100,21 +106,33 @@
     <bool>true</bool>
    </property>
    <property name="text" >
-    <string>User Details</string>
+    <string>User &amp;Details</string>
+   </property>
+   <property name="statusTip" >
+    <string>Blendet das Detail-Fenster ein bzw. aus</string>
    </property>
   </action>
   <action name="_action_set_cols" >
    <property name="text" >
-    <string>Spalten auswählen</string>
+    <string>&amp;Spalten auswählen</string>
+   </property>
+   <property name="statusTip" >
+    <string>Öffnet ein Dialog, indem die Spalten der Tabelle ausgewählt werden können</string>
    </property>
   </action>
   <action name="_action_delete" >
+   <property name="enabled" >
+    <bool>false</bool>
+   </property>
    <property name="icon" >
     <iconset resource="../qrc/images.qrc" >
      <normaloff>:/icons/icons/delete.png</normaloff>:/icons/icons/delete.png</iconset>
    </property>
    <property name="text" >
-    <string>Benutzer löschen</string>
+    <string>Benutzer &amp;löschen</string>
+   </property>
+   <property name="statusTip" >
+    <string>Löscht die ausgewählten Benutzer</string>
    </property>
   </action>
   <action name="_action_destroy_clipboard" >
@@ -123,7 +141,10 @@
      <normaloff>:/icons/icons/destroy_clipboard.png</normaloff>:/icons/icons/destroy_clipboard.png</iconset>
    </property>
    <property name="text" >
-    <string>Ablage(n) aufräumen</string>
+    <string>&amp;Ablage(n) aufräumen</string>
+   </property>
+   <property name="statusTip" >
+    <string>Löscht die Ablage aller, bzw. aller ausgewählten Benutzer</string>
    </property>
   </action>
   <action name="_action_destroy_trash" >
@@ -132,25 +153,40 @@
      <normaloff>:/icons/icons/destroy_trash.png</normaloff>:/icons/icons/destroy_trash.png</iconset>
    </property>
    <property name="text" >
-    <string>Mülleimer leeren</string>
+    <string>&amp;Mülleimer leeren</string>
+   </property>
+   <property name="statusTip" >
+    <string>Leet den Mülleimer aller bzw. aller ausgewählten Benutzer</string>
    </property>
   </action>
   <action name="_action_lock" >
+   <property name="enabled" >
+    <bool>false</bool>
+   </property>
    <property name="icon" >
     <iconset resource="../qrc/images.qrc" >
      <normaloff>:/icons/icons/lock.png</normaloff>:/icons/icons/lock.png</iconset>
    </property>
    <property name="text" >
-    <string>Benutzer sperren</string>
+    <string>Benutzer &amp;sperren</string>
+   </property>
+   <property name="statusTip" >
+    <string>Sperrt die ausgewählten Benutzer</string>
    </property>
   </action>
   <action name="_action_unlock" >
+   <property name="enabled" >
+    <bool>false</bool>
+   </property>
    <property name="icon" >
     <iconset resource="../qrc/images.qrc" >
      <normaloff>:/icons/icons/unlock.png</normaloff>:/icons/icons/unlock.png</iconset>
    </property>
    <property name="text" >
-    <string>Benutzer entsperren</string>
+    <string>Benutzer &amp;entsperren</string>
+   </property>
+   <property name="statusTip" >
+    <string>Hebt die Sperrung der ausgewählten Benutzer auf</string>
    </property>
   </action>
  </widget>

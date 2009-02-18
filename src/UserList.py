@@ -114,12 +114,22 @@ class UserList(QtGui.QTreeView):
     # @see loadList()
     def changeHeaderData(self, p_header_data):
          self._model.changeHeaderData(p_header_data)
+         for i in range(0, len(p_header_data)):
+             self.resizeColumnToContents(i)
     
-    ## Entfernt einen Benutzer aus der Liste
-    # @param p_user Ein Dictonary mit einem Element "user_id" indem sich
-    # die ID des Users befindet. 
-    # @return Benutzer-ID des Eintrags der nun selektiert ist. None für keinen.
-    def removeEntry(self, p_user):
+    ## Entfernt einen oder mehrere Benutzer aus der Liste
+    # @param p_user Liste mit den Usernamen
+    def removeUser(self, p_user):
+        pass
+    
+    ## Markiert ein oder mehrere Benutzer als gesperrt.
+    # @param p_user Liste von Usernamen 
+    def lockUser(self, p_user):
+        pass
+    
+    ## Markiert ein oder mehrere Benutzer als nicht gesperrt.
+    # @param p_user Liste von Usernamen  
+    def unlockUser(self, p_user):
         pass
     
     ## Emitiert das SelectionChanged() Signal

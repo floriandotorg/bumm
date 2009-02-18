@@ -54,29 +54,21 @@
    </item>
    <item row="3" column="1" colspan="3" >
     <widget class="QLineEdit" name="_passwd" >
+     <property name="minimumSize" >
+      <size>
+       <width>230</width>
+       <height>0</height>
+      </size>
+     </property>
      <property name="echoMode" >
       <enum>QLineEdit::Password</enum>
      </property>
     </widget>
    </item>
-   <item row="4" column="0" >
+   <item row="4" column="0" colspan="2" >
     <widget class="QLabel" name="_lbl_status" >
      <property name="text" >
       <string>Server-Adresse und Logindaten eintragen</string>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="1" >
-    <widget class="QPushButton" name="_proxy_button" >
-     <property name="text" >
-      <string>Proxy</string>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="2" >
-    <widget class="QPushButton" name="_login_button" >
-     <property name="text" >
-      <string>Anmelden</string>
      </property>
     </widget>
    </item>
@@ -87,7 +79,26 @@
      </property>
     </widget>
    </item>
+   <item row="4" column="2" >
+    <widget class="QPushButton" name="_login_button" >
+     <property name="text" >
+      <string>Anmelden</string>
+     </property>
+     <property name="default" >
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
   </layout>
+  <zorder>_lbl_server_address</zorder>
+  <zorder>_server_address</zorder>
+  <zorder>_lbl_username</zorder>
+  <zorder>_lbl_passwd</zorder>
+  <zorder>_username</zorder>
+  <zorder>_passwd</zorder>
+  <zorder>_lbl_status</zorder>
+  <zorder>_quit_button</zorder>
+  <zorder>_login_button</zorder>
  </widget>
  <resources/>
  <connections>

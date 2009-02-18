@@ -28,7 +28,6 @@
 import xmlrpclib                                         # XML-RPC
 import Exceptions                                        # Ausnahmen
 import socket                                            # Socket
-from _ProxiedTransport import ProxiedTransport           # Authorized-Transport
 
 ## Interface zum BSCW-Server
 #
@@ -60,7 +59,7 @@ class BscwInterface(object):
 
             # Authorisierung überprüfen (User? Admin?)
             if not self._server.is_admin(p_username):
-                raise Exceptions.AuthorizationFailed
+                raise Exceptions.HostUnreachable
 
         except (xmlrpclib.Fault, socket.error):
             # Verbindung überprüfen
@@ -123,40 +122,40 @@ class BscwInterface(object):
     #     - other : Zugriffsrechte für alle Anderen: Liste mit zwei Elementen
     #        - Liste mit Usernamen, die dieser Rolle entsprechen
     #        - Liste mit Zugriffsrechten
-    def getAllUsers(self):
-        return self._server.get_all_users()
+    def getAllUser(self):
+        return self._server.get_all_user()
 
     ## Löscht ein oder mehrere Benuzter endgültig und irreversibel vom
     # BSCW-Server.
     # @param p_user Eine Liste mit den Namen der zu löschenden Benutzer
-    def deleteUsers(self, p_users):
-        self._server.delete_users(p_users)
+    def deleteUser(self, p_user):
+        self._server.delete_user(p_user)
 
     ## Sperrt einen User, sodass er sich nicht mehr anmelden kann.
     # @param p_user Eine Liste mit den Namen der zu sperrenden Benutzer
     # @see unlockUser()
-    def lockUsers(self, p_users):
-        self._server.lock_users(p_users)
+    def lockUser(self, p_user):
+        self._server.lock_user(p_user)
 
     ## Entsperrt einen User, damit er sich wieder am BSCW-Server anmelden
     # kann.
     # @param p_user Eine Liste mit den Namen der zu entsprrenden Benutzer
-    def unlockUsers(self, p_users):
-        self._server.unlock_users(p_users)
+    def unlockUser(self, p_user):
+        self._server.unlock_user(p_user)
 
     ## Löscht alle Objekte im Mülleimer eines oder aller User.
     # @param p_outdated Mindestalter der zu löschenden Dateien
-    # @param p_users Eine Liste mit den Namen der zu löschenden Benutzer oder
+    # @param p_user Eine Liste mit den Namen der zu löschenden Benutzer oder
     # eine leere Liste für alle Benutzer
-    def destroyTrash(self, p_outdated, p_users = []):
-        self._server.destroy_trash(p_outdated, p_users)
+    def destroyTrash(self, p_outdated, p_user = []):
+        self._server.destroy_trash(p_outdated, p_user)
 
     ## Löscht alle Objekte in der Ablage eines oder aller User.
     # @param p_outdated Mindestalter der zu löschenden Dateien
-    # @param p_users Eine Liste mit den Namen der zu löschenden Benutzer oder
+    # @param p_user Eine Liste mit den Namen der zu löschenden Benutzer oder
     # eine leere Liste für alle Benutzer
-    def destroyClipboard(self, p_outdated, p_users = []):
-        self._server.destroy_clipboard(p_outdated, p_users)
+    def destroyClipboard(self, p_outdated, p_user = []):
+        self._server.destroy_clipboard(p_outdated, p_user)
 
     ## Stellt eine Verbindung zum BSCW-Server her
     # @param p_hostname DNS-Name oder IP-Adresse des BSCW-Servers

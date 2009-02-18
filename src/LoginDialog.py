@@ -56,14 +56,25 @@ class LoginDialog(QtGui.QDialog, Ui_LoginDialog):
          self.connect(self._login_button, QtCore.SIGNAL("clicked()"),
                         self._loginSlot)
          
-         # 'Proxy' Button mit _configureProxySlot verbinden
-         self.connect(self._proxy_button, QtCore.SIGNAL("clicked()"),
-                        self._configureProxySlot)
-         
     ## Gibt nach erfolgreicher Anmeldung die verbundene
     # BscwInterface Klasse zurück.
     def getInterface(self):
         return self._bscw_interface
+    
+    ## Gibt den Inhalt des Eingabefelds für die Server-Adresse zurück.
+    # @return Server-Adresse als QString
+    def getServerAddress(self):
+        return self._server_address.text()
+    
+    ## Gibt den Inhalt des Eingabefelds für den Benutzername zurück.
+    # @return Benutzername als QString
+    def getUsername(self):
+        return self._username.text()
+    
+    ## Gibt den Inhalt des Eingabefelds für das Passwort zurück.
+    # @return Passwort als QString
+    def getPasswd(self):
+        return self._passwd.text()
     
     ## Sperrt bzw. Entsperrt alle Steuerelemente auf dem Fenster.
     # @param p_enable Steuerelemente sperren ja/nein (Boolean)
@@ -71,7 +82,6 @@ class LoginDialog(QtGui.QDialog, Ui_LoginDialog):
         self._server_address.setEnabled(p_enable)
         self._username.setEnabled(p_enable)
         self._passwd.setEnabled(p_enable)
-        self._proxy_button.setEnabled(p_enable)
         self._login_button.setEnabled(p_enable)
         self._quit_button.setEnabled(p_enable)
     
@@ -99,49 +109,20 @@ class LoginDialog(QtGui.QDialog, Ui_LoginDialog):
                                        str(self._username.text()),
                                        str(self._passwd.text()))
             self.accept()
-        except AuthorizationFailed:
-            self._changeStatus(self.trUtf8("Autorisation fehlgeschlagen!"),
+        except LoginIncorrect:
+            self._changeStatus(self.trUtf8("Benutzername oder Passwort falsch!"),
+                               QtGui.QColor("Red"))
+        except NoAdminRights:
+            self._changeStatus(self.trUtf8("Benutzer hat keine Admin-Rechte!"),
+                               QtGui.QColor("Red"))
+        except UserLocked:
+            self._changeStatus(self.trUtf8("Benutzer gesperrt!"),
                                QtGui.QColor("Red"))
         except HostUnreachable:
             self._changeStatus(self.trUtf8("Server nicht erreichbar!"),
-                                QtGui.QColor("Red"))
-        except ProxyUnreachable:
-            self._changeStatus(self.trUtf8("Proxy nicht erreichbar!"),
                                 QtGui.QColor("Red"))
         #except:
         #    self._changeStatus(self.trUtf8("Unbekannter Fehler aufgetreten!"),
         #                        QtGui.QColor("Red"))
         finally:
             self._setEnabled(True)
-    
-    ## Öffnet ein Eingabefenster für die Proxy-Konfigurationen und übergibt ggf.
-    # die Daten an die BscwInterface Klasse.        
-    def _configureProxySlot(self):
-        # Variable zum Zwischenspeichern der Eingabe
-        proxy = (QtCore.QString(self._settings.proxy), True)
-        # Regulärer Ausdruck zum Parsen der Eingabe
-        reg_exp = QtCore.QRegExp("((([a-zA-Z0-9_]+):([a-zA-Z0-9_]+)@)?"\
-                                 "([a-zA-Z0-9_]+)(:([0-9]{1,5}))?)?")
-        
-        while proxy[1]:
-            # Eingabefenster anzeigen            
-            proxy = QtGui.QInputDialog.getText(self, self.trUtf8("Proxy"),
-                        self.trUtf8("Bitte geben Sie die Adresse des Proxys "\
-                                    "im folgenden Format ein:\n\n"
-                                    "[benutzer:passwort@]adresse:port"), 
-                        QtGui.QLineEdit.Normal,
-                        proxy[0])
-            
-            # Ist die Eingabe korrekt? Dann Werte in BscwInterface schreiben
-            # und Konfiguration speichern
-            if proxy[1] and reg_exp.exactMatch(proxy[0]):
-                self._bscw_interface.setProxy(reg_exp.cap(5), reg_exp.cap(7),
-                                              reg_exp.cap(3), reg_exp.cap(4))
-                self._settings.proxy = proxy[0]
-                break
-            # Eingabe nicht korrekt? Dann Fehlermeldung anzeigen
-            elif proxy[1]:
-                QtGui.QMessageBox.critical(self,
-                                           self.trUtf8("Fehlerhafte Eingabe"),
-                                        self.trUtf8("Ihre Eingabe entspricht "\
-                                                    "nicht dem Muster."))

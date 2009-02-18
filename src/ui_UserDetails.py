@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'UserDetails.ui'
 #
-# Created: Tue Feb 17 12:14:23 2009
+# Created: Tue Feb 17 22:57:25 2009
 #      by: PyQt4 UI code generator 4.4.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -33,7 +33,7 @@ class Ui_UserDetails(object):
         self.gridLayout_3 = QtGui.QGridLayout(self._tab_pic)
         self.gridLayout_3.setObjectName("gridLayout_3")
         self._lbl_pic = QtGui.QLabel(self._tab_pic)
-        self._lbl_pic.setScaledContents(True)
+        self._lbl_pic.setScaledContents(False)
         self._lbl_pic.setOpenExternalLinks(False)
         self._lbl_pic.setObjectName("_lbl_pic")
         self.gridLayout_3.addWidget(self._lbl_pic, 0, 0, 1, 1)
@@ -42,7 +42,7 @@ class Ui_UserDetails(object):
         UserDetails.setWidget(self._content)
 
         self.retranslateUi(UserDetails)
-        self._tab_widget.setCurrentIndex(1)
+        self._tab_widget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(UserDetails)
 
     def retranslateUi(self, UserDetails):
