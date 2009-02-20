@@ -71,10 +71,6 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self._line_edit_filter.setMaximumWidth(150)
         self._toolbar.addWidget(self._line_edit_filter)
         
-        self.connect(self._action_info, QtCore.SIGNAL("triggered()"), 
-                        self._showInfoSlot)
-        self.connect(self._action_set_cols, QtCore.SIGNAL("triggered()"),
-                        self._showSetColumnDialogSlot)
         self.connect(self._user_list, 
                         QtCore.SIGNAL("SelectionChanged()"), 
                         self._selectionChangedSlot)
@@ -86,24 +82,43 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
                         QtCore.SIGNAL("visibilityChanged(bool)"),
                         self._action_user_details.setChecked)
         
-        self.connect(self._line_edit_filter, QtCore.SIGNAL("returnPressed()"),
-                        self._setUserListFilter)
+        self.connect(self._action_update_all, QtCore.SIGNAL("triggered()"),
+                        self._loadList)
+        
+        self.connect(self._action_set_cols, QtCore.SIGNAL("triggered()"),
+                        self._showSetColumnDialogSlot)
+        
         self.connect(self._action_delete, QtCore.SIGNAL("triggered()"),
                         self._deleteUserSlot)
         self.connect(self._action_lock, QtCore.SIGNAL("triggered()"),
                         self._lockUserSlot)
         self.connect(self._action_unlock, QtCore.SIGNAL("triggered()"),
                         self._unlockUserSlot)
+        self.connect(self._action_destroy_trash, QtCore.SIGNAL("triggered()"),
+                        self._destroyTrashSlot)
+        self.connect(self._action_destroy_clipboard, 
+                        QtCore.SIGNAL("triggered()"),
+                        self._destroyClipboardSlot)
+        
+        self.connect(self._action_info, QtCore.SIGNAL("triggered()"), 
+                        self._showInfoSlot)
                      
+        self.connect(self._line_edit_filter, QtCore.SIGNAL("returnPressed()"),
+                        self._setUserListFilterSlot)
+        
         self._login()
     
     ## Läd die Liste vom BSCW Server und zeigt das Fenster an    
     def show(self):
         QtGui.QMainWindow.show(self)
+        self._loadList()
+        
+    ## Lädt die Daten aller Benutzer und stellt sie in der Liste da
+    def _loadList(self):
         self._lockWidget(True, self.trUtf8("Benutzerliste wird geladen ..."))
         #self._bscw_interface = BscwInterface() 
         self._user_list.loadList(self._bscw_interface.getAllUser())
-        self._lockWidget(False)
+        self._unlockWidget()  
 
     ## Zeigt ein Info-Dialog an
     def _showInfoSlot(self):
@@ -135,6 +150,10 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             self._statusbar.clearMessage()
         QtGui.qApp.processEvents()
     
+    ## Entsperrt das Widget und löscht die Status-Nachricht    
+    def _unlockWidget(self):
+        self._lockWidget(False)
+    
     ## Aktualisiert die UserDetails und die Toolbar
     def _selectionChangedSlot(self):
         selection = self._user_list.getSelection()
@@ -162,7 +181,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
                             self.trUtf8("Benutzerbild wird geladen ..."))
                 p_selection[0]["local_photo"] = \
                             self._getFileByUrl(p_selection[0]["photo"])
-                self._lockWidget(False)
+                self._unlockWidget
             self._user_details.showUser(p_selection[0])
         else:
             self._user_details.showUser(None)
@@ -177,7 +196,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self._lockWidget(True, self.trUtf8("Benutzer werden gesperrt ..."))
         self._bscw_interface.lockUser(to_lock)
         self._user_list.lockUser(to_lock)
-        self._lockWidget(False)
+        self._unlockWidget()
     
     ## Entsperrt alle in der Benutzerliste angewählten User    
     def _unlockUserSlot(self):
@@ -189,7 +208,47 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self._lockWidget(True, self.trUtf8("Benutzer werden entsperrt ..."))
         self._bscw_interface.unlockUser(to_unlock)
         self._user_list.unlockUser(to_unlock)
-        self._lockWidget(False)
+        self._unlockWidget()
+    
+    ## Zeigt ein Dialog an, indem ein Mindestalter angegeben werden kann und
+    # leer danach die Mülleinmer.    
+    def _destroyTrashSlot(self):
+        user = []
+        
+        for i in self._user_list.getSelection():
+            user.append(i["name"])
+            
+        outdated = QtGui.QInputDialog.getInteger(self, 
+                        self.trUtf8("Mindestalter angeben"),
+                        self.trUtf8("Mindestalter der zu " \
+                                    "löschenden Dateien (in Tagen):"),
+                        5, 0)
+        
+        if outdated[1]:
+            self._lockWidget(True, self.trUtf8("Mülleimer werden " \
+                                               "geleert ..."))
+            self._bscw_interface.destroyTrash(outdated[0], user)
+            self._unlockWidget()
+    
+    ## Zeigt ein Dialog an, indem ein Mindestalter angegeben werden kann und
+    # räumt danach die Zwischenalagen auf.    
+    def _destroyClipboardSlot(self):
+        user = []
+        
+        for i in self._user_list.getSelection():
+            user.append(i["name"])
+            
+        outdated = QtGui.QInputDialog.getInteger(self, 
+                        self.trUtf8("Mindestalter angeben"),
+                        self.trUtf8("Mindestalter der zu " \
+                                    "löschenden Dateien (in Tagen):"),
+                        5, 0)
+        
+        if outdated[1]:
+            self._lockWidget(True, self.trUtf8("Zwischenablagen werden " \
+                                               "aufgeräumt ..."))
+            self._bscw_interface.destroyClipboard(outdated[0], user)
+            self._unlockWidget()
     
     ## Löscht alle in der Benutzerliste angewählten User    
     def _deleteUserSlot(self):
@@ -207,10 +266,10 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             self._lockWidget(True, self.trUtf8("Benutzer werden gelöscht ..."))
             self._bscw_interface.deleteUser(to_delete)
             self._user_list.removeUser(to_delete)
-            self._lockWidget(False)
+            self._unlockWidget()
     
     ## Setzt den Filter der User Liste       
-    def _setUserListFilter(self):
+    def _setUserListFilterSlot(self):
         self._user_list.setFilter(self._line_edit_filter.text())
 
     ## Zeigt den LoginDialog an und versucht sich per BscwInterface am

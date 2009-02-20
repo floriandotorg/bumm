@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'MainWindow.ui'
 #
-# Created: Wed Feb 18 10:54:33 2009
+# Created: Thu Feb 19 12:23:30 2009
 #      by: PyQt4 UI code generator 4.4.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -75,7 +75,11 @@ class Ui_MainWindow(object):
         icon5.addPixmap(QtGui.QPixmap(":/icons/icons/unlock.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self._action_unlock.setIcon(icon5)
         self._action_unlock.setObjectName("_action_unlock")
+        self._action_update_all = QtGui.QAction(MainWindow)
+        self._action_update_all.setObjectName("_action_update_all")
         self._menu_program.addAction(self._action_quit)
+        self._menu_view.addAction(self._action_update_all)
+        self._menu_view.addSeparator()
         self._menu_view.addAction(self._action_user_details)
         self._menu_view.addSeparator()
         self._menu_view.addAction(self._action_set_cols)
@@ -128,5 +132,8 @@ class Ui_MainWindow(object):
         self._action_lock.setStatusTip(QtGui.QApplication.translate("MainWindow", "Sperrt die ausgewählten Benutzer", None, QtGui.QApplication.UnicodeUTF8))
         self._action_unlock.setText(QtGui.QApplication.translate("MainWindow", "Benutzer &entsperren", None, QtGui.QApplication.UnicodeUTF8))
         self._action_unlock.setStatusTip(QtGui.QApplication.translate("MainWindow", "Hebt die Sperrung der ausgewählten Benutzer auf", None, QtGui.QApplication.UnicodeUTF8))
+        self._action_update_all.setText(QtGui.QApplication.translate("MainWindow", "&Alles Aktualisieren", None, QtGui.QApplication.UnicodeUTF8))
+        self._action_update_all.setStatusTip(QtGui.QApplication.translate("MainWindow", "Aktualisiert die Liste (Kann mehrere Minuten dauern)", None, QtGui.QApplication.UnicodeUTF8))
+        self._action_update_all.setShortcut(QtGui.QApplication.translate("MainWindow", "F5", None, QtGui.QApplication.UnicodeUTF8))
 
 import images_rc
