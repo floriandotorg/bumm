@@ -120,7 +120,7 @@ class BscwInterface(object):
     def lockUser(self, p_user):
         self._server.lock_user(p_user)
 
-    ## Hebt die Anmeldesperre eines oder mehrerer Benutzer auf..
+    ## Hebt die Anmeldesperre eines oder mehrerer Benutzer auf
     # @param p_user Eine Liste mit den Namen der zu entsprrenden Benutzer
     def unlockUser(self, p_user):
         self._server.unlock_user(p_user)

@@ -40,6 +40,7 @@ class UserList(QtGui.QTreeView):
     # @param p_parent Übergeordnetes QObject 
     def __init__(self, p_header_data, p_parent = None):
         QtGui.QTreeView.__init__(self, p_parent)
+        ## Das Model der Liste (Siehe: Qt Dokumentation - Model/View-Framework)
         self._model = UserListModel.UserListModel(p_header_data)
         self.setModel(self._model)
         self.setRootIsDecorated(False)
@@ -109,7 +110,7 @@ class UserList(QtGui.QTreeView):
     
     ## Übergibt eine Liste mit Spalten die angezeigt werden sollen.
     # @param p_header_data Eine Liste von Tupels mit jeweils zwei Elementen,
-    # in denen der Schlüssel und die Überschrift stehen.
+    # in denen der Spaltenname und die Überschrift stehen.
     # @see loadList()
     def changeHeaderData(self, p_header_data):
          self._model.changeHeaderData(p_header_data)

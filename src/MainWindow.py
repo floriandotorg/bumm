@@ -41,32 +41,39 @@ import urllib
 import tempfile
 
 ## Diese Klasse stellt das Hauptfenster der Anwendung da und managed alle
-# Funktionen des Programms.
+# Funktionen des Programms
 class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 
     ## Konstruktor
-    # @param p_parent Übergeordnetes QObject.
+    # @param p_parent Übergeordnetes QObject
     def __init__(self, p_parent = None):
         QtGui.QMainWindow.__init__(self, p_parent)
         self.setupUi(self)
         
+        ## Programmeinstellungen
         self._settings = Settings()
+        ## Liste aller heruntergeladenen Benutzerbilder
         self._img_cache = []
         
+        ## Liste aller angezeigten Spalten in der User-Liste
         self._headers = SetColumnDialog([], self) \
                             .tupleByKey(self._settings.columns)
+        ## Liste aller Benuter
         self._user_list = UserList(self._headers, self)
         self.setCentralWidget(self._user_list)
         
+        ## DockWidget indem nähere Benutzerinformationen angezeigt werden
         self._user_details = UserDetails(self)
         self.addDockWidget(QtCore.Qt.RightDockWidgetArea, 
                                                 self._user_details)
         
         self._toolbar.addSeparator()
+        ## 'Suchtext'-Label
         self._lbl_filter = QtGui.QLabel(self)
         self._lbl_filter.setText(self.trUtf8(u"Suchtext: "))
         self._toolbar.addWidget(self._lbl_filter)
         
+        ## Eingabefeld für den Suchbegriff
         self._line_edit_filter = QtGui.QLineEdit(self)
         self._line_edit_filter.setMaximumWidth(150)
         self._toolbar.addWidget(self._line_edit_filter)
@@ -108,12 +115,12 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         
         self._login()
     
-    ## Läd die Liste vom BSCW Server und zeigt das Fenster an    
+    ## Lädt die Benutzerdaten vom BSCW Server und zeigt das Hauptfenster an    
     def show(self):
         QtGui.QMainWindow.show(self)
         self._loadList()
         
-    ## Lädt die Daten aller Benutzer und stellt sie in der Liste da
+    ## Lädt die Daten aller Benutzer und stellt diese in der Liste da
     def _loadList(self):
         self._lockWidget(True, self.trUtf8("Benutzerliste wird geladen ..."))
         #self._bscw_interface = BscwInterface() 
@@ -126,7 +133,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         info_dialog.exec_()
     
     ## Zeigt den Spalten-Auswählen-Dialog an und speichert, wenn auf
-    # 'OK' geklickt wurde die Auswahl in _headers. Außerdem wird
+    # 'OK' geklickt wurde die Auswahl in self._headers. Außerdem wird
     # die User-Liste aktualisiert
     def _showSetColumnDialogSlot(self):
         set_column_dialog = SetColumnDialog(self._headers, self)
@@ -154,7 +161,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
     def _unlockWidget(self):
         self._lockWidget(False)
     
-    ## Aktualisiert die UserDetails und die Toolbar
+    ## Aktualisiert die User-Details und die Toolbar
     def _selectionChangedSlot(self):
         selection = self._user_list.getSelection()
         if selection == []:
@@ -163,14 +170,14 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             self._setUserActionEnabled(True)
         self._updateUserDetails(selection)
     
-    ## Aktiviert bzw. Deaktiviert die User-Aktions-Menüs
+    ## Aktiviert/Deaktiviert die User-Aktions-Menüs
     # @param p_enabled Menüs aktiviert ja/nein (Boolean)
     def _setUserActionEnabled(self, p_enabled):
         self._action_delete.setEnabled(p_enabled)
         self._action_lock.setEnabled(p_enabled)
         self._action_unlock.setEnabled(p_enabled)
     
-    ## Zeigt den aktuell angewählten User im DockWidget an und läd bei Bedarf
+    ## Zeigt den aktuell angewählten User im DockWidget an und lädt bei Bedarf
     # das Benutzerbild herunter.  
     # @param p_selection Liste der angewählten User
     def _updateUserDetails(self, p_selection):
@@ -210,8 +217,8 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self._user_list.unlockUser(to_unlock)
         self._unlockWidget()
     
-    ## Zeigt ein Dialog an, indem ein Mindestalter angegeben werden kann und
-    # leer danach die Mülleinmer.    
+    ## Leer danach die Mülleimer. Das Mindestalter der Dateien wird mithilfe
+    # eines Dialogs definiert.
     def _destroyTrashSlot(self):
         user = []
         
@@ -230,8 +237,8 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             self._bscw_interface.destroyTrash(outdated[0], user)
             self._unlockWidget()
     
-    ## Zeigt ein Dialog an, indem ein Mindestalter angegeben werden kann und
-    # räumt danach die Zwischenalagen auf.    
+    ## Räumt danach die Zwischenablagen auf. Das Mindestalter der Dateien wird mithilfe
+    # eines Dialogs definiert.
     def _destroyClipboardSlot(self):
         user = []
         
@@ -268,7 +275,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             self._user_list.removeUser(to_delete)
             self._unlockWidget()
     
-    ## Setzt den Filter der User Liste       
+    ## Setzt den Filter der User-Liste       
     def _setUserListFilterSlot(self):
         self._user_list.setFilter(self._line_edit_filter.text())
 
@@ -281,14 +288,17 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             QtGui.qApp.quit()
             exit()
 
+        ## Interface zum BSCW-Server
         self._bscw_interface = login_dialog.getInterface()
         
         reg_exp = QtCore.QRegExp("(http://)?([a-zA-Z_0-9:]+)(/[a-zA-Z_])*")
         reg_exp.exactMatch(login_dialog.getServerAddress())
+        ## HTTP-Adresse des BSCW-Servers (Wird zum Herunterladen der
+        # Benutzerbilder benötigt)
         self._img_url_prefix = "http://%s:%s@%s" % (str(login_dialog.getUsername()),
                             str(login_dialog.getPasswd()), str(reg_exp.cap(2)))
         
-    ## Lädt eine URL in eine temporäre Date und gibt den Pfad der 
+    ## Lädt eine URL in eine temporäre Datei und gibt den Pfad der 
     # temporären Datei zurück
     # @param p_url URL der Datei
     # @return Pfad zur Datei als String oder None, wenn  ein Fehler aufgetreten
