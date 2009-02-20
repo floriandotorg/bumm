@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-## @package LoginDialog
+## @package InfoDialog
 # @brief Implementation der InfoDialog Klasse
 # @version 0.1
 # @author Florian Kaiser

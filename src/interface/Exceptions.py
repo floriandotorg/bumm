@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-## @package Exceptions
+## @package interface.Exceptions
 # @brief Deklaration mehrerer Exceptions für das BscwInterface
 # @version 0.1
 # @author Florian Kaiser
@@ -25,7 +25,7 @@
 #                                                                               #
 #################################################################################
 
-## Benutzername oder Passwort ist inkorrekt.
+## Benutzername oder Passwort inkorrekt.
 class LoginIncorrect(Exception):
     pass
 

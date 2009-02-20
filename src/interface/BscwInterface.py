@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-## @package BscwInterface
+## @package interface.BscwInterface
 # @brief Implementation der BscwInterface Klasse
 # @version 0.1
 # @author Florian Kaiser
@@ -31,15 +31,10 @@ import socket                                            # Socket
 
 ## Interface zum BSCW-Server
 #
-# Diese Klasse stellt Methoden bereit alle User inkl. aller Attribute
-# auszulesen. Dabei teilt sich das Auslesen der Attribute in zwei Phasen:
-#
-# -# Allgemeine Attribute werden bereits mit getAllUsers() zurückgegeben
-# -# Weitere Attribute können mit getAdditionalUserInfo() gelesen werden
-#
-# Diese Trennung ist nötig, da das Sammeln der "Additional Information"
-# im Vergleich zu den "einfachen" Attributen relativ lange dauert und deshalb
-# erst bei Bedarf nachgeladen werden sollte.
+# Diese Klasse stellt Methoden zum Auslesen aller User inkl. aller Attribute
+# bereit. Zusätzlich können Benutzer gelöscht, gesperrt und entsperrt werden
+# Außerdem ist es möglich die Zwischenablage einiger oder alle User aufzuräumen
+# oder die Mülleimer zu leeren.
 class BscwInterface(object):
 
     ## Initialisiert die BscwInterface-Klasse
@@ -71,19 +66,7 @@ class BscwInterface(object):
         # Server-Objekt löschen
         del self._server
 
-    ## Definiert ein Netzwerk-Proxy für die Verbindung zum BSCW Server.
-    # Sollte bereits eine Verbindung bestehen, wird diese getrennt.
-    # @param p_hostname DNS-Name oder IP-Adresse des Proxys (None = kein Proxy
-    # benötigt)
-    # @param p_port Port des Proxys
-    # @param p_username Benutzername für die Anmeldung am Proxy (None = keine
-    # Anmeldung erforderlich)
-    # @param p_passwd Passwort für die Anmeldung am Proxy
-    def setProxy(self, p_hostname = "", p_port = "", p_username = "",
-                 p_passwd = ""):
-        pass
-
-    ## Gibt eine Liste aller am BSCW-Server angemeldeten User inkl.
+    ## Gibt eine Liste aller am BSCW-Server angemeldeten User inklusive
     # verschiedener Attribute zurück.
     # @return Liste von Dictionaries mit folgendem Aufbau
     # - user_id : Benutzer-ID
@@ -131,27 +114,26 @@ class BscwInterface(object):
     def deleteUser(self, p_user):
         self._server.delete_user(p_user)
 
-    ## Sperrt einen User, sodass er sich nicht mehr anmelden kann.
+    ## Sperrt ein oder mehrere User für die Anmeldung am BSCW-Server.
     # @param p_user Eine Liste mit den Namen der zu sperrenden Benutzer
     # @see unlockUser()
     def lockUser(self, p_user):
         self._server.lock_user(p_user)
 
-    ## Entsperrt einen User, damit er sich wieder am BSCW-Server anmelden
-    # kann.
+    ## Hebt die Anmeldesperre eines oder mehrerer Benutzer auf..
     # @param p_user Eine Liste mit den Namen der zu entsprrenden Benutzer
     def unlockUser(self, p_user):
         self._server.unlock_user(p_user)
 
-    ## Löscht alle Objekte im Mülleimer eines oder aller User.
-    # @param p_outdated Mindestalter der zu löschenden Dateien
+    ## Löscht alle Objekte im Mülleimer einiger oder aller User.
+    # @param p_outdated Mindestalter der zu löschenden Dateien in Tagen
     # @param p_user Eine Liste mit den Namen der zu löschenden Benutzer oder
     # eine leere Liste für alle Benutzer
     def destroyTrash(self, p_outdated, p_user = []):
         self._server.destroy_trash(p_outdated, p_user)
 
-    ## Löscht alle Objekte in der Ablage eines oder aller User.
-    # @param p_outdated Mindestalter der zu löschenden Dateien
+    ## Löscht alle Objekte in der Ablage einiger oder aller User.
+    # @param p_outdated Mindestalter der zu löschenden Dateien in Tagen
     # @param p_user Eine Liste mit den Namen der zu löschenden Benutzer oder
     # eine leere Liste für alle Benutzer
     def destroyClipboard(self, p_outdated, p_user = []):
@@ -171,5 +153,6 @@ class BscwInterface(object):
         self.hostname = 'http://' + p_username + ':' + p_passwd \
         + '@' + p_hostname + '/bscw/bscw.cgi/?op=xmlrpc'
 
+        ## XMLRPC-Verbindung zum BSCW Server
         self._server = xmlrpclib.ServerProxy(self.hostname)
         #self._server = xmlrpclib.ServerProxy(self.hostname, proxied_transport)

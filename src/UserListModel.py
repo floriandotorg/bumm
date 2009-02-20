@@ -28,13 +28,8 @@
 from PyQt4 import QtCore
 import operator
 
-## UserList Steuerelement
-# Diese Klasse implementiert ein Steuerelement zum Anzeigen aller Benutzer
-# anhand einer Liste. Mehrfachauswahl ist nicht zugelassen.
-#
-# Die Klasse emitiert folgende Signals:
-# - SelectionChanged(p_user_id) wenn auf ein Eintrag geklickt wurde. "p_user_id"
-# gibt die ID des Users zurück, welcher selektiert wurde.
+## Schnittstelle zwischen Benutzerdaten und der User-Liste
+# Siehe Qt Model/View Framework
 class UserListModel(QtCore.QAbstractTableModel):
 
     ## Konstruktor

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-## @package BscwInterface 
+## @package interface 
 # @brief Interface zum BSCW-Server
 # @version 0.1
 # @author Florian Kaiser

@@ -31,9 +31,8 @@ from interface.Exceptions import *
 #from interface.BscwInterface import BscwInterface
 from test import BscwInterface
 
-## Stellt ein Dialog da, indem Benutzername und Passwort eingegeben werden
-# müssen. Optional kann ein Proxy eingegeben werden.
-# Sind alle Daten eingegeben, kann ein Verbindungsversuch gestartet werden.
+## Stellt ein Dialog da, der die Login-Daten entgegen nimmt und die Anmeldung 
+# durchührt.
 class LoginDialog(QtGui.QDialog, Ui_LoginDialog):
     
     ## Konstruktor
@@ -43,13 +42,13 @@ class LoginDialog(QtGui.QDialog, Ui_LoginDialog):
          QtGui.QDialog.__init__(self, p_parent)
          self.setupUi(self)
          
-         # Einstellungen laden und in die Steuerelemente schreiben
+         ## Programmenstellungen
          self._settings = p_settings
          self._username.setText(p_settings.username)
          self._server_address.setText(p_settings.server_address)
          self._passwd.setText("badreligion")
          
-         # BscwInterface Klasse initilisieren
+         ## Verbindung zum BSCW-Server
          self._bscw_interface = BscwInterface()
          
          # 'Anmelden' Button mit _loginSlot verbinden
@@ -76,7 +75,7 @@ class LoginDialog(QtGui.QDialog, Ui_LoginDialog):
     def getPasswd(self):
         return self._passwd.text()
     
-    ## Sperrt bzw. Entsperrt alle Steuerelemente auf dem Fenster.
+    ## Sperrt oder Entsperrt alle Steuerelemente auf dem Fenster.
     # @param p_enable Steuerelemente sperren ja/nein (Boolean)
     def _setEnabled(self, p_enable):
         self._server_address.setEnabled(p_enable)
@@ -96,8 +95,8 @@ class LoginDialog(QtGui.QDialog, Ui_LoginDialog):
         palette.setColor(QtGui.QPalette.Foreground, p_color)
         self._lbl_status.setPalette(palette)
     
-    ## Versucht sich am BSCW-Server anzumelden und gibt ggf. eine Fehlermeldung
-    # aus.
+    ## Versucht sich am BSCW-Server anzumelden und gibt gegebenenfalls
+    # eine Fehlermeldung aus.
     def _loginSlot(self):
         self._setEnabled(False)
         self._changeStatus("Verbinde...", QtGui.QColor("black"))

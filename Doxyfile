@@ -413,13 +413,13 @@ SORT_MEMBER_DOCS       = YES
 # by member name. If set to NO (the default) the members will appear in 
 # declaration order.
 
-SORT_BRIEF_DOCS        = NO
+SORT_BRIEF_DOCS        = YES
 
 # If the SORT_GROUP_NAMES tag is set to YES then doxygen will sort the 
 # hierarchy of group names into alphabetical order. If set to NO (the default) 
 # the group names will appear in their defined order.
 
-SORT_GROUP_NAMES       = NO
+SORT_GROUP_NAMES       = YES
 
 # If the SORT_BY_SCOPE_NAME tag is set to YES, the class list will be 
 # sorted by fully-qualified names, including namespaces. If set to 
@@ -429,7 +429,7 @@ SORT_GROUP_NAMES       = NO
 # Note: This option applies only to the class list, not to the 
 # alphabetical list.
 
-SORT_BY_SCOPE_NAME     = NO
+SORT_BY_SCOPE_NAME     = YES
 
 # The GENERATE_TODOLIST tag can be used to enable (YES) or 
 # disable (NO) the todo list. This list is created by putting \todo 
@@ -632,7 +632,14 @@ RECURSIVE              = YES
 # excluded from the INPUT source files. This way you can easily exclude a 
 # subdirectory from a directory tree whose root is specified with the INPUT tag.
 
-EXCLUDE                = 
+EXCLUDE                = src/test.py \
+                         src/images_rc.py \
+                         src/qrc_images.py \
+                         src/ui_InfoDialog.py \
+                         src/ui_LoginDialog.py \
+                         src/ui_MainWindow.py \
+                         src/ui_SetColumnDialog.py \
+                         src/ui_UserDetails.py
 
 # The EXCLUDE_SYMLINKS tag can be used select whether or not files or 
 # directories that are symbolic links (a Unix filesystem feature) are excluded 
@@ -1086,7 +1093,7 @@ LATEX_HIDE_INDICES     = NO
 # The RTF output is optimized for Word 97 and may not look very pretty with 
 # other RTF readers or editors.
 
-GENERATE_RTF           = YES
+GENERATE_RTF           = NO
 
 # The RTF_OUTPUT tag is used to specify where the RTF docs will be put. 
 # If a relative path is entered the value of OUTPUT_DIRECTORY will be 
@@ -1370,7 +1377,7 @@ HIDE_UNDOC_RELATIONS   = YES
 # toolkit from AT&T and Lucent Bell Labs. The other options in this section 
 # have no effect if this option is set to NO (the default)
 
-HAVE_DOT               = NO
+HAVE_DOT               = YES
 
 # By default doxygen will write a font called FreeSans.ttf to the output 
 # directory and reference it in all dot files that doxygen generates. This 
@@ -1418,12 +1425,12 @@ GROUP_GRAPHS           = YES
 # collaboration diagrams in a style similar to the OMG's Unified Modeling 
 # Language.
 
-UML_LOOK               = NO
+UML_LOOK               = YES
 
 # If set to YES, the inheritance and collaboration graphs will show the 
 # relations between templates and their instances.
 
-TEMPLATE_RELATIONS     = NO
+TEMPLATE_RELATIONS     = YES
 
 # If the ENABLE_PREPROCESSING, SEARCH_INCLUDES, INCLUDE_GRAPH, and HAVE_DOT 
 # tags are set to YES then doxygen will generate a graph for each documented 
@@ -1445,7 +1452,7 @@ INCLUDED_BY_GRAPH      = YES
 # the time of a run. So in most cases it will be better to enable call graphs 
 # for selected functions only using the \callgraph command.
 
-CALL_GRAPH             = NO
+CALL_GRAPH             = YES
 
 # If the CALLER_GRAPH and HAVE_DOT tags are set to YES then 
 # doxygen will generate a caller dependency graph for every global function 
@@ -1453,7 +1460,7 @@ CALL_GRAPH             = NO
 # the time of a run. So in most cases it will be better to enable caller 
 # graphs for selected functions only using the \callergraph command.
 
-CALLER_GRAPH           = NO
+CALLER_GRAPH           = YES
 
 # If the GRAPHICAL_HIERARCHY and HAVE_DOT tags are set to YES then doxygen 
 # will graphical hierarchy of all classes instead of a textual one.
@@ -1476,7 +1483,7 @@ DOT_IMAGE_FORMAT       = png
 # The tag DOT_PATH can be used to specify the path where the dot tool can be 
 # found. If left blank, it is assumed the dot tool can be found in the path.
 
-DOT_PATH               = 
+DOT_PATH               = C:/Programme/Graphviz2.20/bin
 
 # The DOTFILE_DIRS tag can be used to specify one or more directories that 
 # contain dot files that are included in the documentation (see the 

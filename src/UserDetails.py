@@ -29,9 +29,8 @@
 from PyQt4 import QtGui, QtCore
 from ui_UserDetails import Ui_UserDetails
 
-## UserDetails Steuerelement
-# Diese Klasse implementiert ein Steuerelement zum Anzeigen zusätzlicher
-# Benutzer Informationen.
+## Implementation eines Steuerelements zum Anzeigen zusätzlicher
+# Benutzerinformationen.
 #
 # Die Klasse emitiert folgende Signals:
 # - RemoveUser(p_user_name) Wenn auf "Benutzer löschen" geklickt wurde. 
@@ -53,7 +52,7 @@ class UserDetails(QtGui.QDockWidget, Ui_UserDetails):
         self.setupUi(self)
     
     ## Zeigt alle Userinformationen im Widget an
-    # @param p_user_list Eine Liste von Dictonaries mit folgendem Aufbau oder 
+    # @param p_user Eine Liste von Dictonaries mit folgendem Aufbau oder 
     # None für keinen:
     # - user_id : Benutzer-ID
     # - name : Benutzername

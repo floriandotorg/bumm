@@ -28,9 +28,8 @@
 from PyQt4 import QtGui, QtCore
 import UserListModel
 
-## UserList Steuerelement
-# Diese Klasse implementiert ein Steuerelement zum Anzeigen aller Benutzer
-# anhand einer Liste. Mehrfachauswahl ist zugelassen.
+## Implementation eines Steuerelements zum Anzeigen aller Benutzer
+# in Form einer Liste. Mehrfachauswahl ist zugelassen.
 #
 # Die Klasse emitiert folgende Signals:
 # - SelectionChanged() Wenn die Auswahl geändert wurde.
