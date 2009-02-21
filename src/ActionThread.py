@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
-## @package Settings
-# @brief Implementation der Settings Klasse
+## @package ActionThread
+# @brief Implementation der ActionThread-Klasse
 # @version 0.1
 # @author Florian Kaiser
-# @date 12.02.09
+# @date 21.02.09
 
 #################################################################################
 # Copyright (C) 2009 Benjamin Flader, Benjamin Leipold, André Naumann,          #
@@ -27,21 +27,27 @@
 
 from PyQt4 import QtCore
 
-## Verwaltet Programmeinstellungen und speichert diese in einer .ini Datei.
-# Diese Datei hat immer den Namen "config.ini" und liegt Verzeichnis für 
-# Einstellugnen des Betriebsystems (z.B. Dokumente und Einstellungen)
-# Bei der Datei handelt sich um ein Standard-Windows-Konfigurationsfile.
-# Sollte sich diese Datei am angegebenen Ort befinden, wird sie gelesen,
-# anderenfalls wird eine neue Datei mit Standardwerten gefüllt.
-class Settings(QtCore.QObject):
+## Thread für Aufgaben, die eine lange Laufzeit haben und die Anwendung blockieren
+# könnten
+class ActionThread(QtCore.QThread):
     
     ## Konstruktor
     # @param p_parent Übergeordnetes QObject
-    def __init__(self, p_parent = None):
-        QtCore.QObject.__init__(self, p_parent)
-        #self.server_address = "http://172.16.124.101/bscw/bscw.cgi/?op=xmlrpc"
-        self.server_address = "http://localhost:8080/bscw/bscw.cgi/?op=xmlrpc"
-        self.username = "ChuckNoris"
-        self.proxy = ""
-        self.columns = ["user_id", "name", "longname"]
+    # @param p_func Zeiger auf eine Funktion mit langer Laufzeit
+    # @param p_params Parameter, die beim Aufruf übergeben werden
+    def __init__(self, p_parent, p_func, *p_params):
+        QtCore.QThread.__init__(self, p_parent)
+        ## Zeiger auf eine Funktion mit langer Laufzeit
+        self._func = p_func
+        ## Parameter, die beim Aufruf übergeben werden
+        self._params = p_params
+        ## Rückgabewert der Funktion
+        self._result = None
     
+    ## Gibt den Rückgabewert der ausgeführten Funktion zurück    
+    def getResult(self):
+        return self._result
+    
+    ## Startet die Funktion und speichert das Ergebnis in self._result
+    def run(self):
+        self._result = self._func(*self._params)

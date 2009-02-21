@@ -36,6 +36,7 @@ from LoginDialog import LoginDialog
 from Settings import Settings
 from InfoDialog import InfoDialog
 from SetColumnDialog import SetColumnDialog
+from ActionThread import ActionThread
 import time
 import urllib
 import tempfile
@@ -119,13 +120,29 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
     def show(self):
         QtGui.QMainWindow.show(self)
         self._loadList()
+    
+    ## Erzeugt einen Thread, der eine Aufgabe ausführt, die die Anwendung 
+    # blockieren könnte
+    # @param p_func Zeiger auf eine Funktion mit langer Laufzeit
+    # @param p_finished Zeiger auf eine Funktion, die aufgerufen wird,
+    # wenn die Aufgabe bearbeitet wurde
+    # @param p_params Parameter, die beim Aufruf übergeben werden
+    def _action(self, p_func, p_finished, *p_params):
+        ## Thread für Aufgaben mit langer Laufzeit
+        self._action_thread = ActionThread(self, p_func, *p_params)
+        self.connect(self._action_thread, QtCore.SIGNAL("finished()"),
+                     p_finished)
+        self._action_thread.start()
         
     ## Lädt die Daten aller Benutzer und stellt diese in der Liste da
     def _loadList(self):
         self._lockWidget(True, self.trUtf8("Benutzerliste wird geladen ..."))
-        #self._bscw_interface = BscwInterface() 
-        self._user_list.loadList(self._bscw_interface.getAllUser())
-        self._unlockWidget()  
+        self._action(self._bscw_interface.getAllUser, self._listLoadedSlot)
+    
+    ## Lädt die Benutzerdaten in die User-Liste und entsperrt das Fenster
+    def _listLoadedSlot(self):
+        self._user_list.loadList(self.sender().getResult())
+        self._unlockWidget() 
 
     ## Zeigt ein Info-Dialog an
     def _showInfoSlot(self):
@@ -201,9 +218,9 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             to_lock.append(i["name"])
         
         self._lockWidget(True, self.trUtf8("Benutzer werden gesperrt ..."))
-        self._bscw_interface.lockUser(to_lock)
+        self._action(self._bscw_interface.lockUser, self._unlockWidget, 
+                        to_lock)
         self._user_list.lockUser(to_lock)
-        self._unlockWidget()
     
     ## Entsperrt alle in der Benutzerliste angewählten User    
     def _unlockUserSlot(self):
@@ -213,9 +230,9 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             to_unlock.append(i["name"])
         
         self._lockWidget(True, self.trUtf8("Benutzer werden entsperrt ..."))
-        self._bscw_interface.unlockUser(to_unlock)
+        self._action(self._bscw_interface.unlockUser, self._unlockWidget, 
+                        to_unlock)
         self._user_list.unlockUser(to_unlock)
-        self._unlockWidget()
     
     ## Leer danach die Mülleimer. Das Mindestalter der Dateien wird mithilfe
     # eines Dialogs definiert.
@@ -234,8 +251,8 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         if outdated[1]:
             self._lockWidget(True, self.trUtf8("Mülleimer werden " \
                                                "geleert ..."))
-            self._bscw_interface.destroyTrash(outdated[0], user)
-            self._unlockWidget()
+            self._action(self._bscw_interface.destroyTrash, self._unlockWidget, 
+                        outdated[0], user)
     
     ## Räumt danach die Zwischenablagen auf. Das Mindestalter der Dateien wird mithilfe
     # eines Dialogs definiert.
@@ -254,8 +271,8 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         if outdated[1]:
             self._lockWidget(True, self.trUtf8("Zwischenablagen werden " \
                                                "aufgeräumt ..."))
-            self._bscw_interface.destroyClipboard(outdated[0], user)
-            self._unlockWidget()
+            self._action(self._bscw_interface.destroyClipboard, self._unlockWidget, 
+                        outdated[0], user)
     
     ## Löscht alle in der Benutzerliste angewählten User    
     def _deleteUserSlot(self):
@@ -273,7 +290,8 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             self._lockWidget(True, self.trUtf8("Benutzer werden gelöscht ..."))
             self._bscw_interface.deleteUser(to_delete)
             self._user_list.removeUser(to_delete)
-            self._unlockWidget()
+            self._action(self._bscw_interface.deleteUser, self._unlockWidget, 
+                        to_delete)
     
     ## Setzt den Filter der User-Liste       
     def _setUserListFilterSlot(self):
