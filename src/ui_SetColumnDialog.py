@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'SetColumnDialog.ui'
 #
-# Created: Sun Feb 15 19:54:59 2009
+# Created: Mon Feb 23 08:34:10 2009
 #      by: PyQt4 UI code generator 4.4.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -36,5 +36,5 @@ class Ui_SetColumnDialog(object):
         QtCore.QMetaObject.connectSlotsByName(SetColumnDialog)
 
     def retranslateUi(self, SetColumnDialog):
-        SetColumnDialog.setWindowTitle(QtGui.QApplication.translate("SetColumnDialog", "Dialog", None, QtGui.QApplication.UnicodeUTF8))
+        SetColumnDialog.setWindowTitle(QtGui.QApplication.translate("SetColumnDialog", "Spalten auswählen", None, QtGui.QApplication.UnicodeUTF8))
 

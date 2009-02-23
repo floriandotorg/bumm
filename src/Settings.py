@@ -40,7 +40,8 @@ class Settings(QtCore.QObject):
     def __init__(self, p_parent = None):
         QtCore.QObject.__init__(self, p_parent)
         #self.server_address = "http://172.16.124.101/bscw/bscw.cgi/?op=xmlrpc"
-        self.server_address = "http://localhost:8080/bscw/bscw.cgi/?op=xmlrpc"
+        self.server_address = "http://10.200.132.22/bscw/bscw.cgi/?op=xmlrpc"
+        #self.server_address = "http://localhost:8080/bscw/bscw.cgi/?op=xmlrpc"
         self.username = "ChuckNoris"
         self.proxy = ""
         self.columns = ["user_id", "name", "longname"]

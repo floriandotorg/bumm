@@ -205,7 +205,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
                             self.trUtf8("Benutzerbild wird geladen ..."))
                 p_selection[0]["local_photo"] = \
                             self._getFileByUrl(p_selection[0]["photo"])
-                self._unlockWidget
+                self._unlockWidget()
             self._user_details.showUser(p_selection[0])
         else:
             self._user_details.showUser(None)
