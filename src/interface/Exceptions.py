@@ -41,6 +41,10 @@ class UserLocked(Exception):
 class HostUnreachable(Exception):
     pass
 
+## BSCW-API Erweiterungen nicht installiert
+class ServerExtensionNotInstalled(Exception):
+    pass
+
 ## Die bereits bestehende Verbindung wurde unterbrochen oder hat nie
 # existiert. Ein erneuter Loginvorgang ist erforderlich und die aufgerufene
 # Methode auszuführen.
