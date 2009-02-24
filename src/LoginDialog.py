@@ -28,53 +28,52 @@
 from PyQt4 import QtGui, QtCore
 from ui_LoginDialog import Ui_LoginDialog
 from interface.Exceptions import *
-#from interface.BscwInterface import BscwInterface
-from test import BscwInterface
+from interface.BscwInterface import BscwInterface
 
-## Stellt ein Dialog da, der die Login-Daten entgegen nimmt und die Anmeldung 
+## Stellt ein Dialog da, der die Login-Daten entgegen nimmt und die Anmeldung
 # durchührt.
 class LoginDialog(QtGui.QDialog, Ui_LoginDialog):
-    
+
     ## Konstruktor
-    # @param p_settings Klasse in der die Einstellungen gespeichert sind 
+    # @param p_settings Klasse in der die Einstellungen gespeichert sind
     # @param p_parent Übergeordnetes QObject.
     def __init__(self, p_settings, p_parent = None):
          QtGui.QDialog.__init__(self, p_parent)
          self.setupUi(self)
-         
+
          ## Programmenstellungen
          self._settings = p_settings
          self._username.setText(p_settings.username)
          self._server_address.setText(p_settings.server_address)
          self._passwd.setText("badreligion")
-         
+
          ## Verbindung zum BSCW-Server
          self._bscw_interface = BscwInterface()
-         
+
          # 'Anmelden' Button mit _loginSlot verbinden
          self.connect(self._login_button, QtCore.SIGNAL("clicked()"),
                         self._loginSlot)
-         
+
     ## Gibt nach erfolgreicher Anmeldung die verbundene
     # BscwInterface Klasse zurück.
     def getInterface(self):
         return self._bscw_interface
-    
+
     ## Gibt den Inhalt des Eingabefelds für die Server-Adresse zurück.
     # @return Server-Adresse als QString
     def getServerAddress(self):
         return self._server_address.text()
-    
+
     ## Gibt den Inhalt des Eingabefelds für den Benutzername zurück.
     # @return Benutzername als QString
     def getUsername(self):
         return self._username.text()
-    
+
     ## Gibt den Inhalt des Eingabefelds für das Passwort zurück.
     # @return Passwort als QString
     def getPasswd(self):
         return self._passwd.text()
-    
+
     ## Sperrt oder Entsperrt alle Steuerelemente auf dem Fenster.
     # @param p_enable Steuerelemente sperren ja/nein (Boolean)
     def _setEnabled(self, p_enable):
@@ -83,28 +82,28 @@ class LoginDialog(QtGui.QDialog, Ui_LoginDialog):
         self._passwd.setEnabled(p_enable)
         self._login_button.setEnabled(p_enable)
         self._quit_button.setEnabled(p_enable)
-    
+
     ## Schreibt einen Text auf das Status-Label und ändert die Textfarbe
     # des Labels.
     # @param p_str Text der in das Label geschrieben werden soll
-    # @param p_color Die neue Textfarbe als QtGui.QColor     
+    # @param p_color Die neue Textfarbe als QtGui.QColor
     def _changeStatus(self, p_str, p_color):
         self._lbl_status.setText(p_str)
         palette = QtGui.QPalette(QtGui.QColor("white"))
         palette.setColor(QtGui.QPalette.Text, p_color)
         palette.setColor(QtGui.QPalette.Foreground, p_color)
         self._lbl_status.setPalette(palette)
-    
+
     ## Versucht sich am BSCW-Server anzumelden und gibt gegebenenfalls
     # eine Fehlermeldung aus.
     def _loginSlot(self):
         self._setEnabled(False)
         self._changeStatus("Verbinde...", QtGui.QColor("black"))
         self.repaint()
-        
+
         # Anmeldung ausführen und ggf. Fehlermeldung anzeigen
         try:
-            self._bscw_interface.login(str(self._server_address.text()), 
+            self._bscw_interface.login(str(self._server_address.text()),
                                        str(self._username.text()),
                                        str(self._passwd.text()))
             self.accept()
