@@ -222,7 +222,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self._action(self._bscw_interface.lockUser, self._unlockWidget,
                         to_lock)
 
-        for i in to_unlock:
+        for i in to_lock:
             self._user_list.updateUserAttr(to_lock, "locked", True)
 
     ## Entsperrt alle in der Benutzerliste angewählten User
