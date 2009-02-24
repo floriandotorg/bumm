@@ -27,6 +27,7 @@
 
 from PyQt4 import QtCore
 import operator
+import datetime
 
 ## Schnittstelle zwischen Benutzerdaten und der User-Liste
 # Siehe Qt Model/View Framework
@@ -51,7 +52,7 @@ class UserListModel(QtCore.QAbstractTableModel):
         return len(self.header_list)
 
     ## Gibt den Wert, der in der gewünschten Zelle stehen soll zurück
-    # @param p_index Spezifiziert die Zelle in der der zurückgegeben Wert 
+    # @param p_index Spezifiziert die Zelle in der der zurückgegeben Wert
     # stehen soll
     # @param p_role Funktion des Aufrufes
     def data(self, p_index, p_role=QtCore.Qt.DisplayRole):
@@ -61,6 +62,18 @@ class UserListModel(QtCore.QAbstractTableModel):
             return QtCore.QVariant()
         elif p_index.row() >= len(self.user_list):
             return QtCore.QVariant()
+        elif self.header_list[p_index.column()][0] == "last_login":
+            return QtCore.QVariant(
+                self.user_list[p_index.row()]
+                    [self.header_list[p_index.column()][0]])
+        elif self.header_list[p_index.column()][0] == "create_time":
+            return QtCore.QVariant(
+                self.user_list[p_index.row()]
+                     [self.header_list[p_index.column()][0]])
+        elif self.user_list[p_index.row()][self.header_list[p_index.column()][0]] == True:
+            return QtCore.QVariant("Ja")
+        elif self.user_list[p_index.row()][self.header_list[p_index.column()][0]] == False:
+            return QtCore.QVariant("Nein")
         else:
             return QtCore.QVariant(
                 self.user_list[p_index.row()]
@@ -68,8 +81,8 @@ class UserListModel(QtCore.QAbstractTableModel):
 
     ## Gibt den Text, der in der gewünschten Spalte stehen soll zurück
     # @param p_section Für horizontale Header entspricht section der Nummer der
-    # Spalte, für vertikale Header der Nummer der Zeile. 
-    # @param p_orientation Gibt an, ob der Header horizontal oder vertikal 
+    # Spalte, für vertikale Header der Nummer der Zeile.
+    # @param p_orientation Gibt an, ob der Header horizontal oder vertikal
     # ausgerichtet ist.
     # @param p_role Funktion des Aufrufes
     def headerData(self, p_section, p_orientation,
@@ -119,7 +132,7 @@ class UserListModel(QtCore.QAbstractTableModel):
     def loadList(self, p_user_list):
         self.user_list = p_user_list
         self.emit(QtCore.SIGNAL("layoutChanged()"))
-        
+
     ## Sortiert die angezeigten Benutzer
     # @param p_column Die Nummer der Spalte nach der sortiert werden soll.
     # @param p_order Die Richtung in die sortiert werden soll.
@@ -137,7 +150,7 @@ class UserListModel(QtCore.QAbstractTableModel):
     def changeHeaderData(self, p_header_data):
         self.header_list = p_header_data
         self.emit(QtCore.SIGNAL("layoutChanged()"))
-        
-    ## Gibt eine Liste der Ausgewählten Einträge zurück.    
+
+    ## Gibt eine Liste der Ausgewählten Einträge zurück.
     def selectedIndexes(self):
         pass

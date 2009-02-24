@@ -9,8 +9,8 @@
 # todo:
 # SelectionChanged() funzt nicht
 # last_login und create_time zeigen nichts an
-# true/false zu ja/nein bei boolischen werten
 # changeHeaderData() muss die spaltengröße anpassen
+# removeuser funzt nich
 
 #################################################################################
 # Copyright (C) 2009 Benjamin Flader, Benjamin Leipold, André Naumann,          #
