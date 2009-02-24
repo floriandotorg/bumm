@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'UserDetails.ui'
 #
-# Created: Tue Feb 24 16:03:14 2009
+# Created: Tue Feb 24 16:07:09 2009
 #      by: PyQt4 UI code generator 4.4.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -18,11 +18,11 @@ class Ui_UserDetails(object):
         self.verticalLayout = QtGui.QVBoxLayout(self._content)
         self.verticalLayout.setObjectName("verticalLayout")
         self.horizontalLayout = QtGui.QHBoxLayout()
-        self.horizontalLayout.setSpacing(0)
+        self.horizontalLayout.setSpacing(5)
         self.horizontalLayout.setObjectName("horizontalLayout")
         self._lbl_user = QtGui.QLabel(self._content)
-        self._lbl_user.setMinimumSize(QtCore.QSize(45, 16))
-        self._lbl_user.setMaximumSize(QtCore.QSize(45, 16))
+        self._lbl_user.setMinimumSize(QtCore.QSize(41, 16))
+        self._lbl_user.setMaximumSize(QtCore.QSize(41, 16))
         self._lbl_user.setObjectName("_lbl_user")
         self.horizontalLayout.addWidget(self._lbl_user)
         self._user = QtGui.QLineEdit(self._content)
@@ -30,11 +30,9 @@ class Ui_UserDetails(object):
         self._user.setMaximumSize(QtCore.QSize(107, 20))
         self._user.setObjectName("_user")
         self.horizontalLayout.addWidget(self._user)
-        spacerItem = QtGui.QSpacerItem(13, 17, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout.addItem(spacerItem)
         self._lbl_user_id = QtGui.QLabel(self._content)
-        self._lbl_user_id.setMinimumSize(QtCore.QSize(60, 16))
-        self._lbl_user_id.setMaximumSize(QtCore.QSize(60, 16))
+        self._lbl_user_id.setMinimumSize(QtCore.QSize(57, 16))
+        self._lbl_user_id.setMaximumSize(QtCore.QSize(57, 16))
         self._lbl_user_id.setObjectName("_lbl_user_id")
         self.horizontalLayout.addWidget(self._lbl_user_id)
         self._user_id = QtGui.QLineEdit(self._content)
@@ -42,8 +40,8 @@ class Ui_UserDetails(object):
         self._user_id.setMaximumSize(QtCore.QSize(85, 20))
         self._user_id.setObjectName("_user_id")
         self.horizontalLayout.addWidget(self._user_id)
-        spacerItem1 = QtGui.QSpacerItem(17, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
-        self.horizontalLayout.addItem(spacerItem1)
+        spacerItem = QtGui.QSpacerItem(17, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(spacerItem)
         self.verticalLayout.addLayout(self.horizontalLayout)
         self._user_info_tabs = QtGui.QTabWidget(self._content)
         self._user_info_tabs.setMinimumSize(QtCore.QSize(339, 371))

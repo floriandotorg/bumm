@@ -97,13 +97,13 @@ class UserDetails(QtGui.QDockWidget, Ui_UserDetails):
 
             self._user.setText(p_user["name"])
             self._user_id.setText(str(p_user["user_id"]))
-            
-            ##Info-Tab
+
+            ##Daten des Info-Tab
             self._full_name.setText(p_user["longname"])
             self._admin.setText(str(p_user["admin"]))
             self._locked.setText(str(p_user["locked"]))
-            self._user_mail.setText(p_user["email"])
-            self._user_more_mail.insertItem(0, p_user["secondary_email"])
+            self._mail.setText(p_user["email"])
+            self._more_mail.setText(str(p_user["secondary_email"]))
             self._last_login.setText(str(p_user["last_login"]))
             self._workspace.setText(str(p_user["workspaces"]))
 
