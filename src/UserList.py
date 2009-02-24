@@ -126,14 +126,11 @@ class UserList(QtGui.QTreeView):
     def removeUser(self, p_user):
         pass
     
-    ## Markiert ein oder mehrere Benutzer als gesperrt.
-    # @param p_user Liste von Usernamen 
-    def lockUser(self, p_user):
-        pass
-    
-    ## Markiert ein oder mehrere Benutzer als nicht gesperrt.
-    # @param p_user Liste von Usernamen  
-    def unlockUser(self, p_user):
+    ## Überschreibt ein Attribut eines Benutzers mit einem neuen Wert
+    # p_name Name des Benutzers
+    # p_key Name des Attributs (Siehe loadList())
+    # p_value Neuer Wert
+    def updateUserAttr(self, p_name, p_key, p_value):
         pass
     
     ## Emitiert das SelectionChanged() Signal
