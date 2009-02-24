@@ -37,6 +37,7 @@ from Settings import Settings
 from InfoDialog import InfoDialog
 from SetColumnDialog import SetColumnDialog
 from ActionThread import ActionThread
+from ErrorDialog import ErrorDialog
 import time
 import urllib
 import tempfile
@@ -48,79 +49,89 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
     ## Konstruktor
     # @param p_parent Übergeordnetes QObject
     def __init__(self, p_parent = None):
-        QtGui.QMainWindow.__init__(self, p_parent)
-        self.setupUi(self)
-
-        ## Programmeinstellungen
-        self._settings = Settings()
-
-        ## Liste aller heruntergeladenen Benutzerbilder
-        self._img_cache = []
-
-        ## Liste aller angezeigten Spalten in der User-Liste
-        self._headers = SetColumnDialog([], self) \
-                            .tupleByKey(self._settings.columns)
-        ## Liste aller Benuter
-        self._user_list = UserList(self._headers, self)
-        self.setCentralWidget(self._user_list)
-
-        ## DockWidget indem nähere Benutzerinformationen angezeigt werden
-        self._user_details = UserDetails(self)
-        self.addDockWidget(QtCore.Qt.RightDockWidgetArea,
-                                                self._user_details)
-
-        self._toolbar.addSeparator()
-        ## 'Suchtext'-Label
-        self._lbl_filter = QtGui.QLabel(self)
-        self._lbl_filter.setText(self.trUtf8("Suchtext: "))
-        self._toolbar.addWidget(self._lbl_filter)
-
-        ## Eingabefeld für den Suchbegriff
-        self._line_edit_filter = QtGui.QLineEdit(self)
-        self._line_edit_filter.setMaximumWidth(150)
-        self._toolbar.addWidget(self._line_edit_filter)
-
-        self.connect(self._user_list,
-                        QtCore.SIGNAL("SelectionChanged()"),
-                        self._selectionChangedSlot)
-
-        self.connect(self._action_user_details,
-                        QtCore.SIGNAL("triggered(bool)"),
-                        self._user_details.setVisible)
-        self.connect(self._user_details,
-                        QtCore.SIGNAL("visibilityChanged(bool)"),
-                        self._action_user_details.setChecked)
-
-        self.connect(self._action_update_all, QtCore.SIGNAL("triggered()"),
-                        self._loadList)
-
-        self.connect(self._action_set_cols, QtCore.SIGNAL("triggered()"),
-                        self._showSetColumnDialogSlot)
-
-        self.connect(self._action_delete, QtCore.SIGNAL("triggered()"),
-                        self._deleteUserSlot)
-        self.connect(self._action_lock, QtCore.SIGNAL("triggered()"),
-                        self._lockUserSlot)
-        self.connect(self._action_unlock, QtCore.SIGNAL("triggered()"),
-                        self._unlockUserSlot)
-        self.connect(self._action_destroy_trash, QtCore.SIGNAL("triggered()"),
-                        self._destroyTrashSlot)
-        self.connect(self._action_destroy_clipboard,
-                        QtCore.SIGNAL("triggered()"),
-                        self._destroyClipboardSlot)
-
-        self.connect(self._action_info, QtCore.SIGNAL("triggered()"),
-                        self._showInfoSlot)
-
-        self.connect(self._line_edit_filter, QtCore.SIGNAL("returnPressed()"),
-                        self._setUserListFilterSlot)
-
-        self._login()
+        try:
+            QtGui.QMainWindow.__init__(self, p_parent)
+            self.setupUi(self)
+    
+            ## Programmeinstellungen
+            self._settings = Settings()
+    
+            ## Liste aller heruntergeladenen Benutzerbilder
+            self._img_cache = []
+    
+            ## Liste aller angezeigten Spalten in der User-Liste
+            self._headers = SetColumnDialog([], self) \
+                                .tupleByKey(self._settings.columns)
+            ## Liste aller Benuter
+            self._user_list = UserList(self._headers, self)
+            self.setCentralWidget(self._user_list)
+    
+            ## DockWidget indem nähere Benutzerinformationen angezeigt werden
+            self._user_details = UserDetails(self)
+            self.addDockWidget(QtCore.Qt.RightDockWidgetArea,
+                                                    self._user_details)
+    
+            self._toolbar.addSeparator()
+            ## 'Suchtext'-Label
+            self._lbl_filter = QtGui.QLabel(self)
+            self._lbl_filter.setText(self.trUtf8("Suchtext: "))
+            self._toolbar.addWidget(self._lbl_filter)
+    
+            ## Eingabefeld für den Suchbegriff
+            self._line_edit_filter = QtGui.QLineEdit(self)
+            self._line_edit_filter.setMaximumWidth(150)
+            self._toolbar.addWidget(self._line_edit_filter)
+    
+            self.connect(self._user_list,
+                            QtCore.SIGNAL("SelectionChanged()"),
+                            self._selectionChangedSlot)
+    
+            self.connect(self._action_user_details,
+                            QtCore.SIGNAL("triggered(bool)"),
+                            self._user_details.setVisible)
+            self.connect(self._user_details,
+                            QtCore.SIGNAL("visibilityChanged(bool)"),
+                            self._action_user_details.setChecked)
+    
+            self.connect(self._action_update_all, QtCore.SIGNAL("triggered()"),
+                            self._loadList)
+    
+            self.connect(self._action_set_cols, QtCore.SIGNAL("triggered()"),
+                            self._showSetColumnDialogSlot)
+    
+            self.connect(self._action_delete, QtCore.SIGNAL("triggered()"),
+                            self._deleteUserSlot)
+            self.connect(self._action_lock, QtCore.SIGNAL("triggered()"),
+                            self._lockUserSlot)
+            self.connect(self._action_unlock, QtCore.SIGNAL("triggered()"),
+                            self._unlockUserSlot)
+            self.connect(self._action_destroy_trash, QtCore.SIGNAL("triggered()"),
+                            self._destroyTrashSlot)
+            self.connect(self._action_destroy_clipboard,
+                            QtCore.SIGNAL("triggered()"),
+                            self._destroyClipboardSlot)
+    
+            self.connect(self._action_info, QtCore.SIGNAL("triggered()"),
+                            self._showInfoSlot)
+    
+            self.connect(self._line_edit_filter, QtCore.SIGNAL("returnPressed()"),
+                            self._setUserListFilterSlot)
+    
+            self._login()
+            
+        except Exception, exception:
+            err_dialog = ErrorDialog(exception, self)
+            err_dialog.exec_()
 
     ## Lädt die Benutzerdaten vom BSCW Server und zeigt das Hauptfenster an
     def show(self):
-        QtGui.QMainWindow.show(self)
-        self._loadList()
+        try:
+            QtGui.QMainWindow.show(self)
+            self._loadList()
+            
+        except Exception, exception:
+            err_dialog = ErrorDialog(exception, self)
+            err_dialog.exec_()
 
     ## Erzeugt einen Thread, der eine Aufgabe ausführt, die die Anwendung
     # blockieren könnte
