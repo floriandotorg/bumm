@@ -28,8 +28,8 @@
 from PyQt4 import QtGui, QtCore, Qt
 from ui_MainWindow import Ui_MainWindow
 import interface
-#from interface.BscwInterface import BscwInterface
-from test import BscwInterface
+from interface.BscwInterface import BscwInterface
+#from test import BscwInterface
 from UserList import UserList
 from UserDetails import UserDetails
 from LoginDialog import LoginDialog
