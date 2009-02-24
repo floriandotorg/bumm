@@ -47,18 +47,21 @@ class BscwInterface(object):
     # @param p_username Benutzername für die Anmeldung am BSCW-Server
     # @param p_passwd Passwort für die Anmeldung am BSCW-Server
     def login(self, p_hostname, p_username, p_passwd):
-
+        # Verbindung herstellen
+        self._connect(p_hostname, p_username, p_passwd)
         try:
-            # Verbindung herstellen
-            self._connect(p_hostname, p_username, p_passwd)
-
             # Authorisierung überprüfen (User? Admin?)
             if not self._server.is_admin(p_username):
-                raise Exceptions.HostUnreachable
-
-        except (xmlrpclib.Fault, socket.error):
-            # Verbindung überprüfen
+                # Benutzer hat keine Administratorenrechte
+                raise Exceptions.NoAdminRights
+        except(socket.error):
+            # Server nicht erreichbar
             raise Exceptions.HostUnreachable
+        except(xmlrpclib.ProtocolError):
+            # Login-Daten nicht korrekt
+            raise Exceptions.LoginIncorrect
+
+
 
     ## Loggt den User aus und bricht die Verbindung zum BSCW-Server ab
     def logout(self):
@@ -134,6 +137,7 @@ class BscwInterface(object):
         except(socket.error):
             # Verbindung abgebrochen
             raise Exceptions.ConnectionError
+
     ## Hebt die Anmeldesperre eines oder mehrerer Benutzer auf
     # @param p_user Eine Liste mit den Namen der zu entsprrenden Benutzer
     def unlockUser(self, p_user):
@@ -173,18 +177,10 @@ class BscwInterface(object):
     # @param p_username Benutzername für die Anmeldung am BSCW-Server
     # @param p_passwd Passwort für die Anmeldung am BSCW-Server
     def _connect(self, p_hostname, p_username, p_passwd):
-
-        # AuthorizedTransport (zum Patchen von XMLRPC, siehe
-        # _AuthorizedTransport.py)
-        proxied_transport = ProxiedTransport(p_username, p_passwd)
-
         # Verbindung mit dem Server herstellen
         self.hostname = 'http://' + p_username + ':' + p_passwd \
         + '@' + p_hostname + '/bscw/bscw.cgi/?op=xmlrpc'
 
-        try:
-            ## XMLRPC-Verbindung zum BSCW Server
-            self._server = xmlrpclib.ServerProxy(self.hostname)
-            #self._server = xmlrpclib.ServerProxy(self.hostname, proxied_transport)
-        except(xmlrpclib.Fault):
-            raise Exceptions.ConnectionError
+        ## XMLRPC-Verbindung zum BSCW Server
+        self._server = xmlrpclib.ServerProxy(self.hostname)
+
