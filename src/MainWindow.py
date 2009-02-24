@@ -2,9 +2,9 @@
 
 ## @package MainWindow
 # @brief Implementation der MainWindow Klasse
-# @version 0.1
+# @version 1
 # @author Florian Kaiser
-# @date 12.02.09
+# @date 14.02.09
 
 #################################################################################
 # Copyright (C) 2009 Benjamin Flader, Benjamin Leipold, André Naumann,          #
@@ -53,6 +53,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         
         ## Programmeinstellungen
         self._settings = Settings()
+
         ## Liste aller heruntergeladenen Benutzerbilder
         self._img_cache = []
         
@@ -71,7 +72,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self._toolbar.addSeparator()
         ## 'Suchtext'-Label
         self._lbl_filter = QtGui.QLabel(self)
-        self._lbl_filter.setText(self.trUtf8(u"Suchtext: "))
+        self._lbl_filter.setText(self.trUtf8("Suchtext: "))
         self._toolbar.addWidget(self._lbl_filter)
         
         ## Eingabefeld für den Suchbegriff
@@ -220,7 +221,9 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self._lockWidget(True, self.trUtf8("Benutzer werden gesperrt ..."))
         self._action(self._bscw_interface.lockUser, self._unlockWidget, 
                         to_lock)
-        self._user_list.lockUser(to_lock)
+        
+        for i in to_unlock:
+            self._user_list.updateUserAttr(to_lock, "locked", True)
     
     ## Entsperrt alle in der Benutzerliste angewählten User    
     def _unlockUserSlot(self):
@@ -232,7 +235,9 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self._lockWidget(True, self.trUtf8("Benutzer werden entsperrt ..."))
         self._action(self._bscw_interface.unlockUser, self._unlockWidget, 
                         to_unlock)
-        self._user_list.unlockUser(to_unlock)
+        
+        for i in to_unlock:
+            self._user_list.updateUserAttr(to_unlock, "locked", False)
     
     ## Leer danach die Mülleimer. Das Mindestalter der Dateien wird mithilfe
     # eines Dialogs definiert.

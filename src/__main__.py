@@ -2,7 +2,7 @@
 
 ## @package __main__
 # @brief Startet die Applikation
-# @version 0.1
+# @version 1
 # @author Florian Kaiser
 # @date 10.02.09
 

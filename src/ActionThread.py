@@ -2,7 +2,7 @@
 
 ## @package ActionThread
 # @brief Implementation der ActionThread-Klasse
-# @version 0.1
+# @version 1
 # @author Florian Kaiser
 # @date 21.02.09
 
@@ -44,7 +44,8 @@ class ActionThread(QtCore.QThread):
         ## Rückgabewert der Funktion
         self._result = None
     
-    ## Gibt den Rückgabewert der ausgeführten Funktion zurück    
+    ## Gibt den Rückgabewert der ausgeführten Funktion zurück
+    # @return Rückgabewert der Funktion
     def getResult(self):
         return self._result
     

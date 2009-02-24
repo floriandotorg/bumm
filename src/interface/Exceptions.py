@@ -2,9 +2,9 @@
 
 ## @package interface.Exceptions
 # @brief Deklaration mehrerer Exceptions für das BscwInterface
-# @version 0.1
+# @version 2
 # @author Florian Kaiser
-# @date 10.02.09
+# @date 23.02.09
 
 #################################################################################
 # Copyright (C) 2009 Benjamin Flader, Benjamin Leipold, André Naumann,          #

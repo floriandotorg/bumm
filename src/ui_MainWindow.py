@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'MainWindow.ui'
 #
-# Created: Thu Feb 19 12:23:30 2009
+# Created: Mon Feb 23 08:43:15 2009
 #      by: PyQt4 UI code generator 4.4.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -108,7 +108,7 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "BUMM 1.0 - BSCW Userverwaltung", None, QtGui.QApplication.UnicodeUTF8))
+        MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "BUMMS - BSCW Userverwaltung", None, QtGui.QApplication.UnicodeUTF8))
         self._menu_program.setTitle(QtGui.QApplication.translate("MainWindow", "&Programm", None, QtGui.QApplication.UnicodeUTF8))
         self._menu_view.setTitle(QtGui.QApplication.translate("MainWindow", "&Ansicht", None, QtGui.QApplication.UnicodeUTF8))
         self._menu_help.setTitle(QtGui.QApplication.translate("MainWindow", "&Hilfe", None, QtGui.QApplication.UnicodeUTF8))
