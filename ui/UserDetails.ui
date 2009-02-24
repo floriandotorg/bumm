@@ -1361,6 +1361,19 @@
        <attribute name="title" >
         <string>Bild</string>
        </attribute>
+       <widget class="QLabel" name="_lbl_pic" >
+        <property name="geometry" >
+         <rect>
+          <x>50</x>
+          <y>50</y>
+          <width>201</width>
+          <height>201</height>
+         </rect>
+        </property>
+        <property name="text" >
+         <string/>
+        </property>
+       </widget>
       </widget>
      </widget>
     </item>

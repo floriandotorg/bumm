@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'UserDetails.ui'
 #
-# Created: Tue Feb 24 14:18:03 2009
+# Created: Tue Feb 24 14:40:51 2009
 #      by: PyQt4 UI code generator 4.4.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -354,6 +354,9 @@ class Ui_UserDetails(object):
         self._user_info_tabs.addTab(self._personal_tab, "")
         self._pic_tab = QtGui.QWidget()
         self._pic_tab.setObjectName("_pic_tab")
+        self._lbl_pic = QtGui.QLabel(self._pic_tab)
+        self._lbl_pic.setGeometry(QtCore.QRect(50, 50, 201, 201))
+        self._lbl_pic.setObjectName("_lbl_pic")
         self._user_info_tabs.addTab(self._pic_tab, "")
         self.verticalLayout.addWidget(self._user_info_tabs)
         UserDetails.setWidget(self._content)
