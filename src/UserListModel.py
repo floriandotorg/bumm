@@ -154,3 +154,14 @@ class UserListModel(QtCore.QAbstractTableModel):
     ## Gibt eine Liste der Ausgewählten Einträge zurück.
     def selectedIndexes(self):
         pass
+    
+    ## Entfernt einen oder mehrere Benutzer aus der Liste
+    # @param p_user Liste mit den Usernamen
+    def removeUser(self, p_user):
+        for i in p_user:
+            counter = 0
+            for user in self.user_list:
+                if i == user:
+                    del self.user_list[counter]
+                counter = counter + 1
+        self.loadList(self.user_list)

@@ -124,7 +124,7 @@ class UserList(QtGui.QTreeView):
     ## Entfernt einen oder mehrere Benutzer aus der Liste
     # @param p_user Liste mit den Usernamen
     def removeUser(self, p_user):
-        pass
+        self._model.removeUser(p_user)
     
     ## Überschreibt ein Attribut eines Benutzers mit einem neuen Wert
     # p_name Name des Benutzers
