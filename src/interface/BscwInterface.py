@@ -28,7 +28,7 @@
 import xmlrpclib                                         # XML-RPC
 import Exceptions                                        # Ausnahmen
 import socket                                            # Socket
-
+import string
 ## Interface zum BSCW-Server
 #
 # Diese Klasse stellt Methoden zum Auslesen aller User inkl. aller Attribute
@@ -177,6 +177,11 @@ class BscwInterface(object):
     # @param p_username Benutzername für die Anmeldung am BSCW-Server
     # @param p_passwd Passwort für die Anmeldung am BSCW-Server
     def _connect(self, p_hostname, p_username, p_passwd):
+        # flexible Anpassung des Hostnames
+        p_hostname = string.replace(p_hostname,"http://","")
+        p_hostname = string.split(p_hostname,"/")[0]
+
+
         # Verbindung mit dem Server herstellen
         self.hostname = 'http://' + p_username + ':' + p_passwd \
         + '@' + p_hostname + '/bscw/bscw.cgi/?op=xmlrpc'
