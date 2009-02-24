@@ -6,8 +6,14 @@
 # @author Benjamin Leipold
 # @date 12.02.09
 
+# todo:
+# SelectionChanged() funzt nicht
+# last_login und create_time zeigen nichts an
+# true/false zu ja/nein bei boolischen werten
+# changeHeaderData() muss die spaltengröße anpassen
+
 #################################################################################
-# Copyright (C) 2009 Benjamin Flader, Benjamin Leipold, André Naumann,           #
+# Copyright (C) 2009 Benjamin Flader, Benjamin Leipold, André Naumann,          #
 # Corinna Vollert, Florian Kaiser                                               #
 #                                                                               #
 # This program is free software; you can redistribute it andor modify it under  #
@@ -114,8 +120,6 @@ class UserList(QtGui.QTreeView):
     # @see loadList()
     def changeHeaderData(self, p_header_data):
          self._model.changeHeaderData(p_header_data)
-         for i in range(0, len(p_header_data)):
-             self.resizeColumnToContents(i)
     
     ## Entfernt einen oder mehrere Benutzer aus der Liste
     # @param p_user Liste mit den Usernamen
