@@ -5,49 +5,1295 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>447</width>
-    <height>390</height>
+    <width>346</width>
+    <height>432</height>
    </rect>
   </property>
   <property name="windowTitle" >
    <string>Details</string>
   </property>
   <widget class="QWidget" name="_content" >
-   <layout class="QGridLayout" name="gridLayout" >
-    <item row="0" column="0" >
-     <widget class="QTabWidget" name="_tab_widget" >
-      <property name="currentIndex" >
-       <number>0</number>
+   <widget class="QLineEdit" name="_user_id" >
+    <property name="geometry" >
+     <rect>
+      <x>255</x>
+      <y>8</y>
+      <width>85</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="minimumSize" >
+     <size>
+      <width>85</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="maximumSize" >
+     <size>
+      <width>85</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="_user" >
+    <property name="geometry" >
+     <rect>
+      <x>52</x>
+      <y>8</y>
+      <width>125</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="minimumSize" >
+     <size>
+      <width>107</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="maximumSize" >
+     <size>
+      <width>159</width>
+      <height>20</height>
+     </size>
+    </property>
+    <property name="text" >
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="_lbl_user" >
+    <property name="geometry" >
+     <rect>
+      <x>3</x>
+      <y>10</y>
+      <width>49</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="minimumSize" >
+     <size>
+      <width>49</width>
+      <height>16</height>
+     </size>
+    </property>
+    <property name="maximumSize" >
+     <size>
+      <width>49</width>
+      <height>16</height>
+     </size>
+    </property>
+    <property name="text" >
+     <string>Benutzer</string>
+    </property>
+   </widget>
+   <widget class="QTabWidget" name="_user_info_tabs" >
+    <property name="geometry" >
+     <rect>
+      <x>2</x>
+      <y>35</y>
+      <width>339</width>
+      <height>371</height>
+     </rect>
+    </property>
+    <property name="minimumSize" >
+     <size>
+      <width>339</width>
+      <height>371</height>
+     </size>
+    </property>
+    <property name="maximumSize" >
+     <size>
+      <width>16777215</width>
+      <height>16777215</height>
+     </size>
+    </property>
+    <property name="currentIndex" >
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="_info_tab" >
+     <attribute name="title" >
+      <string>Info</string>
+     </attribute>
+     <widget class="QWidget" name="layoutWidget" >
+      <property name="geometry" >
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>323</width>
+        <height>171</height>
+       </rect>
       </property>
-      <widget class="QWidget" name="_tab_details" >
-       <attribute name="title" >
-        <string>Details</string>
-       </attribute>
-       <layout class="QGridLayout" name="gridLayout_2" />
-      </widget>
-      <widget class="QWidget" name="_tab_pic" >
-       <attribute name="title" >
-        <string>Bild</string>
-       </attribute>
-       <layout class="QGridLayout" name="gridLayout_3" >
+      <layout class="QFormLayout" name="_form_layout_info" >
+       <property name="horizontalSpacing" >
+        <number>0</number>
+       </property>
+       <property name="verticalSpacing" >
+        <number>0</number>
+       </property>
+       <item row="0" column="1" >
+        <widget class="QLineEdit" name="_full_name" >
+         <property name="minimumSize" >
+          <size>
+           <width>190</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>190</width>
+           <height>20</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" >
+        <widget class="QLabel" name="_lbl_admin" >
+         <property name="minimumSize" >
+          <size>
+           <width>125</width>
+           <height>16</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>125</width>
+           <height>16</height>
+          </size>
+         </property>
+         <property name="text" >
+          <string>Administrator</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1" >
+        <widget class="QLineEdit" name="_admin" >
+         <property name="minimumSize" >
+          <size>
+           <width>190</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>190</width>
+           <height>20</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0" >
+        <widget class="QLabel" name="_lbl_locked" >
+         <property name="minimumSize" >
+          <size>
+           <width>125</width>
+           <height>16</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>125</width>
+           <height>16</height>
+          </size>
+         </property>
+         <property name="text" >
+          <string>Gesperrt</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1" >
+        <widget class="QLineEdit" name="_locked" >
+         <property name="minimumSize" >
+          <size>
+           <width>190</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>190</width>
+           <height>20</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0" >
+        <widget class="QLabel" name="_lbl_user_mail" >
+         <property name="minimumSize" >
+          <size>
+           <width>125</width>
+           <height>16</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>125</width>
+           <height>16</height>
+          </size>
+         </property>
+         <property name="text" >
+          <string>Primäre E-Mail Adresse</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1" >
+        <widget class="QLineEdit" name="_user_mail" >
+         <property name="minimumSize" >
+          <size>
+           <width>190</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>190</width>
+           <height>20</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0" >
+        <widget class="QLabel" name="_lbl_user_more_mail" >
+         <property name="minimumSize" >
+          <size>
+           <width>125</width>
+           <height>16</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>125</width>
+           <height>16</height>
+          </size>
+         </property>
+         <property name="text" >
+          <string>weitere E-Mail Adressen</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1" >
+        <widget class="QComboBox" name="_user_more_mail" >
+         <property name="minimumSize" >
+          <size>
+           <width>190</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>190</width>
+           <height>20</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0" >
+        <widget class="QLabel" name="_lbl_last_login" >
+         <property name="minimumSize" >
+          <size>
+           <width>125</width>
+           <height>16</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>125</width>
+           <height>16</height>
+          </size>
+         </property>
+         <property name="text" >
+          <string>Letzte Anmeldung</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1" >
+        <widget class="QLineEdit" name="_last_login" >
+         <property name="minimumSize" >
+          <size>
+           <width>190</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>190</width>
+           <height>20</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0" >
+        <widget class="QLabel" name="_lbl_workspace" >
+         <property name="minimumSize" >
+          <size>
+           <width>125</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>125</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="text" >
+          <string>Arbeitsbereiche</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1" >
+        <widget class="QTextEdit" name="_workspace" >
+         <property name="minimumSize" >
+          <size>
+           <width>190</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>190</width>
+           <height>16777215</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0" >
+        <widget class="QLabel" name="_lbl_full_name" >
+         <property name="minimumSize" >
+          <size>
+           <width>125</width>
+           <height>16</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>125</width>
+           <height>16</height>
+          </size>
+         </property>
+         <property name="text" >
+          <string>Vollständiger Name</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="_account_tab" >
+     <attribute name="title" >
+      <string>Konto</string>
+     </attribute>
+     <widget class="QLineEdit" name="_storage_usage" >
+      <property name="geometry" >
+       <rect>
+        <x>135</x>
+        <y>30</y>
+        <width>190</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="minimumSize" >
+       <size>
+        <width>190</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="maximumSize" >
+       <size>
+        <width>190</width>
+        <height>20</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QLabel" name="_lbl_storage_usage" >
+      <property name="geometry" >
+       <rect>
+        <x>10</x>
+        <y>32</y>
+        <width>125</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="minimumSize" >
+       <size>
+        <width>125</width>
+        <height>16</height>
+       </size>
+      </property>
+      <property name="maximumSize" >
+       <size>
+        <width>125</width>
+        <height>16</height>
+       </size>
+      </property>
+      <property name="text" >
+       <string>Speicherverbrauch</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="_objects" >
+      <property name="geometry" >
+       <rect>
+        <x>135</x>
+        <y>50</y>
+        <width>190</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="minimumSize" >
+       <size>
+        <width>190</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="maximumSize" >
+       <size>
+        <width>190</width>
+        <height>20</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QLabel" name="_lbl_objects" >
+      <property name="geometry" >
+       <rect>
+        <x>10</x>
+        <y>52</y>
+        <width>125</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="minimumSize" >
+       <size>
+        <width>125</width>
+        <height>16</height>
+       </size>
+      </property>
+      <property name="maximumSize" >
+       <size>
+        <width>125</width>
+        <height>16</height>
+       </size>
+      </property>
+      <property name="text" >
+       <string>Objekte</string>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="_access_rights_box" >
+      <property name="geometry" >
+       <rect>
+        <x>5</x>
+        <y>75</y>
+        <width>325</width>
+        <height>160</height>
+       </rect>
+      </property>
+      <property name="minimumSize" >
+       <size>
+        <width>325</width>
+        <height>160</height>
+       </size>
+      </property>
+      <property name="maximumSize" >
+       <size>
+        <width>325</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="title" >
+       <string>Zugriffsrechte</string>
+      </property>
+      <widget class="QWidget" name="layoutWidget_2" >
+       <property name="geometry" >
+        <rect>
+         <x>8</x>
+         <y>22</y>
+         <width>311</width>
+         <height>141</height>
+        </rect>
+       </property>
+       <layout class="QGridLayout" name="_grid_layout_account" >
         <item row="0" column="0" >
-         <widget class="QLabel" name="_lbl_pic" >
+         <widget class="QLabel" name="_lbl_role" >
+          <property name="minimumSize" >
+           <size>
+            <width>55</width>
+            <height>16</height>
+           </size>
+          </property>
+          <property name="maximumSize" >
+           <size>
+            <width>55</width>
+            <height>16</height>
+           </size>
+          </property>
           <property name="text" >
-           <string/>
+           <string>Rollen</string>
           </property>
-          <property name="scaledContents" >
-           <bool>false</bool>
+         </widget>
+        </item>
+        <item row="0" column="1" >
+         <widget class="QLabel" name="_lbl_role_owner" >
+          <property name="minimumSize" >
+           <size>
+            <width>121</width>
+            <height>16</height>
+           </size>
           </property>
-          <property name="openExternalLinks" >
-           <bool>false</bool>
+          <property name="maximumSize" >
+           <size>
+            <width>121</width>
+            <height>16</height>
+           </size>
+          </property>
+          <property name="text" >
+           <string>Rolleninhaber</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2" >
+         <widget class="QLabel" name="_lbl_authorized_actions" >
+          <property name="minimumSize" >
+           <size>
+            <width>121</width>
+            <height>16</height>
+           </size>
+          </property>
+          <property name="maximumSize" >
+           <size>
+            <width>121</width>
+            <height>16</height>
+           </size>
+          </property>
+          <property name="text" >
+           <string>Erlaubte Aktionen</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" >
+         <widget class="QLabel" name="_lbl_owner" >
+          <property name="minimumSize" >
+           <size>
+            <width>55</width>
+            <height>35</height>
+           </size>
+          </property>
+          <property name="maximumSize" >
+           <size>
+            <width>55</width>
+            <height>35</height>
+           </size>
+          </property>
+          <property name="text" >
+           <string>Eigentümer</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1" >
+         <widget class="QTextEdit" name="_role_owner_as_owner" >
+          <property name="minimumSize" >
+           <size>
+            <width>121</width>
+            <height>35</height>
+           </size>
+          </property>
+          <property name="maximumSize" >
+           <size>
+            <width>121</width>
+            <height>16777215</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2" >
+         <widget class="QTextEdit" name="_actions_as_owner" >
+          <property name="minimumSize" >
+           <size>
+            <width>121</width>
+            <height>35</height>
+           </size>
+          </property>
+          <property name="maximumSize" >
+           <size>
+            <width>121</width>
+            <height>16777215</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0" >
+         <widget class="QLabel" name="_lbl_manager" >
+          <property name="minimumSize" >
+           <size>
+            <width>55</width>
+            <height>35</height>
+           </size>
+          </property>
+          <property name="maximumSize" >
+           <size>
+            <width>55</width>
+            <height>35</height>
+           </size>
+          </property>
+          <property name="text" >
+           <string>Manager</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1" >
+         <widget class="QTextEdit" name="_role_owner_as_manager" >
+          <property name="minimumSize" >
+           <size>
+            <width>121</width>
+            <height>35</height>
+           </size>
+          </property>
+          <property name="maximumSize" >
+           <size>
+            <width>121</width>
+            <height>16777215</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2" >
+         <widget class="QTextEdit" name="_actions_as_manager" >
+          <property name="minimumSize" >
+           <size>
+            <width>121</width>
+            <height>35</height>
+           </size>
+          </property>
+          <property name="maximumSize" >
+           <size>
+            <width>121</width>
+            <height>16777215</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0" >
+         <widget class="QLabel" name="_lbl_other" >
+          <property name="minimumSize" >
+           <size>
+            <width>55</width>
+            <height>35</height>
+           </size>
+          </property>
+          <property name="maximumSize" >
+           <size>
+            <width>55</width>
+            <height>35</height>
+           </size>
+          </property>
+          <property name="text" >
+           <string>Andere</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1" >
+         <widget class="QTextEdit" name="_role_owner_as_other" >
+          <property name="minimumSize" >
+           <size>
+            <width>121</width>
+            <height>35</height>
+           </size>
+          </property>
+          <property name="maximumSize" >
+           <size>
+            <width>121</width>
+            <height>16777215</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="2" >
+         <widget class="QTextEdit" name="_actions_as_other" >
+          <property name="minimumSize" >
+           <size>
+            <width>121</width>
+            <height>35</height>
+           </size>
+          </property>
+          <property name="maximumSize" >
+           <size>
+            <width>121</width>
+            <height>16777215</height>
+           </size>
           </property>
          </widget>
         </item>
        </layout>
       </widget>
      </widget>
-    </item>
-   </layout>
+     <widget class="QLabel" name="_lbl_create_time" >
+      <property name="geometry" >
+       <rect>
+        <x>10</x>
+        <y>12</y>
+        <width>125</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="minimumSize" >
+       <size>
+        <width>125</width>
+        <height>16</height>
+       </size>
+      </property>
+      <property name="maximumSize" >
+       <size>
+        <width>125</width>
+        <height>16</height>
+       </size>
+      </property>
+      <property name="text" >
+       <string>Erstellungsdatum</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="_create_time" >
+      <property name="geometry" >
+       <rect>
+        <x>135</x>
+        <y>10</y>
+        <width>190</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="minimumSize" >
+       <size>
+        <width>190</width>
+        <height>20</height>
+       </size>
+      </property>
+      <property name="maximumSize" >
+       <size>
+        <width>190</width>
+        <height>20</height>
+       </size>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="_personal_tab" >
+     <attribute name="title" >
+      <string>Persönliches</string>
+     </attribute>
+     <widget class="QGroupBox" name="_phone_box" >
+      <property name="geometry" >
+       <rect>
+        <x>5</x>
+        <y>5</y>
+        <width>325</width>
+        <height>108</height>
+       </rect>
+      </property>
+      <property name="minimumSize" >
+       <size>
+        <width>325</width>
+        <height>108</height>
+       </size>
+      </property>
+      <property name="maximumSize" >
+       <size>
+        <width>325</width>
+        <height>108</height>
+       </size>
+      </property>
+      <property name="title" >
+       <string>Telefon/-fax</string>
+      </property>
+      <widget class="QLineEdit" name="_private_tel" >
+       <property name="geometry" >
+        <rect>
+         <x>130</x>
+         <y>20</y>
+         <width>187</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="minimumSize" >
+        <size>
+         <width>187</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="maximumSize" >
+        <size>
+         <width>187</width>
+         <height>20</height>
+        </size>
+       </property>
+      </widget>
+      <widget class="QLabel" name="_lbl_private_tel" >
+       <property name="geometry" >
+        <rect>
+         <x>8</x>
+         <y>22</y>
+         <width>122</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="minimumSize" >
+        <size>
+         <width>122</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="maximumSize" >
+        <size>
+         <width>122</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="text" >
+        <string>Privat</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="_mobile_tel" >
+       <property name="geometry" >
+        <rect>
+         <x>130</x>
+         <y>40</y>
+         <width>187</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="minimumSize" >
+        <size>
+         <width>187</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="maximumSize" >
+        <size>
+         <width>187</width>
+         <height>20</height>
+        </size>
+       </property>
+      </widget>
+      <widget class="QLabel" name="_lbl_mobile_tel" >
+       <property name="geometry" >
+        <rect>
+         <x>8</x>
+         <y>42</y>
+         <width>122</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="minimumSize" >
+        <size>
+         <width>122</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="maximumSize" >
+        <size>
+         <width>122</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="text" >
+        <string>Mobil</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="_office_tel" >
+       <property name="geometry" >
+        <rect>
+         <x>130</x>
+         <y>60</y>
+         <width>187</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="minimumSize" >
+        <size>
+         <width>187</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="maximumSize" >
+        <size>
+         <width>187</width>
+         <height>20</height>
+        </size>
+       </property>
+      </widget>
+      <widget class="QLabel" name="_lbl_office_tel" >
+       <property name="geometry" >
+        <rect>
+         <x>8</x>
+         <y>62</y>
+         <width>122</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="minimumSize" >
+        <size>
+         <width>122</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="maximumSize" >
+        <size>
+         <width>122</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="text" >
+        <string>Büro</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="_lbl_fax" >
+       <property name="geometry" >
+        <rect>
+         <x>8</x>
+         <y>82</y>
+         <width>122</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="minimumSize" >
+        <size>
+         <width>122</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="maximumSize" >
+        <size>
+         <width>122</width>
+         <height>16</height>
+        </size>
+       </property>
+       <property name="text" >
+        <string>Fax</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="_fax" >
+       <property name="geometry" >
+        <rect>
+         <x>130</x>
+         <y>80</y>
+         <width>187</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="minimumSize" >
+        <size>
+         <width>187</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="maximumSize" >
+        <size>
+         <width>187</width>
+         <height>20</height>
+        </size>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="layoutWidget_3" >
+      <property name="geometry" >
+       <rect>
+        <x>10</x>
+        <y>118</y>
+        <width>321</width>
+        <height>221</height>
+       </rect>
+      </property>
+      <layout class="QFormLayout" name="_personal_form" >
+       <property name="sizeConstraint" >
+        <enum>QLayout::SetMinimumSize</enum>
+       </property>
+       <property name="fieldGrowthPolicy" >
+        <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+       </property>
+       <property name="horizontalSpacing" >
+        <number>0</number>
+       </property>
+       <property name="verticalSpacing" >
+        <number>0</number>
+       </property>
+       <property name="topMargin" >
+        <number>0</number>
+       </property>
+       <item row="0" column="0" >
+        <widget class="QLabel" name="_lbl_language" >
+         <property name="minimumSize" >
+          <size>
+           <width>125</width>
+           <height>16</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>125</width>
+           <height>16</height>
+          </size>
+         </property>
+         <property name="text" >
+          <string>Sprache</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1" >
+        <widget class="QLineEdit" name="_language" >
+         <property name="minimumSize" >
+          <size>
+           <width>190</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>190</width>
+           <height>20</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0" >
+        <widget class="QLabel" name="_lbl_organisation" >
+         <property name="minimumSize" >
+          <size>
+           <width>125</width>
+           <height>16</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>125</width>
+           <height>16</height>
+          </size>
+         </property>
+         <property name="text" >
+          <string>Organisation</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1" >
+        <widget class="QLineEdit" name="_organisation" >
+         <property name="minimumSize" >
+          <size>
+           <width>190</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>190</width>
+           <height>20</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0" >
+        <widget class="QLabel" name="_lbl_office_url" >
+         <property name="minimumSize" >
+          <size>
+           <width>125</width>
+           <height>16</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>125</width>
+           <height>16</height>
+          </size>
+         </property>
+         <property name="text" >
+          <string>Webseite (Büro)</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1" >
+        <widget class="QLineEdit" name="_office_url" >
+         <property name="minimumSize" >
+          <size>
+           <width>190</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>190</width>
+           <height>20</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0" >
+        <widget class="QLabel" name="_lbl_private_url" >
+         <property name="minimumSize" >
+          <size>
+           <width>125</width>
+           <height>16</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>125</width>
+           <height>16</height>
+          </size>
+         </property>
+         <property name="text" >
+          <string>Webseite (privat)</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1" >
+        <widget class="QLineEdit" name="_private_url" >
+         <property name="minimumSize" >
+          <size>
+           <width>190</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>190</width>
+           <height>20</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0" >
+        <widget class="QLabel" name="_lbl_address" >
+         <property name="minimumSize" >
+          <size>
+           <width>125</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>125</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="text" >
+          <string>Adresse</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1" >
+        <widget class="QTextEdit" name="_address" >
+         <property name="minimumSize" >
+          <size>
+           <width>190</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>190</width>
+           <height>16777215</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0" >
+        <widget class="QLabel" name="_lbl_instant_messenger" >
+         <property name="minimumSize" >
+          <size>
+           <width>125</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>125</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="text" >
+          <string>Instant Messenger</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1" >
+        <widget class="QTextEdit" name="_instant_messenger" >
+         <property name="minimumSize" >
+          <size>
+           <width>190</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>190</width>
+           <height>16777215</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0" >
+        <widget class="QLabel" name="_lbl_more_info" >
+         <property name="minimumSize" >
+          <size>
+           <width>125</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>125</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="text" >
+          <string>Weitere Informationen</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1" >
+        <widget class="QTextEdit" name="_more_info" >
+         <property name="minimumSize" >
+          <size>
+           <width>190</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="maximumSize" >
+          <size>
+           <width>190</width>
+           <height>16777215</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="_pic_tab" >
+     <attribute name="title" >
+      <string>Bild</string>
+     </attribute>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="_lbl_user_id" >
+    <property name="geometry" >
+     <rect>
+      <x>190</x>
+      <y>10</y>
+      <width>65</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="minimumSize" >
+     <size>
+      <width>65</width>
+      <height>16</height>
+     </size>
+    </property>
+    <property name="maximumSize" >
+     <size>
+      <width>65</width>
+      <height>16</height>
+     </size>
+    </property>
+    <property name="text" >
+     <string>Benutzer-ID</string>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>
