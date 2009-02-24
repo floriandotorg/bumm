@@ -285,7 +285,7 @@
          </size>
         </property>
        </widget>
-       <widget class="QLabel" name="_lbl_user_mail" >
+       <widget class="QLabel" name="_lbl_mail" >
         <property name="geometry" >
          <rect>
           <x>11</x>
@@ -310,7 +310,7 @@
          <string>Primäre E-Mail Adresse</string>
         </property>
        </widget>
-       <widget class="QLineEdit" name="_user_mail" >
+       <widget class="QLineEdit" name="_mail" >
         <property name="geometry" >
          <rect>
           <x>136</x>
@@ -332,58 +332,36 @@
          </size>
         </property>
        </widget>
-       <widget class="QLabel" name="_lbl_user_more_mail" >
+       <widget class="QLabel" name="_lbl_more_mail" >
         <property name="geometry" >
          <rect>
           <x>11</x>
           <y>91</y>
           <width>125</width>
-          <height>16</height>
+          <height>40</height>
          </rect>
         </property>
         <property name="minimumSize" >
          <size>
           <width>125</width>
-          <height>16</height>
+          <height>40</height>
          </size>
         </property>
         <property name="maximumSize" >
          <size>
           <width>125</width>
-          <height>16</height>
+          <height>40</height>
          </size>
         </property>
         <property name="text" >
          <string>weitere E-Mail Adressen</string>
         </property>
        </widget>
-       <widget class="QComboBox" name="_user_more_mail" >
-        <property name="geometry" >
-         <rect>
-          <x>136</x>
-          <y>91</y>
-          <width>190</width>
-          <height>20</height>
-         </rect>
-        </property>
-        <property name="minimumSize" >
-         <size>
-          <width>190</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="maximumSize" >
-         <size>
-          <width>190</width>
-          <height>20</height>
-         </size>
-        </property>
-       </widget>
        <widget class="QLabel" name="_lbl_last_login" >
         <property name="geometry" >
          <rect>
           <x>11</x>
-          <y>111</y>
+          <y>131</y>
           <width>125</width>
           <height>16</height>
          </rect>
@@ -408,7 +386,7 @@
         <property name="geometry" >
          <rect>
           <x>136</x>
-          <y>111</y>
+          <y>131</y>
           <width>190</width>
           <height>20</height>
          </rect>
@@ -430,7 +408,7 @@
         <property name="geometry" >
          <rect>
           <x>11</x>
-          <y>131</y>
+          <y>151</y>
           <width>125</width>
           <height>45</height>
          </rect>
@@ -455,15 +433,37 @@
         <property name="geometry" >
          <rect>
           <x>136</x>
-          <y>131</y>
+          <y>151</y>
           <width>190</width>
-          <height>192</height>
+          <height>91</height>
          </rect>
         </property>
         <property name="minimumSize" >
          <size>
           <width>190</width>
           <height>45</height>
+         </size>
+        </property>
+        <property name="maximumSize" >
+         <size>
+          <width>190</width>
+          <height>16777215</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QTextEdit" name="_more_mail" >
+        <property name="geometry" >
+         <rect>
+          <x>136</x>
+          <y>91</y>
+          <width>190</width>
+          <height>40</height>
+         </rect>
+        </property>
+        <property name="minimumSize" >
+         <size>
+          <width>190</width>
+          <height>40</height>
          </size>
         </property>
         <property name="maximumSize" >
@@ -606,6 +606,9 @@
           </rect>
          </property>
          <layout class="QGridLayout" name="_grid_layout_account" >
+          <property name="spacing" >
+           <number>0</number>
+          </property>
           <item row="0" column="0" >
            <widget class="QLabel" name="_lbl_role" >
             <property name="minimumSize" >

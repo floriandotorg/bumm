@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ## @package UserDetails
-# @brief Implementation eines DockWidgets zum Anzeigen zusätzlicher User 
+# @brief Implementation eines DockWidgets zum Anzeigen zusätzlicher User
 # Informationen
 # @version 0.1
 # @author Corinna Vollert
@@ -33,26 +33,26 @@ from ui_UserDetails import Ui_UserDetails
 # Benutzerinformationen.
 #
 # Die Klasse emitiert folgende Signals:
-# - RemoveUser(p_user_name) Wenn auf "Benutzer löschen" geklickt wurde. 
+# - RemoveUser(p_user_name) Wenn auf "Benutzer löschen" geklickt wurde.
 # "p_user_name" gibt den Name des Users an, welcher gelöscht werden soll.
-# - LockUser(p_user_name) Wenn auf "Benutzer sperren" geklickt wurde. 
+# - LockUser(p_user_name) Wenn auf "Benutzer sperren" geklickt wurde.
 # "p_user_name" gibt den Name des Users an, welcher gesperrt werden soll.
-# - UnlockUser(p_user_name) Wenn auf "Benutzer entsperren" geklickt wurde. 
+# - UnlockUser(p_user_name) Wenn auf "Benutzer entsperren" geklickt wurde.
 # "p_user_name" gibt den Name des Users an, welcher entsperrt werden soll.
 # - DestroyTrash(p_user_name) Leert den Mülleinmer des Benutzers. "p_user_name"
 # ist der Name des Benutzers bei dem dies geschied.
-# - DestroyClipboard(p_user_name) Räumt die Zwischenablage des Benutzers auf. 
+# - DestroyClipboard(p_user_name) Räumt die Zwischenablage des Benutzers auf.
 # "p_user_name" ist der Name des Benutzers bei dem dies geschied.
 class UserDetails(QtGui.QDockWidget, Ui_UserDetails):
-    
+
     ## Konstruktor
-    # @param p_parent Übergeordnetes QObject 
+    # @param p_parent Übergeordnetes QObject
     def __init__(self, p_parent = None):
         QtGui.QDockWidget.__init__(self, p_parent)
         self.setupUi(self)
-    
+
     ## Zeigt alle Userinformationen im Widget an
-    # @param p_user Eine Liste von Dictonaries mit folgendem Aufbau oder 
+    # @param p_user Eine Liste von Dictonaries mit folgendem Aufbau oder
     # None für keinen:
     # - user_id : Benutzer-ID
     # - name : Benutzername
@@ -73,7 +73,7 @@ class UserDetails(QtGui.QDockWidget, Ui_UserDetails):
     # als Wert
     # - additional_info : Weitere Informationen
     # - photo : Link zum Benutzerbild oder None wenn keins existiert
-    # - local_photo : Pfad zum lokal zwischengespeicherten Benutzerbild oder 
+    # - local_photo : Pfad zum lokal zwischengespeicherten Benutzerbild oder
     # None wenn keins existiert
     # - locked : User geserrt ja/nein (Boolean)
     # - used_memory : Speicherverbrauch in MB
@@ -94,15 +94,22 @@ class UserDetails(QtGui.QDockWidget, Ui_UserDetails):
     #        - Liste mit Zugriffsrechten
     def showUser(self, p_user):
         if p_user:
-            text = u""
-            for key in p_user:
-                text += unicode(key) + u": " + unicode(p_user[key]) + u"\n"
-            self._text_details.setText(text)
+
+            self._user.setText(p_user["name"])
+            self._user_id.setText(str(p_user["user_id"]))
             
+            ##Info-Tab
+            self._full_name.setText(p_user["longname"])
+            self._admin.setText(str(p_user["admin"]))
+            self._locked.setText(str(p_user["locked"]))
+            self._user_mail.setText(p_user["email"])
+            self._user_more_mail.insertItem(0, p_user["secondary_email"])
+            self._last_login.setText(str(p_user["last_login"]))
+            self._workspace.setText(str(p_user["workspaces"]))
+
             try:
                 self._lbl_pic.setPixmap(QtGui.QPixmap(p_user["local_photo"]))
             except:
                 self._lbl_pic.clear()
         else:
-            self._text_details.setText(u"Bitte wählen Sie einen User aus!")
-        
+            self._user.setText("kein Benutzer!")
