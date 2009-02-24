@@ -314,7 +314,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         ## Interface zum BSCW-Server
         self._bscw_interface = login_dialog.getInterface()
 
-        reg_exp = QtCore.QRegExp("(http://)?([a-zA-Z_0-9:]+)(/[a-zA-Z_])*")
+        reg_exp = QtCore.QRegExp("(http://)?([a-zA-Z0-9_\\-:\\.]+)(/[. ^])*")
         reg_exp.exactMatch(login_dialog.getServerAddress())
         ## HTTP-Adresse des BSCW-Servers (Wird zum Herunterladen der
         # Benutzerbilder benötigt)
