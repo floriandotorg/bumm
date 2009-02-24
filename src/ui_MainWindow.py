@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'MainWindow.ui'
 #
-# Created: Mon Feb 23 08:43:15 2009
+# Created: Tue Feb 24 13:36:03 2009
 #      by: PyQt4 UI code generator 4.4.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -20,7 +20,7 @@ class Ui_MainWindow(object):
         self._centralwidget.setObjectName("_centralwidget")
         MainWindow.setCentralWidget(self._centralwidget)
         self._menubar = QtGui.QMenuBar(MainWindow)
-        self._menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
+        self._menubar.setGeometry(QtCore.QRect(0, 0, 800, 19))
         self._menubar.setObjectName("_menubar")
         self._menu_program = QtGui.QMenu(self._menubar)
         self._menu_program.setObjectName("_menu_program")
@@ -118,7 +118,7 @@ class Ui_MainWindow(object):
         self._action_quit.setStatusTip(QtGui.QApplication.translate("MainWindow", "Beendet das Programm", None, QtGui.QApplication.UnicodeUTF8))
         self._action_info.setText(QtGui.QApplication.translate("MainWindow", "Ü&ber", None, QtGui.QApplication.UnicodeUTF8))
         self._action_info.setStatusTip(QtGui.QApplication.translate("MainWindow", "Zeigt Zusatzinformationen zum Programm an", None, QtGui.QApplication.UnicodeUTF8))
-        self._action_user_details.setText(QtGui.QApplication.translate("MainWindow", "User &Details", None, QtGui.QApplication.UnicodeUTF8))
+        self._action_user_details.setText(QtGui.QApplication.translate("MainWindow", "Benutzer &Details", None, QtGui.QApplication.UnicodeUTF8))
         self._action_user_details.setStatusTip(QtGui.QApplication.translate("MainWindow", "Blendet das Detail-Fenster ein bzw. aus", None, QtGui.QApplication.UnicodeUTF8))
         self._action_set_cols.setText(QtGui.QApplication.translate("MainWindow", "&Spalten auswählen", None, QtGui.QApplication.UnicodeUTF8))
         self._action_set_cols.setStatusTip(QtGui.QApplication.translate("MainWindow", "Öffnet ein Dialog, indem die Spalten der Tabelle ausgewählt werden können", None, QtGui.QApplication.UnicodeUTF8))
