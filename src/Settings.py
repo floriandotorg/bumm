@@ -2,9 +2,9 @@
 
 ## @package Settings
 # @brief Implementation der Settings Klasse
-# @version 0.1
-# @author Florian Kaiser
-# @date 12.02.09
+# @version 1
+# @author Benjamin Flader
+# @date 24.02.09
 
 #################################################################################
 # Copyright (C) 2009 Benjamin Flader, Benjamin Leipold, André Naumann,          #
@@ -39,10 +39,30 @@ class Settings(QtCore.QObject):
     # @param p_parent Übergeordnetes QObject
     def __init__(self, p_parent = None):
         QtCore.QObject.__init__(self, p_parent)
-        #self.server_address = "http://172.16.124.101/bscw/bscw.cgi/?op=xmlrpc"
+        self._username = "ChuckNoris"
+        
+        
+        
         self.server_address = "http://10.200.132.22/bscw/bscw.cgi/?op=xmlrpc"
-        #self.server_address = "http://localhost:8080/bscw/bscw.cgi/?op=xmlrpc"
-        self.username = "ChuckNoris"
-        self.proxy = ""
         self.columns = ["user_id", "name", "longname"]
+        self.login_dialog_geometry = QtCore.QRect()
+        self.col_dialog_geometry = QtCore.QRect()
+        self.main_window_geometry = QtCore.QRect()
+        self.user_details_geometry = QtCore.QRect()
+        self.show_user_details = True
+        
+    # Getter/Setter Beispiel für Username
+    def getUsername(self):
+        print "getter"
+        return self._username
+    
+    def setUsername(self, username):
+        print "setter"
+        self._username = username
+        
+    username = property(getUsername, setUsername)
+    
+if __name__ == "__main__":
+    s = Settings()
+    print s.username
     
