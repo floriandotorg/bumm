@@ -10,7 +10,7 @@
    </rect>
   </property>
   <property name="windowTitle" >
-   <string>BUMM 1.0 - BSCW Userverwaltung</string>
+   <string>BUMMS - BSCW Userverwaltung</string>
   </property>
   <property name="windowIcon" >
    <iconset resource="../qrc/images.qrc" >
