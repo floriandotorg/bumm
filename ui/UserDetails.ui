@@ -23,15 +23,7 @@
        <attribute name="title" >
         <string>Details</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_2" >
-        <item row="0" column="0" >
-         <widget class="QTextEdit" name="_text_details" >
-          <property name="readOnly" >
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-       </layout>
+       <layout class="QGridLayout" name="gridLayout_2" />
       </widget>
       <widget class="QWidget" name="_tab_pic" >
        <attribute name="title" >
