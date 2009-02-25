@@ -45,10 +45,9 @@ class Settings(QtCore.QObject):
         self.__username = ""
         self.__server_address = ""
         self.__columns = ["user_id", "name", "longname"]
-        self.__login_dialog_geometry = QtCore.QRect()
-        self.__col_dialog_geometry = QtCore.QRect()
-        self.__main_window_geometry = QtCore.QRect()
-        self.__user_details_geometry = QtCore.QRect()
+        self.__col_dialog_geometry = QtCore.QRect(100, 100, 100, 100)
+        self.__main_window_geometry = QtCore.QRect(100, 100, 100, 100)
+        self.__user_details_geometry = QtCore.QRect(100, 100, 100, 100)
         self.__show_user_details = True
 
         # lese Einstellungen aus
@@ -57,9 +56,7 @@ class Settings(QtCore.QObject):
         self._server_address = self._settings.value("server_address",
                             QtCore.QVariant(self.__server_address)).toString()
         self._columns = self._settings.value("columns",
-                            QtCore.QVariant(self.__columns)).toString()
-        self._login_dialog_geometry = self._settings.value("login_dialog_geometry",
-                            QtCore.QVariant(self.__login_dialog_geometry)).toRect()
+                            QtCore.QVariant(self.__columns)).toList()
         self._col_dialog_geometry = self._settings.value("col_dialog_geometry",
                             QtCore.QVariant(self.__col_dialog_geometry)).toRect()
         self._main_window_geometry = self._settings.value("main_window_geometry",
@@ -76,8 +73,6 @@ class Settings(QtCore.QObject):
                             QtCore.QVariant(self._server_address))
         self._settings.setValue("columns",
                             QtCore.QVariant(self._columns))
-        self._settings.setValue("login_dialog_geometry",
-                            QtCore.QVariant(self._login_dialog_geometry))
         self._settings.setValue("col_dialog_geometry",
                             QtCore.QVariant(self._col_dialog_geometry))
         self._settings.setValue("main_window_geometry",
@@ -106,11 +101,6 @@ class Settings(QtCore.QObject):
     # @return Spaltennamen als Liste
     def getColumns(self):
         return self._columns
-
-    ## gibt die geometrischen Daten des Login-Dialogs zurück
-    # @return geometrische Daten des Login-Dialogs als QRect
-    def getLoginDialogGeometry(self):
-        return self._login_dialog_geometry
 
     ## gibt die geometrischen Daten des Spalten-Dialogs zurück
     # @return geometrische Daten des Spalten-Dialogs als QRect
@@ -150,11 +140,6 @@ class Settings(QtCore.QObject):
     def setColumns(self, p_columns):
         self._columns = p_columns
 
-    ## setzt die geometrischen Daten des Login-Dialogs
-    # @param p_login_dialog_geometry Daten des Login-Dialogs als QRect
-    def setLoginDialogGeometry(self, p_login_dialog_geometry):
-        self._login_dialog_geometry = p_login_dialog_geometry
-
     ## setzt die geometrischen Daten des Spalten-Dialogs
     # @param p_col_dialog_geometry geometrische Daten des Spalten-Dialogs als QRect
     def setColDialogGeometry(self, p_col_dialog_geometry):
@@ -179,7 +164,6 @@ class Settings(QtCore.QObject):
     username = property(getUsername, setUsername)
     server_address = property(getServerAddress, setServerAddress)
     columns = property(getColumns, setColumns)
-    login_dialog_geometry = property(getLoginDialogGeometry, setLoginDialogGeometry)
     col_dialog_geometry = property(getColDialogGeometry, setColDialogGeometry)
     main_window_geometry = property(getMainWindowGeometry, setMainWindowGeometry)
     user_details_geometry = property(getUserDetailsGeometry, setUserDetailsGeometry)
@@ -187,5 +171,4 @@ class Settings(QtCore.QObject):
 
 if __name__ == "__main__":
     s = Settings()
-    s.setUsername("Flo")
     print s.username
