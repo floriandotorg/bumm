@@ -51,9 +51,12 @@ class BscwInterface(object):
         self._connect(p_hostname, p_username, p_passwd)
         try:
             # Authorisierung überprüfen (User? Admin?)
-            if not self._server.is_admin(p_username):
+            if self._server.is_admin(p_username) == False:
                 # Benutzer hat keine Administratorenrechte
                 raise Exceptions.NoAdminRights
+            if self._server.is_admin(p_username) == None:
+                # Benutzer ist nicht vorhanden
+                raise Exceptions.LoginIncorrect
         except(socket.error):
             # Server nicht erreichbar
             raise Exceptions.HostUnreachable
