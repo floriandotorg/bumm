@@ -181,7 +181,7 @@ class Settings(QtCore.QObject):
     columns = property(getColumns, setColumns)
     login_dialog_geometry = property(getLoginDialogGeometry, setLoginDialogGeometry)
     col_dialog_geometry = property(getColDialogGeometry, setColDialogGeometry)
-    main_window_dialog_geometry = property(getMainWindowGeometry, setMainWindowGeometry)
+    main_window_geometry = property(getMainWindowGeometry, setMainWindowGeometry)
     user_details_geometry = property(getUserDetailsGeometry, setUserDetailsGeometry)
     show_user_details = property(getShowUserDetails, setShowUserDetails)
 
