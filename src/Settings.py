@@ -44,13 +44,23 @@ class Settings(QtCore.QObject):
         self._settings = QtCore.QSettings("BUMM")
 
         # lege Standardwerte fest
-        self.__username = ""
-        self.__server_address = ""
-        self.__columns = ["user_id", "name", "longname"]
-        self.__col_dialog_geometry = QtCore.QRect(100, 100, 100, 100)
-        self.__main_window_geometry = QtCore.QRect(100, 100, 100, 100)
-        self.__user_details_geometry = QtCore.QRect(100, 100, 100, 100)
+        self.__username = "ChuckNoris"
+        self.__server_address = "http://10.200.132.22/bscw"
+        self.__columns = ["user_id", "name", "longname", "email", "used_memory", "last_login", "locked"]
+        self.__col_dialog_geometry = QtCore.QRect(100,100,100,100)
+        self.__main_window_geometry = QtCore.QRect(100,100,800,800)
+        self.__user_details_geometry = QtCore.QRect(100,100,100,100)
         self.__show_user_details = True
+        
+        # lege Standardwerte fest
+        #self.username = "ChuckNoris"
+        #self.server_address = "http://10.200.132.22/bscw"
+        #self.columns = ["user_id", "name", "longname", "email", "used_memory", "last_login", "locked"]
+        #self.col_dialog_geometry = QtCore.QRect(100,100,100,100)
+        #self.main_window_geometry = QtCore.QRect(100,100,800,800)
+        #self.user_details_geometry = QtCore.QRect(100,100,100,100)
+        #self.show_user_details = True
+
 
         # lese Einstellungen aus
         self._username = self._settings.value("username",
@@ -58,7 +68,7 @@ class Settings(QtCore.QObject):
         self._server_address = self._settings.value("server_address",
                             QtCore.QVariant(self.__server_address)).toString()
         self._columns = self._settings.value("columns",
-                            QtCore.QVariant(self.__columns)).toList()
+                            QtCore.QVariant(self.__columns)).toString()
         self._col_dialog_geometry = self._settings.value("col_dialog_geometry",
                             QtCore.QVariant(self.__col_dialog_geometry)).toRect()
         self._main_window_geometry = self._settings.value("main_window_geometry",
