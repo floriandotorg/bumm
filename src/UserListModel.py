@@ -63,10 +63,11 @@ class UserListModel(QtCore.QAbstractTableModel):
         elif p_index.row() >= len(self.user_list):
             return QtCore.QVariant()
         elif self.header_list[p_index.column()][0] == "last_login":
-            return QtCore.QVariant(
-                self.user_list[p_index.row()]
-                    [self.header_list[p_index.column()][0]])
+            d = datetime.datetime.strptime(self.user_list[p_index.row()]
+                    [self.header_list[p_index.column()][0]], "%Y%m%dT%H:%M:%S")
+            return QtCore.QVariant(d.strftime("%d.%m.%Y, %H:%M"))
         elif self.header_list[p_index.column()][0] == "create_time":
+            print self.user_list[p_index.row()][self.header_list[p_index.column()][0]]
             return QtCore.QVariant(
                 self.user_list[p_index.row()]
                      [self.header_list[p_index.column()][0]])
@@ -137,11 +138,12 @@ class UserListModel(QtCore.QAbstractTableModel):
     # @param p_column Die Nummer der Spalte nach der sortiert werden soll.
     # @param p_order Die Richtung in die sortiert werden soll.
     def sort(self, p_column, p_order):
-        if p_order == QtCore.Qt.AscendingOrder:
-            self.user_list.sort(key = operator.itemgetter(self.header_list[p_column][0]))
-        elif p_order == QtCore.Qt.DescendingOrder:
-            self.user_list.sort(key = operator.itemgetter(self.header_list[p_column][0]), reverse = True)
-        self.emit(QtCore.SIGNAL("layoutChanged()"))
+        if len(self.user_list) != 0:
+            if p_order == QtCore.Qt.AscendingOrder:
+                self.user_list.sort(key = operator.itemgetter(self.header_list[p_column][0]))
+            elif p_order == QtCore.Qt.DescendingOrder:
+                self.user_list.sort(key = operator.itemgetter(self.header_list[p_column][0]), reverse = True)
+            self.emit(QtCore.SIGNAL("layoutChanged()"))
 
     ## Übergibt eine Liste mit Spalten die angezeigt werden sollen.
     # @param p_header_data Eine Liste von Tupels mit jeweils zwei Elementen,
