@@ -53,11 +53,19 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             QtGui.QMainWindow.__init__(self, p_parent)
             self.setupUi(self)
     
-            ## Programmeinstellungen
-            self._settings = Settings()
-    
             ## Liste aller heruntergeladenen Benutzerbilder
             self._img_cache = []
+            
+            ## DockWidget indem nähere Benutzerinformationen angezeigt werden
+            self._user_details = UserDetails(self)
+            self.addDockWidget(QtCore.Qt.RightDockWidgetArea,
+                                                    self._user_details)
+            
+            ## Programmeinstellungen laden
+            self._settings = Settings()
+            self.setGeometry(self._settings.main_window_geometry)
+            self._user_details.setGeometry(self._settings.user_details_geometry)
+            self._user_details.setVisible(self._settings.show_user_details)
     
             ## Liste aller angezeigten Spalten in der User-Liste
             self._headers = SetColumnDialog([], self) \
@@ -65,11 +73,6 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             ## Liste aller Benuter
             self._user_list = UserList(self._headers, self)
             self.setCentralWidget(self._user_list)
-    
-            ## DockWidget indem nähere Benutzerinformationen angezeigt werden
-            self._user_details = UserDetails(self)
-            self.addDockWidget(QtCore.Qt.RightDockWidgetArea,
-                                                    self._user_details)
     
             self._toolbar.addSeparator()
             ## 'Suchtext'-Label
@@ -120,8 +123,16 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             self._login()
             
         except Exception, exception:
+            # Fehlerdialog anzeigen
             err_dialog = ErrorDialog(exception, self)
             err_dialog.exec_()
+    
+    ## Dekonstruktor
+    def __del__(self):
+        self._settings.columns = [i[0] for i in self._headers]
+        self._settings.main_window_geometry = self.geometry()
+        self._settings.user_details_geometry = self._user_details.geometry()
+        self._settings.show_user_details = self._user_details.isVisible()
 
     ## Lädt die Benutzerdaten vom BSCW Server und zeigt das Hauptfenster an
     def show(self):
@@ -130,6 +141,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             self._loadList()
             
         except Exception, exception:
+            # Fehlerdialog anzeigen
             err_dialog = ErrorDialog(exception, self)
             err_dialog.exec_()
 
@@ -166,10 +178,12 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
     # die User-Liste aktualisiert
     def _showSetColumnDialogSlot(self):
         set_column_dialog = SetColumnDialog(self._headers, self)
+        set_column_dialog.setGeometry(self._settings.col_dialog_geometry)
         set_column_dialog.exec_()
         if set_column_dialog.result() == QtGui.QDialog.Accepted:
             self._headers = set_column_dialog.getHeaderData()
             self._user_list.changeHeaderData(self._headers)
+        self._settings.col_dialog_geometry = set_column_dialog.geometry()
 
     ## Sperrt/Entsperrt das Widget und zeigt eine Meldung in der Statusleiste an
     # @param p_lock Widget sperren ja/nein (Boolean)
@@ -321,6 +335,8 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         if login_dialog.exec_() != QtGui.QDialog.Accepted:
             QtGui.qApp.quit()
             exit()
+        
+        self._settings = login_dialog.getSettings()
 
         ## Interface zum BSCW-Server
         self._bscw_interface = login_dialog.getInterface()

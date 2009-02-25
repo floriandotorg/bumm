@@ -45,6 +45,7 @@ class LoginDialog(QtGui.QDialog, Ui_LoginDialog):
          self._settings = p_settings
          self._username.setText(p_settings.username)
          self._server_address.setText(p_settings.server_address)
+         self.setGeometry(self._settings.login_dialog_geometry)
          self._passwd.setText("badreligion")
 
          ## Verbindung zum BSCW-Server
@@ -73,6 +74,14 @@ class LoginDialog(QtGui.QDialog, Ui_LoginDialog):
     # @return Passwort als QString
     def getPasswd(self):
         return self._passwd.text()
+    
+    ## Gibt die Klasse für die Einstellungen zurück
+    # @return Settings Klasse
+    def getSettings(self):
+        self._settings.username = str(self._username.text())
+        self._settings.server_address = str(self._server_address.text())
+        self._settings.login_dialog_geometry = self.geometry()
+        return self._settings
 
     ## Sperrt oder Entsperrt alle Steuerelemente auf dem Fenster.
     # @param p_enable Steuerelemente sperren ja/nein (Boolean)
