@@ -120,7 +120,7 @@ class SetColumnDialog(QtGui.QDialog, Ui_SetColumnDialog):
                      ("additional_info", 
                                 QtGui.qApp.trUtf8("Weitere Informationen")),
                      ("photo", QtGui.qApp.trUtf8("Benutzerbild (URL)")),
-                     ("locked", QtGui.qApp.trUtf8("User geserrt ja/nein")),
+                     ("locked", QtGui.qApp.trUtf8("User gesperrt ja/nein")),
                      ("used_memory", 
                                 QtGui.qApp.trUtf8("Speicherverbrauch (MB)")),
                      ("last_login", QtGui.qApp.trUtf8("Letzte Anmeldung")),
