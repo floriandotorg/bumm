@@ -7,7 +7,7 @@
 # @date 24.02.09
 
 #################################################################################
-# Copyright (C) 2009 Benjamin Flader, Benjamin Leipold, AndrÃ© Naumann,          #
+# Copyright (C) 2009 Benjamin Flader, Benjamin Leipold, André Naumann,          #
 # Corinna Vollert, Florian Kaiser                                               #
 #                                                                               #
 # This program is free software; you can redistribute it andor modify it under  #
@@ -55,7 +55,7 @@ class Settings(QtCore.QObject):
         self._username = self._settings.value("username",
                             QtCore.QVariant(self.__username)).toString()
         self._server_address = self._settings.value("server_address",
-                            QtCore.QVariant(self.__server_address)).toList()
+                            QtCore.QVariant(self.__server_address)).toString()
         self._columns = self._settings.value("columns",
                             QtCore.QVariant(self.__columns)).toString()
         self._login_dialog_geometry = self._settings.value("login_dialog_geometry",
@@ -92,37 +92,37 @@ class Settings(QtCore.QObject):
 
     # Get'er
 
-    ## gibt den Benutzernamen zurÃ¼ck
+    ## gibt den Benutzernamen zurück
     # @return Benutzername als QString
     def getUsername(self):
         return self._username
 
-    ## gibt die Serveradresse zurÃ¼ck
+    ## gibt die Serveradresse zurück
     # @return Serveradresse als QString
     def getServerAddress(self):
         return self._server_address
 
-    ## gibt die Spaltennamen zurÃ¼ck
+    ## gibt die Spaltennamen zurück
     # @return Spaltennamen als Liste
     def getColumns(self):
         return self._columns
 
-    ## gibt die geometrischen Daten des Login-Dialogs zurÃ¼ck
+    ## gibt die geometrischen Daten des Login-Dialogs zurück
     # @return geometrische Daten des Login-Dialogs als QRect
     def getLoginDialogGeometry(self):
         return self._login_dialog_geometry
 
-    ## gibt die geometrischen Daten des Spalten-Dialogs zurÃ¼ck
+    ## gibt die geometrischen Daten des Spalten-Dialogs zurück
     # @return geometrische Daten des Spalten-Dialogs als QRect
     def getColDialogGeometry(self):
         return self._col_dialog_geometry
 
-    ## gibt die geometrischen Daten des MainWindow-Dialogs zurÃ¼ck
+    ## gibt die geometrischen Daten des MainWindow-Dialogs zurück
     # @return geometrische Daten des MainWindow-Dialogs als QRect
     def getMainWindowGeometry(self):
         return self._main_window_geometry
 
-    ## gibt die geometrischen Daten des UserDetail-Dialogs zurÃ¼ck
+    ## gibt die geometrischen Daten des UserDetail-Dialogs zurück
     # @return geometrische Daten des Login-Dialogs als QRect
     def getUserDetailsGeometry(self):
         return self._user_details_geometry
@@ -138,7 +138,7 @@ class Settings(QtCore.QObject):
     ## setzt den Benutzernamen
     # @param p_username Benutzername
     def setUsername(self, p_username):
-        self._username = p_username
+        self._username = str(p_username)
 
     ## setzt die Serveradresse
     # @param p_server_adress Serveradresse als QString
