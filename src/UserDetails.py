@@ -107,6 +107,25 @@ class UserDetails(QtGui.QDockWidget, Ui_UserDetails):
             self._last_login.setText(str(p_user["last_login"]))
             self._workspace.setText(str(p_user["workspaces"]))
 
+            ##Daten des Konto-Tab
+            self._create_time.setText(str(p_user["create_time"]))
+            self._storage_usage.setText(str(p_user["used_memory"]))
+            self._objects.setText(str(p_user["files"]))
+            #self._role_owner_as_owner.setText(str(p_user["access_right"]["owner"]))
+
+            ##Daten des Persönliches-Tab
+            self._private_tel.setText(p_user["phone_home"])
+            self._mobile_tel.setText(p_user["phone_mobile"])
+            self._office_tel.setText(p_user["phone_office"])
+            self._fax.setText(p_user["fax"])
+            self._language.setText(p_user["language"])
+            self._organisation.setText(p_user["organization"])
+            #self._private_url.setText(p_user["url_homepage"])
+            self._office_url.setText(p_user["url"])
+            self._address.setText(p_user["address"])
+            self._instant_messenger.setText(str(p_user["messaging_services"]))
+            self._more_info.setText(p_user["additional_info"])
+
             try:
                 self._lbl_pic.setPixmap(QtGui.QPixmap(p_user["local_photo"]))
             except:
