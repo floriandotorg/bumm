@@ -38,22 +38,21 @@ class LoginDialog(QtGui.QDialog, Ui_LoginDialog):
     # @param p_settings Klasse in der die Einstellungen gespeichert sind
     # @param p_parent Übergeordnetes QObject.
     def __init__(self, p_settings, p_parent = None):
-         QtGui.QDialog.__init__(self, p_parent)
-         self.setupUi(self)
-
-         ## Programmenstellungen
-         self._settings = p_settings
-         self._username.setText(p_settings.username)
-         self._server_address.setText(p_settings.server_address)
-         self.setGeometry(self._settings.login_dialog_geometry)
-         self._passwd.setText("badreligion")
-
-         ## Verbindung zum BSCW-Server
-         self._bscw_interface = BscwInterface()
-
-         # 'Anmelden' Button mit _loginSlot verbinden
-         self.connect(self._login_button, QtCore.SIGNAL("clicked()"),
-                        self._loginSlot)
+        QtGui.QDialog.__init__(self, p_parent)
+        self.setupUi(self)
+        
+        ## Programmenstellungen
+        self._settings = p_settings
+        self._username.setText(p_settings.username)
+        self._server_address.setText(p_settings.server_address)
+        self._passwd.setText("badreligion")
+        
+        ## Verbindung zum BSCW-Server
+        self._bscw_interface = BscwInterface()
+        
+        # 'Anmelden' Button mit _loginSlot verbinden
+        self.connect(self._login_button, QtCore.SIGNAL("clicked()"),
+                     self._loginSlot)
 
     ## Gibt nach erfolgreicher Anmeldung die verbundene
     # BscwInterface Klasse zurück.
@@ -80,7 +79,6 @@ class LoginDialog(QtGui.QDialog, Ui_LoginDialog):
     def getSettings(self):
         self._settings.username = str(self._username.text())
         self._settings.server_address = str(self._server_address.text())
-        self._settings.login_dialog_geometry = self.geometry()
         return self._settings
 
     ## Sperrt oder Entsperrt alle Steuerelemente auf dem Fenster.
