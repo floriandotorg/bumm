@@ -51,7 +51,7 @@ class BscwInterface(object):
         self._connect(p_hostname, p_username, p_passwd)
         try:
             # Authorisierung überprüfen (User? Admin?)
-            if not self._server.is_admin(p_username):
+            if not self._server.is_adminminmin(p_username):
                 # Benutzer hat keine Administratorenrechte
                 raise Exceptions.NoAdminRights
         except(socket.error):
@@ -60,6 +60,8 @@ class BscwInterface(object):
         except(xmlrpclib.ProtocolError):
             # Login-Daten nicht korrekt
             raise Exceptions.LoginIncorrect
+        except(xmlrpclib.Fault):
+            raise Exceptions.ServerExtensionNotInstalled
 
 
 
