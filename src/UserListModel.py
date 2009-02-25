@@ -62,6 +62,14 @@ class UserListModel(QtCore.QAbstractTableModel):
             return QtCore.QVariant()
         elif p_index.row() >= len(self.user_list):
             return QtCore.QVariant()
+        elif self.header_list[p_index.column()][0] == "admin" or \
+                self.header_list[p_index.column()][0] == "locked":
+            if self.user_list[p_index.row()][self.header_list[p_index.column()][0]] == True:
+                return QtCore.QVariant("Ja")
+            elif self.user_list[p_index.row()][self.header_list[p_index.column()][0]] == False:
+                return QtCore.QVariant("Nein")
+        elif not self.user_list[p_index.row()][self.header_list[p_index.column()][0]]:
+            return QtCore.QVariant("N/A")
         elif self.header_list[p_index.column()][0] == "last_login":
             date_time = datetime.datetime.strptime(self.user_list[p_index.row()]
                     [self.header_list[p_index.column()][0]].value, "%Y%m%dT%H:%M:%S")
@@ -70,10 +78,6 @@ class UserListModel(QtCore.QAbstractTableModel):
             date_time = datetime.datetime.strptime(self.user_list[p_index.row()]
                     [self.header_list[p_index.column()][0]].value, "%Y%m%dT%H:%M:%S")
             return QtCore.QVariant(date_time.strftime("%d.%m.%Y %H:%M"))
-        elif self.user_list[p_index.row()][self.header_list[p_index.column()][0]] == True:
-            return QtCore.QVariant("Ja")
-        elif self.user_list[p_index.row()][self.header_list[p_index.column()][0]] == False:
-            return QtCore.QVariant("Nein")
         else:
             return QtCore.QVariant(
                 self.user_list[p_index.row()]
@@ -112,7 +116,7 @@ class UserListModel(QtCore.QAbstractTableModel):
     # als Wert
     # - additional_info : Weitere Informationen
     # - photo : Link zum Benutzerbild oder None wenn keins existiert
-    # - locked : User geserrt ja/nein (Boolean)
+    # - locked : User gesperrt ja/nein (Boolean)
     # - used_memory : Speicherverbrauch in MB
     # - last_login : Letzte Anmeldung als datetime.datetime
     # - create_time : Zeit der Erstellung des Users als datetime.datetime
@@ -139,9 +143,20 @@ class UserListModel(QtCore.QAbstractTableModel):
     def sort(self, p_column, p_order):
         if len(self.user_list) != 0:
             if p_order == QtCore.Qt.AscendingOrder:
-                self.user_list.sort(key = operator.itemgetter(self.header_list[p_column][0]))
+                '''if self.header_list[p_column][0] == "last_login":
+                    self.user_list.sort(key = (operator.itemgetter(self.header_list[p_column][0])).value)
+                elif self.header_list[p_column][0] == "create_time":
+                    self.user_list.sort(key = (operator.itemgetter(self.header_list[p_column][0])).value)
+                else:
+                self.user_list.sort(key = operator.itemgetter(self.header_list[p_column][0]))'''
             elif p_order == QtCore.Qt.DescendingOrder:
-                self.user_list.sort(key = operator.itemgetter(self.header_list[p_column][0]), reverse = True)
+                '''if self.header_list[p_column][0] == "last_login":
+                    pass
+                elif self.header_list[p_column][0] == "create_time":
+                    pass
+                else:'''
+                #self.user_list.sort(key = operator.itemgetter(self.header_list[p_column][0]), reverse = True)
+                
             self.emit(QtCore.SIGNAL("layoutChanged()"))
 
     ## Übergibt eine Liste mit Spalten die angezeigt werden sollen.
@@ -155,7 +170,7 @@ class UserListModel(QtCore.QAbstractTableModel):
     ## Gibt eine Liste der Ausgewählten Einträge zurück.
     def selectedIndexes(self):
         pass
-    
+
     ## Entfernt einen oder mehrere Benutzer aus der Liste
     # @param p_user Liste mit den Usernamen
     def removeUser(self, p_user):

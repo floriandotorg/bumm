@@ -8,7 +8,6 @@
 
 # todo:
 # SelectionChanged() funzt nicht
-# last_login und create_time zeigen nichts an
 # changeHeaderData() muss die spaltengröße anpassen
 # removeuser funzt nich
 
