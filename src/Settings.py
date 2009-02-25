@@ -32,6 +32,15 @@ from PyQt4 import QtCore
 #  gefüllt.
 class Settings(QtCore.QObject):
 
+    # lege Standardwerte fest
+    s_username = ""
+    s_server_address = ""
+    s_columns = ["user_id", "name", "longname", "email", "used_memory", "last_login", "locked"]
+    s_col_dialog_geometry = QtCore.QRect(100, 100, 100, 100)
+    s_main_window_geometry = QtCore.QRect(100, 100, 800, 800)
+    s_user_details_geometry = QtCore.QRect(100, 100, 100, 100)
+    s_show_user_details = True
+
     ## Konstruktor
     # Im Konstruktor werden die gespeicherten Werte, bzw. die Standard-Werte
     # geladen.
@@ -43,40 +52,21 @@ class Settings(QtCore.QObject):
         # initialisiere QSettings-Objekt
         self._settings = QtCore.QSettings("BUMM")
 
-        # lege Standardwerte fest
-        self.__username = "ChuckNoris"
-        self.__server_address = "http://10.200.132.22/bscw"
-        self.__columns = ["user_id", "name", "longname", "email", "used_memory", "last_login", "locked"]
-        self.__col_dialog_geometry = QtCore.QRect(100,100,100,100)
-        self.__main_window_geometry = QtCore.QRect(100,100,800,800)
-        self.__user_details_geometry = QtCore.QRect(100,100,100,100)
-        self.__show_user_details = True
-        
-        # lege Standardwerte fest
-        #self.username = "ChuckNoris"
-        #self.server_address = "http://10.200.132.22/bscw"
-        #self.columns = ["user_id", "name", "longname", "email", "used_memory", "last_login", "locked"]
-        #self.col_dialog_geometry = QtCore.QRect(100,100,100,100)
-        #self.main_window_geometry = QtCore.QRect(100,100,800,800)
-        #self.user_details_geometry = QtCore.QRect(100,100,100,100)
-        #self.show_user_details = True
-
-
         # lese Einstellungen aus
         self._username = self._settings.value("username",
-                            QtCore.QVariant(self.__username)).toString()
+                            QtCore.QVariant(Settings.s_username)).toString()
         self._server_address = self._settings.value("server_address",
-                            QtCore.QVariant(self.__server_address)).toString()
+                            QtCore.QVariant(Settings.s_server_address)).toString()
         self._columns = self._settings.value("columns",
-                            QtCore.QVariant(self.__columns)).toString()
+                            QtCore.QVariant(Settings.s_columns)).toStringList()
         self._col_dialog_geometry = self._settings.value("col_dialog_geometry",
-                            QtCore.QVariant(self.__col_dialog_geometry)).toRect()
+                            QtCore.QVariant(Settings.s_col_dialog_geometry)).toRect()
         self._main_window_geometry = self._settings.value("main_window_geometry",
-                            QtCore.QVariant(self.__main_window_geometry)).toRect()
+                            QtCore.QVariant(Settings.s_main_window_geometry)).toRect()
         self._user_details_geometry = self._settings.value("user_details_geometry",
-                            QtCore.QVariant(self.__user_details_geometry)).toRect()
+                            QtCore.QVariant(Settings.s_user_details_geometry)).toRect()
         self._show_user_details = self._settings.value("show_user_details",
-                            QtCore.QVariant(self.__show_user_details)).toBool()
+                            QtCore.QVariant(Settings.s_show_user_details)).toBool()
 
     ## Dekonstruktor
     # Im Dekonstruktor werden die neuen Einstellungen gespeichert.
