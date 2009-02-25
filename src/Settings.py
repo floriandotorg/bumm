@@ -143,7 +143,7 @@ class Settings(QtCore.QObject):
     ## setzt die Serveradresse
     # @param p_server_adress Serveradresse als QString
     def setServerAddress(self, p_server_address):
-        self._server_address = p_server_adress
+        self._server_address = p_server_address
 
     ## setzt die Spaltennamen
     # @param p_columns Spaltennamen als Liste
@@ -152,7 +152,7 @@ class Settings(QtCore.QObject):
 
     ## setzt die geometrischen Daten des Login-Dialogs
     # @param p_login_dialog_geometry Daten des Login-Dialogs als QRect
-    def setLoginDialogGeometry(self):
+    def setLoginDialogGeometry(self, p_login_dialog_geometry):
         self._login_dialog_geometry = p_login_dialog_geometry
 
     ## setzt die geometrischen Daten des Spalten-Dialogs
@@ -175,7 +175,7 @@ class Settings(QtCore.QObject):
     def setShowUserDetails(self, p_show_user_details):
         self._show_user_details = p_show_user_details
 
-    # Propertys
+    # Properties
     username = property(getUsername, setUsername)
     server_address = property(getServerAddress, setServerAddress)
     columns = property(getColumns, setColumns)
