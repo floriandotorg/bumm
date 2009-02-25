@@ -28,6 +28,7 @@
 from PyQt4 import QtCore
 import operator
 import datetime
+import string
 
 ## Schnittstelle zwischen Benutzerdaten und der User-Liste
 # Siehe Qt Model/View Framework
@@ -68,8 +69,13 @@ class UserListModel(QtCore.QAbstractTableModel):
                 return QtCore.QVariant("Ja")
             elif self.user_list[p_index.row()][self.header_list[p_index.column()][0]] == False:
                 return QtCore.QVariant("Nein")
-        elif not self.user_list[p_index.row()][self.header_list[p_index.column()][0]]:
-            return QtCore.QVariant("N/A")
+        elif not self.user_list[p_index.row()][self.header_list[p_index.column()][0]] and \
+                self.header_list[p_index.column()][0] == "last_login":
+            return QtCore.QVariant("Nie")
+        #elif self.header_list[p_index.column()][0] == "used_memory":
+        #    kilobyte_output = \
+        #    string(self.user_list[p_index.row()][self.header_list[p_index.column()][0]])
+        #    return QtCore.QVariant(kilobyte_output)
         elif self.header_list[p_index.column()][0] == "last_login":
             date_time = datetime.datetime.strptime(self.user_list[p_index.row()]
                     [self.header_list[p_index.column()][0]].value, "%Y%m%dT%H:%M:%S")
