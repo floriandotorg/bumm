@@ -70,6 +70,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             ## Liste aller angezeigten Spalten in der User-Liste
             self._headers = SetColumnDialog([], self) \
                                 .tupleByKey(self._settings.columns)
+
             ## Liste aller Benuter
             self._user_list = UserList(self._headers, self)
             self.setCentralWidget(self._user_list)
@@ -94,7 +95,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
                             self._user_details.setVisible)
             self.connect(self._user_details,
                             QtCore.SIGNAL("visibilityChanged(bool)"),
-                            self._action_user_details.setChecked)
+                            self._changeUserDetailsVisibilitySlot)
     
             self.connect(self._action_update_all, QtCore.SIGNAL("triggered()"),
                             self._loadList)
@@ -122,17 +123,10 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
     
             self._login()
             
-        except Exception, exception:
+        except interface.Exceptions.ConnectionError, exception:
             # Fehlerdialog anzeigen
             err_dialog = ErrorDialog(exception, self)
             err_dialog.exec_()
-    
-    ## Dekonstruktor
-    def __del__(self):
-        self._settings.columns = [i[0] for i in self._headers]
-        self._settings.main_window_geometry = self.geometry()
-        self._settings.user_details_geometry = self._user_details.geometry()
-        self._settings.show_user_details = self._user_details.isVisible()
 
     ## Lädt die Benutzerdaten vom BSCW Server und zeigt das Hauptfenster an
     def show(self):
@@ -144,7 +138,16 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             # Fehlerdialog anzeigen
             err_dialog = ErrorDialog(exception, self)
             err_dialog.exec_()
-
+    
+    ## Überladene Methode: Speichert alle Einstellungen, wenn das Fenster
+    # geschlossen wurde
+    # @param p_even Qt-Close-Event     
+    def closeEvent(self, p_event):
+        self._settings.columns = [i[0] for i in self._headers]
+        self._settings.main_window_geometry = self.geometry()
+        self._settings.user_details_geometry = self._user_details.geometry()
+        self._settings.show_user_details = self._user_details.isVisible()
+    
     ## Erzeugt einen Thread, der eine Aufgabe ausführt, die die Anwendung
     # blockieren könnte
     # @param p_func Zeiger auf eine Funktion mit langer Laufzeit
@@ -179,11 +182,19 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
     def _showSetColumnDialogSlot(self):
         set_column_dialog = SetColumnDialog(self._headers, self)
         set_column_dialog.setGeometry(self._settings.col_dialog_geometry)
+        print self._settings.col_dialog_geometry
         set_column_dialog.exec_()
         if set_column_dialog.result() == QtGui.QDialog.Accepted:
             self._headers = set_column_dialog.getHeaderData()
             self._user_list.changeHeaderData(self._headers)
         self._settings.col_dialog_geometry = set_column_dialog.geometry()
+        print set_column_dialog.geometry()
+    
+    ## Zeigt/Versteckt das UserDetails Fenster
+    # @param p_visible UserDetails zeigen ja/nein (Boolean) 
+    def _changeUserDetailsVisibilitySlot(self, p_visible):
+        self._user_details.setVisible(p_visible)
+        self._settings.show_user_details = p_visible
 
     ## Sperrt/Entsperrt das Widget und zeigt eine Meldung in der Statusleiste an
     # @param p_lock Widget sperren ja/nein (Boolean)
