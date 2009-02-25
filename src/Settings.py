@@ -29,11 +29,13 @@ from PyQt4 import QtCore
 
 ## Verwaltet Programmeinstellungen und speichert diese je nach System.
 #  Ist noch keine Datei vorhanden werden die Einstellungen mit Default-Werten
-#  gefÃ¼llt.
+#  gefüllt.
 class Settings(QtCore.QObject):
 
     ## Konstruktor
-    # @param p_parent Ãœbergeordnetes QObject
+    # Im Konstruktor werden die gespeicherten Werte, bzw. die Standard-Werte
+    # geladen.
+    # @param p_parent übergeordnetes QObject
     def __init__(self, p_parent = None):
         # initialisiere Objekt
         QtCore.QObject.__init__(self, p_parent)
@@ -67,6 +69,7 @@ class Settings(QtCore.QObject):
                             QtCore.QVariant(self.__show_user_details)).toBool()
 
     ## Dekonstruktor
+    # Im Dekonstruktor werden die neuen Einstellungen gespeichert.
     def __del__(self):
         self._settings.setValue("username", QtCore.QVariant(self._username))
         self._settings.setValue("server_address",
@@ -168,7 +171,3 @@ class Settings(QtCore.QObject):
     main_window_geometry = property(getMainWindowGeometry, setMainWindowGeometry)
     user_details_geometry = property(getUserDetailsGeometry, setUserDetailsGeometry)
     show_user_details = property(getShowUserDetails, setShowUserDetails)
-
-if __name__ == "__main__":
-    s = Settings()
-    print s.username
