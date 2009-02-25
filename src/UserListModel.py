@@ -63,14 +63,13 @@ class UserListModel(QtCore.QAbstractTableModel):
         elif p_index.row() >= len(self.user_list):
             return QtCore.QVariant()
         elif self.header_list[p_index.column()][0] == "last_login":
-            d = datetime.datetime.strptime(self.user_list[p_index.row()]
-                    [self.header_list[p_index.column()][0]], "%Y%m%dT%H:%M:%S")
-            return QtCore.QVariant(d.strftime("%d.%m.%Y, %H:%M"))
+            date_time = datetime.datetime.strptime(self.user_list[p_index.row()]
+                    [self.header_list[p_index.column()][0]].value, "%Y%m%dT%H:%M:%S")
+            return QtCore.QVariant(date_time.strftime("%d.%m.%Y %H:%M"))
         elif self.header_list[p_index.column()][0] == "create_time":
-            print self.user_list[p_index.row()][self.header_list[p_index.column()][0]]
-            return QtCore.QVariant(
-                self.user_list[p_index.row()]
-                     [self.header_list[p_index.column()][0]])
+            date_time = datetime.datetime.strptime(self.user_list[p_index.row()]
+                    [self.header_list[p_index.column()][0]].value, "%Y%m%dT%H:%M:%S")
+            return QtCore.QVariant(date_time.strftime("%d.%m.%Y %H:%M"))
         elif self.user_list[p_index.row()][self.header_list[p_index.column()][0]] == True:
             return QtCore.QVariant("Ja")
         elif self.user_list[p_index.row()][self.header_list[p_index.column()][0]] == False:
