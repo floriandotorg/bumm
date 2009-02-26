@@ -136,7 +136,7 @@ class UserDetails(QtGui.QDockWidget, Ui_UserDetails):
             #else:
             created = datetime.datetime.strptime(p_user["create_time"].value, "%Y%m%dT%H:%M:%S")
             self._create_time.setText(created.strftime("%d.%m.%Y %H:%M"))
-            self._storage_usage.setText(str(p_user["used_memory"]))
+            self._storage_usage.setText(str(int(p_user["used_memory"]) * 1000))
             self._objects.setText(str(p_user["files"]))
             #self._role_owner_as_owner.setText(str(p_user["access_right"]["owner"]))
 
