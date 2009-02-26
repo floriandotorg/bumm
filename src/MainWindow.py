@@ -66,6 +66,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             self.setGeometry(self._settings.main_window_geometry)
             self._user_details.setGeometry(self._settings.user_details_geometry)
             self._user_details.setVisible(self._settings.show_user_details)
+            self._action_user_details.setChecked(self._settings.show_user_details)
     
             ## Liste aller angezeigten Spalten in der User-Liste
             self._headers = SetColumnDialog([], self) \
@@ -182,13 +183,13 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
     def _showSetColumnDialogSlot(self):
         set_column_dialog = SetColumnDialog(self._headers, self)
         set_column_dialog.setGeometry(self._settings.col_dialog_geometry)
-        print self._settings.col_dialog_geometry
+        print "show vor:" + str(self._settings.col_dialog_geometry)
         set_column_dialog.exec_()
         if set_column_dialog.result() == QtGui.QDialog.Accepted:
             self._headers = set_column_dialog.getHeaderData()
             self._user_list.changeHeaderData(self._headers)
         self._settings.col_dialog_geometry = set_column_dialog.geometry()
-        print set_column_dialog.geometry()
+        print "show nach:" + str(set_column_dialog.geometry())
     
     ## Zeigt/Versteckt das UserDetails Fenster
     # @param p_visible UserDetails zeigen ja/nein (Boolean) 
