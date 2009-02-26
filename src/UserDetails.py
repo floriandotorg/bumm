@@ -83,8 +83,8 @@ class UserDetails(QtGui.QDockWidget, Ui_UserDetails):
     # - files : Dateien (Anzahl)
     # - admin : User ist BSCW-Admin ja/nein (Boolean)
     # - workspaces : Liste aller Arbeitsbereiche, in den der User Mitglied ist
-    # - access_right : Zugriffsrechte, Dictornary mit folgendem Aufbau:
-    #     - owner : Zugriffsrechte für Eigentümer: Liste mit zwei Elementen
+    # - access_rights : Zugriffsrechte, Dictornary mit folgendem Aufbau:
+    #     - owner : Zugriffsrechte für Eigentümer: Tupel mit zwei Listen
     #        - Liste mit Usernamen, die dieser Rolle entsprechen
     #        - Liste mit Zugriffsrechten
     #     - manager : Zugriffsrechte für Manager: Liste mit zwei Elementen
@@ -118,7 +118,7 @@ class UserDetails(QtGui.QDockWidget, Ui_UserDetails):
             else:
                 self._more_mail.setText("")
             #if p_user["last_login"] == None:
-            #   self._last_login.setText("Nie")
+            #    self._last_login.setText("Nie")
             #else:
             last_login = datetime.datetime.strptime(p_user["last_login"].value, "%Y%m%dT%H:%M:%S")
             self._last_login.setText(last_login.strftime("%d.%m.%Y %H:%M"))
@@ -136,9 +136,50 @@ class UserDetails(QtGui.QDockWidget, Ui_UserDetails):
             #else:
             created = datetime.datetime.strptime(p_user["create_time"].value, "%Y%m%dT%H:%M:%S")
             self._create_time.setText(created.strftime("%d.%m.%Y %H:%M"))
-            self._storage_usage.setText(str(int(p_user["used_memory"]) * 1000))
+            self._storage_usage.setText(str(int(p_user["used_memory"] * 1000)))
             self._objects.setText(str(p_user["files"]))
-            #self._role_owner_as_owner.setText(str(p_user["access_right"]["owner"]))
+            if p_user["access_rights"]["owner"][0]:
+                text = ""
+                for i in range(len(p_user["access_rights"]["owner"][0])):
+                    text += (p_user["access_rights"]["owner"][0][i] + "\n")
+                self._role_owner_as_owner.setText(text)
+            else:
+                self._role_owner_as_owner.setText("None")
+            if p_user["access_rights"]["owner"][1]:
+                text = ""
+                for i in range(len(p_user["access_rights"]["owner"][1])):
+                    text += (p_user["access_rights"]["owner"][1][i] + "\n")
+                self._actions_as_owner.setText(text)
+            else:
+                self._actions_as_owner.setText("None")
+            if p_user["access_rights"]["manager"][0]:
+                text = ""
+                for i in range(len(p_user["access_rights"]["manager"][0])):
+                    text += (p_user["access_rights"]["manager"][0][i] + "\n")
+                self._role_owner_as_manager.setText(text)
+            else:
+                self._role_owner_as_manager.setText("None")
+            if p_user["access_rights"]["manager"][1]:
+                text = ""
+                for i in range(len(p_user["access_rights"]["manager"][1])):
+                    text += (p_user["access_rights"]["manager"][1][i] + "\n")
+                self._actions_as_manager.setText(text)
+            else:
+                self._actions_as_manager.setText("None")
+            if p_user["access_rights"]["other"][0]:
+                text = ""
+                for i in range(len(p_user["access_rights"]["other"][0])):
+                    text += (p_user["access_rights"]["other"][0][i] + "\n")
+                self._role_owner_as_other.setText(text)
+            else:
+                self._role_owner_as_other.setText("None")
+            if p_user["access_rights"]["other"][1]:
+                text = ""
+                for i in range(len(p_user["access_rights"]["other"][1])):
+                    text += (p_user["access_rights"]["other"][1][i] + "\n")
+                self._actions_as_other.setText(text)
+            else:
+                self._actions_as_other.setText("None")
 
             ##Daten des Persönliches-Tab
             self._private_tel.setText(p_user["phone_home"])
