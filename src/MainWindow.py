@@ -52,22 +52,22 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         try:
             QtGui.QMainWindow.__init__(self, p_parent)
             self.setupUi(self)
-    
+
             ## Liste aller heruntergeladenen Benutzerbilder
             self._img_cache = []
-            
+
             ## DockWidget indem nähere Benutzerinformationen angezeigt werden
             self._user_details = UserDetails(self)
             self.addDockWidget(QtCore.Qt.RightDockWidgetArea,
                                                     self._user_details)
-            
+
             ## Programmeinstellungen laden
             self._settings = Settings()
             self.setGeometry(self._settings.main_window_geometry)
             self._user_details.setGeometry(self._settings.user_details_geometry)
             self._user_details.setVisible(self._settings.show_user_details)
             self._action_user_details.setChecked(self._settings.show_user_details)
-    
+
             ## Liste aller angezeigten Spalten in der User-Liste
             self._headers = SetColumnDialog([], self) \
                                 .tupleByKey(self._settings.columns)
@@ -75,35 +75,35 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             ## Liste aller Benuter
             self._user_list = UserList(self._headers, self)
             self.setCentralWidget(self._user_list)
-    
+
             self._toolbar.addSeparator()
             ## 'Suchtext'-Label
             self._lbl_filter = QtGui.QLabel(self)
             self._lbl_filter.setText(self.trUtf8("Suchtext: "))
             self._toolbar.addWidget(self._lbl_filter)
-    
+
             ## Eingabefeld für den Suchbegriff
             self._line_edit_filter = QtGui.QLineEdit(self)
             self._line_edit_filter.setMaximumWidth(150)
             self._toolbar.addWidget(self._line_edit_filter)
-    
+
             self.connect(self._user_list,
                             QtCore.SIGNAL("SelectionChanged()"),
                             self._selectionChangedSlot)
-    
+
             self.connect(self._action_user_details,
                             QtCore.SIGNAL("triggered(bool)"),
                             self._user_details.setVisible)
             self.connect(self._user_details,
                             QtCore.SIGNAL("visibilityChanged(bool)"),
                             self._changeUserDetailsVisibilitySlot)
-    
+
             self.connect(self._action_update_all, QtCore.SIGNAL("triggered()"),
                             self._loadList)
-    
+
             self.connect(self._action_set_cols, QtCore.SIGNAL("triggered()"),
                             self._showSetColumnDialogSlot)
-    
+
             self.connect(self._action_delete, QtCore.SIGNAL("triggered()"),
                             self._deleteUserSlot)
             self.connect(self._action_lock, QtCore.SIGNAL("triggered()"),
@@ -115,15 +115,15 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             self.connect(self._action_destroy_clipboard,
                             QtCore.SIGNAL("triggered()"),
                             self._destroyClipboardSlot)
-    
+
             self.connect(self._action_info, QtCore.SIGNAL("triggered()"),
                             self._showInfoSlot)
-    
+
             self.connect(self._line_edit_filter, QtCore.SIGNAL("returnPressed()"),
                             self._setUserListFilterSlot)
-    
+
             self._login()
-            
+
         except interface.Exceptions.ConnectionError, exception:
             # Fehlerdialog anzeigen
             err_dialog = ErrorDialog(exception, self)
@@ -134,21 +134,21 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         try:
             QtGui.QMainWindow.show(self)
             self._loadList()
-            
+
         except Exception, exception:
             # Fehlerdialog anzeigen
             err_dialog = ErrorDialog(exception, self)
             err_dialog.exec_()
-    
+
     ## Überladene Methode: Speichert alle Einstellungen, wenn das Fenster
     # geschlossen wurde
-    # @param p_even Qt-Close-Event     
+    # @param p_even Qt-Close-Event
     def closeEvent(self, p_event):
         self._settings.columns = [i[0] for i in self._headers]
         self._settings.main_window_geometry = self.geometry()
         self._settings.user_details_geometry = self._user_details.geometry()
         self._settings.show_user_details = self._user_details.isVisible()
-    
+
     ## Erzeugt einen Thread, der eine Aufgabe ausführt, die die Anwendung
     # blockieren könnte
     # @param p_func Zeiger auf eine Funktion mit langer Laufzeit
@@ -183,19 +183,18 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
     def _showSetColumnDialogSlot(self):
         set_column_dialog = SetColumnDialog(self._headers, self)
         set_column_dialog.setGeometry(self._settings.col_dialog_geometry)
-        print "show vor:" + str(self._settings.col_dialog_geometry)
+
         set_column_dialog.exec_()
+
         if set_column_dialog.result() == QtGui.QDialog.Accepted:
             self._headers = set_column_dialog.getHeaderData()
             self._user_list.changeHeaderData(self._headers)
         self._settings.col_dialog_geometry = set_column_dialog.geometry()
-        print "show nach:" + str(set_column_dialog.geometry())
-    
+
     ## Zeigt/Versteckt das UserDetails Fenster
-    # @param p_visible UserDetails zeigen ja/nein (Boolean) 
+    # @param p_visible UserDetails zeigen ja/nein (Boolean)
     def _changeUserDetailsVisibilitySlot(self, p_visible):
         self._user_details.setVisible(p_visible)
-        self._settings.show_user_details = p_visible
 
     ## Sperrt/Entsperrt das Widget und zeigt eine Meldung in der Statusleiste an
     # @param p_lock Widget sperren ja/nein (Boolean)
@@ -347,7 +346,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         if login_dialog.exec_() != QtGui.QDialog.Accepted:
             QtGui.qApp.quit()
             exit()
-        
+
         self._settings = login_dialog.getSettings()
 
         ## Interface zum BSCW-Server
