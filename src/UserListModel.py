@@ -72,10 +72,12 @@ class UserListModel(QtCore.QAbstractTableModel):
         elif not self.user_list[p_index.row()][self.header_list[p_index.column()][0]] and \
                 self.header_list[p_index.column()][0] == "last_login":
             return QtCore.QVariant("Nie")
-        #elif self.header_list[p_index.column()][0] == "used_memory":
-        #    kilobyte_output = \
-        #    string(self.user_list[p_index.row()][self.header_list[p_index.column()][0]])
-        #    return QtCore.QVariant(kilobyte_output)
+        elif self.header_list[p_index.column()][0] == "used_memory":
+            kilobyte_output = \
+            str(int(self.user_list[p_index.row()] \
+            [self.header_list[p_index.column()][0]] * 1000)) \
+            + " KB"
+            return QtCore.QVariant(kilobyte_output)
         elif self.header_list[p_index.column()][0] == "last_login":
             date_time = datetime.datetime.strptime(self.user_list[p_index.row()]
                     [self.header_list[p_index.column()][0]].value, "%Y%m%dT%H:%M:%S")
@@ -99,7 +101,10 @@ class UserListModel(QtCore.QAbstractTableModel):
                                 p_role = QtCore.Qt.DisplayRole):
         if p_role!=QtCore.Qt.DisplayRole:
             return QtCore.QVariant()
-        return QtCore.QVariant(QtCore.QString(self.header_list[p_section][1]))
+        elif p_section >= len(self.header_list):
+            return QtCore.QVariant()
+        else:
+            return QtCore.QVariant(QtCore.QString(self.header_list[p_section][1]))
 
     ## Löscht den Inhalt der Liste und zeigt den Inhalt von p_user_list an.
     # @param p_user_list Eine Liste von Dictonaries mit folgendem Aufbau:
