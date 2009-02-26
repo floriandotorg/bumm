@@ -54,8 +54,9 @@ class UserList(QtGui.QTreeView):
         self.setSelectionMode(QtGui.QTreeView.ExtendedSelection)
         self.connect(self, QtCore.SIGNAL("clicked(QModelIndex)"), 
                                     self._emitSelectionChanged)
-        #self.setVerticalScrollMode(QtGui.QTreeView.ScrollPerPixel)
-        #self.setHorizontalScrollMode(QtGui.QTreeView.ScrollPerPixel)
+        self.setVerticalScrollMode(QtGui.QTreeView.ScrollPerPixel)
+        self.setHorizontalScrollMode(QtGui.QTreeView.ScrollPerPixel)
+        self._resizeColumns()
     
     ## Gibt eine Liste der selektierten User zurück
     # @return Liste von Dictonaries mit Userdaten (siehe loadList())
@@ -112,6 +113,7 @@ class UserList(QtGui.QTreeView):
     #        - Liste mit Zugriffsrechten
     def loadList(self, p_user_list):
         self._model.loadList(p_user_list)
+        self._resizeColumns()
     
     ## Übergibt eine Liste mit Spalten die angezeigt werden sollen.
     # @param p_header_data Eine Liste von Tupels mit jeweils zwei Elementen,
@@ -119,6 +121,7 @@ class UserList(QtGui.QTreeView):
     # @see loadList()
     def changeHeaderData(self, p_header_data):
          self._model.changeHeaderData(p_header_data)
+         self._resizeColumns()
     
     ## Entfernt einen oder mehrere Benutzer aus der Liste
     # @param p_user Liste mit den Usernamen
@@ -135,3 +138,8 @@ class UserList(QtGui.QTreeView):
     ## Emitiert das SelectionChanged() Signal
     def _emitSelectionChanged(self):
         self.emit(QtCore.SIGNAL("SelectionChanged()"))
+      
+    ## Passt die Spalten auf die Inhalte an    
+    def _resizeColumns(self):
+        for i in range(self._model.columnCount()):
+            self.resizeColumnToContents(i)
