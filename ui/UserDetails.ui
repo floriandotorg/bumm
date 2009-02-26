@@ -40,6 +40,9 @@
       </item>
       <item>
        <widget class="QLineEdit" name="_user" >
+        <property name="enabled" >
+         <bool>true</bool>
+        </property>
         <property name="minimumSize" >
          <size>
           <width>107</width>
@@ -54,6 +57,12 @@
         </property>
         <property name="text" >
          <string/>
+        </property>
+        <property name="frame" >
+         <bool>true</bool>
+        </property>
+        <property name="readOnly" >
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -92,6 +101,9 @@
         </property>
         <property name="text" >
          <string/>
+        </property>
+        <property name="readOnly" >
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -177,6 +189,9 @@
           <height>20</height>
          </size>
         </property>
+        <property name="readOnly" >
+         <bool>true</bool>
+        </property>
        </widget>
        <widget class="QLabel" name="_lbl_admin" >
         <property name="geometry" >
@@ -223,6 +238,9 @@
           <width>190</width>
           <height>20</height>
          </size>
+        </property>
+        <property name="readOnly" >
+         <bool>true</bool>
         </property>
        </widget>
        <widget class="QLabel" name="_lbl_locked" >
@@ -271,6 +289,9 @@
           <height>20</height>
          </size>
         </property>
+        <property name="readOnly" >
+         <bool>true</bool>
+        </property>
        </widget>
        <widget class="QLabel" name="_lbl_mail" >
         <property name="geometry" >
@@ -317,6 +338,9 @@
           <width>190</width>
           <height>20</height>
          </size>
+        </property>
+        <property name="readOnly" >
+         <bool>true</bool>
         </property>
        </widget>
        <widget class="QLabel" name="_lbl_more_mail" >
@@ -390,6 +414,12 @@
           <height>20</height>
          </size>
         </property>
+        <property name="frame" >
+         <bool>true</bool>
+        </property>
+        <property name="readOnly" >
+         <bool>true</bool>
+        </property>
        </widget>
        <widget class="QLabel" name="_lbl_workspace" >
         <property name="geometry" >
@@ -437,6 +467,9 @@
           <height>16777215</height>
          </size>
         </property>
+        <property name="readOnly" >
+         <bool>true</bool>
+        </property>
        </widget>
        <widget class="QTextEdit" name="_more_mail" >
         <property name="geometry" >
@@ -458,6 +491,9 @@
           <width>190</width>
           <height>16777215</height>
          </size>
+        </property>
+        <property name="readOnly" >
+         <bool>true</bool>
         </property>
        </widget>
       </widget>
@@ -485,6 +521,9 @@
           <width>190</width>
           <height>20</height>
          </size>
+        </property>
+        <property name="readOnly" >
+         <bool>true</bool>
         </property>
        </widget>
        <widget class="QLabel" name="_lbl_storage_usage" >
@@ -532,6 +571,9 @@
           <width>190</width>
           <height>20</height>
          </size>
+        </property>
+        <property name="readOnly" >
+         <bool>true</bool>
         </property>
        </widget>
        <widget class="QLabel" name="_lbl_objects" >
@@ -686,6 +728,9 @@
               <height>16777215</height>
              </size>
             </property>
+            <property name="readOnly" >
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item row="1" column="2" >
@@ -701,6 +746,9 @@
               <width>121</width>
               <height>16777215</height>
              </size>
+            </property>
+            <property name="readOnly" >
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -737,6 +785,9 @@
               <height>16777215</height>
              </size>
             </property>
+            <property name="readOnly" >
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item row="2" column="2" >
@@ -752,6 +803,9 @@
               <width>121</width>
               <height>16777215</height>
              </size>
+            </property>
+            <property name="readOnly" >
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -788,6 +842,9 @@
               <height>16777215</height>
              </size>
             </property>
+            <property name="readOnly" >
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item row="3" column="2" >
@@ -803,6 +860,9 @@
               <width>121</width>
               <height>16777215</height>
              </size>
+            </property>
+            <property name="readOnly" >
+             <bool>true</bool>
             </property>
            </widget>
           </item>
@@ -855,6 +915,9 @@
           <height>20</height>
          </size>
         </property>
+        <property name="readOnly" >
+         <bool>true</bool>
+        </property>
        </widget>
       </widget>
       <widget class="QWidget" name="_personal_tab" >
@@ -906,6 +969,9 @@
            <height>20</height>
           </size>
          </property>
+         <property name="readOnly" >
+          <bool>true</bool>
+         </property>
         </widget>
         <widget class="QLabel" name="_lbl_private_tel" >
          <property name="geometry" >
@@ -953,6 +1019,9 @@
            <height>20</height>
           </size>
          </property>
+         <property name="readOnly" >
+          <bool>true</bool>
+         </property>
         </widget>
         <widget class="QLabel" name="_lbl_mobile_tel" >
          <property name="geometry" >
@@ -999,6 +1068,9 @@
            <width>187</width>
            <height>20</height>
           </size>
+         </property>
+         <property name="readOnly" >
+          <bool>true</bool>
          </property>
         </widget>
         <widget class="QLabel" name="_lbl_office_tel" >
@@ -1072,6 +1144,9 @@
            <height>20</height>
           </size>
          </property>
+         <property name="readOnly" >
+          <bool>true</bool>
+         </property>
         </widget>
        </widget>
        <widget class="QWidget" name="layoutWidget_3" >
@@ -1132,6 +1207,9 @@
              <height>20</height>
             </size>
            </property>
+           <property name="readOnly" >
+            <bool>true</bool>
+           </property>
           </widget>
          </item>
          <item row="1" column="0" >
@@ -1166,6 +1244,9 @@
              <width>190</width>
              <height>20</height>
             </size>
+           </property>
+           <property name="readOnly" >
+            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -1202,6 +1283,9 @@
              <height>20</height>
             </size>
            </property>
+           <property name="readOnly" >
+            <bool>true</bool>
+           </property>
           </widget>
          </item>
          <item row="3" column="0" >
@@ -1236,6 +1320,9 @@
              <width>190</width>
              <height>20</height>
             </size>
+           </property>
+           <property name="readOnly" >
+            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -1272,6 +1359,9 @@
              <height>16777215</height>
             </size>
            </property>
+           <property name="readOnly" >
+            <bool>true</bool>
+           </property>
           </widget>
          </item>
          <item row="5" column="0" >
@@ -1307,6 +1397,9 @@
              <height>16777215</height>
             </size>
            </property>
+           <property name="readOnly" >
+            <bool>true</bool>
+           </property>
           </widget>
          </item>
          <item row="6" column="0" >
@@ -1341,6 +1434,9 @@
              <width>190</width>
              <height>16777215</height>
             </size>
+           </property>
+           <property name="readOnly" >
+            <bool>true</bool>
            </property>
           </widget>
          </item>
