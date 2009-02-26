@@ -1,12 +1,14 @@
+# -*- coding: utf-8 -*-
+
 # Dateiname: ap_destroy_trash.py
-# Beschreibung: BSCW-API-Erweiterung zum Leeren der Mülleimer aller
+# Beschreibung: BSCW-API-Erweiterung zum Leeren der MÃ¼lleimer aller
 # oder einiger Benutzer
 # Version: 1
 # Autor: Florian Kaiser
-# Letzte Änderung: 23.02.09
+# Letzte Ã„nderung: 23.02.09
 
 #################################################################################
-# Copyright (C) 2009 Benjamin Flader, Benjamin Leipold, André Naumann,          #
+# Copyright (C) 2009 Benjamin Flader, Benjamin Leipold, AndrÃ© Naumann,          #
 # Corinna Vollert, Florian Kaiser                                               #
 #                                                                               #
 # Redistribution and use in source and binary forms, with or without            #
@@ -34,10 +36,10 @@
 def param_def():
     from api_def import ASCII, ARRAY, INT
     return (
-        # Mindestalter der zu löschenden Dateien in Tagen
+        # Mindestalter der zu lÃ¶schenden Dateien in Tagen
         ('outdated', INT, 0),
-        # Eine Liste mit den Namen der zu löschenden Benutzer oder eine leere
-        # Liste für alle Benutzer
+        # Eine Liste mit den Namen der zu lÃ¶schenden Benutzer oder eine leere
+        # Liste fÃ¼r alle Benutzer
         ('user_names', ARRAY, 0, [('user_name', ASCII, 1)]),
     )
     
@@ -47,8 +49,8 @@ def do_it(request, outdated, user_names):
     from cl_request import Request
     import time
     
-    # Prüfen ob der Benutzer, der diese Datei ausführt Admin-Rechte besitzt,
-    # wenn nicht, Ausführung abbrechen
+    # PrÃ¼fen ob der Benutzer, der diese Datei ausfÃ¼hrt Admin-Rechte besitzt,
+    # wenn nicht, AusfÃ¼hrung abbrechen
     if not request.user.is_admin():
         return None
         
@@ -63,5 +65,5 @@ def do_it(request, outdated, user_names):
     # Liste mit Userobjekten durchgehen ..
     for user in users:
         req.set_user(user.name)
-        # .. und die Mülleimer dieser leeren
+        # .. und die MÃ¼lleimer dieser leeren
         op_rmwaste.clear_waste(req, user.waste, outdated, True, False)

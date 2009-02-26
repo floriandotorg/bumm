@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 # Dateiname: ap_delete_user.py
 # Beschreibung: BSCW-API-Erweiterung zum Löschen von Benutzern
 # Version: 1

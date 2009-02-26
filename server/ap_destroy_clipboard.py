@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 # Dateiname: ap_destroy_clipboard.py
 # Beschreibung: BSCW-API-Erweiterung zum Löschen der Zwischenablage aller
 # oder einiger Benutzer
