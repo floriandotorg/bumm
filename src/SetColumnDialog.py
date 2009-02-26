@@ -114,7 +114,7 @@ class SetColumnDialog(QtGui.QDialog, Ui_SetColumnDialog):
                      ("fax", QtGui.qApp.trUtf8("Faxnummer")),
                      ("address", QtGui.qApp.trUtf8("Adresse")),
                      ("url", QtGui.qApp.trUtf8("Webseite")),
-                     ("url_homepage", QtGui.qApp.trUtf8("Webseite privat")),
+                     ("url_home", QtGui.qApp.trUtf8("Webseite privat")),
                      ("messaging_services", 
                                 QtGui.qApp.trUtf8("Messaging Services")),
                      ("additional_info", 
@@ -128,7 +128,7 @@ class SetColumnDialog(QtGui.QDialog, Ui_SetColumnDialog):
                      ("files", QtGui.qApp.trUtf8("Dateien (Anzahl)")),
                      ("admin", QtGui.qApp.trUtf8("Admin ja/nein")),
                      ("workspaces", QtGui.qApp.trUtf8("Arbeitsbereiche")),
-                     ("access_right", QtGui.qApp.trUtf8("Zugriffsrechte"))]
+                     ("access_rights", QtGui.qApp.trUtf8("Zugriffsrechte"))]
     
 
 
