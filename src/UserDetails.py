@@ -100,10 +100,23 @@ class UserDetails(QtGui.QDockWidget, Ui_UserDetails):
 
             ##Daten des Info-Tab
             self._full_name.setText(p_user["longname"])
-            self._admin.setText(str(p_user["admin"]))
-            self._locked.setText(str(p_user["locked"]))
+            if p_user["admin"] == False:
+                self._admin.setText("Nein")
+            else:
+                self._admin.setText("Ja")
+            if p_user["locked"] == False:
+                self._locked.setText("Nein")
+            else:
+                self._locked.setText("Ja")
             self._mail.setText(p_user["email"])
-            self._more_mail.setText(str(p_user["secondary_email"]))
+            if p_user["secondary_email"]:
+                text = ""
+                for i in range(len(p_user["secondary_email"])):
+                    text += (p_user["secondary_email"][i] + "\n")
+                self._more_mail.setText(text)
+                #self._more_mail.setText(str(p_user["secondary_email"][0]))
+            else:
+                self._more_mail.setText("")
             self._last_login.setText(str(p_user["last_login"]))
             self._workspace.setText(str(p_user["workspaces"]))
 
