@@ -178,20 +178,32 @@ class UserListModel(QtCore.QAbstractTableModel):
         self.header_list = p_header_data
         self.emit(QtCore.SIGNAL("layoutChanged()"))
 
-    ## Gibt eine Liste der Ausgewählten Einträge zurück.
-    def selectedIndexes(self):
-        pass
-
     ## Entfernt einen oder mehrere Benutzer aus der Liste
     # @param p_user Liste mit den Usernamen
     def removeUser(self, p_user):
-        print p_user
-        for i in p_user:
+        for user_name in p_user:
             counter = 0
             for user in self.user_list:
-                if i == user["name"]:
-                    print self.user_list[counter]
+                if user_name == user["name"]:
                     del self.user_list[counter]
                 counter = counter + 1
         self.loadList(self.user_list)
         self.emit(QtCore.SIGNAL("layoutChanged()"))
+
+    ## Überschreibt ein Attribut eines oder mehrerer Benutzer mit einem neuen Wert
+    # p_name Liste von Namen der Benutzer
+    # p_key Name des Attributs (Siehe loadList())
+    # p_value Neuer Wert
+    def updateUserAttr(self, p_name, p_key, p_value):
+        counter = 0
+        update_id = -1
+        for i in range(len(p_name)):
+            for user in self.user_list:
+                if user["name"] == p_name[i]:
+                    update_id = counter
+                counter = counter + 1
+            if update_id != -1:
+                self.user_list[update_id]["p_key"] = p_value
+                self.loadList(self.user_list)
+                
+                 

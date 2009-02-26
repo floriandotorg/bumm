@@ -131,7 +131,7 @@ class UserList(QtGui.QTreeView):
     # p_key Name des Attributs (Siehe loadList())
     # p_value Neuer Wert
     def updateUserAttr(self, p_name, p_key, p_value):
-        pass
+        self._model.updateUserAttr(p_name, p_key, p_value)
     
     ## Emitiert das SelectionChanged() Signal
     def _emitSelectionChanged(self):
