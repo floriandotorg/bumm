@@ -146,17 +146,17 @@ class Settings(QtCore.QObject):
     ## setzt die geometrischen Daten des Spalten-Dialogs
     # @param p_col_dialog_geometry geometrische Daten des Spalten-Dialogs als QRect
     def setColDialogGeometry(self, p_col_dialog_geometry):
-        self._col_dialog_geometry = p_col_dialog_geometry
+        self._col_dialog_geometry = QtCore.QRect(p_col_dialog_geometry)
 
     ## setzt die geometrischen Daten des MainWindow-Dialogs
     # @param p_main_window_geometry geometrische Daten des MainWindow-Dialogs als QRect
     def setMainWindowGeometry(self, p_main_window_geometry):
-        self._main_window_geometry = p_main_window_geometry
+        self._main_window_geometry = QtCore.QRect(p_main_window_geometry)
 
     ## setzt die geometrischen Daten des UserDetail-Dialogs
     # @param p_user_details_geometry geometrische Daten des Login-Dialogs als QRect
     def setUserDetailsGeometry(self, p_user_details_geometry):
-        self._user_details_geometry = p_user_details_geometry
+        self._user_details_geometry = QtCore.QRect(p_user_details_geometry)
 
     ## setzt den Boolean ob UserDetails angezeigt werden sollen
     # @param _show_user_details UserDetails als Boolean
