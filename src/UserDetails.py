@@ -67,7 +67,7 @@ class UserDetails(QtGui.QDockWidget, Ui_UserDetails):
     # - fax : Faxnummer
     # - language : Sprache
     # - address : Adresse
-    # - url_homepage : Webseite privat
+    # - url_home : Webseite privat
     # - url : website Büro
     # - messaging_services : Messaging Services, Dictronary mit
     # dem Name des Service als Schlüssel und der ID (z.B ICQ-Nummer)
@@ -147,10 +147,17 @@ class UserDetails(QtGui.QDockWidget, Ui_UserDetails):
             self._fax.setText(p_user["fax"])
             self._language.setText(p_user["language"])
             self._organisation.setText(p_user["organization"])
-            #self._private_url.setText(p_user["url_homepage"])
+            self._private_url.setText(p_user["url_home"])
             self._office_url.setText(p_user["url"])
             self._address.setText(p_user["address"])
-            self._instant_messenger.setText(str(p_user["messaging_services"]))
+            #self._instant_messenger.setText(str(p_user["messaging_services"]))
+            if p_user["messaging_services"]:
+                text = ""
+                for i in range(len(p_user["messaging_services"])):
+                    text += (p_user["messaging_services"].keys()[i] + " : " + p_user["messaging_services"].values()[i] + "\n")
+                self._instant_messenger.setText(text)
+            else:
+                self._instant_messenger.setText("")
             self._more_info.setText(p_user["additional_info"])
 
             try:
