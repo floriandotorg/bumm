@@ -96,7 +96,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
                             self._user_details.setVisible)
             self.connect(self._user_details,
                             QtCore.SIGNAL("visibilityChanged(bool)"),
-                            self._changeUserDetailsVisibilitySlot)
+                            self._action_user_details.setChecked)
 
             self.connect(self._action_update_all, QtCore.SIGNAL("triggered()"),
                             self._loadList)
@@ -190,11 +190,6 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             self._headers = set_column_dialog.getHeaderData()
             self._user_list.changeHeaderData(self._headers)
         self._settings.col_dialog_geometry = set_column_dialog.geometry()
-
-    ## Zeigt/Versteckt das UserDetails Fenster
-    # @param p_visible UserDetails zeigen ja/nein (Boolean)
-    def _changeUserDetailsVisibilitySlot(self, p_visible):
-        self._user_details.setVisible(p_visible)
 
     ## Sperrt/Entsperrt das Widget und zeigt eine Meldung in der Statusleiste an
     # @param p_lock Widget sperren ja/nein (Boolean)
