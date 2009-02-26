@@ -28,6 +28,7 @@
 
 from PyQt4 import QtGui, QtCore
 from ui_UserDetails import Ui_UserDetails
+import datetime
 
 ## Implementation eines Steuerelements zum Anzeigen zusätzlicher
 # Benutzerinformationen.
@@ -114,14 +115,21 @@ class UserDetails(QtGui.QDockWidget, Ui_UserDetails):
                 for i in range(len(p_user["secondary_email"])):
                     text += (p_user["secondary_email"][i] + "\n")
                 self._more_mail.setText(text)
-                #self._more_mail.setText(str(p_user["secondary_email"][0]))
             else:
                 self._more_mail.setText("")
-            self._last_login.setText(str(p_user["last_login"]))
-            self._workspace.setText(str(p_user["workspaces"]))
+            last_login = datetime.datetime.strptime(p_user["last_login"].value, "%Y%m%dT%H:%M:%S")
+            self._last_login.setText(last_login.strftime("%d.%m.%Y %H:%M"))
+            if p_user["workspaces"]:
+                text = ""
+                for i in range(len(p_user["workspaces"])):
+                    text += (p_user["workspaces"][i] + "\n")
+                self._workspace.setText(text)
+            else:
+                self._workspace.setText("")
 
             ##Daten des Konto-Tab
-            self._create_time.setText(str(p_user["create_time"]))
+            create_time = datetime.datetime.strptime(p_user["create_time"].value, "%Y%m%dT%H:%M:%S")
+            self._create_time.setText(create_time.strftime("%d.%m.%Y %H:%M"))
             self._storage_usage.setText(str(p_user["used_memory"]))
             self._objects.setText(str(p_user["files"]))
             #self._role_owner_as_owner.setText(str(p_user["access_right"]["owner"]))
