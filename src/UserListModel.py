@@ -185,10 +185,13 @@ class UserListModel(QtCore.QAbstractTableModel):
     ## Entfernt einen oder mehrere Benutzer aus der Liste
     # @param p_user Liste mit den Usernamen
     def removeUser(self, p_user):
+        print p_user
         for i in p_user:
             counter = 0
             for user in self.user_list:
-                if i == user:
+                if i == user["name"]:
+                    print self.user_list[counter]
                     del self.user_list[counter]
                 counter = counter + 1
         self.loadList(self.user_list)
+        self.emit(QtCore.SIGNAL("layoutChanged()"))

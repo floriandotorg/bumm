@@ -8,8 +8,6 @@
 
 # todo:
 # SelectionChanged() funzt nicht
-# changeHeaderData() muss die spaltengröße anpassen
-# removeuser funzt nich
 
 #################################################################################
 # Copyright (C) 2009 Benjamin Flader, Benjamin Leipold, André Naumann,          #
