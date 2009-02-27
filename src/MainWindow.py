@@ -82,6 +82,10 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 
             ## Programmeinstellungen laden
             self._settings = Settings()
+
+            ## Login öffnen
+            self._login()
+
             self.setGeometry(self._settings.main_window_geometry)
             self._user_details.setGeometry(self._settings.user_details_geometry)
             self._user_details.setVisible(self._settings.show_user_details)
@@ -144,8 +148,6 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             self.connect(self._line_edit_filter,
                             QtCore.SIGNAL("returnPressed()"),
                             self._setUserListFilterSlot)
-
-            self._login()
 
         except Exception, exception:
             # Fehlerdialog anzeigen
