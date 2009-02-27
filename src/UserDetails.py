@@ -128,11 +128,11 @@ class UserDetails(QtGui.QDockWidget, Ui_UserDetails):
                 self._more_mail.setText(text)
             else:
                 self._more_mail.setText("")
-            #if p_user["last_login"] == None:
-            #    self._last_login.setText("Nie")
-            #else:
-            last_login = datetime.datetime.strptime(p_user["last_login"].value, "%Y%m%dT%H:%M:%S")
-            self._last_login.setText(last_login.strftime("%d.%m.%Y %H:%M"))
+            if type(p_user["last_login"] == "NoneType"):
+                self._last_login.setText("Nie")
+            else:
+                last_logged = datetime.datetime.strptime(p_user["last_login"].value, "%Y%m%dT%H:%M:%S")
+                self._last_login.setText(last_logged.strftime("%d.%m.%Y %H:%M"))
             if p_user["workspaces"]:
                 text = ""
                 for i in range(len(p_user["workspaces"])):
@@ -142,11 +142,11 @@ class UserDetails(QtGui.QDockWidget, Ui_UserDetails):
                 self._workspace.setText("")
 
             ##Daten des Konto-Tab
-            #if p_user["create_time"] == None:
-            #    self._create_time.setText("Nie")
-            #else:
-            created = datetime.datetime.strptime(p_user["create_time"].value, "%Y%m%dT%H:%M:%S")
-            self._create_time.setText(created.strftime("%d.%m.%Y %H:%M"))
+            if not type(p_user["create_time"] == "DateTime"):
+                self._create_time.setText("Nie")
+            else:
+                created = datetime.datetime.strptime(p_user["create_time"].value, "%Y%m%dT%H:%M:%S")
+                self._create_time.setText(created.strftime("%d.%m.%Y %H:%M"))
             self._storage_usage.setText(str(int(p_user["used_memory"] * 1000)))
             self._objects.setText(str(p_user["files"]))
             if p_user["access_rights"]["owner"][0]:
