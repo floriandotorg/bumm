@@ -203,7 +203,7 @@ class UserListModel(QtCore.QAbstractTableModel):
                     update_id = counter
                 counter = counter + 1
             if update_id != -1:
-                self.user_list[update_id]["p_key"] = p_value
+                self.user_list[update_id][p_key] = p_value
                 self.loadList(self.user_list)
                 
                  
