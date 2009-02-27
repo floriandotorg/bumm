@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'UserDetails.ui'
 #
-# Created: Fri Feb 27 10:59:35 2009
+# Created: Fri Feb 27 13:41:13 2009
 #      by: PyQt4 UI code generator 4.4.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -13,6 +13,11 @@ class Ui_UserDetails(object):
     def setupUi(self, UserDetails):
         UserDetails.setObjectName("UserDetails")
         UserDetails.resize(372, 439)
+        sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(UserDetails.sizePolicy().hasHeightForWidth())
+        UserDetails.setSizePolicy(sizePolicy)
         UserDetails.setMinimumSize(QtCore.QSize(372, 439))
         self._content = QtGui.QWidget()
         self._content.setObjectName("_content")

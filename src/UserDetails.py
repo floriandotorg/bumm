@@ -51,6 +51,15 @@ class UserDetails(QtGui.QDockWidget, Ui_UserDetails):
     def __init__(self, p_parent = None):
         QtGui.QDockWidget.__init__(self, p_parent)
         self.setupUi(self)
+        self.f = True
+        
+    def sizeHint(self):
+        print "Jklj"
+        if self.f:
+            self.f = False
+            return QSize(100, 100)
+        else:
+            return QtGui.QDockWidget.sizeHint()
 
         access_rights_describtion = {"change_pwd" : "Passwort ändern",
                                      "contact" : "Ansprechen",
