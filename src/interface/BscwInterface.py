@@ -49,31 +49,28 @@ class BscwInterface(object):
     def login(self, p_hostname, p_username, p_passwd):
         # Verbindung herstellen
         self._connect(p_hostname, p_username, p_passwd)
+        
         try:
             # Authorisierung überprüfen (User? Admin?)
-            if self._server.mist(p_username):#is_admin(p_username) == False:
+            if self._server.is_admin(p_username) == False:
                 # Benutzer hat keine Administratorenrechte
                 raise Exceptions.NoAdminRights
             if self._server.is_admin(p_username) == None:
                 # Benutzer ist nicht vorhanden
                 raise Exceptions.LoginIncorrect
-        except(socket.error):
+        except socket.error:
             # Server nicht erreichbar
             raise Exceptions.HostUnreachable
-        except(xmlrpclib.ProtocolError):
+        except xmlrpclib.ProtocolError:
             # Login-Daten nicht korrekt
             raise Exceptions.LoginIncorrect
-        except(xmlrpclib.Fault) as err:
-            if string.find(str(err),"Fault 10010") != -1:
-                print "blubb"
-                raise err
+        except xmlrpclib.Fault, err:
+            if string.find(str(err), "Fault 10010") != -1:
+                raise
             raise Exceptions.ServerExtensionNotInstalled
-
-
 
     ## Loggt den User aus und bricht die Verbindung zum BSCW-Server ab
     def logout(self):
-
         # Server-Objekt löschen
         del self._server
 
@@ -188,7 +185,6 @@ class BscwInterface(object):
         # flexible Anpassung des Hostnames
         p_hostname = string.replace(p_hostname,"http://","")
         p_hostname = string.split(p_hostname,"/")[0]
-
 
         # Verbindung mit dem Server herstellen
         self.hostname = 'http://' + p_username + ':' + p_passwd \
