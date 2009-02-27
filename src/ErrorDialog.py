@@ -35,6 +35,7 @@ import traceback
 class ErrorDialog(QtGui.QDialog, Ui_ErrorDialog):
     
     ## Konstruktor 
+    # @exception Exception, die ausgewertet werden soll
     # @param p_parent übergeordnetes QObject.
     def __init__(self, exception, p_parent = None):
         QtGui.QDialog.__init__(self, p_parent)
@@ -52,14 +53,14 @@ class ErrorDialog(QtGui.QDialog, Ui_ErrorDialog):
                             .standardIcon(QtGui.QStyle.SP_MessageBoxCritical) \
                             .pixmap(ico_size))
         # Größe des Icon-Labels anpassen
-        self._lbl_img.setMaximumWidth(ico_size + 5)
+        self._lbl_img.setMaximumWidth(ico_size + 10)
         
         ## Größe des Fensters, wenn der Traceback angzeigt wird
         self._expand_hight = self.height()
         # Den Traceback verstecken
         self._text_traceback.hide()
         # Und die Fensterhöhe anpassen
-        self.setMaximumHeight(119)
+        self.setMaximumHeight(73 + self._lbl_err.height())
         
         self.connect(self._button_details, QtCore.SIGNAL("clicked()"), 
                      self._changeDetailsVisibilitySlot)
@@ -74,7 +75,7 @@ class ErrorDialog(QtGui.QDialog, Ui_ErrorDialog):
             # Den Traceback verstecken
             self._text_traceback.hide()
             # Die Größe des Fensters anpassen
-            self.setFixedHeight(123)
+            self.setFixedHeight(73 + self._lbl_err.height())
             # Die Buttonbeschreibung ändern
             self._button_details.setText("Details >>")
         else:

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ErrorDialog.ui'
 #
-# Created: Tue Feb 24 20:26:24 2009
+# Created: Fri Feb 27 08:22:43 2009
 #      by: PyQt4 UI code generator 4.4.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -12,7 +12,7 @@ from PyQt4 import QtCore, QtGui
 class Ui_ErrorDialog(object):
     def setupUi(self, ErrorDialog):
         ErrorDialog.setObjectName("ErrorDialog")
-        ErrorDialog.resize(460, 224)
+        ErrorDialog.resize(532, 224)
         ErrorDialog.setMinimumSize(QtCore.QSize(460, 0))
         self.gridLayout = QtGui.QGridLayout(ErrorDialog)
         self.gridLayout.setObjectName("gridLayout")
@@ -21,16 +21,19 @@ class Ui_ErrorDialog(object):
         self._lbl_img.setObjectName("_lbl_img")
         self.gridLayout.addWidget(self._lbl_img, 0, 0, 2, 1)
         self._lbl_header = QtGui.QLabel(ErrorDialog)
+        self._lbl_header.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
         self._lbl_header.setObjectName("_lbl_header")
         self.gridLayout.addWidget(self._lbl_header, 0, 1, 1, 2)
         self._lbl_err = QtGui.QLabel(ErrorDialog)
         self._lbl_err.setMinimumSize(QtCore.QSize(0, 50))
         self._lbl_err.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
+        self._lbl_err.setWordWrap(True)
         self._lbl_err.setObjectName("_lbl_err")
         self.gridLayout.addWidget(self._lbl_err, 1, 1, 1, 3)
         self._button_details = QtGui.QPushButton(ErrorDialog)
         self._button_details.setMinimumSize(QtCore.QSize(91, 0))
         self._button_details.setMaximumSize(QtCore.QSize(91, 16777215))
+        self._button_details.setAutoDefault(False)
         self._button_details.setObjectName("_button_details")
         self.gridLayout.addWidget(self._button_details, 2, 0, 1, 2)
         self._button_quit = QtGui.QPushButton(ErrorDialog)
@@ -40,6 +43,7 @@ class Ui_ErrorDialog(object):
         self.gridLayout.addWidget(self._button_quit, 2, 2, 1, 1)
         self._button_continue = QtGui.QPushButton(ErrorDialog)
         self._button_continue.setMaximumSize(QtCore.QSize(77, 16777215))
+        self._button_continue.setDefault(True)
         self._button_continue.setObjectName("_button_continue")
         self.gridLayout.addWidget(self._button_continue, 2, 3, 1, 1)
         self._text_traceback = QtGui.QPlainTextEdit(ErrorDialog)

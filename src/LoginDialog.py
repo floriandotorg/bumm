@@ -29,6 +29,7 @@ from PyQt4 import QtGui, QtCore
 from ui_LoginDialog import Ui_LoginDialog
 from interface.Exceptions import *
 from interface.BscwInterface import BscwInterface
+from ErrorDialog import ErrorDialog
 
 ## Stellt ein Dialog da, der die Login-Daten entgegen nimmt und die Anmeldung
 # durchührt.
@@ -126,8 +127,23 @@ class LoginDialog(QtGui.QDialog, Ui_LoginDialog):
         except HostUnreachable:
             self._changeStatus(self.trUtf8("Server nicht erreichbar!"),
                                 QtGui.QColor("Red"))
-        #except:
-        #    self._changeStatus(self.trUtf8("Unbekannter Fehler aufgetreten!"),
-        #                        QtGui.QColor("Red"))
+        except ServerExtensionNotInstalled:
+            QtGui.QMessageBox.warning(self, 
+                                      self.trUtf8("Server-Erweiterung nicht" \
+                                                  " installiert!"),
+                                      self.trUtf8("Die Server-Erweiterung " \
+                                                  "wurde nicht auf dem " \
+                                                  "Server gefunden. Bitte " \
+                                                  "kopieren Sie alle Dateien " \
+                                                  "aus dem Ordner 'server' " \
+                                                  "in den Ordner 'src' auf " \
+                                                  "dem BSCW-Server."))
+            self._changeStatus(self.trUtf8("Server-Erweiterung nicht" \
+                                           " installiert!"),
+                                QtGui.QColor("Red"))
+        except Exception, exception:
+            # Fehlerdialog anzeigen
+            err_dialog = ErrorDialog(exception, self)
+            err_dialog.exec_()
         finally:
             self._setEnabled(True)
