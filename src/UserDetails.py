@@ -52,6 +52,17 @@ class UserDetails(QtGui.QDockWidget, Ui_UserDetails):
         QtGui.QDockWidget.__init__(self, p_parent)
         self.setupUi(self)
 
+        access_rights_describtion = {"change_pwd" : "Passwort ändern",
+                                     "contact" : "Ansprechen",
+                                     "edit_prefs" : "Einstellungen",
+                                     "editdetails" : "Profil ändern",
+                                     "get" : "Öffnen",
+                                     "history" : "Verlauf Zeigen",
+                                     "info" : "Weitere Informationen",
+                                     "mail_to" : "Email",
+                                     "get_vcard" : "vCard"}
+
+
     ## Zeigt alle Userinformationen im Widget an
     # @param p_user Eine Liste von Dictonaries mit folgendem Aufbau oder
     # None für keinen:
