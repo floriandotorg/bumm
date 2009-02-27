@@ -144,7 +144,9 @@ class UserListModel(QtCore.QAbstractTableModel):
     #     - other : Zugriffsrechte für alle Anderen: Liste mit zwei Elementen
     #        - Liste mit Usernamen, die dieser Rolle entsprechen
     #        - Liste mit Zugriffsrechten
-    def loadList(self, p_user_list):
+    def loadList(self, p_user_list, p_complete = True):
+        if p_complete == True:
+            self.complete_user_list = p_user_list
         self.user_list = p_user_list
         self.emit(QtCore.SIGNAL("layoutChanged()"))
 
@@ -167,7 +169,7 @@ class UserListModel(QtCore.QAbstractTableModel):
                     pass
                 else:'''
                 #self.user_list.sort(key = operator.itemgetter(self.header_list[p_column][0]), reverse = True)
-                
+
             self.emit(QtCore.SIGNAL("layoutChanged()"))
 
     ## Übergibt eine Liste mit Spalten die angezeigt werden sollen.
@@ -205,5 +207,21 @@ class UserListModel(QtCore.QAbstractTableModel):
             if update_id != -1:
                 self.user_list[update_id][p_key] = p_value
                 self.loadList(self.user_list)
-                
-                 
+
+    ## Definiert einen Suchtext, nachdem gefilert wird
+    # @param p_text Suchtext
+    def setFilter(self, p_text):
+        found = False
+        if p_text == "":
+            self.loadList(self.complete_user_list)
+        else:
+            self.user_list = []
+            for user in self.complete_user_list:
+                for i in user:
+                    if i != "last_login" and i != "create_time":
+                        if user[i] == p_text and found == False:
+                            self.user_list.append(user)
+                            found = True
+                found = False
+            self.loadList(self.user_list, False)
+        self.emit(QtCore.SIGNAL("layoutChanged()"))

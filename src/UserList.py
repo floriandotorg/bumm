@@ -69,7 +69,7 @@ class UserList(QtGui.QTreeView):
     ## Definiert einen Suchtext, nachdem gefilert wird
     # @param p_text Suchtext 
     def setFilter(self, p_text):
-        pass
+        self._model.setFilter(p_text)
     
     ## Löscht den Inhalt der Liste und zeigt den Inhalt von p_user_list an.
     # @param p_user_list Eine Liste von Dictonaries mit folgendem Aufbau:
