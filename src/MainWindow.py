@@ -54,14 +54,14 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         result = ""
         points = 0
         p_mem = str(int(p_mem * 1000))
-        
+
         for i in range(0, len(p_mem))[::-1]:
             result = p_mem[i] + result
-            
+
             if not (len(result) - points) % 3 and i:
                 result = "." + result
                 points += 1
-        
+
         return result + " KB"
     formatMemory = staticmethod(formatMemory)
 
@@ -87,6 +87,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             self._user_details.setVisible(self._settings.show_user_details)
             self._action_user_details.setChecked(self._settings \
                                                             .show_user_details)
+            self.restoreState(self._settings.state);
 
             ## Liste aller angezeigten Spalten in der User-Liste
             self._headers = SetColumnDialog([], self) \
@@ -180,6 +181,8 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 
                 self._settings.show_user_details = \
                     self._user_details.isVisible()
+
+                self._settings.state = self.saveState()
 
         except Exception, exception:
             # Fehlerdialog anzeigen

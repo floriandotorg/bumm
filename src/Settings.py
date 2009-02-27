@@ -67,6 +67,8 @@ class Settings(QtCore.QObject):
                             QtCore.QVariant(Settings.s_user_details_geometry)).toRect()
         self._show_user_details = self._settings.value("show_user_details",
                             QtCore.QVariant(Settings.s_show_user_details)).toBool()
+        self._state = self._settings.value("state",
+                            QtCore.QVariant(QtCore.QByteArray())).toByteArray()
 
     ## Dekonstruktor
     # Im Dekonstruktor werden die neuen Einstellungen gespeichert.
@@ -84,6 +86,7 @@ class Settings(QtCore.QObject):
                             QtCore.QVariant(self._user_details_geometry))
         self._settings.setValue("show_user_details",
                             QtCore.QVariant(self._show_user_details))
+        self._settings.setValue("state", QtCore.QVariant(self._state))
 
         # Daten speichern
         self._settings.sync()
@@ -126,6 +129,12 @@ class Settings(QtCore.QObject):
     def getShowUserDetails(self):
         return self._show_user_details
 
+    ## gibt den Status des MainWindows
+    #  zurÃ¼ck
+    # @return Status als QByteArray
+    def getState(self):
+        return self._state
+
     # Set'er
 
     ## setzt den Benutzernamen
@@ -163,6 +172,11 @@ class Settings(QtCore.QObject):
     def setShowUserDetails(self, p_show_user_details):
         self._show_user_details = p_show_user_details
 
+    ## setzt den Boolean ob UserDetails angezeigt werden sollen
+    # @param _show_user_details UserDetails als Boolean
+    def setState(self, p_state):
+        self._state = p_state
+
     # Properties
     username = property(getUsername, setUsername)
     server_address = property(getServerAddress, setServerAddress)
@@ -171,3 +185,4 @@ class Settings(QtCore.QObject):
     main_window_geometry = property(getMainWindowGeometry, setMainWindowGeometry)
     user_details_geometry = property(getUserDetailsGeometry, setUserDetailsGeometry)
     show_user_details = property(getShowUserDetails, setShowUserDetails)
+    state = property(getState, setState)
