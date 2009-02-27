@@ -61,15 +61,15 @@ class UserDetails(QtGui.QDockWidget, Ui_UserDetails):
         else:
             return QtGui.QDockWidget.sizeHint()
 
-        access_rights_describtion = {"change_pwd" : "Passwort ändern",
-                                     "contact" : "Ansprechen",
-                                     "edit_prefs" : "Einstellungen",
-                                     "editdetails" : "Profil ändern",
-                                     "get" : "Öffnen",
-                                     "history" : "Verlauf Zeigen",
-                                     "info" : "Weitere Informationen",
-                                     "mail_to" : "Email",
-                                     "get_vcard" : "vCard"}
+        self.rights_describtion = {"change_pwd" : "Passwort aendern",
+                                   "contact" : "Ansprechen",
+                                   "edit_prefs" : "Einstellungen",
+                                   "editdetails" : "Profil aendern",
+                                   "get" : "Oeffnen",
+                                   "history" : "Verlauf Zeigen",
+                                   "info" : "Weitere Informationen",
+                                   "mail_to" : "Email",
+                                   "get_vcard" : "vCard"}
 
 
     ## Zeigt alle Userinformationen im Widget an
@@ -168,7 +168,24 @@ class UserDetails(QtGui.QDockWidget, Ui_UserDetails):
             if p_user["access_rights"]["owner"][1]:
                 text = ""
                 for i in range(len(p_user["access_rights"]["owner"][1])):
-                    text += (p_user["access_rights"]["owner"][1][i] + "\n")
+                    if p_user["access_rights"]["owner"][1][i] == "change_pwd":
+                        text += (self.rights_describtion["change_pwd"] + "\n")
+                    if p_user["access_rights"]["owner"][1][i] == "contact":
+                        text += (self.rights_describtion["contact"] + "\n")
+                    if p_user["access_rights"]["owner"][1][i] == "edit_prefs":
+                        text += (self.rights_describtion["edit_prefs"] + "\n")
+                    if p_user["access_rights"]["owner"][1][i] == "editdetails":
+                        text += (self.rights_describtion["editdetails"] + "\n")
+                    if p_user["access_rights"]["owner"][1][i] == "get":
+                        text += (self.rights_describtion["get"] + "\n")
+                    if p_user["access_rights"]["owner"][1][i] == "history":
+                        text += (self.rights_describtion["history"] + "\n")
+                    if p_user["access_rights"]["owner"][1][i] == "info":
+                        text += (self.rights_describtion["info"] + "\n")
+                    if p_user["access_rights"]["owner"][1][i] == "mail_to":
+                        text += (self.rights_describtion["mail_to"] + "\n")
+                    if p_user["access_rights"]["owner"][1][i] == "get_vcard":
+                        text += (self.rights_describtion["get_vcard"] + "\n")
                 self._actions_as_owner.setText(text)
             else:
                 self._actions_as_owner.setText("None")
@@ -182,7 +199,24 @@ class UserDetails(QtGui.QDockWidget, Ui_UserDetails):
             if p_user["access_rights"]["manager"][1]:
                 text = ""
                 for i in range(len(p_user["access_rights"]["manager"][1])):
-                    text += (p_user["access_rights"]["manager"][1][i] + "\n")
+                    if p_user["access_rights"]["manager"][1][i] == "change_pwd":
+                        text += (self.rights_describtion["change_pwd"] + "\n")
+                    if p_user["access_rights"]["manager"][1][i] == "contact":
+                        text += (self.rights_describtion["contact"] + "\n")
+                    if p_user["access_rights"]["manager"][1][i] == "edit_prefs":
+                        text += (self.rights_describtion["edit_prefs"] + "\n")
+                    if p_user["access_rights"]["manager"][1][i] == "editdetails":
+                        text += (self.rights_describtion["editdetails"] + "\n")
+                    if p_user["access_rights"]["manager"][1][i] == "get":
+                        text += (self.rights_describtion["get"] + "\n")
+                    if p_user["access_rights"]["manager"][1][i] == "history":
+                        text += (self.rights_describtion["history"] + "\n")
+                    if p_user["access_rights"]["manager"][1][i] == "info":
+                        text += (self.rights_describtion["info"] + "\n")
+                    if p_user["access_rights"]["manager"][1][i] == "mail_to":
+                        text += (self.rights_describtion["mail_to"] + "\n")
+                    if p_user["access_rights"]["manager"][1][i] == "get_vcard":
+                        text += (self.rights_describtion["get_vcard"] + "\n")
                 self._actions_as_manager.setText(text)
             else:
                 self._actions_as_manager.setText("None")
@@ -196,7 +230,24 @@ class UserDetails(QtGui.QDockWidget, Ui_UserDetails):
             if p_user["access_rights"]["other"][1]:
                 text = ""
                 for i in range(len(p_user["access_rights"]["other"][1])):
-                    text += (p_user["access_rights"]["other"][1][i] + "\n")
+                    if p_user["access_rights"]["other"][1][i] == "change_pwd":
+                        text += (self.rights_describtion["change_pwd"] + "\n")
+                    if p_user["access_rights"]["other"][1][i] == "contact":
+                        text += (self.rights_describtion["contact"] + "\n")
+                    if p_user["access_rights"]["other"][1][i] == "edit_prefs":
+                        text += (self.rights_describtion["edit_prefs"] + "\n")
+                    if p_user["access_rights"]["other"][1][i] == "editdetails":
+                        text += (self.rights_describtion["editdetails"] + "\n")
+                    if p_user["access_rights"]["other"][1][i] == "get":
+                        text += (self.rights_describtion["get"] + "\n")
+                    if p_user["access_rights"]["other"][1][i] == "history":
+                        text += (self.rights_describtion["history"] + "\n")
+                    if p_user["access_rights"]["other"][1][i] == "info":
+                        text += (self.rights_describtion["info"] + "\n")
+                    if p_user["access_rights"]["other"][1][i] == "mail_to":
+                        text += (self.rights_describtion["mail_to"] + "\n")
+                    if p_user["access_rights"]["other"][1][i] == "get_vcard":
+                        text += (self.rights_describtion["get_vcard"] + "\n")
                 self._actions_as_other.setText(text)
             else:
                 self._actions_as_other.setText("None")
