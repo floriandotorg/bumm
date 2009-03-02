@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
 # Dateiname: ap_delete_user.py
-# Beschreibung: BSCW-API-Erweiterung zum Löschen von Benutzern
+# Beschreibung: BSCW-API-Erweiterung zum LÃ¶schen von Benutzern
 # Version: 1
 # Autor: Florian Kaiser
-# Letzte Änderung: 23.02.09
+# Letzte Ã„nderung: 23.02.09
 
 #################################################################################
-# Copyright (C) 2009 Benjamin Flader, Benjamin Leipold, André Naumann,          #
+# Copyright (C) 2009 Benjamin Flader, Benjamin Leipold, AndrÃ© Naumann,          #
 # Corinna Vollert, Florian Kaiser                                               #
 #                                                                               #
 # Redistribution and use in source and binary forms, with or without            #
@@ -35,29 +35,29 @@
 def param_def():
     from api_def import ASCII, ARRAY
     return (
-        # Liste mit Usernamen der zu löschenden Benutzer
+        # Liste mit Usernamen der zu lÃ¶schenden Benutzer
         ('user_names', ARRAY, 0, [('user_name', ASCII, 1)]),
     )
 
 def do_it(request, user_names):
     from admin import op_rmuser
     
-    # Prüfen ob der Benutzer, der diese Datei ausführt Admin-Rechte besitzt,
-    # wenn nicht, Ausführung abbrechen
+    # PrÃ¼fen ob der Benutzer, der diese Datei ausfÃ¼hrt Admin-Rechte besitzt,
+    # wenn nicht, AusfÃ¼hrung abbrechen
     if not request.user.is_admin():
         return None
     
-    # Der Rückgabewert ist eine Liste aller Benutzer die nicht gelöscht werden
+    # Der RÃ¼ckgabewert ist eine Liste aller Benutzer die nicht gelÃ¶scht werden
     # konnten
     result = []    
     
-    # Username für Username durchgehen und ..
+    # Username fÃ¼r Username durchgehen und ..
     for user_name in user_names:
         try:
-            # .. versuchen den Benutzer zu löschen
+            # .. versuchen den Benutzer zu lÃ¶schen
             op_rmuser.handle_main(["bsadmin rmuser", user_name])
         except:
-            # Fehler aufgetreten? Dann an die Liste anhängen
+            # Fehler aufgetreten? Dann an die Liste anhÃ¤ngen
             result.append(user_name)
             
     return result

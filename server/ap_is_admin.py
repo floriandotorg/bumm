@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 
 # Dateiname: ap_is_admin.py
-# Beschreibung: BSCW-API-Erweiterung zum Überprüfen der Adminrechte eines
+# Beschreibung: BSCW-API-Erweiterung zum Ã¼berprÃ¼fen der Adminrechte eines
 # Benutzers
 # Version: 1
 # Autor: Florian Kaiser
-# Letzte Änderung: 23.02.09
+# Letzte Ã„nderung: 23.02.09
 
 #################################################################################
-# Copyright (C) 2009 Benjamin Flader, Benjamin Leipold, André Naumann,          #
+# Copyright (C) 2009 Benjamin Flader, Benjamin Leipold, AndrÃ© Naumann,          #
 # Corinna Vollert, Florian Kaiser                                               #
 #                                                                               #
 # Redistribution and use in source and binary forms, with or without            #
@@ -42,11 +42,11 @@ def do_it(request, user_name):
     from cl_core import User
     from admin import bs_admutil
     
-    # Ist der Benutzername ungültig?
+    # Ist der Benutzername ungÃ¼ltig?
     users = [i.name for i in bs_admutil.userlist(None)[0]]
     if not user_name in users:
-        # Dann None zurückgeben
+        # Dann None zurÃ¼ckgeben
         return None
     
-    # Ansonsten Adminrechte prüfen und True oder False zurückgeben
+    # Ansonsten Adminrechte prÃ¼fen und True oder False zurÃ¼ckgeben
     return User(user_name).is_admin()

@@ -4,10 +4,10 @@
 # Beschreibung: BSCW-API-Erweiterung zum Entsperren eines Benutzers
 # Version: 1
 # Autor: Florian Kaiser
-# Letzte Änderung: 23.02.09
+# Letzte Ã„nderung: 23.02.09
 
 #################################################################################
-# Copyright (C) 2009 Benjamin Flader, Benjamin Leipold, André Naumann,          #
+# Copyright (C) 2009 Benjamin Flader, Benjamin Leipold, AndrÃ© Naumann,          #
 # Corinna Vollert, Florian Kaiser                                               #
 #                                                                               #
 # Redistribution and use in source and binary forms, with or without            #
@@ -43,8 +43,8 @@ def do_it(request, user_names):
     import bs_passwd
     from cl_request import get_user
     
-    # Prüfen ob der Benutzer, der diese Datei ausführt Admin-Rechte besitzt,
-    # wenn nicht, Ausführung abbrechen
+    # PrÃ¼fen ob der Benutzer, der diese Datei ausfÃ¼hrt Admin-Rechte besitzt,
+    # wenn nicht, AusfÃ¼hrung abbrechen
     if not request.user.is_admin():
         return None
     
