@@ -35,7 +35,8 @@ class Settings(QtCore.QObject):
     # lege Standardwerte fest
     s_username = ""
     s_server_address = ""
-    s_columns = ["user_id", "name", "longname", "email", "used_memory", "last_login", "locked"]
+    s_columns = ["user_id", "name", "longname", "email", "used_memory",
+                  "last_login", "locked"]
     s_col_dialog_geometry = QtCore.QRect(100, 100, 100, 100)
     s_main_window_geometry = QtCore.QRect(100, 100, 800, 800)
     s_user_details_geometry = QtCore.QRect(100, 100, 100, 100)
@@ -56,17 +57,24 @@ class Settings(QtCore.QObject):
         self._username = self._settings.value("username",
                             QtCore.QVariant(Settings.s_username)).toString()
         self._server_address = self._settings.value("server_address",
-                            QtCore.QVariant(Settings.s_server_address)).toString()
+                            QtCore.QVariant(Settings.s_server_address)) \
+                            .toString()
         self._columns = self._settings.value("columns",
                             QtCore.QVariant(Settings.s_columns)).toStringList()
         self._col_dialog_geometry = self._settings.value("col_dialog_geometry",
-                            QtCore.QVariant(Settings.s_col_dialog_geometry)).toRect()
-        self._main_window_geometry = self._settings.value("main_window_geometry",
-                            QtCore.QVariant(Settings.s_main_window_geometry)).toRect()
-        self._user_details_geometry = self._settings.value("user_details_geometry",
-                            QtCore.QVariant(Settings.s_user_details_geometry)).toRect()
+                            QtCore.QVariant(Settings.s_col_dialog_geometry)) \
+                            .toRect()
+        self._main_window_geometry = self._settings.value( \
+                            "main_window_geometry",
+                            QtCore.QVariant(Settings.s_main_window_geometry)) \
+                            .toRect()
+        self._user_details_geometry = self._settings.value(
+                            "user_details_geometry", \
+                            QtCore.QVariant(Settings.s_user_details_geometry)) \
+                            .toRect()
         self._show_user_details = self._settings.value("show_user_details",
-                            QtCore.QVariant(Settings.s_show_user_details)).toBool()
+                            QtCore.QVariant(Settings.s_show_user_details)) \
+                            .toBool()
         self._state = self._settings.value("state",
                             QtCore.QVariant(QtCore.QByteArray())).toByteArray()
 
@@ -153,17 +161,20 @@ class Settings(QtCore.QObject):
         self._columns = p_columns
 
     ## setzt die geometrischen Daten des Spalten-Dialogs
-    # @param p_col_dialog_geometry geometrische Daten des Spalten-Dialogs als QRect
+    # @param p_col_dialog_geometry geometrische Daten des Spalten-Dialogs als
+    #        QRect
     def setColDialogGeometry(self, p_col_dialog_geometry):
         self._col_dialog_geometry = QtCore.QRect(p_col_dialog_geometry)
 
     ## setzt die geometrischen Daten des MainWindow-Dialogs
-    # @param p_main_window_geometry geometrische Daten des MainWindow-Dialogs als QRect
+    # @param p_main_window_geometry geometrische Daten des MainWindow-Dialogs
+    #        als QRect
     def setMainWindowGeometry(self, p_main_window_geometry):
         self._main_window_geometry = QtCore.QRect(p_main_window_geometry)
 
     ## setzt die geometrischen Daten des UserDetail-Dialogs
-    # @param p_user_details_geometry geometrische Daten des Login-Dialogs als QRect
+    # @param p_user_details_geometry geometrische Daten des Login-Dialogs als
+    #        QRect
     def setUserDetailsGeometry(self, p_user_details_geometry):
         self._user_details_geometry = QtCore.QRect(p_user_details_geometry)
 
@@ -183,6 +194,7 @@ class Settings(QtCore.QObject):
     columns = property(getColumns, setColumns)
     col_dialog_geometry = property(getColDialogGeometry, setColDialogGeometry)
     main_window_geometry = property(getMainWindowGeometry, setMainWindowGeometry)
-    user_details_geometry = property(getUserDetailsGeometry, setUserDetailsGeometry)
+    user_details_geometry = property(getUserDetailsGeometry, \
+                                     setUserDetailsGeometry)
     show_user_details = property(getShowUserDetails, setShowUserDetails)
     state = property(getState, setState)
