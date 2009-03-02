@@ -211,6 +211,7 @@ class UserListModel(QtCore.QAbstractTableModel):
     ## Definiert einen Suchtext, nachdem gefilert wird
     # @param p_text Suchtext
     def setFilter(self, p_text):
+        print type(p_text)
         found = False
         if p_text == "":
             self.loadList(self.complete_user_list)
@@ -219,7 +220,7 @@ class UserListModel(QtCore.QAbstractTableModel):
             for user in self.complete_user_list:
                 for i in user:
                     if i != "last_login" and i != "create_time":
-                        if user[i] == p_text and found == False:
+                        if QtCore.QString(unicode(user[i])).contains(p_text) and found == False:
                             self.user_list.append(user)
                             found = True
                 found = False
