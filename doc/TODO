@@ -1,15 +1,22 @@
-- Benutzerliste
-- Bild im DockWidget
-- Hilfe-Funktion
-- Zeilenlänge
-- Icon
-- Exe
+Benutzerliste
 
-- Benutzerhandbuch (2-3 Seiten als HTML)
+- Sortieren nach Datum (leipi)
+- SelectionChanged (leipi)
+- DockWidget Position (Ben)
+- Bild im DockWidget (Florian)
+- Hilfe-Funktion (Florian)
+- Zeilenlänge
+- Icon (Corinna)
+- Exe (Florian)
+
+- Finaler Test 05.05.09
+
+- Benutzerhandbuch (2-3 Seiten als HTML) (Leipi & Andre)
 - Kommentieren
 
 - Doku:
-	- Zielsetzung
-	- Analyse (Use-Case)
-	- Desgin (Klassendiagramm etc.)
-	- Klassenbeschreibung
+	- Analyse (Use-Case) (Corinna)
+	- Lösungsansatz (André)
+	- Desgin (Klassendiagramm etc.) (Florian)
+	- Klassenbeschreibung (Doxygen)
+	- Zusammenführen (Ben)
