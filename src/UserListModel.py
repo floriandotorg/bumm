@@ -34,6 +34,25 @@ import string
 # Siehe Qt Model/View Framework
 class UserListModel(QtCore.QAbstractTableModel):
 
+    ## Wandelt eine Speicherangabe von MB in KB und gibt sie Formatiert mit
+    # 1000er Trennzeichen und Einheit zurück
+    # @param mem Speicher in MB
+    # @return Formatierter String
+    def formatMemory(p_mem):
+        result = ""
+        points = 0
+        p_mem = str(int(p_mem * 1000))
+
+        for i in range(0, len(p_mem))[::-1]:
+            result = p_mem[i] + result
+
+            if not (len(result) - points) % 3 and i:
+                result = "." + result
+                points += 1
+
+        return result + " KB"
+    formatMemory = staticmethod(formatMemory)
+
     ## Konstruktor
     # @param p_header_data Eine Liste von Tupels mit jeweils zwei Elementen,
     # in denen der Schlüssel und die Überschrift stehen.
