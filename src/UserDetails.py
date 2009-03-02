@@ -28,6 +28,7 @@
 
 from PyQt4 import QtGui, QtCore
 from ui_UserDetails import Ui_UserDetails
+from UserListModel import UserListModel
 import datetime
 
 ## Implementation eines Steuerelements zum Anzeigen zusätzlicher
@@ -147,7 +148,7 @@ class UserDetails(QtGui.QDockWidget, Ui_UserDetails):
             else:
                 created = datetime.datetime.strptime(p_user["create_time"].value, "%Y%m%dT%H:%M:%S")
                 self._create_time.setText(created.strftime("%d.%m.%Y %H:%M"))
-            self._storage_usage.setText(str(int(p_user["used_memory"] * 1000)))
+            self._storage_usage.setText(UserListModel.formatMemory(p_user["used_memory"]))
             self._objects.setText(str(p_user["files"]))
             if p_user["access_rights"]["owner"][0]:
                 text = ""
