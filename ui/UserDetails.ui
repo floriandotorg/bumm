@@ -163,7 +163,7 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="0" >
+        <item row="3" column="0" >
          <widget class="QLabel" name="_lbl_admin" >
           <property name="minimumSize" >
            <size>
@@ -182,7 +182,7 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="1" >
+        <item row="3" column="1" >
          <widget class="QLineEdit" name="_admin" >
           <property name="minimumSize" >
            <size>
@@ -195,7 +195,7 @@
           </property>
          </widget>
         </item>
-        <item row="2" column="0" >
+        <item row="4" column="0" >
          <widget class="QLabel" name="_lbl_locked" >
           <property name="minimumSize" >
            <size>
@@ -214,7 +214,7 @@
           </property>
          </widget>
         </item>
-        <item row="2" column="1" >
+        <item row="4" column="1" >
          <widget class="QLineEdit" name="_locked" >
           <property name="minimumSize" >
            <size>
@@ -227,7 +227,7 @@
           </property>
          </widget>
         </item>
-        <item row="3" column="0" >
+        <item row="5" column="0" >
          <widget class="QLabel" name="_lbl_mail" >
           <property name="minimumSize" >
            <size>
@@ -246,7 +246,7 @@
           </property>
          </widget>
         </item>
-        <item row="3" column="1" >
+        <item row="5" column="1" >
          <widget class="QLineEdit" name="_mail" >
           <property name="minimumSize" >
            <size>
@@ -259,7 +259,7 @@
           </property>
          </widget>
         </item>
-        <item row="4" column="0" >
+        <item row="6" column="0" >
          <widget class="QLabel" name="_lbl_more_mail" >
           <property name="minimumSize" >
            <size>
@@ -278,7 +278,7 @@
           </property>
          </widget>
         </item>
-        <item row="4" column="1" >
+        <item row="6" column="1" >
          <widget class="QTextEdit" name="_more_mail" >
           <property name="minimumSize" >
            <size>
@@ -291,7 +291,23 @@
           </property>
          </widget>
         </item>
-        <item row="5" column="0" >
+        <item row="2" column="1" >
+         <widget class="QLineEdit" name="_last_login" >
+          <property name="minimumSize" >
+           <size>
+            <width>190</width>
+            <height>20</height>
+           </size>
+          </property>
+          <property name="frame" >
+           <bool>true</bool>
+          </property>
+          <property name="readOnly" >
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0" >
          <widget class="QLabel" name="_lbl_last_login" >
           <property name="minimumSize" >
            <size>
@@ -310,23 +326,7 @@
           </property>
          </widget>
         </item>
-        <item row="5" column="1" >
-         <widget class="QLineEdit" name="_last_login" >
-          <property name="minimumSize" >
-           <size>
-            <width>190</width>
-            <height>20</height>
-           </size>
-          </property>
-          <property name="frame" >
-           <bool>true</bool>
-          </property>
-          <property name="readOnly" >
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="0" >
+        <item row="8" column="0" >
          <widget class="QLabel" name="_lbl_workspace" >
           <property name="minimumSize" >
            <size>
@@ -345,7 +345,7 @@
           </property>
          </widget>
         </item>
-        <item row="6" column="1" >
+        <item row="8" column="1" >
          <widget class="QTextEdit" name="_workspace" >
           <property name="minimumSize" >
            <size>
@@ -359,6 +359,20 @@
          </widget>
         </item>
        </layout>
+       <zorder>_lbl_full_name</zorder>
+       <zorder>_full_name</zorder>
+       <zorder>_lbl_admin</zorder>
+       <zorder>_admin</zorder>
+       <zorder>_lbl_locked</zorder>
+       <zorder>_locked</zorder>
+       <zorder>_lbl_mail</zorder>
+       <zorder>_mail</zorder>
+       <zorder>_lbl_more_mail</zorder>
+       <zorder>_more_mail</zorder>
+       <zorder>_last_login</zorder>
+       <zorder>_lbl_last_login</zorder>
+       <zorder>_workspace</zorder>
+       <zorder>_lbl_workspace</zorder>
       </widget>
       <widget class="QWidget" name="_account_tab" >
        <attribute name="title" >
@@ -698,6 +712,19 @@
              </property>
             </widget>
            </item>
+           <item row="1" column="1" >
+            <widget class="QLineEdit" name="_mobile_tel" >
+             <property name="minimumSize" >
+              <size>
+               <width>187</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="readOnly" >
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
            <item row="1" column="0" >
             <widget class="QLabel" name="_lbl_mobile_tel" >
              <property name="minimumSize" >
@@ -717,8 +744,8 @@
              </property>
             </widget>
            </item>
-           <item row="1" column="1" >
-            <widget class="QLineEdit" name="_mobile_tel" >
+           <item row="2" column="1" >
+            <widget class="QLineEdit" name="_office_tel" >
              <property name="minimumSize" >
               <size>
                <width>187</width>
@@ -746,19 +773,6 @@
              </property>
              <property name="text" >
               <string>Büro</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="1" >
-            <widget class="QLineEdit" name="_office_tel" >
-             <property name="minimumSize" >
-              <size>
-               <width>187</width>
-               <height>20</height>
-              </size>
-             </property>
-             <property name="readOnly" >
-              <bool>true</bool>
              </property>
             </widget>
            </item>
