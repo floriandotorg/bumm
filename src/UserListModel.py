@@ -92,11 +92,8 @@ class UserListModel(QtCore.QAbstractTableModel):
                 self.header_list[p_index.column()][0] == "last_login":
             return QtCore.QVariant("Nie")
         elif self.header_list[p_index.column()][0] == "used_memory":
-            kilobyte_output = \
-            str(int(self.user_list[p_index.row()] \
-            [self.header_list[p_index.column()][0]] * 1000)) \
-            + " KB"
-            return QtCore.QVariant(kilobyte_output)
+            return QtCore.QVariant(self.formatMemory(self.user_list[p_index.row()] \
+                    [self.header_list[p_index.column()][0]]))
         elif self.header_list[p_index.column()][0] == "last_login":
             date_time = datetime.datetime.strptime(self.user_list[p_index.row()]
                     [self.header_list[p_index.column()][0]].value, "%Y%m%dT%H:%M:%S")
