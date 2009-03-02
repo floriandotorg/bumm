@@ -177,19 +177,15 @@ class UserListModel(QtCore.QAbstractTableModel):
             if p_order == QtCore.Qt.AscendingOrder:
                 if self.header_list[p_column][0] == "last_login":
                     pass
-                elif self.header_list[p_column][0] == "create_time":
-                    pass
                 else:
                     self.user_list.sort(key = operator.itemgetter( \
-                                            self.header_list[p_column][0]))
+                                        self.header_list[p_column][0]))
             elif p_order == QtCore.Qt.DescendingOrder:
                 if self.header_list[p_column][0] == "last_login":
                     pass
-                elif self.header_list[p_column][0] == "create_time":
-                    pass
                 else:
                     self.user_list.sort(key = operator.itemgetter( \
-                            self.header_list[p_column][0]), reverse = True)
+                        self.header_list[p_column][0]), reverse = True)
 
             self.emit(QtCore.SIGNAL("layoutChanged()"))
 
@@ -232,7 +228,6 @@ class UserListModel(QtCore.QAbstractTableModel):
     ## Definiert einen Suchtext, nachdem gefilert wird
     # @param p_text Suchtext
     def setFilter(self, p_text):
-        print type(p_text)
         found = False
         if p_text == "":
             self.loadList(self.complete_user_list)
@@ -241,7 +236,7 @@ class UserListModel(QtCore.QAbstractTableModel):
             for user in self.complete_user_list:
                 for i in user:
                     if i != "last_login" and i != "create_time":
-                        if QtCore.QString(unicode(user[i])).contains(p_text) and found == False:
+                        if QtCore.QString(unicode(user[i])).contains(p_text, 0) and found == False:
                             self.user_list.append(user)
                             found = True
                 found = False
