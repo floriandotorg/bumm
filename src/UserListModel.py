@@ -175,19 +175,21 @@ class UserListModel(QtCore.QAbstractTableModel):
     def sort(self, p_column, p_order):
         if len(self.user_list) != 0:
             if p_order == QtCore.Qt.AscendingOrder:
-                '''if self.header_list[p_column][0] == "last_login":
-                    self.user_list.sort(key = (operator.itemgetter(self.header_list[p_column][0])).value)
+                if self.header_list[p_column][0] == "last_login":
+                    pass
                 elif self.header_list[p_column][0] == "create_time":
-                    self.user_list.sort(key = (operator.itemgetter(self.header_list[p_column][0])).value)
+                    pass
                 else:
-                self.user_list.sort(key = operator.itemgetter(self.header_list[p_column][0]))'''
+                    self.user_list.sort(key = operator.itemgetter( \
+                                            self.header_list[p_column][0]))
             elif p_order == QtCore.Qt.DescendingOrder:
-                '''if self.header_list[p_column][0] == "last_login":
+                if self.header_list[p_column][0] == "last_login":
                     pass
                 elif self.header_list[p_column][0] == "create_time":
                     pass
-                else:'''
-                #self.user_list.sort(key = operator.itemgetter(self.header_list[p_column][0]), reverse = True)
+                else:
+                    self.user_list.sort(key = operator.itemgetter( \
+                            self.header_list[p_column][0]), reverse = True)
 
             self.emit(QtCore.SIGNAL("layoutChanged()"))
 
