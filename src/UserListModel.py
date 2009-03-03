@@ -239,9 +239,9 @@ class UserListModel(QtCore.QAbstractTableModel):
     # p_key Name des Attributs (Siehe loadList())
     # p_value Neuer Wert
     def updateUserAttr(self, p_name, p_key, p_value):
-        counter = 0
-        update_id = -1
         for i in range(len(p_name)):
+            counter = 0
+            update_id = -1
             for user in self.user_list:
                 if user["name"] == p_name[i]:
                     update_id = counter
