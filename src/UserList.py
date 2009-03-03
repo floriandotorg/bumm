@@ -50,8 +50,6 @@ class UserList(QtGui.QTreeView):
         self.setSortingEnabled(True)
         self.setAlternatingRowColors(True)
         self.setSelectionMode(QtGui.QTreeView.ExtendedSelection)
-        self.connect(self, QtCore.SIGNAL("clicked(QModelIndex)"), 
-                                    self._emitSelectionChanged)
         self.setVerticalScrollMode(QtGui.QTreeView.ScrollPerPixel)
         self.setHorizontalScrollMode(QtGui.QTreeView.ScrollPerPixel)
         self._resizeColumns()
@@ -134,8 +132,9 @@ class UserList(QtGui.QTreeView):
         self._model.updateUserAttr(p_name, p_key, p_value)
     
     ## Emitiert das SelectionChanged() Signal
-    def _emitSelectionChanged(self):
+    def selectionChanged(self, selected, deselected):
         self.emit(QtCore.SIGNAL("SelectionChanged()"))
+        #self.setSelectionModel(QtGui.QItemSelectionModel.Rows)
       
     ## Passt die Spalten auf die Inhalte an    
     def _resizeColumns(self):

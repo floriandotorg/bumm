@@ -267,3 +267,4 @@ class UserListModel(QtCore.QAbstractTableModel):
                 found = False
             self.loadList(self.user_list, False)
         self.emit(QtCore.SIGNAL("layoutChanged()"))
+        
