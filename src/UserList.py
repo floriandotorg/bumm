@@ -132,9 +132,9 @@ class UserList(QtGui.QTreeView):
         self._model.updateUserAttr(p_name, p_key, p_value)
     
     ## Emitiert das SelectionChanged() Signal
-    def selectionChanged(self, selected, deselected):
+    def selectionChanged(self, p_selected, p_deselected):
         self.emit(QtCore.SIGNAL("SelectionChanged()"))
-        #self.setSelectionModel(QtGui.QItemSelectionModel.Rows)
+        QtGui.QTreeView.selectionChanged(self, p_selected, p_deselected)
       
     ## Passt die Spalten auf die Inhalte an    
     def _resizeColumns(self):
