@@ -132,7 +132,8 @@ class UserDetails(QtGui.QDockWidget, Ui_UserDetails):
             if type(p_user["last_login"]) == type(None):
                 self._last_login.setText("Nie")
             else:
-                last_logged = datetime.datetime.strptime(p_user["last_login"].value, "%Y%m%dT%H:%M:%S")
+                last_logged = datetime.datetime. \
+                strptime(p_user["last_login"].value, "%Y%m%dT%H:%M:%S")
                 self._last_login.setText(last_logged.strftime("%d.%m.%Y %H:%M"))
             if p_user["workspaces"]:
                 text = ""
@@ -143,12 +144,14 @@ class UserDetails(QtGui.QDockWidget, Ui_UserDetails):
                 self._workspace.setText("")
 
             ##Daten des Konto-Tab
-            if not type(p_user["create_time"]) == type(None):
+            if type(p_user["create_time"]) == type(None):
                 self._create_time.setText("Nie")
             else:
-                created = datetime.datetime.strptime(p_user["create_time"].value, "%Y%m%dT%H:%M:%S")
+                created = datetime.datetime.strptime(p_user["create_time"].value,
+                                                     "%Y%m%dT%H:%M:%S")
                 self._create_time.setText(created.strftime("%d.%m.%Y %H:%M"))
-            self._storage_usage.setText(UserListModel.formatMemory(p_user["used_memory"]))
+            self._storage_usage.setText(UserListModel. \
+                                        formatMemory(p_user["used_memory"]))
             self._objects.setText(str(p_user["files"]))
             if p_user["access_rights"]["owner"][0]:
                 text = ""
@@ -258,7 +261,8 @@ class UserDetails(QtGui.QDockWidget, Ui_UserDetails):
             if p_user["messaging_services"]:
                 text = ""
                 for i in range(len(p_user["messaging_services"])):
-                    text += (p_user["messaging_services"].keys()[i] + " : " + p_user["messaging_services"].values()[i] + "\n")
+                    text += (p_user["messaging_services"].keys()[i] + " : " + \
+                             p_user["messaging_services"].values()[i] + "\n")
                 self._instant_messenger.setText(text)
             else:
                 self._instant_messenger.setText("")
