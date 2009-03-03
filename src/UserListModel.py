@@ -88,8 +88,8 @@ class UserListModel(QtCore.QAbstractTableModel):
                 return QtCore.QVariant("Ja")
             elif self.user_list[p_index.row()][self.header_list[p_index.column()][0]] == False:
                 return QtCore.QVariant("Nein")
-        elif not self.user_list[p_index.row()][self.header_list[p_index.column()][0]] and \
-                self.header_list[p_index.column()][0] == "last_login":
+        elif self.header_list[p_index.column()][0] == "last_login" and \
+            type(self.user_list[p_index.row()]["last_login"]) == type(None):
             return QtCore.QVariant("Nie")
         elif self.header_list[p_index.column()][0] == "used_memory":
             return QtCore.QVariant(self.formatMemory(self.user_list[p_index.row()] \
@@ -173,13 +173,41 @@ class UserListModel(QtCore.QAbstractTableModel):
         if len(self.user_list) != 0:
             if p_order == QtCore.Qt.AscendingOrder:
                 if self.header_list[p_column][0] == "last_login":
-                    pass
+                    if len(self.user_list):
+                        sorted_list = []
+                        temp_list = []
+                        for user in self.user_list:
+                            if type(user["last_login"]) == type(None):
+                                sorted_list.append(user)
+                            else:
+                                temp_list.append(user)
+                        temp_list.sort(key = operator.itemgetter( \
+                                self.header_list[p_column][0]), reverse = True)
+                        temp_list.extend(sorted_list)
+                        self.user_list = temp_list
+                elif type(self.user_list[p_column][self.header_list[p_column][0]]) == type("String"):
+                    self.user_list.sort(lambda a, b: cmp(a.lower(), b.lower()), key = operator.itemgetter( \
+                        self.header_list[p_column][0]))
                 else:
                     self.user_list.sort(key = operator.itemgetter( \
                                         self.header_list[p_column][0]))
             elif p_order == QtCore.Qt.DescendingOrder:
                 if self.header_list[p_column][0] == "last_login":
-                    pass
+                    if len(self.user_list):
+                        sorted_list = []
+                        temp_list = []
+                        for user in self.user_list:
+                            if type(user["last_login"]) == type(None):
+                                sorted_list.append(user)
+                            else:
+                                temp_list.append(user)
+                        temp_list.sort(key = operator.itemgetter( \
+                        self.header_list[p_column][0]))
+                        sorted_list.extend(temp_list)
+                        self.user_list = sorted_list
+                elif type(self.user_list[p_column][self.header_list[p_column][0]]) == type("String"):
+                    self.user_list.sort(lambda a, b: cmp(a.lower(), b.lower()), key = operator.itemgetter( \
+                        self.header_list[p_column][0]), reverse = True)
                 else:
                     self.user_list.sort(key = operator.itemgetter( \
                         self.header_list[p_column][0]), reverse = True)
