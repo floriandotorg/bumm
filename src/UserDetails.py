@@ -106,7 +106,40 @@ class UserDetails(QtGui.QDockWidget, Ui_UserDetails):
     #        - Liste mit Usernamen, die dieser Rolle entsprechen
     #        - Liste mit Zugriffsrechten
     def showUser(self, p_user):
-        if p_user:
+
+        if not p_user:
+            self._user.setText("kein Benutzer!")
+            self._user_id.setText("")
+            self._full_name.setText("")
+            self._admin.setText("")
+            self._locked.setText("")
+            self._mail.setText("")
+            self._more_mail.setText("")
+            self._last_login.setText("")
+            self._workspace.setText("")
+            self._create_time.setText("")
+            self._storage_usage.setText("")
+            self._objects.setText("")
+            self._role_owner_as_owner.setText("")
+            self._actions_as_owner.setText("")
+            self._role_owner_as_manager.setText("")
+            self._actions_as_manager.setText("")
+            self._role_owner_as_other.setText("")
+            self._actions_as_other.setText("")
+            self._private_tel.setText("")
+            self._mobile_tel.setText("")
+            self._office_tel.setText("")
+            self._fax.setText("")
+            self._language.setText("")
+            self._organisation.setText("")
+            self._private_url.setText("")
+            self._office_url.setText("")
+            self._address.setText("")
+            self._instant_messenger.setText("")
+            self._more_info.setText("")
+
+        else:
+            print type(p_user)
 
             self._user.setText(p_user["name"])
             self._user_id.setText(str(p_user["user_id"]))
@@ -272,5 +305,3 @@ class UserDetails(QtGui.QDockWidget, Ui_UserDetails):
                 self._lbl_pic.setPixmap(QtGui.QPixmap(p_user["local_photo"]))
             except:
                 self._lbl_pic.clear()
-        else:
-            self._user.setText("kein Benutzer!")
