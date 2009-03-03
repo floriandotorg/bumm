@@ -129,7 +129,7 @@ class UserDetails(QtGui.QDockWidget, Ui_UserDetails):
                 self._more_mail.setText(text)
             else:
                 self._more_mail.setText("")
-            if type(p_user["last_login"] == "NoneType"):
+            if type(p_user["last_login"]) == type(None):
                 self._last_login.setText("Nie")
             else:
                 last_logged = datetime.datetime.strptime(p_user["last_login"].value, "%Y%m%dT%H:%M:%S")
@@ -143,7 +143,7 @@ class UserDetails(QtGui.QDockWidget, Ui_UserDetails):
                 self._workspace.setText("")
 
             ##Daten des Konto-Tab
-            if not type(p_user["create_time"] == "DateTime"):
+            if not type(p_user["create_time"]) == type(None):
                 self._create_time.setText("Nie")
             else:
                 created = datetime.datetime.strptime(p_user["create_time"].value, "%Y%m%dT%H:%M:%S")
