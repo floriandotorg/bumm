@@ -139,7 +139,6 @@ class UserDetails(QtGui.QDockWidget, Ui_UserDetails):
             self._more_info.setText("")
 
         else:
-            print type(p_user)
 
             self._user.setText(p_user["name"])
             self._user_id.setText(str(p_user["user_id"]))
