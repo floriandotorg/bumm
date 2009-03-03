@@ -20,3 +20,6 @@ Benutzerliste
 	- Desgin (Klassendiagramm etc.) (Florian)
 	- Klassenbeschreibung (Doxygen)
 	- Zusammenführen (Ben)
+	
+BUGS
+- UserDetails: Letzte Anmeldung immer "nie"
