@@ -6,9 +6,6 @@
 # @author Benjamin Leipold
 # @date 12.02.09
 
-# todo:
-# SelectionChanged() funzt nicht
-
 #################################################################################
 # Copyright (C) 2009 Benjamin Flader, Benjamin Leipold, André Naumann,          #
 # Corinna Vollert, Florian Kaiser                                               #
