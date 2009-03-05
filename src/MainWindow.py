@@ -25,11 +25,9 @@
 #                                                                               #
 #################################################################################
 
-from PyQt4 import QtGui, QtCore, Qt
+from PyQt4 import QtGui, QtCore
 from ui_MainWindow import Ui_MainWindow
-import interface
 from interface.BscwInterface import BscwInterface
-#from test import BscwInterface
 from UserList import UserList
 from UserDetails import UserDetails
 from LoginDialog import LoginDialog
@@ -38,9 +36,9 @@ from InfoDialog import InfoDialog
 from SetColumnDialog import SetColumnDialog
 from ActionThread import ActionThread
 from ErrorDialog import ErrorDialog
-import time
 import urllib
 import tempfile
+import interface
 
 ## Diese Klasse stellt das Hauptfenster der Anwendung da und managed alle
 # Funktionen des Programms
@@ -50,7 +48,9 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
     # @param p_parent Übergeordnetes QObject
     def __init__(self, p_parent = None):
         try:
+            # Übergeordneten Konstruktor aufrufen
             QtGui.QMainWindow.__init__(self, p_parent)
+            # Und Fenster konstruieren (Siehe Qt-Dokumentation)
             self.setupUi(self)
 
             ## Liste aller heruntergeladenen Benutzerbilder
@@ -58,15 +58,17 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 
             ## DockWidget indem nähere Benutzerinformationen angezeigt werden
             self._user_details = UserDetails(self)
+            # DockWidget dem Fenster hinzufügen
             self.addDockWidget(QtCore.Qt.RightDockWidgetArea,
                                                     self._user_details)
 
-            ## Programmeinstellungen laden
+            ## Programmeinstellungen
             self._settings = Settings()
 
             ## Login öffnen
             self._login()
-
+            
+            # Einstellungen laden
             self.setGeometry(self._settings.main_window_geometry)
             self._user_details.setGeometry(self._settings.user_details_geometry)
             self._user_details.setVisible(self._settings.show_user_details)
@@ -81,7 +83,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             ## Liste aller Benuter
             self._user_list = UserList(self._headers, self)
             self.setCentralWidget(self._user_list)
-
+            
             self._toolbar.addSeparator()
             ## 'Suchtext'-Label
             self._lbl_filter = QtGui.QLabel(self)
@@ -92,11 +94,20 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             self._line_edit_filter = QtGui.QLineEdit(self)
             self._line_edit_filter.setMaximumWidth(150)
             self._toolbar.addWidget(self._line_edit_filter)
-
+            
+            ## Button um die Liste zu filtern
+            self._button_filter = QtGui.QPushButton(self)
+            self._button_filter.setText(self.trUtf8("Suchen"))
+            self._toolbar.addWidget(self._button_filter)
+            
+            # Wenn ein oder mehrere Einträge markiert werden, dann 
+            # das SockWidget aktualisieren
             self.connect(self._user_list,
                             QtCore.SIGNAL("SelectionChanged()"),
                             self._selectionChangedSlot)
-
+            
+            # Die UserDetails abhängig vom "User Details"-Button
+            # anzeigen bzw. verbergen
             self.connect(self._action_user_details,
                             QtCore.SIGNAL("triggered(bool)"),
                             self._user_details.setVisible)
@@ -104,12 +115,18 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
                             QtCore.SIGNAL("visibilityChanged(bool)"),
                             self._action_user_details.setChecked)
 
+            # Die User-Liste anzeigen, wenn auf "Alles aktualisieren" geklickt
+            # wurde
             self.connect(self._action_update_all, QtCore.SIGNAL("triggered()"),
                             self._loadList)
 
+            # SetColumnDialog anzeigen, wenn auf "Spalten auswählen..."
+            # geklickt wurde
             self.connect(self._action_set_cols, QtCore.SIGNAL("triggered()"),
                             self._showSetColumnDialogSlot)
 
+            # User (ent-)sperren, User löschen und Aufräumarbeiten starten,
+            # wenn auf den entsprechenden Button geklicht wurde
             self.connect(self._action_delete, QtCore.SIGNAL("triggered()"),
                             self._deleteUserSlot)
             self.connect(self._action_lock, QtCore.SIGNAL("triggered()"),
@@ -123,11 +140,17 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
                             QtCore.SIGNAL("triggered()"),
                             self._destroyClipboardSlot)
 
+            # Info-Dialog anzeigen wenn auf "Hilfe -> Info" geklickt wurde
             self.connect(self._action_info, QtCore.SIGNAL("triggered()"),
                             self._showInfoSlot)
 
+            # Die Liste filtern, wenn im Suchtextfeld "Enter" gedrückt oder
+            # der "Suchen"-Button angeklickt wurde
             self.connect(self._line_edit_filter,
                             QtCore.SIGNAL("returnPressed()"),
+                            self._setUserListFilterSlot)
+            self.connect(self._button_filter,
+                            QtCore.SIGNAL("clicked()"),
                             self._setUserListFilterSlot)
 
         except Exception, exception:
@@ -135,35 +158,54 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             err_dialog = ErrorDialog(exception, self)
             err_dialog.exec_()
 
-    ## Lädt die Benutzerdaten vom BSCW Server und zeigt das Hauptfenster an
+    ## Überladene Methode:  Lädt die Benutzerdaten vom BSCW Server und zeigt das
+    # Hauptfenster an
     def show(self):
         try:
+            # Fenster anzeigen
             QtGui.QMainWindow.show(self)
+            # Benutzerliste laden
             self._loadList()
 
         except Exception, exception:
             # Fehlerdialog anzeigen
             err_dialog = ErrorDialog(exception, self)
             err_dialog.exec_()
+            
+    ## Überladene Methode: Speichert den Status vom Benutzer-Details-Dialog 
+    # (offen/zu)
+    # @param p_event QEvent, übergibt das von Qt gesendete Event
+    def event(self, p_event):
+
+        # Event überprüfen
+        if p_event.WindowStateChange:
+
+            # Wenn Fenster (noch) nicht minimiert und nicht geschlossen
+            if not self.isMinimized() and not self.isHidden():
+                    self._settings.show_user_details \
+                        = self._user_details.isVisible()
+
+        # Standard-Methode ausführen
+        return QtGui.QMainWindow.event(self, p_event)
 
     ## Überladene Methode: Speichert alle Einstellungen, wenn das Fenster
     # geschlossen wurde
-    # @param p_even Qt-Close-Event
+    # @param p_event Qt-Close-Event
     def closeEvent(self, p_event):
 
         try:
+            # Einstellungen speichern
             self._settings.columns = [i[0] for i in self._headers]
             self._settings.main_window_geometry = self.geometry()
             self._settings.user_details_geometry = \
                                     self._user_details.geometry()
 
-            # wenn minimiert nicht den Status speichern, da ansonsten immer
-            # false
+            # Wenn das Hauptfenster minimiert wurde, dann die Sichtbarkeit
+            # des DockWidgets nicht speichern, weil diese dann immer
+            # "False" ist
             if not self.isMinimized():
-                self._settings.show_user_details = self._user_details.isVisible()
-
                 self._settings.show_user_details = \
-                    self._user_details.isVisible()
+                                    self._user_details.isVisible()
 
                 self._settings.state = self.saveState()
 
@@ -173,7 +215,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             err_dialog.exec_()
 
     ## Erzeugt einen Thread, der eine Aufgabe ausführt, die die Anwendung
-    # blockieren könnte
+    # durch eine lange Laufzeit blockieren könnte
     # @param p_func Zeiger auf eine Funktion mit langer Laufzeit
     # @param p_finished Zeiger auf eine Funktion, die aufgerufen wird,
     # wenn die Aufgabe bearbeitet wurde
@@ -182,8 +224,13 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         try:
             ## Thread für Aufgaben mit langer Laufzeit
             self._action_thread = ActionThread(self, p_func, *p_params)
+            
+            # Wenn der Thread beendet wurde, dann führe die im Parameter
+            # p_finished spezifizierte Funktion aus
             self.connect(self._action_thread, QtCore.SIGNAL("finished()"),
                          p_finished)
+            
+            # Thread starten
             self._action_thread.start()
 
         except Exception, exception:
@@ -194,52 +241,14 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
     ## Lädt die Daten aller Benutzer und stellt diese in der Liste da
     def _loadList(self):
         try:
+            # Fenster blockieren und Statusmeldung anzeigen
             self._lockWidget(True,
                              self.trUtf8("Benutzerliste wird geladen ..."))
+            
+            # Thread starten, der die Liste vom Server lädt
             self._action(self._bscw_interface.getAllUser,
                              self._listLoadedSlot)
-        except Exception, exception:
-            # Fehlerdialog anzeigen
-            err_dialog = ErrorDialog(exception, self)
-            err_dialog.exec_()
-
-    ## Lädt die Benutzerdaten in die User-Liste und entsperrt das Fenster
-    def _listLoadedSlot(self):
-        try:
-            self._user_list.loadList(self.sender().getResult())
-            self._unlockWidget()
-
-        except Exception, exception:
-            # Fehlerdialog anzeigen
-            err_dialog = ErrorDialog(exception, self)
-            err_dialog.exec_()
-
-    ## Zeigt ein Info-Dialog an
-    def _showInfoSlot(self):
-        try:
-            info_dialog = InfoDialog(self)
-            info_dialog.exec_()
-
-        except Exception, exception:
-            # Fehlerdialog anzeigen
-            err_dialog = ErrorDialog(exception, self)
-            err_dialog.exec_()
-
-    ## Zeigt den Spalten-Auswählen-Dialog an und speichert, wenn auf
-    # 'OK' geklickt wurde die Auswahl in self._headers. Außerdem wird
-    # die User-Liste aktualisiert
-    def _showSetColumnDialogSlot(self):
-        try:
-            set_column_dialog = SetColumnDialog(self._headers, self)
-            set_column_dialog.setGeometry(self._settings.col_dialog_geometry)
-
-            set_column_dialog.exec_()
-
-            if set_column_dialog.result() == QtGui.QDialog.Accepted:
-                self._headers = set_column_dialog.getHeaderData()
-                self._user_list.changeHeaderData(self._headers)
-            self._settings.col_dialog_geometry = set_column_dialog.geometry()
-
+            
         except Exception, exception:
             # Fehlerdialog anzeigen
             err_dialog = ErrorDialog(exception, self)
@@ -250,15 +259,26 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
     # @param p_message Nachricht für die Statusbar
     def _lockWidget(self, p_lock, p_message = None):
         try:
+            # Steuerelement sperren ja/nein in 
+            # Steuerelement aktiv ja/nein umwandeln
             p_lock = not p_lock
+            
+            # Die wichtigsten Elemente der GUI sperren bzw. entsperren
             self._toolbar.setEnabled(p_lock)
             self._user_list.setEnabled(p_lock)
             self._menubar.setEnabled(p_lock)
             self._user_details.setEnabled(p_lock)
+            
+            # Statusnachricht setzten, wenn gewünscht
             if p_message:
-                self._statusbar.showMessage(p_message)
+                ## Label in der Statusleiste, indem Statusnachrichten
+                # angezeigt werden
+                self._lbl_status = QtGui.QLabel(p_message, self)
+                self._statusbar.addWidget(self._lbl_status, 2)
             else:
-                self._statusbar.clearMessage()
+                self._statusbar.removeWidget(self._lbl_status)
+                
+            # Fenster aktualisieren
             QtGui.qApp.processEvents()
 
         except Exception, exception:
@@ -267,24 +287,10 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             err_dialog.exec_()
 
     ## Entsperrt das Widget und löscht die Status-Nachricht
+    # Wrapper für _lockWidget(False)
     def _unlockWidget(self):
         try:
             self._lockWidget(False)
-
-        except Exception, exception:
-            # Fehlerdialog anzeigen
-            err_dialog = ErrorDialog(exception, self)
-            err_dialog.exec_()
-
-    ## Aktualisiert die User-Details und die Toolbar
-    def _selectionChangedSlot(self):
-        try:
-            selection = self._user_list.getSelection()
-            if selection == []:
-                self._setUserActionEnabled(False)
-            else:
-                self._setUserActionEnabled(True)
-            self._updateUserDetails(selection)
 
         except Exception, exception:
             # Fehlerdialog anzeigen
@@ -295,6 +301,8 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
     # @param p_enabled Menüs aktiviert ja/nein (Boolean)
     def _setUserActionEnabled(self, p_enabled):
         try:
+            # Menüpunkte und Toolbar-Buttons, die sich auf bestimmte User
+            # beziehen, sperren bzw. entsperren
             self._action_delete.setEnabled(p_enabled)
             self._action_lock.setEnabled(p_enabled)
             self._action_unlock.setEnabled(p_enabled)
@@ -309,15 +317,24 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
     # @param p_selection Liste der angewählten User
     def _updateUserDetails(self, p_selection):
         try:
+            # UserDetails nuranzeigen, wenn genau EIN Benutzer ausgewählt
+            # wurde
             if len(p_selection) == 1:
+                
+                # Wenn ein Benutzerbild existiert und es noch nicht runter-
+                # geladen wurde ...
                 if not "local_photo" in p_selection[0] \
-                        and p_selection[0]["photo"]:
+                                                    and p_selection[0]["photo"]:
+                    # .. Widget sperren und Bild herunterladen
                     self._lockWidget(True,
                                 self.trUtf8("Benutzerbild wird geladen ..."))
                     p_selection[0]["local_photo"] = \
                                 self._getFileByUrl(p_selection[0]["photo"])
                     self._unlockWidget()
+                
+                # Benutzerinfo im DockWidget anzeigen
                 self._user_details.showUser(p_selection[0])
+            
             else:
                 self._user_details.showUser(None)
 
@@ -325,155 +342,27 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             # Fehlerdialog anzeigen
             err_dialog = ErrorDialog(exception, self)
             err_dialog.exec_()
-
-    ## Sperrt alle in der Benutzerliste angewählten User
-    def _lockUserSlot(self):
-        try:
-            to_lock = []
-
-            for i in self._user_list.getSelection():
-                to_lock.append(i["name"])
-
-            self._lockWidget(True, self.trUtf8("Benutzer werden gesperrt ..."))
-            self._action(self._bscw_interface.lockUser, self._unlockWidget,
-                            to_lock)
-
-            for i in to_lock:
-                self._user_list.updateUserAttr(to_lock, "locked", True)
-
-        except Exception, exception:
-            # Fehlerdialog anzeigen
-            err_dialog = ErrorDialog(exception, self)
-            err_dialog.exec_()
-
-    ## Entsperrt alle in der Benutzerliste angewählten User
-    def _unlockUserSlot(self):
-        try:
-            to_unlock = []
-
-            for i in self._user_list.getSelection():
-                to_unlock.append(i["name"])
-
-            self._lockWidget(True, self.trUtf8("Benutzer werden entsperrt ..."))
-            self._action(self._bscw_interface.unlockUser, self._unlockWidget,
-                            to_unlock)
-
-            for i in to_unlock:
-                self._user_list.updateUserAttr(to_unlock, "locked", False)
-
-        except Exception, exception:
-            # Fehlerdialog anzeigen
-            err_dialog = ErrorDialog(exception, self)
-            err_dialog.exec_()
-
-    ## Leer danach die Mülleimer. Das Mindestalter der Dateien wird mithilfe
-    # eines Dialogs definiert.
-    def _destroyTrashSlot(self):
-        try:
-            user = []
-
-            for i in self._user_list.getSelection():
-                user.append(i["name"])
-
-            outdated = QtGui.QInputDialog.getInteger(self,
-                            self.trUtf8("Mindestalter angeben"),
-                            self.trUtf8("Mindestalter der zu " \
-                                        "löschenden Dateien (in Tagen):"),
-                            5, 0)
-
-            if outdated[1]:
-                self._lockWidget(True, self.trUtf8("Mülleimer werden " \
-                                                   "geleert ..."))
-                self._action(self._bscw_interface.destroyTrash,
-                             self._unlockWidget,
-                             outdated[0], user)
-
-        except Exception, exception:
-            # Fehlerdialog anzeigen
-            err_dialog = ErrorDialog(exception, self)
-            err_dialog.exec_()
-
-    ## Räumt danach die Zwischenablagen auf. Das Mindestalter der Dateien
-    # wird mithilfe eines Dialogs definiert.
-    def _destroyClipboardSlot(self):
-        try:
-            user = []
-
-            for i in self._user_list.getSelection():
-                user.append(i["name"])
-
-            outdated = QtGui.QInputDialog.getInteger(self,
-                            self.trUtf8("Mindestalter angeben"),
-                            self.trUtf8("Mindestalter der zu " \
-                                        "löschenden Dateien (in Tagen):"),
-                            5, 0)
-
-            if outdated[1]:
-                self._lockWidget(True, self.trUtf8("Zwischenablagen werden " \
-                                                   "aufgeräumt ..."))
-                self._action(self._bscw_interface.destroyClipboard,
-                             self._unlockWidget,
-                             outdated[0], user)
-
-        except Exception, exception:
-            # Fehlerdialog anzeigen
-            err_dialog = ErrorDialog(exception, self)
-            err_dialog.exec_()
-
-    ## Löscht alle in der Benutzerliste angewählten User
-    def _deleteUserSlot(self):
-        try:
-            to_delete = []
-
-            for i in self._user_list.getSelection():
-                to_delete.append(i["name"])
-
-            ret = QtGui.QMessageBox.question(self,
-                            self.trUtf8("%1 User löschen?") \
-                            .arg(len(to_delete)),
-                            self.trUtf8("Sind Sie sicher, dass Sie die " \
-                            "ausgewählten Benutzer löschen möchten?"),
-                            QtGui.QMessageBox.Yes , QtGui.QMessageBox.No)
-
-            if ret == QtGui.QMessageBox.Yes:
-                self._lockWidget(True,
-                                 self.trUtf8("Benutzer werden gelöscht ..."))
-                self._bscw_interface.deleteUser(to_delete)
-                self._user_list.removeUser(to_delete)
-                self._action(self._bscw_interface.deleteUser,
-                             self._unlockWidget,
-                             to_delete)
-
-        except Exception, exception:
-            # Fehlerdialog anzeigen
-            err_dialog = ErrorDialog(exception, self)
-            err_dialog.exec_()
-
-    ## Setzt den Filter der User-Liste
-    def _setUserListFilterSlot(self):
-        try:
-            self._user_list.setFilter(self._line_edit_filter.text())
-
-        except Exception, exception:
-            # Fehlerdialog anzeigen
-            err_dialog = ErrorDialog(exception, self)
-            err_dialog.exec_()
-
+            
     ## Zeigt den LoginDialog an und versucht sich per BscwInterface am
     #  BSCW-Server anzumelden.
     def _login(self):
         try:
+            # Login Dialog
             login_dialog = LoginDialog(self._settings, self)
 
+            # Wurde auf "Abbrechen" geklickt?
             if login_dialog.exec_() != QtGui.QDialog.Accepted:
+                # Dann Programm beenden
                 QtGui.qApp.quit()
                 exit()
 
+            # Einstellungen des Login Dialogs speichern
             self._settings = login_dialog.getSettings()
 
             ## Interface zum BSCW-Server
             self._bscw_interface = login_dialog.getInterface()
 
+            # HTTP-Adresse aus Server Adresse extrahieren
             reg_exp = \
                 QtCore.QRegExp("(http://)?([a-zA-Z0-9_\\-:\\.]+)(/[. ^])*")
             reg_exp.exactMatch(login_dialog.getServerAddress())
@@ -495,10 +384,17 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
     # ist
     def _getFileByUrl(self, p_url):
         try:
+            # Liegt das Bild auf dem BSCW-Server?
             if p_url[0] == "/":
+                # Dann Server Adresse vor den Pfad des Bildes setzten
                 p_url = self._img_url_prefix + p_url
+            
             try:
+                # URLopener Objekt speichern, damit das Bild nicht
+                # gelöscht wird
                 self._img_cache.append(urllib.URLopener())
+                
+                # Datei runterladen und zurückgeben
                 file = self._img_cache[-1].retrieve(p_url)[0]
                 return file
             except:
@@ -509,21 +405,238 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             err_dialog = ErrorDialog(exception, self)
             err_dialog.exec_()
 
-    ## Speichert den Status vom Benutzer-Details-Dialog (offen/zu)
-    # Diese Methode ist eine überladene Funktion vom MainWindow.
-    # @param p_event QEvent, übergibt das von Qt gesendete Event
-    def event(self, p_event):
+    ## Sperrt alle in der Benutzerliste angewählten User
+    def _lockUserSlot(self):
+        try:
+            # Liste der zu sperrenden Benutzer
+            to_lock = []
 
-        # Event überprüfen
-        if p_event.WindowStateChange:
+            # Den Benutzernamen aller selektierten User der Liste hinzufügen
+            for i in self._user_list.getSelection():
+                to_lock.append(i["name"])
 
-            # wenn Fenster (noch) nicht minimiert und nicht geschlossen
-            if not self.isMinimized() and not self.isHidden():
-                    self._settings.show_user_details \
-                        = self._user_details.isVisible()
+            # Fenster sperren und Thread starten, der die Benutzer sperrt
+            self._lockWidget(True, self.trUtf8("Benutzer werden gesperrt ..."))
+            self._action(self._bscw_interface.lockUser, self._unlockWidget,
+                            to_lock)
 
-        # Standard-Methode ausführen
-        return QtGui.QMainWindow.event(self, p_event)
+            # Benutzerliste aktualisieren
+            self._user_list.updateUserAttr(to_lock, "locked", True)
+
+        except Exception, exception:
+            # Fehlerdialog anzeigen
+            err_dialog = ErrorDialog(exception, self)
+            err_dialog.exec_()
+
+    ## Entsperrt alle in der Benutzerliste angewählten User
+    def _unlockUserSlot(self):
+        try:
+            # Liste der zu entsperrenden Benutzer
+            to_unlock = []
+
+            # Den Benutzernamen aller selektierten User der Liste hinzufügen
+            for i in self._user_list.getSelection():
+                to_unlock.append(i["name"])
+
+            # Fenster sperren und Thread starten, der die Benutzer entsperrt
+            self._lockWidget(True, self.trUtf8("Benutzer werden entsperrt ..."))
+            self._action(self._bscw_interface.unlockUser, self._unlockWidget,
+                            to_unlock)
+            
+            # Benutzerliste aktualisieren
+            self._user_list.updateUserAttr(to_unlock, "locked", False)
+
+        except Exception, exception:
+            # Fehlerdialog anzeigen
+            err_dialog = ErrorDialog(exception, self)
+            err_dialog.exec_()
+
+    ## Leer die Mülleimer der Benutzer. Das Mindestalter der Dateien wird mithilfe
+    # eines Dialogs definiert.
+    def _destroyTrashSlot(self):
+        try:
+            # Liste der Benutzer, bei denen der Mülleimer geleert werden soll 
+            user = []
+
+            # Den Benutzernamen aller selektierten User der Liste hinzufügen
+            for i in self._user_list.getSelection():
+                user.append(i["name"])
+
+            # Per Dialog das Mindestalter der Dateien ermitteln
+            outdated = QtGui.QInputDialog.getInteger(self,
+                            self.trUtf8("Mindestalter angeben"),
+                            self.trUtf8("Mindestalter der zu " \
+                                        "löschenden Dateien (in Tagen):"),
+                            5, 0)
+
+            # Wurde im Buttin auf OK geklickt ..
+            if outdated[1]:
+                # .. dann Widget sperren und Thread starten, der die Mülleimer
+                # leert
+                self._lockWidget(True, self.trUtf8("Mülleimer werden " \
+                                                   "geleert ..."))
+                self._action(self._bscw_interface.destroyTrash,
+                             self._unlockWidget,
+                             outdated[0], user)
+
+        except Exception, exception:
+            # Fehlerdialog anzeigen
+            err_dialog = ErrorDialog(exception, self)
+            err_dialog.exec_()
+
+    ## Räumt die Zwischenablagen der Benutzer auf. Das Mindestalter der Dateien
+    # wird mithilfe eines Dialogs definiert.
+    def _destroyClipboardSlot(self):
+        try:
+            # Liste der Benutzer, bei denen die Zwischenablage gelöscht werden soll 
+            user = []
+
+            # Den Benutzernamen aller selektierten User der Liste hinzufügen
+            for i in self._user_list.getSelection():
+                user.append(i["name"])
+            
+            # Per Dialog das Mindestalter der Dateien ermitteln
+            outdated = QtGui.QInputDialog.getInteger(self,
+                            self.trUtf8("Mindestalter angeben"),
+                            self.trUtf8("Mindestalter der zu " \
+                                        "löschenden Dateien (in Tagen):"),
+                            5, 0)
+            
+            # Wurde im Buttin auf OK geklickt ..
+            if outdated[1]:
+                # .. dann Widget sperren und Thread starten, der die Zwischenablagen
+                # löscht
+                self._lockWidget(True, self.trUtf8("Zwischenablagen werden " \
+                                                   "aufgeräumt ..."))
+                self._action(self._bscw_interface.destroyClipboard,
+                             self._unlockWidget,
+                             outdated[0], user)
+
+        except Exception, exception:
+            # Fehlerdialog anzeigen
+            err_dialog = ErrorDialog(exception, self)
+            err_dialog.exec_()
+
+    ## Löscht alle in der Benutzerliste angewählten User
+    def _deleteUserSlot(self):
+        try:
+            # Liste der zu löschenden User
+            to_delete = []
+
+            # Den Benutzernamen aller selektierten User der Liste hinzufügen
+            for i in self._user_list.getSelection():
+                to_delete.append(i["name"])
+                
+            # Sicherheitsabfrage durchführen
+            ret = QtGui.QMessageBox.question(self,
+                            self.trUtf8("%1 User löschen?") \
+                            .arg(len(to_delete)),
+                            self.trUtf8("Sind Sie sicher, dass Sie die " \
+                            "ausgewählten Benutzer löschen möchten?"),
+                            QtGui.QMessageBox.Yes , QtGui.QMessageBox.No)
+
+            # Wurde auf "Ja" geklickt ..
+            if ret == QtGui.QMessageBox.Yes:
+                # .. dann Fenster sperren und Thread starten, der die Benutzer 
+                # löscht
+                self._lockWidget(True,
+                                 self.trUtf8("Benutzer werden gelöscht ..."))
+                self._action(self._bscw_interface.deleteUser,
+                             self._unlockWidget,
+                             to_delete)
+                
+                # Benutzer aus der Liste entfernen
+                self._user_list.removeUser(to_delete)
+
+        except Exception, exception:
+            # Fehlerdialog anzeigen
+            err_dialog = ErrorDialog(exception, self)
+            err_dialog.exec_()
+
+    ## Setzt den Filter der User-Liste
+    def _setUserListFilterSlot(self):
+        try:
+            # Filter setzten
+            self._user_list.setFilter(self._line_edit_filter.text())
+
+        except Exception, exception:
+            # Fehlerdialog anzeigen
+            err_dialog = ErrorDialog(exception, self)
+            err_dialog.exec_()
+            
+    ## Lädt die Benutzerdaten in die User-Liste und entsperrt das Fenster
+    def _listLoadedSlot(self):
+        try:
+            # Die Benutzerdaten in der Liste anzeigen
+            self._user_list.loadList(self.sender().getResult())
+            # Fenster entsperren
+            self._unlockWidget()
+
+        except Exception, exception:
+            # Fehlerdialog anzeigen
+            err_dialog = ErrorDialog(exception, self)
+            err_dialog.exec_()
+            
+    ## Zeigt ein Info-Dialog an
+    def _showInfoSlot(self):
+        try:
+            # Info-Dialog instanzieren ..
+            info_dialog = InfoDialog(self)
+            # .. und anzeigen
+            info_dialog.exec_()
+
+        except Exception, exception:
+            # Fehlerdialog anzeigen
+            err_dialog = ErrorDialog(exception, self)
+            err_dialog.exec_()
+
+    ## Zeigt den Spalten-Auswählen-Dialog an und speichert, wenn auf
+    # 'OK' geklickt wurde die Auswahl in self._headers. Außerdem wird
+    # die User-Liste aktualisiert
+    def _showSetColumnDialogSlot(self):
+        try:
+            # Dialog erstellen, die Größe des Dialogs aus den Einstellungen
+            # laden und den Dialog anzeigen
+            set_column_dialog = SetColumnDialog(self._headers, self)
+            set_column_dialog.setGeometry(self._settings.col_dialog_geometry)
+            set_column_dialog.exec_()
+            
+            # Wurde auf OK geklickt?
+            if set_column_dialog.result() == QtGui.QDialog.Accepted:
+                # Dann die User-Liste aktualisieren
+                self._headers = set_column_dialog.getHeaderData()
+                self._user_list.changeHeaderData(self._headers)
+                
+            # Die neuen Maße des Dialogs in den Einstellungen speichern
+            self._settings.col_dialog_geometry = set_column_dialog.geometry()
+
+        except Exception, exception:
+            # Fehlerdialog anzeigen
+            err_dialog = ErrorDialog(exception, self)
+            err_dialog.exec_()
+            
+    ## Aktualisiert die User-Details und die Toolbar
+    def _selectionChangedSlot(self):
+        try:
+            # Liste der ausgewählten User holen
+            selection = self._user_list.getSelection()
+            
+            # Sind User selektiert?
+            if selection != []:
+                # Dann Operationen aktivieren, die sich auf bestimmte User
+                # beziehen
+                self._setUserActionEnabled(True)
+            else:
+                # Ansonsten diese Operationen deaktivieren
+                self._setUserActionEnabled(False)
+            
+            # UserDetails-DockWidget aktualisieren
+            self._updateUserDetails(selection)
+
+        except Exception, exception:
+            # Fehlerdialog anzeigen
+            err_dialog = ErrorDialog(exception, self)
+            err_dialog.exec_()
 
 if __name__ == "__main__":
     import sys
