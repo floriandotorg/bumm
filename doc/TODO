@@ -6,6 +6,7 @@ Benutzerliste
 - Connection Refused Error Anzeigen (Florian)
 - Zeilenlänge
 - Icon (Corinna)
+- UserDetails: Ausgrauen, wenn kein User angezeigt werden soll
 - Exe (Florian)
 
 - Finaler Test 05.05.09
@@ -21,4 +22,3 @@ Benutzerliste
 	- Zusammenführen (Ben)
 	
 BUGS
-- UserDetails: Letzte Anmeldung immer "nie"
