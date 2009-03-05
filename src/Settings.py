@@ -27,12 +27,15 @@
 
 from PyQt4 import QtCore
 
-## Verwaltet Programmeinstellungen und speichert diese je nach System.
-#  Ist noch keine Datei vorhanden werden die Einstellungen mit Default-Werten
-#  gefüllt.
+## Verwaltet Programmeinstellungen und speichert diese je nach Betriebssystem:
+#  - Windows: Registry
+#  - Linux: .ini-Dateien
+#  - MacOS: XML
+#  Sind noch keine Einstellungen vorhanden werden die Einstellungen mit
+#  Standard-Werten gefüllt.
 class Settings(QtCore.QObject):
 
-    # lege Standardwerte fest
+    # lege Standardwerte als statische Attribute fest
     s_username = ""
     s_server_address = ""
     s_columns = ["user_id", "name", "longname", "email", "used_memory",
@@ -80,6 +83,7 @@ class Settings(QtCore.QObject):
 
     ## Dekonstruktor
     # Im Dekonstruktor werden die neuen Einstellungen gespeichert.
+    # Dies geschieht bei "BUMM" automatisch am Programmende.
     def __del__(self):
         self._settings.setValue("username", QtCore.QVariant(self._username))
         self._settings.setValue("server_address",
@@ -131,14 +135,14 @@ class Settings(QtCore.QObject):
     def getUserDetailsGeometry(self):
         return self._user_details_geometry
 
-    ## gibt den Boolean zurÃ¼ck ob UserDetails angezeigt werden sollen
-    #  zurÃ¼ck
+    ## gibt den Boolean ob UserDetails angezeigt werden sollen
+    #  zurück
     # @return UserDetails als Boolean
     def getShowUserDetails(self):
         return self._show_user_details
 
-    ## gibt den Status des MainWindows
-    #  zurÃ¼ck
+    ## gibt den Status des MainWindows zurück
+    #  (beinhaltet die Position und Größe der DockWidgets)
     # @return Status als QByteArray
     def getState(self):
         return self._state
@@ -179,12 +183,12 @@ class Settings(QtCore.QObject):
         self._user_details_geometry = QtCore.QRect(p_user_details_geometry)
 
     ## setzt den Boolean ob UserDetails angezeigt werden sollen
-    # @param _show_user_details UserDetails als Boolean
+    # @param p_show_user_details UserDetails als Boolean
     def setShowUserDetails(self, p_show_user_details):
         self._show_user_details = p_show_user_details
 
-    ## setzt den Boolean ob UserDetails angezeigt werden sollen
-    # @param _show_user_details UserDetails als Boolean
+    ## setzt den Status des MainWindows
+    # @param p_state MainWindow-Status als QByteArray
     def setState(self, p_state):
         self._state = p_state
 
