@@ -4,15 +4,15 @@ Benutzerliste
 - Bild im DockWidget (Florian)
 - Hilfe-Funktion (Florian)
 - Connection Refused Error Anzeigen (Florian)
-- Zeilenlänge
+- Zeilenlänge auf 82 Zeichen (Alle)
 - Icon (Corinna)
-- UserDetails: Ausgrauen, wenn kein User angezeigt werden soll
+- UserDetails: Ausgrauen, wenn kein User angezeigt werden soll (Coco)
 - Exe (Florian)
 
 - Finaler Test 05.05.09
 
 - Benutzerhandbuch (2-3 Seiten als HTML) (Leipi & Andre)
-- Kommentieren
+- Kommentieren (Alle)
 
 - Doku:
 	- Analyse (Use-Case) (Corinna)
@@ -20,5 +20,3 @@ Benutzerliste
 	- Desgin (Klassendiagramm etc.) (Florian)
 	- Klassenbeschreibung (Doxygen)
 	- Zusammenführen (Ben)
-	
-BUGS
