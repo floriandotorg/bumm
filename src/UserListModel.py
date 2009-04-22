@@ -84,23 +84,26 @@ class UserListModel(QtCore.QAbstractTableModel):
             return QtCore.QVariant()
         elif self.header_list[p_index.column()][0] == "admin" or \
                 self.header_list[p_index.column()][0] == "locked":
-            if self.user_list[p_index.row()][self.header_list[p_index.column()][0]] == True:
+            if self.user_list[p_index.row()] \
+			[self.header_list[p_index.column()][0]] == True:
                 return QtCore.QVariant("Ja")
-            elif self.user_list[p_index.row()][self.header_list[p_index.column()][0]] == False:
+            elif self.user_list[p_index.row()] \
+			[self.header_list[p_index.column()][0]] == False:
                 return QtCore.QVariant("Nein")
         elif self.header_list[p_index.column()][0] == "last_login" and \
             type(self.user_list[p_index.row()]["last_login"]) == type(None):
             return QtCore.QVariant("Nie")
         elif self.header_list[p_index.column()][0] == "used_memory":
-            return QtCore.QVariant(self.formatMemory(self.user_list[p_index.row()] \
-                    [self.header_list[p_index.column()][0]]))
+            return QtCore.QVariant(self.formatMemory( \
+			self.user_list[p_index.row()] \
+			[self.header_list[p_index.column()][0]]))
         elif self.header_list[p_index.column()][0] == "last_login":
-            date_time = datetime.datetime.strptime(self.user_list[p_index.row()]
-                    [self.header_list[p_index.column()][0]].value, "%Y%m%dT%H:%M:%S")
+            date_time = datetime.datetime.strptime(self.user_list[p_index.row()] \
+            [self.header_list[p_index.column()][0]].value, "%Y%m%dT%H:%M:%S")
             return QtCore.QVariant(date_time.strftime("%d.%m.%Y %H:%M"))
         elif self.header_list[p_index.column()][0] == "create_time":
-            date_time = datetime.datetime.strptime(self.user_list[p_index.row()]
-                    [self.header_list[p_index.column()][0]].value, "%Y%m%dT%H:%M:%S")
+            date_time = datetime.datetime.strptime(self.user_list[p_index.row()] \
+            [self.header_list[p_index.column()][0]].value, "%Y%m%dT%H:%M:%S")
             return QtCore.QVariant(date_time.strftime("%d.%m.%Y %H:%M"))
         else:
             return QtCore.QVariant(
@@ -120,7 +123,8 @@ class UserListModel(QtCore.QAbstractTableModel):
         elif p_section >= len(self.header_list):
             return QtCore.QVariant()
         else:
-            return QtCore.QVariant(QtCore.QString(self.header_list[p_section][1]))
+            return \
+			QtCore.QVariant(QtCore.QString(self.header_list[p_section][1]))
 
     ## Löscht den Inhalt der Liste und zeigt den Inhalt von p_user_list an.
     # @param p_user_list Eine Liste von Dictonaries mit folgendem Aufbau:
@@ -185,8 +189,10 @@ class UserListModel(QtCore.QAbstractTableModel):
                                 self.header_list[p_column][0]), reverse = True)
                         temp_list.extend(sorted_list)
                         self.user_list = temp_list
-                elif type(self.user_list[p_column][self.header_list[p_column][0]]) == type("String"):
-                    self.user_list.sort(lambda a, b: cmp(a.lower(), b.lower()), key = operator.itemgetter( \
+                elif type(self.user_list[p_column] \
+				[self.header_list[p_column][0]]) == type("String"):
+                    self.user_list.sort(lambda a, b: cmp(a.lower(), b.lower()), \
+					key = operator.itemgetter( \
                         self.header_list[p_column][0]))
                 else:
                     self.user_list.sort(key = operator.itemgetter( \
@@ -205,8 +211,10 @@ class UserListModel(QtCore.QAbstractTableModel):
                         self.header_list[p_column][0]))
                         sorted_list.extend(temp_list)
                         self.user_list = sorted_list
-                elif type(self.user_list[p_column][self.header_list[p_column][0]]) == type("String"):
-                    self.user_list.sort(lambda a, b: cmp(a.lower(), b.lower()), key = operator.itemgetter( \
+                elif type(self.user_list[p_column] \
+				[self.header_list[p_column][0]]) == type("String"):
+                    self.user_list.sort(lambda a, b: cmp(a.lower(), b.lower()), \
+					key = operator.itemgetter( \
                         self.header_list[p_column][0]), reverse = True)
                 else:
                     self.user_list.sort(key = operator.itemgetter( \
@@ -234,7 +242,8 @@ class UserListModel(QtCore.QAbstractTableModel):
         self.loadList(self.user_list)
         self.emit(QtCore.SIGNAL("layoutChanged()"))
 
-    ## Überschreibt ein Attribut eines oder mehrerer Benutzer mit einem neuen Wert
+    ## Überschreibt ein Attribut eines oder mehrerer Benutzer mit einem neuen
+	# Wert
     # p_name Liste von Namen der Benutzer
     # p_key Name des Attributs (Siehe loadList())
     # p_value Neuer Wert
@@ -261,7 +270,8 @@ class UserListModel(QtCore.QAbstractTableModel):
             for user in self.complete_user_list:
                 for i in user:
                     if i != "last_login" and i != "create_time":
-                        if QtCore.QString(unicode(user[i])).contains(p_text, 0) and found == False:
+                        if QtCore.QString(unicode(user[i])).contains(p_text, 0) \
+						and found == False:
                             self.user_list.append(user)
                             found = True
                 found = False
