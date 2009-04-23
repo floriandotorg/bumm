@@ -70,7 +70,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             self._settings = Settings()
 
             ## Login öffnen
-            #self._login()
+            self._login()
             
             # Einstellungen laden
             self.setGeometry(self._settings.main_window_geometry)
@@ -174,7 +174,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             # Fenster anzeigen
             QtGui.QMainWindow.show(self)
             # Benutzerliste laden
-            #self._loadList()
+            self._loadList()
 
         except Exception, exception:
             # Fehlerdialog anzeigen
@@ -279,7 +279,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             
             # Dateien löschen
             for i in manual.manual_files:
-                print dir.remove(i)
+                dir.remove(i)
             
             # Ordner entfernen
             QtCore.QDir.temp().rmdir("bumm_manual")
@@ -636,8 +636,6 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
     ## Zeigt das Benutzerhandbuch im Standard-Webrowser an
     def _showManualSlot(self):
         try:
-            print QtCore.QDir.tempPath() + \
-                                           "/bumm_manual/index.html";
             QtGui.QDesktopServices.openUrl(QtCore.QUrl(QtCore.QDir.tempPath() + \
                                            "/bumm_manual/index.html"))
             
