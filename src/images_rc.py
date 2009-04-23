@@ -1,3 +1,3 @@
 # -*- coding: utf-8 -*-
-## Umleitung für die Ressourcen initialisierung im UIC-Codes  
+## Umleitung fÃ¼r die Ressourcen-Initialisierung im UIC-Codes  
 import qrc_images

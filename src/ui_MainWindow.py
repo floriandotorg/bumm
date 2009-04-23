@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'MainWindow.ui'
 #
-# Created: Thu Feb 26 14:16:06 2009
+# Created: Thu Apr 23 10:34:07 2009
 #      by: PyQt4 UI code generator 4.4.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -14,7 +14,7 @@ class Ui_MainWindow(object):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 600)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(":/logo/logo/logo.svg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(":/icons/icons/bumm.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
         self._centralwidget = QtGui.QWidget(MainWindow)
         self._centralwidget.setObjectName("_centralwidget")
@@ -77,12 +77,16 @@ class Ui_MainWindow(object):
         self._action_unlock.setObjectName("_action_unlock")
         self._action_update_all = QtGui.QAction(MainWindow)
         self._action_update_all.setObjectName("_action_update_all")
+        self._action_help_content = QtGui.QAction(MainWindow)
+        self._action_help_content.setObjectName("_action_help_content")
         self._menu_program.addAction(self._action_quit)
         self._menu_view.addAction(self._action_update_all)
         self._menu_view.addSeparator()
         self._menu_view.addAction(self._action_user_details)
         self._menu_view.addSeparator()
         self._menu_view.addAction(self._action_set_cols)
+        self._menu_help.addAction(self._action_help_content)
+        self._menu_help.addSeparator()
         self._menu_help.addAction(self._action_info)
         self._menu_action.addAction(self._action_lock)
         self._menu_action.addAction(self._action_unlock)
@@ -135,5 +139,7 @@ class Ui_MainWindow(object):
         self._action_update_all.setText(QtGui.QApplication.translate("MainWindow", "&Alles Aktualisieren", None, QtGui.QApplication.UnicodeUTF8))
         self._action_update_all.setStatusTip(QtGui.QApplication.translate("MainWindow", "Aktualisiert die Liste (Kann mehrere Minuten dauern)", None, QtGui.QApplication.UnicodeUTF8))
         self._action_update_all.setShortcut(QtGui.QApplication.translate("MainWindow", "F5", None, QtGui.QApplication.UnicodeUTF8))
+        self._action_help_content.setText(QtGui.QApplication.translate("MainWindow", "Inhalt", None, QtGui.QApplication.UnicodeUTF8))
 
 import images_rc
+ 

@@ -30,10 +30,6 @@
   <property name="windowTitle" >
    <string>Über BUMM</string>
   </property>
-  <property name="windowIcon" >
-   <iconset resource="../qrc/images.qrc" >
-    <normaloff>:/logo/logo/logo.svg</normaloff>:/logo/logo/logo.svg</iconset>
-  </property>
   <widget class="QLabel" name="_lbl_info" >
    <property name="geometry" >
     <rect>
@@ -113,6 +109,7 @@ p, li { white-space: pre-wrap; }
   </widget>
  </widget>
  <resources>
+  <include location="../qrc/images.qrc" />
   <include location="../qrc/images.qrc" />
   <include location="../qrc/images.qrc" />
   <include location="../qrc/images.qrc" />

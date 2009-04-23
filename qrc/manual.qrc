@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="manual" >
+    <file>manual/index.html</file>
+  </qresource>
+</RCC>

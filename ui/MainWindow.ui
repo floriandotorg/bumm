@@ -14,7 +14,7 @@
   </property>
   <property name="windowIcon" >
    <iconset resource="../qrc/images.qrc" >
-    <normaloff>:/logo/logo/logo.svg</normaloff>:/logo/logo/logo.svg</iconset>
+    <normaloff>:/icons/icons/bumm.ico</normaloff>:/icons/icons/bumm.ico</iconset>
   </property>
   <widget class="QWidget" name="_centralwidget" />
   <widget class="QMenuBar" name="_menubar" >
@@ -46,6 +46,8 @@
     <property name="title" >
      <string>&amp;Hilfe</string>
     </property>
+    <addaction name="_action_help_content" />
+    <addaction name="separator" />
     <addaction name="_action_info" />
    </widget>
    <widget class="QMenu" name="_menu_action" >
@@ -200,6 +202,11 @@
    </property>
    <property name="shortcut" >
     <string>F5</string>
+   </property>
+  </action>
+  <action name="_action_help_content" >
+   <property name="text" >
+    <string>Inhalt</string>
    </property>
   </action>
  </widget>
