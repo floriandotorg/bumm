@@ -31,7 +31,7 @@ from ui_SetColumnDialog import Ui_SetColumnDialog
 ## Ein Dialog indem die angezeigten Spalten ausgewählt werden können.
 class SetColumnDialog(QtGui.QDialog, Ui_SetColumnDialog):
     
-    ## Liste von Tuples, in der die Spaltennamen und Überschriften gespeichert
+    ## Liste von Tuple, in der die Spaltennamen und Überschriften gespeichert
     # werden.
     # Wird am Anfang auf None gesetzt, weil die Spaltenüberschriften erst 
     # übersetzt werden können, wenn bereits eine QApplication existiert.

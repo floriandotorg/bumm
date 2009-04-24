@@ -2,7 +2,7 @@
 
 ## @package InfoDialog
 # @brief Implementation der InfoDialog Klasse
-# @version 0.1
+# @version 1
 # @author Florian Kaiser
 # @date 13.02.09
 

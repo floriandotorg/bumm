@@ -29,7 +29,12 @@ import sys
 from PyQt4.QtGui import QApplication
 from MainWindow import MainWindow
 
+# Application erstellen
 app = QApplication(sys.argv)
+
+# MainWindow erstellen und anzeigen
 mainWindow = MainWindow()
 mainWindow.show()
+
+# Ausführung starten
 app.exec_()
