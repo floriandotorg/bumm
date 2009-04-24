@@ -36,7 +36,7 @@ class UserListModel(QtCore.QAbstractTableModel):
 
     ## Wandelt eine Speicherangabe von MB in KB und gibt sie Formatiert mit
     # 1000er Trennzeichen und Einheit zurück
-    # @param mem Speicher in MB
+    # @param p_mem Speicher in MB
     # @return Formatierter String
     def formatMemory(p_mem):
         result = ""

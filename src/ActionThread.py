@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ## @package ActionThread
-# @brief Implementation der ActionThread-Klasse
+# @brief Implementation der ActionThread Klasse
 # @version 1
 # @author Florian Kaiser
 # @date 21.02.09

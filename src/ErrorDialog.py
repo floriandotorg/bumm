@@ -35,14 +35,14 @@ import traceback
 class ErrorDialog(QtGui.QDialog, Ui_ErrorDialog):
     
     ## Konstruktor 
-    # @exception Exception, die ausgewertet werden soll
+    # @param p_exception Exception, die ausgewertet werden soll
     # @param p_parent übergeordnetes QObject.
-    def __init__(self, exception, p_parent = None):
+    def __init__(self, p_exception, p_parent = None):
         QtGui.QDialog.__init__(self, p_parent)
         self.setupUi(self)
         
         # Text der Exception und den Traceback darstellen
-        self._lbl_err.setText(type(exception).__name__ + ": " + str(exception))
+        self._lbl_err.setText(type(p_exception).__name__ + ": " + str(p_exception))
         self._text_traceback.setPlainText(traceback.format_exc())
         
         # Standard Icon-Größe ermitteln
@@ -56,7 +56,7 @@ class ErrorDialog(QtGui.QDialog, Ui_ErrorDialog):
         self._lbl_img.setMaximumWidth(ico_size + 10)
         
         ## Größe des Fensters, wenn der Traceback angzeigt wird
-        self._expand_hight = self.height()
+        self._expanded_hight = self.height()
         # Den Traceback verstecken
         self._text_traceback.hide()
         # Und die Fensterhöhe anpassen
@@ -71,7 +71,7 @@ class ErrorDialog(QtGui.QDialog, Ui_ErrorDialog):
     def _changeDetailsVisibilitySlot(self):
         if self._text_traceback.isVisible():
             # Die Höhe des Fensters speichern
-            self._expand_hight = self.height()
+            self._expanded_hight = self.height()
             # Den Traceback verstecken
             self._text_traceback.hide()
             # Die Größe des Fensters anpassen
@@ -82,7 +82,7 @@ class ErrorDialog(QtGui.QDialog, Ui_ErrorDialog):
             # Den Traceback anzeigen
             self._text_traceback.show()
             # Das Fenster wieder auf Ursprungsbgröße bringen
-            self.setFixedHeight(self._expand_hight)
+            self.setFixedHeight(self._expanded_hight)
             # Die Fenstergröße auf unendlich stellen
             self.setMaximumHeight(16777215)
             # Die Buttonbeschreibung ändern

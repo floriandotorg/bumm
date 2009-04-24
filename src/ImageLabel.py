@@ -32,13 +32,13 @@ class ImageLabel(QtGui.QLabel):
     
     ## Konstruktor
     # @param p_parent Übergeordnetes QObject
-    def __init__(self, parent = None):
-        QtGui.QLabel.__init__(self, parent)
+    def __init__(self, p_parent = None):
+        QtGui.QLabel.__init__(self, p_parent)
         
         ## Original des Bildes, das angezeigt werden soll
         self.pixmap = None
     
-    ## Überladene Methode: Setzt das Bild, welches dargestellt werden soll
+    ## Überladene Methode: Setzt das Bild, das dargestellt werden soll
     # @param p_pixmap Bild als QPixmap
     def setPixmap(self, p_pixmap):
         # Bild speichern
@@ -67,7 +67,7 @@ class ImageLabel(QtGui.QLabel):
                                                         self.pixmap.height()),
                                                     Qt.Qt.KeepAspectRatio))
         # Ursprüngliche Methode aufrufen
-        QtGui.QLabel.resizeEvent(self, event)
+        QtGui.QLabel.resizeEvent(self, p_event)
     
     ## Überladene Methode: Löscht das Bild und zeigt nichts an
     def clear(self):

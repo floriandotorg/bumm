@@ -96,7 +96,7 @@ class SetColumnDialog(QtGui.QDialog, Ui_SetColumnDialog):
                 
         return result
     
-    ## Füllt self.s_column_list mit einer Liste aus Tuples, in denen die 
+    ## Füllt self.s_column_list mit einer Liste aus Tuple, in denen die 
     # Spaltenamen und Überschriften stehen.
     def _initColumnList(self):
         SetColumnDialog.s_column_list = \

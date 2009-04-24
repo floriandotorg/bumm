@@ -27,7 +27,8 @@
 
 from PyQt4 import QtCore
 
-## Verwaltet Programmeinstellungen und speichert diese je nach Betriebssystem:
+## Verwaltet Programmeinstellungen und speichert diese.
+# Abhängig vom Betriebsystem werden die Einstellungen folgendermaßen gespeichert:
 #  - Windows: Registry
 #  - Linux: .ini-Dateien
 #  - MacOS: XML
@@ -155,7 +156,7 @@ class Settings(QtCore.QObject):
         self._username = str(p_username)
 
     ## setzt die Serveradresse
-    # @param p_server_adress Serveradresse als QString
+    # @param p_server_address Serveradresse als QString
     def setServerAddress(self, p_server_address):
         self._server_address = p_server_address
 
