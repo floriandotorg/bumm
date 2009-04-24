@@ -2,8 +2,8 @@
 
 ## @package SetColumnDialog
 # @brief Implementation der SetColumnDialog Klasse
-# @version 0.1
-# @author Florian Kaiser
+# @version 1
+# @author André Naumann
 # @date 15.02.09
 
 #################################################################################

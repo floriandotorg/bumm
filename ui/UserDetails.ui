@@ -124,7 +124,7 @@
        </size>
       </property>
       <property name="currentIndex" >
-       <number>0</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="_info_tab" >
        <attribute name="title" >
@@ -326,6 +326,19 @@
           </property>
          </widget>
         </item>
+        <item row="8" column="1" >
+         <widget class="QTextEdit" name="_workspace" >
+          <property name="minimumSize" >
+           <size>
+            <width>190</width>
+            <height>45</height>
+           </size>
+          </property>
+          <property name="readOnly" >
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
         <item row="8" column="0" >
          <widget class="QLabel" name="_lbl_workspace" >
           <property name="minimumSize" >
@@ -342,19 +355,6 @@
           </property>
           <property name="text" >
            <string>Arbeitsbereiche</string>
-          </property>
-         </widget>
-        </item>
-        <item row="8" column="1" >
-         <widget class="QTextEdit" name="_workspace" >
-          <property name="minimumSize" >
-           <size>
-            <width>190</width>
-            <height>45</height>
-           </size>
-          </property>
-          <property name="readOnly" >
-           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -822,14 +822,6 @@
             </widget>
            </item>
           </layout>
-          <zorder>_lbl_private_tel</zorder>
-          <zorder>_mobile_tel</zorder>
-          <zorder>_lbl_mobile_tel</zorder>
-          <zorder>_office_tel</zorder>
-          <zorder>_lbl_office_tel</zorder>
-          <zorder>_lbl_fax</zorder>
-          <zorder>_fax</zorder>
-          <zorder>_private_tel</zorder>
          </widget>
         </item>
         <item row="1" column="0" >
@@ -1063,19 +1055,6 @@
        <attribute name="title" >
         <string>Bild</string>
        </attribute>
-       <widget class="QLabel" name="_lbl_pic" >
-        <property name="geometry" >
-         <rect>
-          <x>5</x>
-          <y>5</y>
-          <width>321</width>
-          <height>331</height>
-         </rect>
-        </property>
-        <property name="text" >
-         <string/>
-        </property>
-       </widget>
       </widget>
      </widget>
     </item>

@@ -1,4 +1,4 @@
-#Thu Apr 23 08:43:09 CEST 2009
+#Fri Apr 24 13:01:32 CEST 2009
 eclipse.preferences.version=1
 encoding//doc/Dateikopf.txt=UTF-8
 encoding//doc/Klassenkopf.txt=UTF-8
@@ -12,6 +12,7 @@ encoding//server/ap_lock_user.py=UTF-8
 encoding//server/ap_unlock_user.py=UTF-8
 encoding//src/ActionThread.py=UTF-8
 encoding//src/ErrorDialog.py=UTF-8
+encoding//src/ImageLabel.py=UTF-8
 encoding//src/InfoDialog.py=UTF-8
 encoding//src/LoginDialog.py=UTF-8
 encoding//src/MainWindow.py=UTF-8

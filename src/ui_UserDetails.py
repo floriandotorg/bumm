@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'UserDetails.ui'
 #
-# Created: Mon Mar 02 13:24:26 2009
+# Created: Fri Apr 24 09:29:16 2009
 #      by: PyQt4 UI code generator 4.4.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -118,16 +118,16 @@ class Ui_UserDetails(object):
         self._lbl_last_login.setMaximumSize(QtCore.QSize(125, 16))
         self._lbl_last_login.setObjectName("_lbl_last_login")
         self.gridLayout_2.addWidget(self._lbl_last_login, 2, 0, 1, 1)
-        self._lbl_workspace = QtGui.QLabel(self._info_tab)
-        self._lbl_workspace.setMinimumSize(QtCore.QSize(125, 45))
-        self._lbl_workspace.setMaximumSize(QtCore.QSize(125, 45))
-        self._lbl_workspace.setObjectName("_lbl_workspace")
-        self.gridLayout_2.addWidget(self._lbl_workspace, 8, 0, 1, 1)
         self._workspace = QtGui.QTextEdit(self._info_tab)
         self._workspace.setMinimumSize(QtCore.QSize(190, 45))
         self._workspace.setReadOnly(True)
         self._workspace.setObjectName("_workspace")
         self.gridLayout_2.addWidget(self._workspace, 8, 1, 1, 1)
+        self._lbl_workspace = QtGui.QLabel(self._info_tab)
+        self._lbl_workspace.setMinimumSize(QtCore.QSize(125, 45))
+        self._lbl_workspace.setMaximumSize(QtCore.QSize(125, 45))
+        self._lbl_workspace.setObjectName("_lbl_workspace")
+        self.gridLayout_2.addWidget(self._lbl_workspace, 8, 0, 1, 1)
         self._user_info_tabs.addTab(self._info_tab, "")
         self._account_tab = QtGui.QWidget()
         self._account_tab.setObjectName("_account_tab")
@@ -360,15 +360,12 @@ class Ui_UserDetails(object):
         self._user_info_tabs.addTab(self._personal_tab, "")
         self._pic_tab = QtGui.QWidget()
         self._pic_tab.setObjectName("_pic_tab")
-        self._lbl_pic = QtGui.QLabel(self._pic_tab)
-        self._lbl_pic.setGeometry(QtCore.QRect(5, 5, 321, 331))
-        self._lbl_pic.setObjectName("_lbl_pic")
         self._user_info_tabs.addTab(self._pic_tab, "")
         self.gridLayout.addWidget(self._user_info_tabs, 1, 0, 1, 1)
         UserDetails.setWidget(self._content)
 
         self.retranslateUi(UserDetails)
-        self._user_info_tabs.setCurrentIndex(0)
+        self._user_info_tabs.setCurrentIndex(3)
         QtCore.QMetaObject.connectSlotsByName(UserDetails)
 
     def retranslateUi(self, UserDetails):

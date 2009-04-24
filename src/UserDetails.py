@@ -3,7 +3,7 @@
 ## @package UserDetails
 # @brief Implementation eines DockWidgets zum Anzeigen zusätzlicher User
 # Informationen
-# @version 0.1
+# @version 1
 # @author Corinna Vollert
 # @date 12.02.09
 
@@ -29,22 +29,11 @@
 from PyQt4 import QtGui, QtCore
 from ui_UserDetails import Ui_UserDetails
 from UserListModel import UserListModel
+from ImageLabel import ImageLabel
 import datetime
 
 ## Implementation eines Steuerelements zum Anzeigen zusätzlicher
 # Benutzerinformationen.
-#
-# Die Klasse emitiert folgende Signals:
-# - RemoveUser(p_user_name) Wenn auf "Benutzer löschen" geklickt wurde.
-# "p_user_name" gibt den Name des Users an, welcher gelöscht werden soll.
-# - LockUser(p_user_name) Wenn auf "Benutzer sperren" geklickt wurde.
-# "p_user_name" gibt den Name des Users an, welcher gesperrt werden soll.
-# - UnlockUser(p_user_name) Wenn auf "Benutzer entsperren" geklickt wurde.
-# "p_user_name" gibt den Name des Users an, welcher entsperrt werden soll.
-# - DestroyTrash(p_user_name) Leert den Mülleinmer des Benutzers. "p_user_name"
-# ist der Name des Benutzers bei dem dies geschied.
-# - DestroyClipboard(p_user_name) Räumt die Zwischenablage des Benutzers auf.
-# "p_user_name" ist der Name des Benutzers bei dem dies geschied.
 class UserDetails(QtGui.QDockWidget, Ui_UserDetails):
 
     ## Konstruktor
@@ -52,7 +41,14 @@ class UserDetails(QtGui.QDockWidget, Ui_UserDetails):
     def __init__(self, p_parent = None):
         QtGui.QDockWidget.__init__(self, p_parent)
         self.setupUi(self)
-
+        
+        ## Label in dem das Benutzerbild angezeigt wird
+        self._lbl_pic = ImageLabel(self._pic_tab)
+        # Layout erstellen, Label hinzufügen und Layout setzten
+        lay = QtGui.QHBoxLayout(self._pic_tab)
+        lay.addWidget(self._lbl_pic)
+        self._pic_tab.setLayout(lay)
+        
         self.rights_describtion = {"change_pwd" : "Passwort aendern",
                                    "contact" : "Ansprechen",
                                    "edit_prefs" : "Einstellungen",
@@ -65,7 +61,7 @@ class UserDetails(QtGui.QDockWidget, Ui_UserDetails):
 
 
     ## Zeigt alle Userinformationen im Widget an
-    # @param p_user Eine Liste von Dictonaries mit folgendem Aufbau oder
+    # @param p_user Ein Dictonary mit folgendem Aufbau oder
     # None für keinen:
     # - user_id : Benutzer-ID
     # - name : Benutzername
