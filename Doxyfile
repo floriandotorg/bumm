@@ -31,7 +31,7 @@ PROJECT_NAME           = BUMM
 # This could be handy for archiving the generated documentation or 
 # if some version control system is used.
 
-PROJECT_NUMBER         = 0.1
+PROJECT_NUMBER         = 1.0
 
 # The OUTPUT_DIRECTORY tag is used to specify the (relative or absolute) 
 # base path where the generated documentation will be put. 
@@ -639,7 +639,10 @@ EXCLUDE                = src/test.py \
                          src/ui_LoginDialog.py \
                          src/ui_MainWindow.py \
                          src/ui_SetColumnDialog.py \
-                         src/ui_UserDetails.py
+                         src/ui_UserDetails.py \
+                         src/manual.py \
+                         src/qrc_manual.py \
+                         src/ui_ErrorDialog.py
 
 # The EXCLUDE_SYMLINKS tag can be used select whether or not files or 
 # directories that are symbolic links (a Unix filesystem feature) are excluded 
