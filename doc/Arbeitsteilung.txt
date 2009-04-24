@@ -1,0 +1,5 @@
+leipi: User-Liste (GUI)
+Ben: API, Recherche, Settings
+Coco: User Details (GUI)
+DandySandy: API, "Spalten auswählen"-Dialog  (GUI)
+Florian: GUI Rest, Server Erweiterung
