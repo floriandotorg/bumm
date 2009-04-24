@@ -41,14 +41,14 @@ class UserDetails(QtGui.QDockWidget, Ui_UserDetails):
     def __init__(self, p_parent = None):
         QtGui.QDockWidget.__init__(self, p_parent)
         self.setupUi(self)
-        
+
         ## Label in dem das Benutzerbild angezeigt wird
         self._lbl_pic = ImageLabel(self._pic_tab)
         # Layout erstellen, Label hinzufügen und Layout setzten
         lay = QtGui.QHBoxLayout(self._pic_tab)
         lay.addWidget(self._lbl_pic)
         self._pic_tab.setLayout(lay)
-        
+
         self.rights_describtion = {"change_pwd" : "Passwort aendern",
                                    "contact" : "Ansprechen",
                                    "edit_prefs" : "Einstellungen",
@@ -133,6 +133,36 @@ class UserDetails(QtGui.QDockWidget, Ui_UserDetails):
             self._address.setText("")
             self._instant_messenger.setText("")
             self._more_info.setText("")
+
+            self._user.setEnabled(False)
+            self._user_id.setEnabled(False)
+            self._full_name.setEnabled(False)
+            self._admin.setEnabled(False)
+            self._locked.setEnabled(False)
+            self._mail.setEnabled(False)
+            self._more_mail.setEnabled(False)
+            self._last_login.setEnabled(False)
+            self._workspace.setEnabled(False)
+            self._create_time.setEnabled(False)
+            self._storage_usage.setEnabled(False)
+            self._objects.setEnabled(False)
+            self._role_owner_as_owner.setEnabled(False)
+            self._actions_as_owner.setEnabled(False)
+            self._role_owner_as_manager.setEnabled(False)
+            self._actions_as_manager.setEnabled(False)
+            self._role_owner_as_other.setEnabled(False)
+            self._actions_as_other.setEnabled(False)
+            self._private_tel.setEnabled(False)
+            self._mobile_tel.setEnabled(False)
+            self._office_tel.setEnabled(False)
+            self._fax.setEnabled(False)
+            self._language.setEnabled(False)
+            self._organisation.setEnabled(False)
+            self._private_url.setEnabled(False)
+            self._office_url.setEnabled(False)
+            self._address.setEnabled(False)
+            self._instant_messenger.setEnabled(False)
+            self._more_info.setEnabled(False)
 
         else:
 
