@@ -9,6 +9,8 @@
 	<file>manual/main.html</file>
 	<file>manual/mainwindow.html</file>
 	<file>manual/menu.html</file>
+	<file>manual/view.html</file>
+	<file>manual/update_all.html</file>
 	<file>manual/action_delete_user1.jpg</file>
 	<file>manual/action_delete_user2.jpg</file>
 	<file>manual/action_delete_user3.jpg</file>
@@ -21,5 +23,7 @@
 	<file>manual/action_lock_user2.jpg</file>
 	<file>manual/bumm.jpg</file>
 	<file>manual/mainwindow.jpg</file>
+	<file>manual/menu_view.jpg</file>
+	<file>manual/update_all.jpg</file>
   </qresource>
 </RCC>
