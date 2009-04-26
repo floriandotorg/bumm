@@ -4,7 +4,11 @@
 	<file>manual/actions.html</file>
 	<file>manual/delete_user.html</file>
 	<file>manual/destroy_trash.html</file>
+	<file>manual/destroy_clipboard.html</file>
+	<file>manual/choose_coloumns.html</file>
 	<file>manual/head.html</file>
+	<file>manual/start.html</file>
+	<file>manual/user_details.html</file>
 	<file>manual/lock_user.html</file>
 	<file>manual/main.html</file>
 	<file>manual/mainwindow.html</file>
@@ -21,6 +25,12 @@
 	<file>manual/action_destroy_trash2.jpg</file>
 	<file>manual/action_lock_user1.jpg</file>
 	<file>manual/action_lock_user2.jpg</file>
+	<file>manual/action_lock_user2.jpg</file>
+	<file>manual/choose_coloumn1.jpg</file>
+	<file>manual/choose_coloumn2.jpg</file>
+	<file>manual/choose_coloumn3.jpg</file>
+	<file>manual/choose_coloumn4.jpg</file>
+	<file>manual/choose_coloumn5.jpg</file>
 	<file>manual/bumm.jpg</file>
 	<file>manual/mainwindow.jpg</file>
 	<file>manual/menu_view.jpg</file>
