@@ -169,6 +169,9 @@ class UserDetails(QtGui.QDockWidget, Ui_UserDetails):
             self._instant_messenger.setEnabled(False)
             self._more_info.setEnabled(False)
 
+            # Bildlabel wird geleert
+            self._lbl_pic.clear()
+
         else: # Ein Benutzer wurde ausgewählt:
 
             ## Benutzername und Benutzer-ID
@@ -178,56 +181,70 @@ class UserDetails(QtGui.QDockWidget, Ui_UserDetails):
             ## Daten des Info-Tab
             # Voller Name
             self._full_name.setText(p_user["longname"])
-            # Adminrechte?
+            # Administrator-Rechte?
             if p_user["admin"] == False:
                 self._admin.setText("Nein")
             else:
                 self._admin.setText("Ja")
+            # Benutzer gesperrt?
             if p_user["locked"] == False:
                 self._locked.setText("Nein")
             else:
                 self._locked.setText("Ja")
+            # Primäre Email-Adresse
             self._mail.setText(p_user["email"])
+            # Sekundäre Email-Adressen
             if p_user["secondary_email"]:
                 text = ""
+                # text = Liste aller sekundären Email-Adressen
                 for i in range(len(p_user["secondary_email"])):
                     text += (p_user["secondary_email"][i] + "\n")
                 self._more_mail.setText(text)
             else:
                 self._more_mail.setText("")
+            # Letzter Login
             if type(p_user["last_login"]) == type(None):
                 self._last_login.setText("Nie")
             else:
                 last_logged = datetime.datetime. \
                 strptime(p_user["last_login"].value, "%Y%m%dT%H:%M:%S")
                 self._last_login.setText(last_logged.strftime("%d.%m.%Y %H:%M"))
+            # Arbeitsbereiche
             if p_user["workspaces"]:
                 text = ""
+                # text = Liste aller Arbeitsbereiche
                 for i in range(len(p_user["workspaces"])):
                     text += (p_user["workspaces"][i] + "\n")
                 self._workspace.setText(text)
             else:
                 self._workspace.setText("")
 
-            ##Daten des Konto-Tab
+            ## Daten des Konto-Tab
+            # Erstellungsdatum
             if type(p_user["create_time"]) == type(None):
                 self._create_time.setText("Nie")
             else:
                 created = datetime.datetime.strptime(p_user["create_time"].value,
                                                      "%Y%m%dT%H:%M:%S")
                 self._create_time.setText(created.strftime("%d.%m.%Y %H:%M"))
+            # Speicherverbrauch
             self._storage_usage.setText(UserListModel. \
                                         formatMemory(p_user["used_memory"]))
+            # Anzahl der Dateien
             self._objects.setText(str(p_user["files"]))
+            # Besitzerrollen
             if p_user["access_rights"]["owner"][0]:
                 text = ""
+                # text = Liste aller eingenommenen Besitzerrollen
                 for i in range(len(p_user["access_rights"]["owner"][0])):
                     text += (p_user["access_rights"]["owner"][0][i] + "\n")
                 self._role_owner_as_owner.setText(text)
             else:
                 self._role_owner_as_owner.setText("None")
+            # Benutzerrechte als Besitzer
             if p_user["access_rights"]["owner"][1]:
                 text = ""
+                # text = Liste aller Benutzerrechte als Besitzer
                 for i in range(len(p_user["access_rights"]["owner"][1])):
                     if p_user["access_rights"]["owner"][1][i] == "change_pwd":
                         text += (self._rights_describtion["change_pwd"] + "\n")
@@ -250,15 +267,19 @@ class UserDetails(QtGui.QDockWidget, Ui_UserDetails):
                 self._actions_as_owner.setText(text)
             else:
                 self._actions_as_owner.setText("None")
+            # Managerrollen
             if p_user["access_rights"]["manager"][0]:
                 text = ""
+                # text = Liste aller eingenommenen Managerrollen
                 for i in range(len(p_user["access_rights"]["manager"][0])):
                     text += (p_user["access_rights"]["manager"][0][i] + "\n")
                 self._role_owner_as_manager.setText(text)
             else:
                 self._role_owner_as_manager.setText("None")
+            # Benutzerrechte als Manager
             if p_user["access_rights"]["manager"][1]:
                 text = ""
+                # text = Liste aller Benutzerrechte als Manager
                 for i in range(len(p_user["access_rights"]["manager"][1])):
                     if p_user["access_rights"]["manager"][1][i] == "change_pwd":
                         text += (self._rights_describtion["change_pwd"] + "\n")
@@ -281,15 +302,19 @@ class UserDetails(QtGui.QDockWidget, Ui_UserDetails):
                 self._actions_as_manager.setText(text)
             else:
                 self._actions_as_manager.setText("None")
+            # Andere Rollen
             if p_user["access_rights"]["other"][0]:
                 text = ""
+                # text = Liste aller eingenommenen anderen Rollen
                 for i in range(len(p_user["access_rights"]["other"][0])):
                     text += (p_user["access_rights"]["other"][0][i] + "\n")
                 self._role_owner_as_other.setText(text)
             else:
                 self._role_owner_as_other.setText("None")
+            # Benutzerrechte für andere
             if p_user["access_rights"]["other"][1]:
                 text = ""
+                # text = Liste aller Benutzerrechte für andere
                 for i in range(len(p_user["access_rights"]["other"][1])):
                     if p_user["access_rights"]["other"][1][i] == "change_pwd":
                         text += (self._rights_describtion["change_pwd"] + "\n")
@@ -313,28 +338,41 @@ class UserDetails(QtGui.QDockWidget, Ui_UserDetails):
             else:
                 self._actions_as_other.setText("None")
 
-            ##Daten des Persönliches-Tab
+            ## Daten des Persönliches-Tab
+            # Private TelefonNr.
             self._private_tel.setText(p_user["phone_home"])
+            # Mobile TelefonNr.
             self._mobile_tel.setText(p_user["phone_mobile"])
+            # TelefonNr. des Büros
             self._office_tel.setText(p_user["phone_office"])
+            # FaxNr.
             self._fax.setText(p_user["fax"])
+            # Sprache
             self._language.setText(p_user["language"])
+            # Organisation
             self._organisation.setText(p_user["organization"])
+            # Private Homepage
             self._private_url.setText(p_user["url_home"])
+            # Firmen-Webpage
             self._office_url.setText(p_user["url"])
+            # Private Anschrift
             self._address.setText(p_user["address"])
-            #self._instant_messenger.setText(str(p_user["messaging_services"]))
+            # Instant Massanger
             if p_user["messaging_services"]:
                 text = ""
+                # text = Liste aller Instant Massanger
                 for i in range(len(p_user["messaging_services"])):
                     text += (p_user["messaging_services"].keys()[i] + " : " + \
                              p_user["messaging_services"].values()[i] + "\n")
                 self._instant_messenger.setText(text)
             else:
                 self._instant_messenger.setText("")
+            # Weitere Informationen
             self._more_info.setText(p_user["additional_info"])
 
             try:
+                # Versuche das Foto zu laden
                 self._lbl_pic.setPixmap(QtGui.QPixmap(p_user["local_photo"]))
             except:
+                # Wenn kein Bild vorhanden, leere das Bildlabel
                 self._lbl_pic.clear()
