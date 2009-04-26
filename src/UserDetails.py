@@ -49,7 +49,7 @@ class UserDetails(QtGui.QDockWidget, Ui_UserDetails):
         lay.addWidget(self._lbl_pic)
         self._pic_tab.setLayout(lay)
 
-        # Ein Dictonary, das die Benutzerrechte enthält
+        ## Ein Dictonary, das die Benutzerrechte enthält
         self._rights_describtion = {"change_pwd" : "Passwort aendern",
                                    "contact" : "Ansprechen",
                                    "edit_prefs" : "Einstellungen",
