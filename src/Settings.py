@@ -188,18 +188,27 @@ class Settings(QtCore.QObject):
     def setShowUserDetails(self, p_show_user_details):
         self._show_user_details = p_show_user_details
 
-    ## setzt den Status des MainWindows
+    ## setzt den Status des MainWindows (z.B. die Position der DockWidgets,
+    # siehe Qt-Dokumentation)
     # @param p_state MainWindow-Status als QByteArray
     def setState(self, p_state):
         self._state = p_state
 
     # Properties
+    # Benutzername
     username = property(getUsername, setUsername)
+    # Adresse des Servers
     server_address = property(getServerAddress, setServerAddress)
+    # Spaltennamen
     columns = property(getColumns, setColumns)
+    # geometrische Daten des Spalten-Dialogs
     col_dialog_geometry = property(getColDialogGeometry, setColDialogGeometry)
+    # geometrische Daten des MainWindow-Dialogs
     main_window_geometry = property(getMainWindowGeometry, setMainWindowGeometry)
+    # geometrische Daten des UserDetail-Dialogs
     user_details_geometry = property(getUserDetailsGeometry, \
                                      setUserDetailsGeometry)
+    # legt fest ob der UserDetail-Dialog angzeigt werden soll
     show_user_details = property(getShowUserDetails, setShowUserDetails)
+    # Status des MainWindows
     state = property(getState, setState)
