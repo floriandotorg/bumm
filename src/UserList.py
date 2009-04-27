@@ -39,31 +39,43 @@ class UserList(QtGui.QTreeView):
     # @param p_header_data Siehe changeHeaderData()
     # @param p_parent Übergeordnetes QObject 
     def __init__(self, p_header_data, p_parent = None):
+		# Übergeordneten Konstruktor aufrufen
         QtGui.QTreeView.__init__(self, p_parent)
         ## Das Model der Liste (Siehe: Qt Dokumentation - Model/View-Framework)
         self._model = UserListModel.UserListModel(p_header_data)
+		# Model der Viewklasse zuordnen
         self.setModel(self._model)
+		# Verhindern von Baumstrukturen
         self.setRootIsDecorated(False)
+		#  Erlauben von Sortierungen
         self.setSortingEnabled(True)
+		# Erlauben von alternativen Spaltenfarben
         self.setAlternatingRowColors(True)
+		# Auswahlmodus auf erweiterte Auswahl setzen
         self.setSelectionMode(QtGui.QTreeView.ExtendedSelection)
+		# Setzen des Scrollens auf Pixelweise
         self.setVerticalScrollMode(QtGui.QTreeView.ScrollPerPixel)
         self.setHorizontalScrollMode(QtGui.QTreeView.ScrollPerPixel)
+		# Anpassen der Spaltenbreite
         self._resizeColumns()
     
     ## Gibt eine Liste der selektierten User zurück
     # @return Liste von Dictonaries mit Userdaten (siehe loadList())
     # @see loadList()
     def getSelection(self):
+		# Erzeugen einer leeren Liste
         result = []
+		# für die Anzahl der ausgewählten Benutzer
         for i in self.selectionModel().selectedIndexes():
             if i.isValid() and i.column() == 0:
+				# Kopieren des momentanen Benutzer in die Ergebnisliste 
                 result.append(self._model.user_list[i.row()])
         return result
     
     ## Definiert einen Suchtext, nachdem gefilert wird
     # @param p_text Suchtext 
     def setFilter(self, p_text):
+		# Aufruf der Funktion setFilter der Modelklasse
         self._model.setFilter(p_text)
     
     ## Löscht den Inhalt der Liste und zeigt den Inhalt von p_user_list an.
@@ -105,7 +117,9 @@ class UserList(QtGui.QTreeView):
     #        - Liste mit Usernamen, die dieser Rolle entsprechen
     #        - Liste mit Zugriffsrechten
     def loadList(self, p_user_list):
+		# Aufruf der Funktion loadList der Modelklasse
         self._model.loadList(p_user_list)
+		# Anpassen der Spaltenbreite
         self._resizeColumns()
     
     ## Übergibt eine Liste mit Spalten die angezeigt werden sollen.
@@ -113,27 +127,37 @@ class UserList(QtGui.QTreeView):
     # in denen der Spaltenname und die Überschrift stehen.
     # @see loadList()
     def changeHeaderData(self, p_header_data):
+		# Aufruf der Funktion changeHeaderData der Modelklasse
          self._model.changeHeaderData(p_header_data)
+		# Anpassen der Spaltenbreite 
          self._resizeColumns()
     
     ## Entfernt einen oder mehrere Benutzer aus der Liste
     # @param p_user Liste mit den Usernamen
     def removeUser(self, p_user):
+		# Aufruf der Funktion removeUser der Modelklasse
         self._model.removeUser(p_user)
     
     ## Überschreibt ein Attribut eines Benutzers mit einem neuen Wert
-    # p_name Name des Benutzers
-    # p_key Name des Attributs (Siehe loadList())
-    # p_value Neuer Wert
+    #@param p_name Name des Benutzers
+    #@param p_key Name des Attributs (Siehe loadList())
+    #@param p_value Neuer Wert
     def updateUserAttr(self, p_name, p_key, p_value):
+		# Aufruf der Funktion updateUserAttr der Modelklasse
         self._model.updateUserAttr(p_name, p_key, p_value)
     
     ## Emitiert das SelectionChanged() Signal
+	#@param p_selected Liste der neu ausgewählten Benutzer
+	#@param p_deselected Liste der vorherigen Auswahl
     def selectionChanged(self, p_selected, p_deselected):
+		# Emitieren des Signals "SelectionChanged()"
         self.emit(QtCore.SIGNAL("SelectionChanged()"))
+		# Übergeordnete Funktion selectionChanged aufrufen
         QtGui.QTreeView.selectionChanged(self, p_selected, p_deselected)
       
     ## Passt die Spalten auf die Inhalte an    
     def _resizeColumns(self):
+		# Durchlaufen aller Spalten
         for i in range(self._model.columnCount()):
+			# Anpassen der Spaltengröße auf den Inhalt
             self.resizeColumnToContents(i)

@@ -41,22 +41,27 @@ class UserListModel(QtCore.QAbstractTableModel):
     def formatMemory(p_mem):
         result = ""
         points = 0
+		# Umwandeln in KB
         p_mem = str(int(p_mem * 1000))
 
+		#  Speichern der einzelnen Stellen in einer Liste
         for i in range(0, len(p_mem))[::-1]:
             result = p_mem[i] + result
 
+			# Einfügen eines Punktes nach jeweils 3 Stellen
             if not (len(result) - points) % 3 and i:
                 result = "." + result
                 points += 1
 
         return result + " KB"
+	# Erzeugen einer statischen Methode
     formatMemory = staticmethod(formatMemory)
 
     ## Konstruktor
     # @param p_header_data Eine Liste von Tupels mit jeweils zwei Elementen,
     # in denen der Schlüssel und die Überschrift stehen.
     def __init__(self, p_header_data):
+		# Übergeordneten Konstruktor aufrufen
         QtCore.QAbstractTableModel.__init__(self)
         self.header_list = p_header_data
         self.user_list = []
@@ -76,12 +81,19 @@ class UserListModel(QtCore.QAbstractTableModel):
     # stehen soll
     # @param p_role Funktion des Aufrufes
     def data(self, p_index, p_role=QtCore.Qt.DisplayRole):
+		# leeren QVariant zurück geben, wenn der übergeben Index nicht anzeigbar
+		# ist
         if p_index.isValid() != True:
             return QtCore.QVariant()
+		# leeren QVariant zurück geben, wenn die übergebenen Werte nicht den 
+		# zur Anzeige von Text bestimmt sind
         elif p_role!=QtCore.Qt.DisplayRole:
             return QtCore.QVariant()
+		# leeren QVariant zurück geben, wenn die gewünschte Reihe größer als die 
+		# Länge der Userliste ist
         elif p_index.row() >= len(self.user_list):
             return QtCore.QVariant()
+		# Ausgabe von "Ja" und "Nein" statt "True" und "False" 
         elif self.header_list[p_index.column()][0] == "admin" or \
                 self.header_list[p_index.column()][0] == "locked":
             if self.user_list[p_index.row()] \
@@ -90,21 +102,26 @@ class UserListModel(QtCore.QAbstractTableModel):
             elif self.user_list[p_index.row()] \
 			[self.header_list[p_index.column()][0]] == False:
                 return QtCore.QVariant("Nein")
+		# Ausgabe von "Nie" wenn der Typ von "last_login" "None" ist
         elif self.header_list[p_index.column()][0] == "last_login" and \
             type(self.user_list[p_index.row()]["last_login"]) == type(None):
             return QtCore.QVariant("Nie")
+		# formatierte Ausgabe des verbrauchten Speicherplatzes
         elif self.header_list[p_index.column()][0] == "used_memory":
             return QtCore.QVariant(self.formatMemory( \
 			self.user_list[p_index.row()] \
 			[self.header_list[p_index.column()][0]]))
+		# formatierte Datumsausgabe
         elif self.header_list[p_index.column()][0] == "last_login":
             date_time = datetime.datetime.strptime(self.user_list[p_index.row()] \
             [self.header_list[p_index.column()][0]].value, "%Y%m%dT%H:%M:%S")
             return QtCore.QVariant(date_time.strftime("%d.%m.%Y %H:%M"))
+		# formatierte Datumsausgabe
         elif self.header_list[p_index.column()][0] == "create_time":
             date_time = datetime.datetime.strptime(self.user_list[p_index.row()] \
             [self.header_list[p_index.column()][0]].value, "%Y%m%dT%H:%M:%S")
             return QtCore.QVariant(date_time.strftime("%d.%m.%Y %H:%M"))
+		# einfaches Anzeigen
         else:
             return QtCore.QVariant(
                 self.user_list[p_index.row()]
@@ -118,8 +135,12 @@ class UserListModel(QtCore.QAbstractTableModel):
     # @param p_role Funktion des Aufrufes
     def headerData(self, p_section, p_orientation,
                                 p_role = QtCore.Qt.DisplayRole):
+		# leeren QVariant zurück geben, wenn der Text nicht zum anzeigen
+		# bestimmt ist
         if p_role!=QtCore.Qt.DisplayRole:
             return QtCore.QVariant()
+		# leeren QVariant zurück geben, wenn die Spaltennummer länger als die 
+		# Liste der Kopfdaten ist
         elif p_section >= len(self.header_list):
             return QtCore.QVariant()
         else:
@@ -164,7 +185,9 @@ class UserListModel(QtCore.QAbstractTableModel):
     #     - other : Zugriffsrechte für alle Anderen: Liste mit zwei Elementen
     #        - Liste mit Usernamen, die dieser Rolle entsprechen
     #        - Liste mit Zugriffsrechten
+	#@param p_complete p_complete ist True, wenn die komplette User-Liste angezeigt werden soll (kein Filter aktiv)
     def loadList(self, p_user_list, p_complete = True):
+		# wenn kein Filter aktiv ist
         if p_complete == True:
             self.complete_user_list = p_user_list
         self.user_list = p_user_list
@@ -174,52 +197,77 @@ class UserListModel(QtCore.QAbstractTableModel):
     # @param p_column Die Nummer der Spalte nach der sortiert werden soll.
     # @param p_order Die Richtung in die sortiert werden soll.
     def sort(self, p_column, p_order):
+		# wenn die User-Liste nicht leer ist
         if len(self.user_list) != 0:
+			# aufsteigende Sortierung
             if p_order == QtCore.Qt.AscendingOrder:
+				# Sortierung nach "Letzter Login"
                 if self.header_list[p_column][0] == "last_login":
                     if len(self.user_list):
                         sorted_list = []
                         temp_list = []
+						# durchgehen jedes Benutzers in der Liste
                         for user in self.user_list:
+							# Kopieren aller noch nicht eingelogten Benutzer an
+							# den Anfang der Sortierten Liste
                             if type(user["last_login"]) == type(None):
                                 sorted_list.append(user)
+							# Benutzer die sich bereits eingeloggt haben in eine
+							# temporäre Liste speichern
                             else:
                                 temp_list.append(user)
+						# temporäre Liste sortieren
                         temp_list.sort(key = operator.itemgetter( \
                                 self.header_list[p_column][0]), reverse = True)
+						# Zusammenfügen beider Listen
                         temp_list.extend(sorted_list)
                         self.user_list = temp_list
+				# wenn der zu sortierende Wert ein String ist, wird unabhängig
+				# von Groß- und Kleinschreibung sortiert werden
                 elif type(self.user_list[p_column] \
 				[self.header_list[p_column][0]]) == type("String"):
                     self.user_list.sort(lambda a, b: cmp(a.lower(), b.lower()), \
 					key = operator.itemgetter( \
                         self.header_list[p_column][0]))
+				# einfache Sortierung von Zahlen
                 else:
                     self.user_list.sort(key = operator.itemgetter( \
                                         self.header_list[p_column][0]))
+			# absteigende Sortierung
             elif p_order == QtCore.Qt.DescendingOrder:
+				# Sortierung nach "Letzter Login"
                 if self.header_list[p_column][0] == "last_login":
                     if len(self.user_list):
                         sorted_list = []
                         temp_list = []
+						# durchgehen jedes Benutzers in der Liste
                         for user in self.user_list:
+							# Kopieren aller noch nicht eingelogten Benutzer an
+							# den Anfang der Sortierten Liste
                             if type(user["last_login"]) == type(None):
                                 sorted_list.append(user)
+							# Benutzer die sich bereits eingeloggt haben in eine
+							# temporäre Liste speichern
                             else:
                                 temp_list.append(user)
+						# temporäre Liste sortieren
                         temp_list.sort(key = operator.itemgetter( \
                         self.header_list[p_column][0]))
+						# Zusammenfügen beider Listen
                         sorted_list.extend(temp_list)
                         self.user_list = sorted_list
+				# wenn der zu sortierende Wert ein String ist, wird unabhängig
+				# von Groß- und Kleinschreibung sortiert werden
                 elif type(self.user_list[p_column] \
 				[self.header_list[p_column][0]]) == type("String"):
                     self.user_list.sort(lambda a, b: cmp(a.lower(), b.lower()), \
 					key = operator.itemgetter( \
                         self.header_list[p_column][0]), reverse = True)
+				# einfache Sortierung von Zahlen
                 else:
                     self.user_list.sort(key = operator.itemgetter( \
                         self.header_list[p_column][0]), reverse = True)
-
+			# Emitieren eines Signals, dass sich das Layout verändert hat
             self.emit(QtCore.SIGNAL("layoutChanged()"))
 
     ## Übergibt eine Liste mit Spalten die angezeigt werden sollen.
@@ -228,18 +276,23 @@ class UserListModel(QtCore.QAbstractTableModel):
     # @see loadList()
     def changeHeaderData(self, p_header_data):
         self.header_list = p_header_data
+		# Emitieren eines Signals, dass sich das Layout verändert hat
         self.emit(QtCore.SIGNAL("layoutChanged()"))
 
     ## Entfernt einen oder mehrere Benutzer aus der Liste
     # @param p_user Liste mit den Usernamen
     def removeUser(self, p_user):
+		# Vergleichen der übergebenen Benutzernamen zum löschen und bei 
+		# Übereinstimmung das Entfernen des jeweiligen Benutzers
         for user_name in p_user:
             counter = 0
             for user in self.user_list:
                 if user_name == user["name"]:
                     del self.user_list[counter]
                 counter = counter + 1
+		# Laden der neuen Liste
         self.loadList(self.user_list)
+		# Emitieren eines Signals, dass sich das Layout verändert hat
         self.emit(QtCore.SIGNAL("layoutChanged()"))
 
     ## Überschreibt ein Attribut eines oder mehrerer Benutzer mit einem neuen
@@ -248,13 +301,16 @@ class UserListModel(QtCore.QAbstractTableModel):
     # p_key Name des Attributs (Siehe loadList())
     # p_value Neuer Wert
     def updateUserAttr(self, p_name, p_key, p_value):
+		# für jeden Benutzer in der Namensliste
         for i in range(len(p_name)):
             counter = 0
             update_id = -1
+			# durchgehen der internen Liste
             for user in self.user_list:
                 if user["name"] == p_name[i]:
                     update_id = counter
                 counter = counter + 1
+			# Setzen des neuen Userattributes
             if update_id != -1:
                 self.user_list[update_id][p_key] = p_value
                 self.loadList(self.user_list)
@@ -263,11 +319,15 @@ class UserListModel(QtCore.QAbstractTableModel):
     # @param p_text Suchtext
     def setFilter(self, p_text):
         found = False
+		# komplette Liste laden, wenn kein Text zum Filtern vorhanden ist
         if p_text == "":
             self.loadList(self.complete_user_list)
         else:
             self.user_list = []
             for user in self.complete_user_list:
+				# Prüfen aller Attribute (außer "last_login" und "create_time") 
+				# ob der Filtertext vorhanden ist. Bei Erfolg, Anhängen an die 
+				# neue Liste.
                 for i in user:
                     if i != "last_login" and i != "create_time":
                         if QtCore.QString(unicode(user[i])).contains(p_text, 0) \
