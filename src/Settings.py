@@ -58,27 +58,35 @@ class Settings(QtCore.QObject):
         self._settings = QtCore.QSettings("BUMM")
 
         # lese Einstellungen aus
+	# Benutzername
         self._username = self._settings.value("username",
                             QtCore.QVariant(Settings.s_username)).toString()
+	# Adresse des Servers
         self._server_address = self._settings.value("server_address",
                             QtCore.QVariant(Settings.s_server_address)) \
                             .toString()
+	# Spaltennamen
         self._columns = self._settings.value("columns",
                             QtCore.QVariant(Settings.s_columns)).toStringList()
+	# geometrische Daten des Spalten-Dialogs
         self._col_dialog_geometry = self._settings.value("col_dialog_geometry",
                             QtCore.QVariant(Settings.s_col_dialog_geometry)) \
                             .toRect()
+	# geometrische Daten des MainWindow-Dialogs
         self._main_window_geometry = self._settings.value( \
                             "main_window_geometry",
                             QtCore.QVariant(Settings.s_main_window_geometry)) \
                             .toRect()
+	# geometrische Daten des UserDetail-Dialogs
         self._user_details_geometry = self._settings.value(
                             "user_details_geometry", \
                             QtCore.QVariant(Settings.s_user_details_geometry)) \
                             .toRect()
+	# legt fest ob der UserDetail-Dialog angzeigt werden soll
         self._show_user_details = self._settings.value("show_user_details",
                             QtCore.QVariant(Settings.s_show_user_details)) \
                             .toBool()
+	# Status des MainWindows, beinhaltet die Position der Dockwidgets sowie der Toolbar
         self._state = self._settings.value("state",
                             QtCore.QVariant(QtCore.QByteArray())).toByteArray()
 
@@ -189,7 +197,7 @@ class Settings(QtCore.QObject):
         self._show_user_details = p_show_user_details
 
     ## setzt den Status des MainWindows (z.B. die Position der DockWidgets,
-    # siehe Qt-Dokumentation)
+    # siehe Qt-Dokumentation zu QMainWindow::saveState())
     # @param p_state MainWindow-Status als QByteArray
     def setState(self, p_state):
         self._state = p_state
