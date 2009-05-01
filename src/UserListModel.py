@@ -34,7 +34,7 @@ import string
 # Siehe Qt Model/View Framework
 class UserListModel(QtCore.QAbstractTableModel):
 
-    ## Wandelt eine Speicherangabe von MB in KB und gibt sie Formatiert mit
+    ## Wandelt eine Speicherangabe von MB in KB und gibt sie formatiert, mit
     # 1000er Trennzeichen und Einheit zurück
     # @param p_mem Speicher in MB
     # @return Formatierter String
@@ -54,7 +54,8 @@ class UserListModel(QtCore.QAbstractTableModel):
                 points += 1
 
         return result + " KB"
-	# Erzeugen einer statischen Methode
+    
+	## Statische Methode für formatMemory 
     formatMemory = staticmethod(formatMemory)
 
     ## Konstruktor
@@ -63,7 +64,9 @@ class UserListModel(QtCore.QAbstractTableModel):
     def __init__(self, p_header_data):
 		# Übergeordneten Konstruktor aufrufen
         QtCore.QAbstractTableModel.__init__(self)
+        ## Liste der angezeigten Spalten
         self.header_list = p_header_data
+        ## Gefilterte Benutzerliste
         self.user_list = []
 
     ## Gibt die Anzahl der Zeilen zurück
@@ -189,6 +192,7 @@ class UserListModel(QtCore.QAbstractTableModel):
     def loadList(self, p_user_list, p_complete = True):
 		# wenn kein Filter aktiv ist
         if p_complete == True:
+            ## Komplette Benutzerliste
             self.complete_user_list = p_user_list
         self.user_list = p_user_list
         self.emit(QtCore.SIGNAL("layoutChanged()"))

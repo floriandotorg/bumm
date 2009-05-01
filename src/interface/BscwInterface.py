@@ -29,6 +29,7 @@ import xmlrpclib                                         # XML-RPC
 import Exceptions                                        # Ausnahmen
 import socket                                            # Socket
 import string
+
 ## Interface zum BSCW-Server
 #
 # Diese Klasse stellt Methoden zum Auslesen aller User inkl. aller Attribute
