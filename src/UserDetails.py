@@ -174,6 +174,37 @@ class UserDetails(QtGui.QDockWidget, Ui_UserDetails):
 
         else: # Ein Benutzer wurde ausgewählt:
 
+            # Alle Felder werden aktiviert
+            self._user.setEnabled(True)
+            self._user_id.setEnabled(True)
+            self._full_name.setEnabled(True)
+            self._admin.setEnabled(True)
+            self._locked.setEnabled(True)
+            self._mail.setEnabled(True)
+            self._more_mail.setEnabled(True)
+            self._last_login.setEnabled(True)
+            self._workspace.setEnabled(True)
+            self._create_time.setEnabled(True)
+            self._storage_usage.setEnabled(True)
+            self._objects.setEnabled(True)
+            self._role_owner_as_owner.setEnabled(True)
+            self._actions_as_owner.setEnabled(True)
+            self._role_owner_as_manager.setEnabled(True)
+            self._actions_as_manager.setEnabled(True)
+            self._role_owner_as_other.setEnabled(True)
+            self._actions_as_other.setEnabled(True)
+            self._private_tel.setEnabled(True)
+            self._mobile_tel.setEnabled(True)
+            self._office_tel.setEnabled(True)
+            self._fax.setEnabled(True)
+            self._language.setEnabled(True)
+            self._organisation.setEnabled(True)
+            self._private_url.setEnabled(True)
+            self._office_url.setEnabled(True)
+            self._address.setEnabled(True)
+            self._instant_messenger.setEnabled(True)
+            self._more_info.setEnabled(True)
+
             ## Benutzername und Benutzer-ID
             self._user.setText(p_user["name"])
             self._user_id.setText(str(p_user["user_id"]))
