@@ -36,7 +36,7 @@ from InfoDialog import InfoDialog
 from SetColumnDialog import SetColumnDialog
 from ActionThread import ActionThread
 from ErrorDialog import ErrorDialog
-import manual
+import webbrowser
 import urllib
 import tempfile
 import interface
@@ -56,9 +56,6 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 
             ## Liste aller heruntergeladenen Benutzerbilder
             self._img_cache = []
-            
-            # Hilfe initialisieren
-            self._initManual()
 
             ## DockWidget indem nähere Benutzerinformationen angezeigt werden
             self._user_details = UserDetails(self)
@@ -217,9 +214,6 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
                                     self._user_details.isVisible()
 
                 self._settings.state = self.saveState()
-            
-            # Aufräumen
-            self._cleanupManual()
 
         except Exception, exception:
             # Fehlerdialog anzeigen
@@ -245,45 +239,6 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             # Thread starten
             self._action_thread.start()
 
-        except Exception, exception:
-            # Fehlerdialog anzeigen
-            err_dialog = ErrorDialog(exception, self)
-            err_dialog.exec_()
-    
-    ## Initilisiert die HTML-Dateien für die Hilfe
-    def _initManual(self):
-        try:
-            # Ordner im temporären Verzeichnis anlegen
-            QtCore.QDir.temp().mkdir("bumm_manual")
-            
-            # Dateien aus den Ressoucen laden und im temporären
-            # Verzeichnis speichern
-            for i in manual.manual_files:
-                file = QtCore.QFile(QtCore.QDir.tempPath() 
-                                          + "/bumm_manual/" + i) 
-                file.open(QtCore.QIODevice.WriteOnly)
-                file.writeData(QtCore.QResource("/manual/manual/" + i).data())
-        
-        except Exception, exception:
-            # Fehlerdialog anzeigen
-            err_dialog = ErrorDialog(exception, self)
-            err_dialog.exec_()
- 
-    ## Löscht die für die Hilfe benötigten Dateien
-    # @see _initManual
-    def _cleanupManual(self):
-        try:
-            # Pfad auf das temporäre Verzeichnis setzten
-            dir = QtCore.QDir.temp()
-            dir.cd("bumm_manual")
-            
-            # Dateien löschen
-            for i in manual.manual_files:
-                dir.remove(i)
-            
-            # Ordner entfernen
-            QtCore.QDir.temp().rmdir("bumm_manual")
-                
         except Exception, exception:
             # Fehlerdialog anzeigen
             err_dialog = ErrorDialog(exception, self)
@@ -636,8 +591,8 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
     ## Zeigt das Benutzerhandbuch im Standard-Webrowser an
     def _showManualSlot(self):
         try:
-            QtGui.QDesktopServices.openUrl(QtCore.QUrl(QtCore.QDir.tempPath() + \
-                                           "/bumm_manual/index.html"))
+            webbrowser.open(QtCore.QFileInfo(__file__).dir().absolutePath() +
+                            "/manual/index.html")
             
         except Exception, exception:
             # Fehlerdialog anzeigen
