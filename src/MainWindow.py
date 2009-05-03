@@ -660,10 +660,3 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             # Fehlerdialog anzeigen
             err_dialog = ErrorDialog(exception, self)
             err_dialog.exec_()
-
-if __name__ == "__main__":
-    import sys
-    app = QtGui.QApplication(sys.argv)
-    mainWindow = MainWindow()
-    mainWindow.show()
-    app.exec_()

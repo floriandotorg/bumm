@@ -46,7 +46,6 @@ class LoginDialog(QtGui.QDialog, Ui_LoginDialog):
         self._settings = p_settings
         self._username.setText(p_settings.username)
         self._server_address.setText(p_settings.server_address)
-        self._passwd.setText("badreligion")
         
         ## Verbindung zum BSCW-Server
         self._bscw_interface = BscwInterface()
